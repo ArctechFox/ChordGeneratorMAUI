@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="ChordGeneratorMAUI.Views.Metronome">
+	
+	<ContentView.Resources>
+		<ResourceDictionary>
+			<Style TargetType="RoundRectangle">
+				<Setter Property="Margin" Value="5,0"></Setter>
+				<Setter Property="BackgroundColor" Value="Transparent"></Setter>
+				<Setter Property="Fill" Value="Black"></Setter>
+				<Setter Property="Opacity" Value=".3"></Setter>
+				<Setter Property="CornerRadius" Value="5"></Setter>
+			</Style>
+		</ResourceDictionary>
+	</ContentView.Resources>
+	
+    <Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition Height="*"></RowDefinition>
+		</Grid.RowDefinitions>
+
+		<VerticalStackLayout Grid.Column="0" Grid.Row="0" VerticalOptions="End">
+			<Label FontSize="Small" Margin="0" HorizontalOptions="Start">BPM</Label>
+			
+			<Entry Text="{Binding BPM}" 
+				   HorizontalOptions="StartAndExpand" TextColor="White" BackgroundColor="Purple" FontAttributes="Bold" FontSize="26" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" 
+				   MinimumWidthRequest="100"></Entry>
+		</VerticalStackLayout>
+
+		<Label Grid.Column="1" Grid.Row="0" Margin="0" Opacity="1" Text="{Binding TotalTimeElapsed}"></Label>
+
+		<VerticalStackLayout Grid.Column="2" Grid.Row="0" HorizontalOptions="End" VerticalOptions="End">
+			<Label FontSize="Small" HorizontalOptions="End" Margin="0">Chart</Label>
+			<Label FontSize="Medium" Opacity="1" FontAttributes="Bold" HorizontalOptions="End" Margin="0" Text="{Binding ChartCount}"></Label>
+		</VerticalStackLayout>
+
+		<!--BEAT INDICATORS-->
+		<Grid Grid.ColumnSpan="3" Grid.Row="1" VerticalOptions="End" Margin="0,5">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"></ColumnDefinition>
+				<ColumnDefinition Width="*"></ColumnDefinition>
+				<ColumnDefinition Width="*"></ColumnDefinition>
+				<ColumnDefinition Width="*"></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="25"></RowDefinition>
+			</Grid.RowDefinitions>
+
+			<RoundRectangle Grid.Column="0">
+				<RoundRectangle.Triggers>
+					<DataTrigger TargetType="RoundRectangle" Binding="{Binding CurrentBeat}" Value="1">
+						<Setter Property="Fill" Value="LightGreen"></Setter>
+						<Setter Property="Opacity" Value="1"></Setter>
+					</DataTrigger>
+				</RoundRectangle.Triggers>
+			</RoundRectangle>
+			<RoundRectangle Grid.Column="1">
+				<RoundRectangle.Triggers>
+					<DataTrigger TargetType="RoundRectangle" Binding="{Binding CurrentBeat}" Value="2">
+						<Setter Property="Fill" Value="Green"></Setter>
+						<Setter Property="Opacity" Value="1"></Setter>
+					</DataTrigger>
+				</RoundRectangle.Triggers>
+			</RoundRectangle>
+			<RoundRectangle Grid.Column="2">
+				<RoundRectangle.Triggers>
+					<DataTrigger TargetType="RoundRectangle" Binding="{Binding CurrentBeat}" Value="3">
+						<Setter Property="Fill" Value="Green"></Setter>
+						<Setter Property="Opacity" Value="1"></Setter>
+					</DataTrigger>
+				</RoundRectangle.Triggers>
+			</RoundRectangle>
+			<RoundRectangle Grid.Column="3">
+				<RoundRectangle.Triggers>
+					<DataTrigger TargetType="RoundRectangle" Binding="{Binding CurrentBeat}" Value="4">
+						<Setter Property="Fill" Value="Green"></Setter>
+						<Setter Property="Opacity" Value="1"></Setter>
+					</DataTrigger>
+				</RoundRectangle.Triggers>
+			</RoundRectangle>
+		</Grid>
+
+	</Grid>
+</ContentView>
