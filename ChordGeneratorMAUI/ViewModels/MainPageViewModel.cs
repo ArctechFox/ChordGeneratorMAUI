@@ -1,4 +1,5 @@
 ﻿using ChordGeneratorMAUI.DataAccess;
+using ChordGeneratorMAUI.Helpers;
 using ChordGeneratorMAUI.Models;
 using System;
 using System.Collections.Generic;
@@ -168,6 +169,11 @@ namespace ChordGeneratorMAUI.ViewModels
                 Chord14.Name = ChordDatabase.Chords[rNumbers[13]];
                 Chord15.Name = ChordDatabase.Chords[rNumbers[14]];
                 Chord16.Name = ChordDatabase.Chords[rNumbers[15]];
+
+                Application.Current?.Dispatcher.Dispatch(() =>
+                {
+                    Helpers.EventManager.Instance.EventAggregator.GetEvent<ChartGeneratedEvent>().Publish();
+                });
             });
         }
     }
