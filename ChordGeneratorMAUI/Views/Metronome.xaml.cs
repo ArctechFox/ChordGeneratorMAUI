@@ -37,11 +37,13 @@ public partial class Metronome : ContentView
     {
         if (beat == 1)
         {
+            ME_MetronomeClickHi.Stop();
             ME_MetronomeClickHi.SeekTo(TimeSpan.Zero);
         }
             
         else
         {
+            ME_MetronomeClickLo.Stop();
             ME_MetronomeClickLo.SeekTo(TimeSpan.Zero);
         }  
     }
