@@ -18,12 +18,18 @@ public partial class Metronome : ContentView
         // Ugh fuck this on mac. Audio player just cant keep up
         ME_MetronomeClickHi.SeekCompleted += ((object sender, EventArgs e) =>
         {
-            ME_MetronomeClickHi.Play();
+            Application.Current?.Dispatcher.Dispatch(() =>
+            {
+                ME_MetronomeClickHi.Play();
+            });
         });
 
         ME_MetronomeClickLo.SeekCompleted += ((object sender, EventArgs e) =>
         {
-            ME_MetronomeClickLo.Play();
+            Application.Current?.Dispatcher.Dispatch(() =>
+            {
+                ME_MetronomeClickLo.Play();
+            });
         });
     }
 
@@ -31,16 +37,11 @@ public partial class Metronome : ContentView
     {
         if (beat == 1)
         {
-            
-            
-
             ME_MetronomeClickHi.SeekTo(TimeSpan.Zero);
         }
             
         else
         {
-            
-
             ME_MetronomeClickLo.SeekTo(TimeSpan.Zero);
         }  
     }
