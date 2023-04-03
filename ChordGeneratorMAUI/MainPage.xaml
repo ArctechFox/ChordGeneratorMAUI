@@ -95,7 +95,7 @@
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="Auto"></ColumnDefinition>
 				<ColumnDefinition Width="*"></ColumnDefinition>
-				<ColumnDefinition Width="Auto"></ColumnDefinition>
+				<ColumnDefinition Width=".5*"></ColumnDefinition>
 			</Grid.ColumnDefinitions>
 
 			<Button Grid.Column="0" Margin="0,0,10,0" Background="Transparent"  BorderColor="Red" TextColor="White" FontSize="32" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Text="RESET"

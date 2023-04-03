@@ -14,13 +14,34 @@ public partial class Metronome : ContentView
         Helpers.EventManager.Instance.EventAggregator
             .GetEvent<BeatElapsedEvent>()
             .Subscribe(PlayClickSound);
+
+        // Ugh fuck this on mac. Audio player just cant keep up
+        ME_MetronomeClickHi.SeekCompleted += ((object sender, EventArgs e) =>
+        {
+            ME_MetronomeClickHi.Play();
+        });
+
+        ME_MetronomeClickLo.SeekCompleted += ((object sender, EventArgs e) =>
+        {
+            ME_MetronomeClickLo.Play();
+        });
     }
 
     private void PlayClickSound(int beat)
     {
         if (beat == 1)
-            ME_MetronomeClickHi.Play();
+        {
+            
+            
+
+            ME_MetronomeClickHi.SeekTo(TimeSpan.Zero);
+        }
+            
         else
-            ME_MetronomeClickLo.Play();
+        {
+            
+
+            ME_MetronomeClickLo.SeekTo(TimeSpan.Zero);
+        }  
     }
 }
