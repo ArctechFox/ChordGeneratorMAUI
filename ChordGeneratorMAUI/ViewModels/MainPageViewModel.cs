@@ -11,6 +11,20 @@ namespace ChordGeneratorMAUI.ViewModels
 {
     public class MainPageViewModel : BindableBase
     {
+        private bool _isPaused = false;
+        public bool IsPaused
+        {
+            get { return _isPaused; }
+            set { SetProperty(ref _isPaused, value); }
+        }
+
+        private bool _isChordChartActive = false;
+        public bool IsChordChartActive
+        {
+            get { return _isChordChartActive; }
+            set { SetProperty(ref _isChordChartActive, value); }
+        }
+
         // TODO: Make the UI a ListBox so we can hook it up to this list instead of 16 different chord models separately
 
         //private List<ChordModel> _chords;
@@ -138,6 +152,8 @@ namespace ChordGeneratorMAUI.ViewModels
 
 
         public DelegateCommand GenerateChordsCommand { get; set; }
+        public DelegateCommand PauseToggleCommand { get; set; }
+        public DelegateCommand ResetCommand { get; set; }
 
         public MainPageViewModel()
         {
@@ -174,7 +190,64 @@ namespace ChordGeneratorMAUI.ViewModels
                 {
                     Helpers.EventManager.Instance.EventAggregator.GetEvent<ChartGeneratedEvent>().Publish();
                 });
+
+                IsPaused = false;
+                IsChordChartActive = true;
             });
+
+            PauseToggleCommand = new DelegateCommand(() =>
+            {
+                // Toggle boolean
+                IsPaused = !IsPaused;
+
+                if (IsPaused)
+                {
+                    Application.Current?.Dispatcher.Dispatch(() =>
+                    {
+                        Helpers.EventManager.Instance.EventAggregator.GetEvent<TimerPauseEvent>().Publish();
+                    });
+                }
+                else
+                {
+                    Application.Current?.Dispatcher.Dispatch(() =>
+                    {
+                        Helpers.EventManager.Instance.EventAggregator.GetEvent<TimerStartEvent>().Publish();
+                    });
+                }                
+            });
+
+            ResetCommand = new DelegateCommand(() =>
+            {
+                Application.Current?.Dispatcher.Dispatch(() =>
+                {
+                    Helpers.EventManager.Instance.EventAggregator.GetEvent<ResetToDefaultSettingsEvent>().Publish();
+                    Helpers.EventManager.Instance.EventAggregator.GetEvent<TimerPauseEvent>().Publish();
+                });
+
+                ClearChordChart();
+            });
+        }
+
+        private void ClearChordChart()
+        {
+            Chord1.Name = "";
+            Chord2.Name = "";
+            Chord3.Name = "";
+            Chord4.Name = "";
+            Chord5.Name = "";
+            Chord6.Name = "";
+            Chord7.Name = "";
+            Chord8.Name = "";
+            Chord9.Name = "";
+            Chord10.Name = "";
+            Chord11.Name = "";
+            Chord12.Name = "";
+            Chord13.Name = "";
+            Chord14.Name = "";
+            Chord15.Name = "";
+            Chord16.Name = "";
+
+            IsChordChartActive = false;
         }
     }
 }
