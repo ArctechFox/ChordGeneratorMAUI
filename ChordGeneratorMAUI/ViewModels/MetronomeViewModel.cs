@@ -17,11 +17,7 @@ namespace ChordGeneratorMAUI.ViewModels
         // In miliseconds
         private readonly double _totalTimeInterval = 1000;
 
-        // Sounds
-        private MediaElement _normalClick;
-        private MediaElement _firstBeatClick;
-
-        public MetronomeViewModel() 
+        public MetronomeViewModel()
         {
             _totalTimer = new System.Timers.Timer();
             _totalTimer.Interval = _totalTimeInterval;
@@ -31,37 +27,23 @@ namespace ChordGeneratorMAUI.ViewModels
             _beatTimer.AutoReset = true;
             _beatTimer.Elapsed += new ElapsedEventHandler(OnBeatTimerElapsed);
 
-            var _normalClickSource = MediaSource.FromResource("embed://Perc_PracticePad_lo.wav");
-            var _firstBeatClickSource = MediaSource.FromResource("embed://Perc_PracticePad_hi.wav");
-
-            _normalClick = new MediaElement
-            {
-                Volume = .5,
-                Source = _normalClickSource
-            };
-
-            _firstBeatClick = new MediaElement
-            {
-                Volume = .8,
-                Source = _firstBeatClickSource
-            };
-
             // Subscribe to relevant events
-            Helpers.EventManager.Instance.EventAggregator
-                .GetEvent<TimerStartEvent>()
-                .Subscribe(StartTotalTimer);
 
             Helpers.EventManager.Instance.EventAggregator
                 .GetEvent<ChartGeneratedEvent>()
                 .Subscribe(ChartGeneratedHandler);
 
             Helpers.EventManager.Instance.EventAggregator
+                .GetEvent<TimerStartEvent>()
+                .Subscribe(StartTotalTimer);
+
+            Helpers.EventManager.Instance.EventAggregator
                 .GetEvent<TimerPauseEvent>()
                 .Subscribe(PauseTotalTimer);
 
             Helpers.EventManager.Instance.EventAggregator
-                .GetEvent<TimerResetEvent>()
-                .Subscribe(ResetTotalTimer);
+                .GetEvent<ResetToDefaultSettingsEvent>()
+                .Subscribe(ResetToDefaultSettings);
         }
 
         private TimeSpan _totalTimeElapsed = TimeSpan.Zero;
@@ -75,7 +57,7 @@ namespace ChordGeneratorMAUI.ViewModels
         public int BPM
         {
             get { return _bpm; }
-            set 
+            set
             {
                 value = value > 0 ? value : 1;
                 SetProperty(ref _bpm, value);
@@ -95,10 +77,10 @@ namespace ChordGeneratorMAUI.ViewModels
         public int CurrentBeat
         {
             get { return _currentBeat; }
-            set 
+            set
             {
                 value = value > TimeSignature ? 1 : value;
-                SetProperty(ref _currentBeat, value); 
+                SetProperty(ref _currentBeat, value);
             }
         }
 
@@ -111,39 +93,39 @@ namespace ChordGeneratorMAUI.ViewModels
 
         /////////////////////////////////////////////////////////////////////////
 
-        public void StartMetronome()
+        private void StartMetronome()
         {
-            CurrentBeat = 1;
+            CurrentBeat = 0;
             _beatTimer.Start();
         }
 
-        public void StopMetronome()
+        private void StopMetronome()
         {
-            CurrentBeat = 0;
             _beatTimer.Stop();
         }
 
-        public void StartTotalTimer()
+        private void StartTotalTimer()
         {
             _totalTimer.Start();
             StartMetronome();
         }
 
-        public void PauseTotalTimer()
+        private void PauseTotalTimer()
         {
             _totalTimer.Stop();
             StopMetronome();
         }
 
-        public void ResetTotalTimer()
+        private void ResetToDefaultSettings()
         {
-            PauseTotalTimer();
             TotalTimeElapsed = TimeSpan.Zero;
+            CurrentBeat = 0;
+            //ChartCount = ChartCount <= 0 ? 0 : ChartCount-1;
         }
 
-        public void ChartGeneratedHandler()
+        private void ChartGeneratedHandler()
         {
-            ResetTotalTimer();
+            ResetToDefaultSettings();
             StartTotalTimer();
 
             ChartCount++;
@@ -154,14 +136,14 @@ namespace ChordGeneratorMAUI.ViewModels
             TotalTimeElapsed += TimeSpan.FromMilliseconds(_totalTimeInterval);
         }
 
-        private void OnBeatTimerElapsed(object sender, ElapsedEventArgs e) 
-        { 
+        private void OnBeatTimerElapsed(object sender, ElapsedEventArgs e)
+        {
             CurrentBeat++;
 
-            if (CurrentBeat == 1)
-                _firstBeatClick.Play();
-            else
-                _normalClick.Play();
+            Application.Current?.Dispatcher.Dispatch(() =>
+            {
+                Helpers.EventManager.Instance.EventAggregator.GetEvent<BeatElapsedEvent>().Publish(CurrentBeat);
+            });
         }
     }
 }

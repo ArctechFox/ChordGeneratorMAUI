@@ -54,6 +54,9 @@
 				<RowDefinition Height="25"></RowDefinition>
 			</Grid.RowDefinitions>
 
+			<toolkit:MediaElement x:Name="ME_MetronomeClickHi" Source="embed://Perc_PracticePad_hi.wav"></toolkit:MediaElement>
+			<toolkit:MediaElement x:Name="ME_MetronomeClickLo" Source="embed://Perc_PracticePad_lo.wav"></toolkit:MediaElement>
+
 			<RoundRectangle Grid.Column="0">
 				<RoundRectangle.Triggers>
 					<DataTrigger TargetType="RoundRectangle" Binding="{Binding CurrentBeat}" Value="1">
