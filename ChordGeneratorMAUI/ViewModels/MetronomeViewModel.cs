@@ -70,7 +70,7 @@ namespace ChordGeneratorMAUI.ViewModels
                     formatString = @"{0:m\:ss}";
                 }
 
-                TotalTimeElapsedString = string.Format(formatString, value);
+                TotalTimeElapsedString = string.Format(formatString, _totalTimeElapsed);
             }
         }
 
@@ -105,7 +105,15 @@ namespace ChordGeneratorMAUI.ViewModels
         public string BarCount
         {
             get { return _barCount; }
-            set { SetProperty(ref _barCount, value); }
+            set 
+            { 
+                SetProperty(ref _barCount, value);
+
+                Application.Current?.Dispatcher.Dispatch(() =>
+                {
+                    Helpers.EventManager.Instance.EventAggregator.GetEvent<BarCountChangedEvent>().Publish(int.Parse(_barCount));
+                });
+            }
         }
 
         private int _currentBeat = 0;
