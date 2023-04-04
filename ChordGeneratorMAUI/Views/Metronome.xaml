@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:sys="clr-namespace:System;assembly=mscorlib"
 			 xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="ChordGeneratorMAUI.Views.Metronome">
 	
@@ -13,13 +14,15 @@
 				<Setter Property="Opacity" Value=".3"></Setter>
 				<Setter Property="CornerRadius" Value="5"></Setter>
 			</Style>
+
+			<SolidColorBrush x:Key="ComboBoxDropDownBackground" Color="#464E51" />
 		</ResourceDictionary>
 	</ContentView.Resources>
 	
     <Grid>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*"></ColumnDefinition>
-			<ColumnDefinition Width="*"></ColumnDefinition>
+			<ColumnDefinition Width="Auto"></ColumnDefinition>
+			<ColumnDefinition Width="Auto"></ColumnDefinition>
 			<ColumnDefinition Width="*"></ColumnDefinition>
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
@@ -27,23 +30,40 @@
 			<RowDefinition Height="*"></RowDefinition>
 		</Grid.RowDefinitions>
 
+		<!--BPM-->
 		<VerticalStackLayout Grid.Column="0" Grid.Row="0" VerticalOptions="End">
-			<Label FontSize="Small" Margin="0" HorizontalOptions="Start">BPM</Label>
+			<Label FontSize="Small" Margin="0,0,0,7" HorizontalOptions="Start">BPM</Label>
 			
 			<Entry Text="{Binding BPM}" 
-				   HorizontalOptions="StartAndExpand" TextColor="White" BackgroundColor="Purple" FontAttributes="Bold" FontSize="26" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" 
-				   MinimumWidthRequest="100"></Entry>
+				   HorizontalOptions="StartAndExpand" TextColor="White" BackgroundColor="Purple" FontAttributes="Bold" FontSize="Small" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" 
+				   MinimumWidthRequest="60"></Entry>
 		</VerticalStackLayout>
 
-		<Label Grid.Column="1" Grid.Row="0" Margin="0" Opacity="1" Text="{Binding TotalTimeElapsed}"></Label>
+		<!--BAR COUNT-->
+		<Picker Grid.Column="1" Grid.Row="0" Title="Bar Count" SelectedItem="{Binding BarCount}" MinimumWidthRequest="110" MinimumHeightRequest="78"
+				Background="Purple" TitleColor="White" TextColor="White" FontAttributes="Bold" FontSize="Small" Margin="10,0"
+				HorizontalOptions="StartAndExpand">
+			<Picker.ItemsSource>
+				<x:Array Type="{x:Type sys:String}">
+					<sys:String>8</sys:String>
+					<sys:String>12</sys:String>
+					<sys:String>16</sys:String>
+					<sys:String>24</sys:String>
+				</x:Array>
+			</Picker.ItemsSource>
+		</Picker>
 
-		<VerticalStackLayout Grid.Column="2" Grid.Row="0" HorizontalOptions="End" VerticalOptions="End">
+		<!--TIMER-->
+		<Label Text="{Binding TotalTimeElapsedString}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" Margin="0" Opacity="1" FontSize="Large"></Label>
+
+		<!--CHART COUNT-->
+		<VerticalStackLayout Grid.Column="3" Grid.Row="0" HorizontalOptions="End" VerticalOptions="End">
 			<Label FontSize="Small" HorizontalOptions="End" Margin="0">Chart</Label>
 			<Label FontSize="Medium" Opacity="1" FontAttributes="Bold" HorizontalOptions="End" Margin="0" Text="{Binding ChartCount}"></Label>
 		</VerticalStackLayout>
 
 		<!--BEAT INDICATORS-->
-		<Grid Grid.ColumnSpan="3" Grid.Row="1" VerticalOptions="End" Margin="0,5">
+		<Grid Grid.ColumnSpan="4" Grid.Row="1" VerticalOptions="End" Margin="0,5">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*"></ColumnDefinition>
 				<ColumnDefinition Width="*"></ColumnDefinition>

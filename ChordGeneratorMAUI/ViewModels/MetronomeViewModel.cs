@@ -1,4 +1,5 @@
-﻿using ChordGeneratorMAUI.Helpers;
+﻿using ABI.System;
+using ChordGeneratorMAUI.Helpers;
 using CommunityToolkit.Maui.Views;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Timers;
+using TimeSpan = System.TimeSpan;
 
 namespace ChordGeneratorMAUI.ViewModels
 {
@@ -50,7 +52,33 @@ namespace ChordGeneratorMAUI.ViewModels
         public TimeSpan TotalTimeElapsed
         {
             get { return _totalTimeElapsed; }
-            set { SetProperty(ref _totalTimeElapsed, value); }
+            set 
+            { 
+                SetProperty(ref _totalTimeElapsed, value);
+
+                string formatString;
+                if (value.TotalHours >= 1)
+                {
+                    formatString = @"{0:h\:mm\:ss}";
+                }
+                else if (value.TotalMinutes >= 10)
+                {
+                    formatString = @"{0:mm\:ss}";
+                }
+                else
+                {
+                    formatString = @"{0:m\:ss}";
+                }
+
+                TotalTimeElapsedString = string.Format(formatString, value);
+            }
+        }
+
+        private string _totalTimeElapsedString = "0:00";
+        public string TotalTimeElapsedString
+        {
+            get { return _totalTimeElapsedString; }
+            set { SetProperty(ref _totalTimeElapsedString, value); }
         }
 
         private int _bpm = 80;
@@ -71,6 +99,13 @@ namespace ChordGeneratorMAUI.ViewModels
         {
             get { return _timeSignature; }
             set { SetProperty(ref _timeSignature, value); }
+        }
+
+        private string _barCount = "16";
+        public string BarCount
+        {
+            get { return _barCount; }
+            set { SetProperty(ref _barCount, value); }
         }
 
         private int _currentBeat = 0;

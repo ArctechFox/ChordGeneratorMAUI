@@ -14,7 +14,7 @@
 			<Style TargetType="Label">
 				<Setter Property="FontSize" Value="{OnPlatform iOS=24, Android=26, WinUI=48, MacCatalyst=48}"></Setter>
 				<Setter Property="TextColor" Value="White"></Setter>
-				<Setter Property="Opacity" Value=".85"></Setter>
+				<Setter Property="Opacity" Value="1"></Setter>
 				<Setter Property="HorizontalOptions" Value="Center"></Setter>
 				<Setter Property="VerticalOptions" Value="Center"></Setter>
 				<Setter Property="HorizontalTextAlignment" Value="Center"></Setter>

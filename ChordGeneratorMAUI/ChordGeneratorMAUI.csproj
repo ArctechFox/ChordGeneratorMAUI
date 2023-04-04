@@ -49,6 +49,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Fonts\LASSUS.TTF" />
+	  <None Remove="Resources\Fonts\MusAnalysis.otf" />
 	  <None Remove="Resources\Raw\chordgen.png" />
 	</ItemGroup>
 
