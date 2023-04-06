@@ -1,6 +1,10 @@
 ﻿using ChordGeneratorMAUI.DataAccess;
 using ChordGeneratorMAUI.Helpers;
 using ChordGeneratorMAUI.Models;
+using Manufaktura.Controls.Model;
+using Manufaktura.Music.Model;
+using Manufaktura.Music.Model.Harmony;
+using Manufaktura.Music.Model.MajorAndMinor;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -28,7 +32,15 @@ namespace ChordGeneratorMAUI.ViewModels
             set { SetProperty(ref _isChordChartActive, value); }
         }
 
-        // TODO: Make the UI a ListBox so we can hook it up to this list instead of 16 different chord models separately
+        private Score _musicScore = new Score();
+        public Score MusicScore
+        {
+            get { return _musicScore; }
+            set
+            {
+                SetProperty(ref _musicScore, value);
+            }
+        }
 
         private ObservableCollection<ChordModel> _chordChart = new ObservableCollection<ChordModel>();
         public ObservableCollection<ChordModel> ChordChart
@@ -43,6 +55,8 @@ namespace ChordGeneratorMAUI.ViewModels
 
         public MainPageViewModel()
         {
+            ChordDatabase.Chords[0]
+
             GenerateChordsCommand = new DelegateCommand(() =>
             {
                 ClearChordChart();
