@@ -34,7 +34,11 @@
 		<v:Metronome Grid.Row="0"></v:Metronome>
 
 		<!--CHART-->
-		<CollectionView Grid.Row="1" ItemsSource="{Binding ChordChart}" ItemsLayout="VerticalGrid, 4" VerticalOptions="Fill">
+		<ContentView>
+			
+		</ContentView>
+		
+		<!--<CollectionView Grid.Row="1" ItemsSource="{Binding ChordChart}" ItemsLayout="VerticalGrid, 4" VerticalOptions="Fill">
 			<CollectionView.ItemTemplate>
 				<DataTemplate>
 					<Border Stroke="Purple" Padding="0,10">
@@ -44,17 +48,18 @@
 								<RowDefinition Height="*" />
 							</Grid.RowDefinitions>
 
-							<!--CHORD NAME-->
+							--><!--CHORD NAME--><!--
 							<Label Grid.Row="0" FontSize="Medium" Margin="0" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" FontFamily="MusicAnalysis" Text="{Binding Name}"></Label>
 
-							<!--SHEET MUSIC-->
+							--><!--SHEET MUSIC--><!--
 							<Label Grid.Row="1" FontSize="62" Margin="0" HorizontalOptions="Fill" FontFamily="Lassus" Text="44444444444" FontAttributes="Bold" Opacity="1" />
 							<Label Grid.Row="1" FontSize="62" Margin="0" HorizontalOptions="Fill" FontFamily="Lassus" Text="{Binding Name}" FontAttributes="Bold" Opacity="1"/>
 						</Grid>
 					</Border>
 				</DataTemplate>
 			</CollectionView.ItemTemplate>
-		</CollectionView>
+		</CollectionView>-->
+		
 
 		<!--BOTTOM-->
 		<Grid Grid.Row="2" HeightRequest="80" Margin="0,10">

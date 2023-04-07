@@ -1,5 +1,4 @@
-﻿using ABI.System;
-using ChordGeneratorMAUI.Helpers;
+﻿using ChordGeneratorMAUI.Helpers;
 using CommunityToolkit.Maui.Views;
 using System;
 using System.Collections.Generic;

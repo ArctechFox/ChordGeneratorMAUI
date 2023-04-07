@@ -55,8 +55,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="AlphaTab" Version="1.3.0-alpha.598" />
 		<PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="1.0.2" />
 		<PackageReference Include="Manufaktura.Controls" Version="1.4.2" />
+		<PackageReference Include="Manufaktura.Controls.WPF" Version="1.4.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="Prism.Maui" Version="8.1.273-pre" />
 	</ItemGroup>

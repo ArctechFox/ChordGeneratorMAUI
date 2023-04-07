@@ -1,6 +1,7 @@
 ﻿using ChordGeneratorMAUI.DataAccess;
 using ChordGeneratorMAUI.Helpers;
 using ChordGeneratorMAUI.Models;
+using Manufaktura.Controls.Extensions;
 using Manufaktura.Controls.Model;
 using Manufaktura.Music.Model;
 using Manufaktura.Music.Model.Harmony;
@@ -55,8 +56,6 @@ namespace ChordGeneratorMAUI.ViewModels
 
         public MainPageViewModel()
         {
-            ChordDatabase.Chords[0]
-
             GenerateChordsCommand = new DelegateCommand(() =>
             {
                 ClearChordChart();
@@ -66,8 +65,7 @@ namespace ChordGeneratorMAUI.ViewModels
                     Random r = new Random();
                     int n = r.Next(0, ChordDatabase.Chords.Count);
 
-                    var newChord = new ChordModel() { Name = ChordDatabase.Chords[n] };
-                    ChordChart.Add(newChord);
+                    GenerateStaff(ChordDatabase.Chords.ElementAt(n).Value);
                 }
 
                 Application.Current?.Dispatcher.Dispatch(() =>
@@ -115,6 +113,24 @@ namespace ChordGeneratorMAUI.ViewModels
             Helpers.EventManager.Instance.EventAggregator
                 .GetEvent<BarCountChangedEvent>()
                 .Subscribe((int c) => { _barCount = c; });
+        }
+
+        private void GenerateStaff(Chord chord)
+        {
+            Staff newStaff = new Staff()
+                .AddTimeSignature(TimeSignatureType.Common, 4, 4)
+                .Add(Clef.Treble);
+
+            List<Note> notes = new List<Note>();
+            foreach (var p in chord.Pitches)
+            {
+                notes.Add(new Note(p, RhythmicDuration.Quarter));
+            }
+
+            newStaff.AddRange(StaffBuilder.MakeChord(notes));
+
+            newStaff.AddBarline();
+            MusicScore.FirstStaff.Elements.Add(newStaff);
         }
 
         private void ClearChordChart()
