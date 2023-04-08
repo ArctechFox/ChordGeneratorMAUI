@@ -1,10 +1,4 @@
-﻿using Manufaktura.Controls.Model;
-using Manufaktura.Controls.Model.Collections;
-using Manufaktura.Controls.Parser.MusicXml.Strategies;
-using Manufaktura.Music.Model;
-using Manufaktura.Music.Model.Harmony;
-using Manufaktura.Music.Model.MajorAndMinor;
-
+﻿using ChordGeneratorMAUI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,321 +9,382 @@ namespace ChordGeneratorMAUI.DataAccess
 {
     public static class ChordDatabase
     {
-        static ChordDatabase()
+        public static readonly List<ChordModel> AllChords = new List<ChordModel>
         {
-            Chords = new Dictionary<string, Chord>();
+            "A",
+            "B",
+            "C",
+            "D",
+            "E",
+            "F",
+            "G",
+            "A♭",
+            "B♭",
+            "C♭",
+            "D♭",
+            "E♭",
+            "F♭",
+            "G♭",
+            "A#",
+            "B#",
+            "C#",
+            "D#",
+            "E#",
+            "F#",
+            "G#",
+            "Amin",
+            "Bmin",
+            "Cmin",
+            "Dmin",
+            "Emin",
+            "Fmin",
+            "Gmin",
+            "A♭min",
+            "B♭min",
+            "C♭min",
+            "D♭min",
+            "E♭min",
+            "F♭min",
+            "G♭min",
+            "A#min",
+            "B#min",
+            "C#min",
+            "D#min",
+            "E#min",
+            "F#min",
+            "G#min",
+            "A7",
+            "B7",
+            "C7",
+            "D7",
+            "E7",
+            "F7",
+            "G7",
+            "A♭7",
+            "B♭7",
+            "C♭7",
+            "D♭7",
+            "E♭7",
+            "F♭7",
+            "G♭7",
+            "A#7",
+            "B#7",
+            "C#7",
+            "D#7",
+            "E#7",
+            "F#7",
+            "G#7",
+            "A -7",
+            "B -7",
+            "C -7",
+            "D -7",
+            "E -7",
+            "F -7",
+            "G -7",
+            "A♭-7",
+            "B♭-7",
+            "C♭-7",
+            "D♭-7",
+            "E♭-7",
+            "F♭-7",
+            "G♭-7",
+            "A# -7",
+            "B# -7",
+            "C# -7",
+            "D# -7",
+            "E# -7",
+            "F# -7",
+            "G# -7",
+            "Amaj7",
+            "Bmaj7",
+            "Cmaj7",
+            "Dmaj7",
+            "Emaj7",
+            "Fmaj7",
+            "Gmaj7",
+            "A♭maj7",
+            "B♭maj7",
+            "C♭maj7",
+            "D♭maj7",
+            "E♭maj7",
+            "F♭maj7",
+            "G♭maj7",
+            "A#maj7",
+            "B#maj7",
+            "C#maj7",
+            "D#maj7",
+            "E#maj7",
+            "F#maj7",
+            "G#maj7",
+    };
 
-            #region Ab Major
+        #region Major Chords
 
-            Chords.Add("Ab", TertianHarmony.CreateChord(Pitch.Ab1, 0, MajorScale.A));
-            Chords.Add("Bbm", TertianHarmony.CreateChord(Pitch.Bb1, 0, MajorScale.A));
-            Chords.Add("Cm", TertianHarmony.CreateChord(Pitch.C1, 0, MajorScale.A));
-            Chords.Add("Db", TertianHarmony.CreateChord(Pitch.Db1, 0, MajorScale.A));
-            Chords.Add("Eb", TertianHarmony.CreateChord(Pitch.Eb1, 0, MajorScale.A));
-            Chords.Add("Fm", TertianHarmony.CreateChord(Pitch.F1, 0, MajorScale.A));
-            Chords.Add("Gm7b5", TertianHarmony.CreateChord(Pitch.G1, 0, MajorScale.A));
+        public static readonly List<ChordModel> Key_Ab_Major_Chords = AllChords.FindAll((c) => 
+                                                                                                                              c.Name == "Ab" ||
+                                                                                                                              c.Name == "Bbm" ||
+                                                                                                                              c.Name == "Cm" ||
+                                                                                                                              c.Name == "Db" ||
+                                                                                                                              c.Name == "Eb" ||
+                                                                                                                              c.Name == "Fm" ||
+                                                                                                                              c.Name == "G°");
 
-            #endregion
+        public static readonly List<ChordModel> Key_A_Major_Chords = AllChords.FindAll((c) =>
+                                                                                                                              c.Name == "A" ||
+                                                                                                                              c.Name == "Bm" ||
+                                                                                                                              c.Name == "C#m" ||
+                                                                                                                              c.Name == "D" ||
+                                                                                                                              c.Name == "E" ||
+                                                                                                                              c.Name == "F#m" ||
+                                                                                                                              c.Name == "G#°");
 
-            #region A Major
+        public static readonly List<ChordModel> Key_Bb_Major_Chords = AllChords.FindAll((c) =>
+                                                                                                                              c.Name == "Bb" ||
+                                                                                                                              c.Name == "Cm" ||
+                                                                                                                              c.Name == "Dm" ||
+                                                                                                                              c.Name == "Eb" ||
+                                                                                                                              c.Name == "F" ||
+                                                                                                                              c.Name == "Gm" ||
+                                                                                                                              c.Name == "A°");
 
-            Chords.Add("A", TertianHarmony.CreateChord(Pitch.A1, 0, MajorScale.A));
-            Chords.Add("Bm", TertianHarmony.CreateChord(Pitch.B1, 0, MajorScale.A));
-            Chords.Add("C#m", TertianHarmony.CreateChord(Pitch.CSharp1, 0, MajorScale.A));
-            Chords.Add("D", TertianHarmony.CreateChord(Pitch.D1, 0, MajorScale.A));
-            Chords.Add("E", TertianHarmony.CreateChord(Pitch.E1, 0, MajorScale.A));
-            Chords.Add("F#m", TertianHarmony.CreateChord(Pitch.FSharp1, 0, MajorScale.A));
-            Chords.Add("G#m7b5", TertianHarmony.CreateChord(Pitch.GSharp1, 0, MajorScale.A));
+        public static readonly List<ChordModel> Key_B_Major_Chords = AllChords.FindAll((c) =>
+                                                                                                                              c.Name == "B" ||
+                                                                                                                              c.Name == "C#m" ||
+                                                                                                                              c.Name == "D#m" ||
+                                                                                                                              c.Name == "E" ||
+                                                                                                                              c.Name == "F#" ||
+                                                                                                                              c.Name == "G#m" ||
+                                                                                                                              c.Name == "A#°");
 
-            #endregion
+        public static readonly List<ChordModel> Key_C_Major_Chords = AllChords.FindAll((c) =>
+                                                                                                                              c.Name == "C" ||
+                                                                                                                              c.Name == "Dm" ||
+                                                                                                                              c.Name == "Em" ||
+                                                                                                                              c.Name == "F" ||
+                                                                                                                              c.Name == "G" ||
+                                                                                                                              c.Name == "Am" ||
+                                                                                                                              c.Name == "B°");
 
-            #region Bb Major
+        public static readonly List<ChordModel> Key_CSharp_Major_Chords = AllChords.FindAll((c) =>
+                                                                                                                              c.Name == "C#" ||
+                                                                                                                              c.Name == "D#m" ||
+                                                                                                                              c.Name == "E#m" ||
+                                                                                                                              c.Name == "F#" ||
+                                                                                                                              c.Name == "G#" ||
+                                                                                                                              c.Name == "A#m" ||
+                                                                                                                              c.Name == "B#°");
 
-            Chords.Add("Bb", TertianHarmony.CreateChord(Pitch.Bb1, 0, MajorScale.B));
-            Chords.Add("Cm", TertianHarmony.CreateChord(Pitch.C1, 0, MajorScale.B));
-            Chords.Add("Dm", TertianHarmony.CreateChord(Pitch.D1, 0, MajorScale.B));
-            Chords.Add("Eb", TertianHarmony.CreateChord(Pitch.Eb1, 0, MajorScale.B));
-            Chords.Add("F", TertianHarmony.CreateChord(Pitch.F1, 0, MajorScale.B));
-            Chords.Add("Gm", TertianHarmony.CreateChord(Pitch.G1, 0, MajorScale.B));
-            Chords.Add("Am7b5", TertianHarmony.CreateChord(Pitch.A1, 0, MajorScale.B));
+        public static readonly List<ChordModel> Key_Db_Major_Chords = AllChords.FindAll((c) =>
+                                                                                                                              c.Name == "Db" ||
+                                                                                                                              c.Name == "Ebm" ||
+                                                                                                                              c.Name == "Fm" ||
+                                                                                                                              c.Name == "Gb" ||
+                                                                                                                              c.Name == "Ab" ||
+                                                                                                                              c.Name == "Bbm" ||
+                                                                                                                              c.Name == "C°");
 
-            #endregion
+        public static readonly List<ChordModel> Key_D_Major_Chords = AllChords.FindAll((c) =>
+                                                                                                                              c.Name == "D" ||
+                                                                                                                              c.Name == "Em" ||
+                                                                                                                              c.Name == "F#m" ||
+                                                                                                                              c.Name == "G" ||
+                                                                                                                              c.Name == "A" ||
+                                                                                                                              c.Name == "Bm" ||
+                                                                                                                              c.Name == "C#°");
 
-            #region B Major
+        public static readonly List<ChordModel> Key_Eb_Major_Chords = AllChords.FindAll((c) =>
+                                                                                                                              c.Name == "Eb" ||
+                                                                                                                              c.Name == "Fm" ||
+                                                                                                                              c.Name == "Gm" ||
+                                                                                                                              c.Name == "Ab" ||
+                                                                                                                              c.Name == "Bb" ||
+                                                                                                                              c.Name == "Cm" ||
+                                                                                                                              c.Name == "D°");
 
-            Chords.Add("B", TertianHarmony.CreateChord(Pitch.Bb1, 0, MajorScale.B));
-            Chords.Add("C#m", TertianHarmony.CreateChord(Pitch.CSharp1, 0, MajorScale.B));
-            Chords.Add("D#m", TertianHarmony.CreateChord(Pitch.DSharp1, 0, MajorScale.B));
-            Chords.Add("E", TertianHarmony.CreateChord(Pitch.E1, 0, MajorScale.B));
-            Chords.Add("F#", TertianHarmony.CreateChord(Pitch.FSharp1, 0, MajorScale.B));
-            Chords.Add("G#m", TertianHarmony.CreateChord(Pitch.GSharp1, 0, MajorScale.B));
-            Chords.Add("A#m7b5", TertianHarmony.CreateChord(Pitch.ASharp1, 0, MajorScale.B));
+        public static readonly List<ChordModel> Key_E_Major_Chords = AllChords.FindAll((c) =>
+                                                                                                                              c.Name == "E" ||
+                                                                                                                              c.Name == "F#m" ||
+                                                                                                                              c.Name == "G#m" ||
+                                                                                                                              c.Name == "A" ||
+                                                                                                                              c.Name == "B" ||
+                                                                                                                              c.Name == "C#m" ||
+                                                                                                                              c.Name == "D#°");
 
-            #endregion
+        public static readonly List<ChordModel> Key_F_Major_Chords = AllChords.FindAll((c) =>
+                                                                                                                              c.Name == "F" ||
+                                                                                                                              c.Name == "Gm" ||
+                                                                                                                              c.Name == "Am" ||
+                                                                                                                              c.Name == "Bb" ||
+                                                                                                                              c.Name == "C" ||
+                                                                                                                              c.Name == "Dm" ||
+                                                                                                                              c.Name == "E°");
 
-            #region C Major
+        public static readonly List<ChordModel> Key_FSharp_Major_Chords = AllChords.FindAll((c) =>
+                                                                                                                              c.Name == "F#" ||
+                                                                                                                              c.Name == "G#m" ||
+                                                                                                                              c.Name == "A#m" ||
+                                                                                                                              c.Name == "B" ||
+                                                                                                                              c.Name == "C#" ||
+                                                                                                                              c.Name == "D#m" ||
+                                                                                                                              c.Name == "E#°");
 
-            Chords.Add("C", TertianHarmony.CreateChord(Pitch.C1, 0, MajorScale.C));
-            Chords.Add("Dm", TertianHarmony.CreateChord(Pitch.D1, 0, MajorScale.C));
-            Chords.Add("Em", TertianHarmony.CreateChord(Pitch.E1, 0, MajorScale.C));
-            Chords.Add("F", TertianHarmony.CreateChord(Pitch.F1, 0, MajorScale.C));
-            Chords.Add("G", TertianHarmony.CreateChord(Pitch.G1, 0, MajorScale.C));
-            Chords.Add("Am", TertianHarmony.CreateChord(Pitch.A1, 0, MajorScale.C));
-            Chords.Add("Bm7b5", TertianHarmony.CreateChord(Pitch.B1, 0, MajorScale.C));
+        public static readonly List<ChordModel> Key_Gb_Major_Chords = AllChords.FindAll((c) =>
+                                                                                                                              c.Name == "Gb" ||
+                                                                                                                              c.Name == "Abm" ||
+                                                                                                                              c.Name == "Bbm" ||
+                                                                                                                              c.Name == "Cb" ||
+                                                                                                                              c.Name == "Db" ||
+                                                                                                                              c.Name == "Ebm" ||
+                                                                                                                              c.Name == "F°");
 
-            #endregion
-        }
+        public static readonly List<ChordModel> Key_G_Major_Chords = AllChords.FindAll((c) =>
+                                                                                                                              c.Name == "G" ||
+                                                                                                                              c.Name == "Am" ||
+                                                                                                                              c.Name == "Bm" ||
+                                                                                                                              c.Name == "C" ||
+                                                                                                                              c.Name == "D" ||
+                                                                                                                              c.Name == "Em" ||
+                                                                                                                              c.Name == "F#°");
 
-        public static Score Score { get; set; }
+        #endregion
 
-        public static Dictionary<string, Chord> Chords;
+        #region Minor Chords
 
-        //public static Dictionary<string, Chord> Chords { get; set; } = new Dictionary<string, Chord>()
-        //{
-        //    #region A
+        public static readonly List<ChordModel> Key_Ab_Minor_Chords = AllChords.FindAll((c) =>
+                                                                                                                              c.Name == "Abm" ||
+                                                                                                                              c.Name == "Bb°" ||
+                                                                                                                              c.Name == "Cb" ||
+                                                                                                                              c.Name == "Dbm" ||
+                                                                                                                              c.Name == "Ebm" ||
+                                                                                                                              c.Name == "Fb" ||
+                                                                                                                              c.Name == "Gb");
 
-        //    { "Ab", TertianHarmony.CreateChord(Pitch.Ab1, 0, new MajorScale(Step.Ab, true)) },
-        //    { "Ab7", TertianHarmony.Create7thChord(Pitch.Ab1, 0, new MajorScale(Step.Ab, true)) },
-        //    { "Abm", TertianHarmony.CreateChord(Pitch.Ab1, 0, new MinorScale(Step.Ab, true)) },
-        //    { "Abm7", TertianHarmony.Create7thChord(Pitch.Ab1, 0, new MinorScale(Step.Ab, true)) },
-        //    { "Abmaj7", TertianHarmony.Create7thChord(Pitch.Ab1, 0, new MajorScale(Step.Ab, true)) },
+        public static readonly List<ChordModel> Key_A_Minor_Chords = AllChords.FindAll((c) =>
+                                                                                                                              c.Name == "Am" ||
+                                                                                                                              c.Name == "B°" ||
+                                                                                                                              c.Name == "C" ||
+                                                                                                                              c.Name == "Dm" ||
+                                                                                                                              c.Name == "Em" ||
+                                                                                                                              c.Name == "F" ||
+                                                                                                                              c.Name == "G");
 
-        //    { "A", TertianHarmony.CreateChord(Pitch.A1, 0, new MajorScale(Step.A, false)) },
-        //    { "A7", TertianHarmony.Create7thChord(Pitch.A1, 0, new MajorScale(Step.A, false)) },
-        //    { "Am", TertianHarmony.CreateChord(Pitch.A1, 0, new MinorScale(Step.A, false)) },
-        //    { "Am7", TertianHarmony.Create7thChord(Pitch.A1, 0, new MinorScale(Step.A, false)) },
-        //    { "Amaj7", TertianHarmony.Create7thChord(Pitch.A1, 0, new MajorScale(Step.A, false)) },
+        public static readonly List<ChordModel> Key_ASharp_Minor_Chords = AllChords.FindAll((c) =>
+                                                                                                                              c.Name == "Bb" ||
+                                                                                                                              c.Name == "Cm" ||
+                                                                                                                              c.Name == "Dm" ||
+                                                                                                                              c.Name == "Eb" ||
+                                                                                                                              c.Name == "F" ||
+                                                                                                                              c.Name == "Gm" ||
+                                                                                                                              c.Name == "A°");
 
-        //    { "A#", TertianHarmony.CreateChord(Pitch.ASharp1, 0, new MajorScale(Step.ASharp, false)) },
-        //    { "A#7", TertianHarmony.Create7thChord(Pitch.ASharp1, 0, new MajorScale(Step.ASharp, false)) },
-        //    { "A#m", TertianHarmony.CreateChord(Pitch.ASharp1, 0, new MinorScale(Step.ASharp, false)) },
-        //    { "A#m7", TertianHarmony.Create7thChord(Pitch.ASharp1, 0, new MinorScale(Step.ASharp, false)) },
-        //    { "A#maj7", TertianHarmony.Create7thChord(Pitch.ASharp1, 0, new MajorScale(Step.ASharp, false)) },
+        public static readonly List<ChordModel> Key_Bb_Minor_Chords = AllChords.FindAll((c) =>
+                                                                                                                              c.Name == "B" ||
+                                                                                                                              c.Name == "C#m" ||
+                                                                                                                              c.Name == "D#m" ||
+                                                                                                                              c.Name == "E" ||
+                                                                                                                              c.Name == "F#" ||
+                                                                                                                              c.Name == "G#m" ||
+                                                                                                                              c.Name == "A#°");
 
-        //    #endregion
+        public static readonly List<ChordModel> Key_B_Minor_Chords = AllChords.FindAll((c) =>
+                                                                                                                              c.Name == "C" ||
+                                                                                                                              c.Name == "Dm" ||
+                                                                                                                              c.Name == "Em" ||
+                                                                                                                              c.Name == "F" ||
+                                                                                                                              c.Name == "G" ||
+                                                                                                                              c.Name == "Am" ||
+                                                                                                                              c.Name == "B°");
 
-        //    #region B
+        public static readonly List<ChordModel> Key_C_Minor_Chords = AllChords.FindAll((c) =>
+                                                                                                                              c.Name == "C#" ||
+                                                                                                                              c.Name == "D#m" ||
+                                                                                                                              c.Name == "E#m" ||
+                                                                                                                              c.Name == "F#" ||
+                                                                                                                              c.Name == "G#" ||
+                                                                                                                              c.Name == "A#m" ||
+                                                                                                                              c.Name == "B#°");
 
-        //    { "Bb", TertianHarmony.CreateChord(Pitch.Bb1, 0, new MajorScale(Step.Bb, true)) },
-        //    { "Bb7", TertianHarmony.Create7thChord(Pitch.Bb1, 0, new MajorScale(Step.Bb, true)) },
-        //    { "Bbm", TertianHarmony.CreateChord(Pitch.Bb1, 0, new MinorScale(Step.Bb, true)) },
-        //    { "Bbm7", TertianHarmony.Create7thChord(Pitch.Bb1, 0, new MinorScale(Step.Bb, true)) },
-        //    { "Bbmaj7", TertianHarmony.Create7thChord(Pitch.Bb1, 0, new MajorScale(Step.Bb, true)) },
+        public static readonly List<ChordModel> Key_CSharp_Minor_Chords = AllChords.FindAll((c) =>
+                                                                                                                              c.Name == "Db" ||
+                                                                                                                              c.Name == "Ebm" ||
+                                                                                                                              c.Name == "Fm" ||
+                                                                                                                              c.Name == "Gb" ||
+                                                                                                                              c.Name == "Ab" ||
+                                                                                                                              c.Name == "Bbm" ||
+                                                                                                                              c.Name == "C°");
 
-        //    { "B", TertianHarmony.CreateChord(Pitch.B1, 0, new MajorScale(Step.B, false)) },
-        //    { "B7", TertianHarmony.Create7thChord(Pitch.B1, 0, new MajorScale(Step.B, false)) },
-        //    { "Bm", TertianHarmony.CreateChord(Pitch.B1, 0, new MinorScale(Step.B, false)) },
-        //    { "Bm7", TertianHarmony.Create7thChord(Pitch.B1, 0, new MinorScale(Step.B, false)) },
-        //    { "Bmaj7", TertianHarmony.Create7thChord(Pitch.B1, 0, new MajorScale(Step.B, false)) },
+        public static readonly List<ChordModel> Key_D_Minor_Chords = AllChords.FindAll((c) =>
+                                                                                                                              c.Name == "D" ||
+                                                                                                                              c.Name == "Em" ||
+                                                                                                                              c.Name == "F#m" ||
+                                                                                                                              c.Name == "G" ||
+                                                                                                                              c.Name == "A" ||
+                                                                                                                              c.Name == "Bm" ||
+                                                                                                                              c.Name == "C#°");
 
-        //    #endregion
+        public static readonly List<ChordModel> Key_DSharp_Minor_Chords = AllChords.FindAll((c) =>
+                                                                                                                              c.Name == "Eb" ||
+                                                                                                                              c.Name == "Fm" ||
+                                                                                                                              c.Name == "Gm" ||
+                                                                                                                              c.Name == "Ab" ||
+                                                                                                                              c.Name == "Bb" ||
+                                                                                                                              c.Name == "Cm" ||
+                                                                                                                              c.Name == "D°");
 
-        //    #region C
+        public static readonly List<ChordModel> Key_Eb_Minor_Chords = AllChords.FindAll((c) =>
+                                                                                                                              c.Name == "E" ||
+                                                                                                                              c.Name == "F#m" ||
+                                                                                                                              c.Name == "G#m" ||
+                                                                                                                              c.Name == "A" ||
+                                                                                                                              c.Name == "B" ||
+                                                                                                                              c.Name == "C#m" ||
+                                                                                                                              c.Name == "D#°");
 
-        //    { "C", TertianHarmony.CreateChord(Pitch.C1, 0, new MajorScale(Step.C, false)) },
-        //    { "C7", TertianHarmony.Create7thChord(Pitch.C1, 0, new MajorScale(Step.C, false)) },
+        public static readonly List<ChordModel> Key_E_Minor_Chords = AllChords.FindAll((c) =>
+                                                                                                                              c.Name == "F" ||
+                                                                                                                              c.Name == "Gm" ||
+                                                                                                                              c.Name == "Am" ||
+                                                                                                                              c.Name == "Bb" ||
+                                                                                                                              c.Name == "C" ||
+                                                                                                                              c.Name == "Dm" ||
+                                                                                                                              c.Name == "E°");
 
-        //    { "Cm", TertianHarmony.CreateChord(Pitch.C1, 0, MinorScale.) },
-        //    //{ "Cm7", TertianHarmony.Create7thChord(Pitch.C1, 0, new MinorScale(Step.C, false)) },
+        public static readonly List<ChordModel> Key_F_Minor_Chords = AllChords.FindAll((c) =>
+                                                                                                                              c.Name == "F#" ||
+                                                                                                                              c.Name == "G#m" ||
+                                                                                                                              c.Name == "A#m" ||
+                                                                                                                              c.Name == "B" ||
+                                                                                                                              c.Name == "C#" ||
+                                                                                                                              c.Name == "D#m" ||
+                                                                                                                              c.Name == "E#°");
 
-        //    { "Cmaj7", TertianHarmony.Create7thChord(Pitch.C1, 0, new MajorScale(Step.C, false)) },
+        public static readonly List<ChordModel> Key_FSharp_Minor_Chords = AllChords.FindAll((c) =>
+                                                                                                                              c.Name == "Gb" ||
+                                                                                                                              c.Name == "Abm" ||
+                                                                                                                              c.Name == "Bbm" ||
+                                                                                                                              c.Name == "Cb" ||
+                                                                                                                              c.Name == "Db" ||
+                                                                                                                              c.Name == "Ebm" ||
+                                                                                                                              c.Name == "F°");
 
+        public static readonly List<ChordModel> Key_G_Minor_Chords = AllChords.FindAll((c) =>
+                                                                                                                              c.Name == "G" ||
+                                                                                                                              c.Name == "Am" ||
+                                                                                                                              c.Name == "Bm" ||
+                                                                                                                              c.Name == "C" ||
+                                                                                                                              c.Name == "D" ||
+                                                                                                                              c.Name == "Em" ||
+                                                                                                                              c.Name == "F#°");
 
-        //    //{ "C#", TertianHarmony.CreateChord(Pitch.CSharp1, 0, new MajorScale(Step.CSharp, false)) },
-        //    //{ "C#7", TertianHarmony.Create7thChord(Pitch.CSharp1, 0, new MajorScale(Step.CSharp, false)) },
-        //    //{ "C#m", TertianHarmony.CreateChord(Pitch.CSharp1, 0, new MinorScale(Step.CSharp, false)) },
-        //    //{ "C#m7", TertianHarmony.Create7thChord(Pitch.CSharp1, 0, new MinorScale(Step.CSharp, false)) },
-        //    //{ "C#maj7", TertianHarmony.Create7thChord(Pitch.CSharp1, 0, new MajorScale(Step.CSharp, false)) },
+        public static readonly List<ChordModel> Key_GSharp_Minor_Chords = AllChords.FindAll((c) =>
+                                                                                                                              c.Name == "G" ||
+                                                                                                                              c.Name == "Am" ||
+                                                                                                                              c.Name == "Bm" ||
+                                                                                                                              c.Name == "C" ||
+                                                                                                                              c.Name == "D" ||
+                                                                                                                              c.Name == "Em" ||
+                                                                                                                              c.Name == "F#°");
 
-        //    #endregion
-
-        //    #region D
-
-        //    { "Db", TertianHarmony.CreateChord(Pitch.Db1, 0, MajorScale.G.) },
-        //    { "Db7", TertianHarmony.Create7thChord(Pitch.Db1, 0, new MajorScale(Step.Db, true)) },
-        //    { "Dbm", TertianHarmony.CreateChord(Pitch.Db1, 0, new MinorScale(Step.Db, true)) },
-        //    { "Dbm7", TertianHarmony.Create7thChord(Pitch.Db1, 0, new MinorScale(Step.Db, true)) },
-        //    { "Dbmaj7", TertianHarmony.Create7thChord(Pitch.Db1, 0, new MajorScale(Step.Db, true)) },
-
-        //    { "D", TertianHarmony.CreateChord(Pitch.D1, 0, new MajorScale(Step.D, false)) },
-        //    { "D7", TertianHarmony.Create7thChord(Pitch.D1, 0, new MajorScale(Step.D, false)) },
-        //    { "Dm", TertianHarmony.CreateChord(Pitch.D1, 0, new MinorScale(Step.D, false)) },
-        //    { "Dm7", TertianHarmony.Create7thChord(Pitch.D1, 0, new MinorScale(Step.D, false)) },
-        //    { "Dmaj7", TertianHarmony.Create7thChord(Pitch.D1, 0, new MajorScale(Step.D, false)) },
-
-        //    { "D#", TertianHarmony.CreateChord(Pitch.DSharp1, 0, new MajorScale(Step.DSharp, false)) },
-        //    { "D#7", TertianHarmony.Create7thChord(Pitch.DSharp1, 0, new MajorScale(Step.DSharp, false)) },
-        //    { "D#m", TertianHarmony.CreateChord(Pitch.DSharp1, 0, new MinorScale(Step.DSharp, false)) },
-        //    { "D#m7", TertianHarmony.Create7thChord(Pitch.DSharp1, 0, new MinorScale(Step.DSharp, false)) },
-        //    { "D#maj7", TertianHarmony.Create7thChord(Pitch.DSharp1, 0, new MajorScale(Step.DSharp, false)) },
-
-        //    #endregion
-
-        //    #region E
-
-        //    { "Eb", TertianHarmony.CreateChord(Pitch.Eb1, 0, new MajorScale(Step.Eb, true)) },
-        //    { "Eb7", TertianHarmony.Create7thChord(Pitch.Eb1, 0, new MajorScale(Step.Eb, true)) },
-        //    { "Ebm", TertianHarmony.CreateChord(Pitch.Eb1, 0, new MinorScale(Step.Eb, true)) },
-        //    { "Ebm7", TertianHarmony.Create7thChord(Pitch.Eb1, 0, new MinorScale(Step.Eb, true)) },
-        //    { "Ebmaj7", TertianHarmony.Create7thChord(Pitch.Eb1, 0, new MajorScale(Step.Eb, true)) },
-
-        //    { "E", TertianHarmony.CreateChord(Pitch.E1, 0, new MajorScale(Step.E, false)) },
-        //    { "E7", TertianHarmony.Create7thChord(Pitch.E1, 0, new MajorScale(Step.E, false)) },
-        //    { "Em", TertianHarmony.CreateChord(Pitch.E1, 0, new MinorScale(Step.E, false)) },
-        //    { "Em7", TertianHarmony.Create7thChord(Pitch.E1, 0, new MinorScale(Step.E, false)) },
-        //    { "Emaj7", TertianHarmony.Create7thChord(Pitch.E1, 0, new MajorScale(Step.E, false)) },
-
-        //    #endregion
-
-        //    #region F
-
-        //    { "F", TertianHarmony.CreateChord(Pitch.F1, 0, new MajorScale(Step.F, false)) },
-        //    { "F7", TertianHarmony.Create7thChord(Pitch.F1, 0, new MajorScale(Step.F, false)) },
-        //    { "Fm", TertianHarmony.CreateChord(Pitch.F1, 0, new MinorScale(Step.F, false)) },
-        //    { "Fm7", TertianHarmony.Create7thChord(Pitch.F1, 0, new MinorScale(Step.F, false)) },
-        //    { "Fmaj7", TertianHarmony.Create7thChord(Pitch.F1, 0, new MajorScale(Step.F, false)) },
-
-        //    { "F#", TertianHarmony.CreateChord(Pitch.FSharp1, 0, new MajorScale(Step.FSharp, false)) },
-        //    { "F#7", TertianHarmony.Create7thChord(Pitch.FSharp1, 0, new MajorScale(Step.FSharp, false)) },
-        //    { "F#m", TertianHarmony.CreateChord(Pitch.FSharp1, 0, new MinorScale(Step.FSharp, false)) },
-        //    { "F#m7", TertianHarmony.Create7thChord(Pitch.FSharp1, 0, new MinorScale(Step.FSharp, false)) },
-        //    { "F#maj7", TertianHarmony.Create7thChord(Pitch.FSharp1, 0, new MajorScale(Step.FSharp, false)) },
-
-        //    #endregion
-
-        //    #region G
-
-        //    { "Gb", TertianHarmony.CreateChord(Pitch.Gb1, 0, new MajorScale(Step.Gb, true)) },
-        //    { "Gb7", TertianHarmony.Create7thChord(Pitch.Gb1, 0, new MajorScale(Step.Gb, true)) },
-        //    { "Gbm", TertianHarmony.CreateChord(Pitch.Gb1, 0, new MinorScale(Step.Gb, true)) },
-        //    { "Gbm7", TertianHarmony.Create7thChord(Pitch.Gb1, 0, new MinorScale(Step.Gb, true)) },
-        //    { "Gbmaj7", TertianHarmony.Create7thChord(Pitch.Gb1, 0, new MajorScale(Step.Gb, true)) },
-
-        //    { "G", TertianHarmony.CreateChord(Pitch.G1, 0, new MajorScale(Step.G, false)) },
-        //    { "G7", TertianHarmony.Create7thChord(Pitch.G1, 0, new MajorScale(Step.G, false)) },
-        //    { "Gm", TertianHarmony.CreateChord(Pitch.G1, 0, new MinorScale(Step.G, false)) },
-        //    { "Gm7", TertianHarmony.Create7thChord(Pitch.G1, 0, new MinorScale(Step.G, false)) },
-        //    { "Gmaj7", TertianHarmony.Create7thChord(Pitch.G1, 0, new MajorScale(Step.G, false)) },
-
-        //    { "G#", TertianHarmony.CreateChord(Pitch.GSharp1, 0, new MajorScale(Step.GSharp, false)) },
-        //    { "G#7", TertianHarmony.Create7thChord(Pitch.GSharp1, 0, new MajorScale(Step.GSharp, false)) },
-        //    { "G#m", TertianHarmony.CreateChord(Pitch.GSharp1, 0, new MinorScale(Step.GSharp, false)) },
-        //    { "G#m7", TertianHarmony.Create7thChord(Pitch.GSharp1, 0, new MinorScale(Step.GSharp, false)) },
-        //    { "G#maj7", TertianHarmony.Create7thChord(Pitch.GSharp1, 0, new MajorScale(Step.GSharp, false)) },
-
-        //    #endregion
-
-        //};
-
-        //public static List<string> Chords = new List<string>
-        //{
-        //    "A",
-        //    "B",
-        //    "C",
-        //    "D",
-        //    "E",
-        //    "F",
-        //    "G",
-        //    "A♭",
-        //    "B♭",
-        //    "C♭",
-        //    "D♭",
-        //    "E♭",
-        //    "F♭",
-        //    "G♭",
-        //    "A#",
-        //    "B#",
-        //    "C#",
-        //    "D#",
-        //    "E#",
-        //    "F#",
-        //    "G#",
-        //    "Amin",
-        //    "Bmin",
-        //    "Cmin",
-        //    "Dmin",
-        //    "Emin",
-        //    "Fmin",
-        //    "Gmin",
-        //    "A♭min",
-        //    "B♭min",
-        //    "C♭min",
-        //    "D♭min",
-        //    "E♭min",
-        //    "F♭min",
-        //    "G♭min",
-        //    "A#min",
-        //    "B#min",
-        //    "C#min",
-        //    "D#min",
-        //    "E#min",
-        //    "F#min",
-        //    "G#min",
-        //    "A7",
-        //    "B7",
-        //    "C7",
-        //    "D7",
-        //    "E7",
-        //    "F7",
-        //    "G7",
-        //    "A♭7",
-        //    "B♭7",
-        //    "C♭7",
-        //    "D♭7",
-        //    "E♭7",
-        //    "F♭7",
-        //    "G♭7",
-        //    "A#7",
-        //    "B#7",
-        //    "C#7",
-        //    "D#7",
-        //    "E#7",
-        //    "F#7",
-        //    "G#7",
-        //    "A -7",
-        //    "B -7",
-        //    "C -7",
-        //    "D -7",
-        //    "E -7",
-        //    "F -7",
-        //    "G -7",
-        //    "A♭-7",
-        //    "B♭-7",
-        //    "C♭-7",
-        //    "D♭-7",
-        //    "E♭-7",
-        //    "F♭-7",
-        //    "G♭-7",
-        //    "A# -7",
-        //    "B# -7",
-        //    "C# -7",
-        //    "D# -7",
-        //    "E# -7",
-        //    "F# -7",
-        //    "G# -7",
-        //    "Amaj7",
-        //    "Bmaj7",
-        //    "Cmaj7",
-        //    "Dmaj7",
-        //    "Emaj7",
-        //    "Fmaj7",
-        //    "Gmaj7",
-        //    "A♭maj7",
-        //    "B♭maj7",
-        //    "C♭maj7",
-        //    "D♭maj7",
-        //    "E♭maj7",
-        //    "F♭maj7",
-        //    "G♭maj7",
-        //    "A#maj7",
-        //    "B#maj7",
-        //    "C#maj7",
-        //    "D#maj7",
-        //    "E#maj7",
-        //    "F#maj7",
-        //    "G#maj7",
-        //};
-
-
+        #endregion
     }
 }

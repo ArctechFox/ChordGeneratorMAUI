@@ -45,6 +45,10 @@ namespace ChordGeneratorMAUI.ViewModels
             Helpers.EventManager.Instance.EventAggregator
                 .GetEvent<ResetToDefaultSettingsEvent>()
                 .Subscribe(ResetToDefaultSettings);
+
+            Helpers.EventManager.Instance.EventAggregator
+                .GetEvent<BPMChangedEvent>()
+                .Subscribe(BPMChangedHandler);
         }
 
         private TimeSpan _totalTimeElapsed = TimeSpan.Zero;
@@ -80,48 +84,13 @@ namespace ChordGeneratorMAUI.ViewModels
             set { SetProperty(ref _totalTimeElapsedString, value); }
         }
 
-        private int _bpm = 80;
-        public int BPM
-        {
-            get { return _bpm; }
-            set
-            {
-                value = value > 0 ? value : 1;
-                SetProperty(ref _bpm, value);
-                _beatTimer.Interval = 60000 / BPM;
-            }
-        }
-
-        // TODO: this is simplified for now
-        private int _timeSignature = 4;
-        public int TimeSignature
-        {
-            get { return _timeSignature; }
-            set { SetProperty(ref _timeSignature, value); }
-        }
-
-        private string _barCount = "16";
-        public string BarCount
-        {
-            get { return _barCount; }
-            set 
-            { 
-                SetProperty(ref _barCount, value);
-
-                Application.Current?.Dispatcher.Dispatch(() =>
-                {
-                    Helpers.EventManager.Instance.EventAggregator.GetEvent<BarCountChangedEvent>().Publish(int.Parse(_barCount));
-                });
-            }
-        }
-
         private int _currentBeat = 0;
         public int CurrentBeat
         {
             get { return _currentBeat; }
             set
             {
-                value = value > TimeSignature ? 1 : value;
+                //value = value > TimeSignature ? 1 : value;
                 SetProperty(ref _currentBeat, value);
             }
         }
@@ -163,6 +132,11 @@ namespace ChordGeneratorMAUI.ViewModels
             TotalTimeElapsed = TimeSpan.Zero;
             CurrentBeat = 0;
             //ChartCount = ChartCount <= 0 ? 0 : ChartCount-1;
+        }
+
+        private void BPMChangedHandler(int bpm)
+        {
+           _beatTimer.Interval = 60000 / bpm;
         }
 
         private void ChartGeneratedHandler()
