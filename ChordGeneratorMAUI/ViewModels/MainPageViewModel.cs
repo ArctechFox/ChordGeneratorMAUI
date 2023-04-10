@@ -12,22 +12,6 @@ namespace ChordGeneratorMAUI.ViewModels
 {
     public class MainPageViewModel : BindableBase
     {
-        private int _barCount;
-
-        private bool _isPaused = false;
-        public bool IsPaused
-        {
-            get { return _isPaused; }
-            set { SetProperty(ref _isPaused, value); }
-        }
-
-        private bool _isChordChartActive = false;
-        public bool IsChordChartActive
-        {
-            get { return _isChordChartActive; }
-            set { SetProperty(ref _isChordChartActive, value); }
-        }
-
         private ChartModel _chordChart = new ChartModel();
         public ChartModel ChordChart
         {
@@ -35,39 +19,62 @@ namespace ChordGeneratorMAUI.ViewModels
             set { SetProperty(ref _chordChart, value); }
         }
 
+        private List<ChartModel> _chartHistory = new List<ChartModel>();
+        public List<ChartModel> ChartHistory
+        {
+            get { return _chartHistory; }
+            set { SetProperty(ref _chartHistory, value); }
+        }
+
+        private bool _isPreviousEnabled = false;
+        public bool IsPreviousEnabled
+        {
+            get { return _isPreviousEnabled; }
+            set { SetProperty(ref _isPreviousEnabled, value); }
+        }
+
+        // /////////////////////////////////////////////////////////////////////////////////////////
+
         public DelegateCommand GenerateChordsCommand { get; set; }
         public DelegateCommand PauseToggleCommand { get; set; }
         public DelegateCommand ResetCommand { get; set; }
+        public DelegateCommand PreviousChartCommand { get; set; }
+        public DelegateCommand SaveChartCommand { get; set; }
 
         public MainPageViewModel()
         {
             GenerateChordsCommand = new DelegateCommand(() =>
             {
-                ClearChordChart();
-
-                for (int i = 0; i < _barCount; i++)
+                // Does the ChartHistory have charts after this one? If so, skip forward to it instead of generate a new one
+                if (ChartHistory.IndexOf(ChordChart) != ChartHistory.Count -1)
                 {
-                    Random r = new Random();
-                    int n = r.Next(0, ChordDatabase.Chords.Count);
-
-                    GenerateStaff(ChordDatabase.Chords.ElementAt(n).Value);
+                    ChordChart = ChartHistory[ChartHistory.IndexOf(ChordChart) + 1];
+                    return;
                 }
 
-                Application.Current?.Dispatcher.Dispatch(() =>
-                {
-                    Helpers.EventManager.Instance.EventAggregator.GetEvent<ChartGeneratedEvent>().Publish();
-                });
+                ChordChart = new ChartModel(ChordChart);
+                ChordChart.GenerateChords(ChartHistory.Count);
+                ChartHistory.Add(ChordChart);
 
-                IsPaused = false;
-                IsChordChartActive = true;
+                IsPreviousEnabled = ChartHistory.Count > 1;
+            });
+
+            PreviousChartCommand = new DelegateCommand(() =>
+            {
+                if (IsPreviousEnabled)
+                {
+                    int previousIndex = ChartHistory.IndexOf(ChordChart) - 1;
+                    if (previousIndex <= 0) previousIndex = 0;
+                    ChordChart = ChartHistory[previousIndex];
+                }
             });
 
             PauseToggleCommand = new DelegateCommand(() =>
             {
                 // Toggle boolean
-                IsPaused = !IsPaused;
+                ChordChart.IsPaused = !ChordChart.IsPaused;
 
-                if (IsPaused)
+                if (ChordChart.IsPaused)
                 {
                     Application.Current?.Dispatcher.Dispatch(() =>
                     {
@@ -90,38 +97,7 @@ namespace ChordGeneratorMAUI.ViewModels
                     Helpers.EventManager.Instance.EventAggregator.GetEvent<ResetToDefaultSettingsEvent>().Publish();
                     Helpers.EventManager.Instance.EventAggregator.GetEvent<TimerPauseEvent>().Publish();
                 });
-
-                ClearChordChart();
             });
-
-            // Event Subscriptions
-            Helpers.EventManager.Instance.EventAggregator
-                .GetEvent<BarCountChangedEvent>()
-                .Subscribe((int c) => { _barCount = c; });
-        }
-
-        private void GenerateStaff(Chord chord)
-        {
-            Staff newStaff = new Staff()
-                .AddTimeSignature(TimeSignatureType.Common, 4, 4)
-                .Add(Clef.Treble);
-
-            List<Note> notes = new List<Note>();
-            foreach (var p in chord.Pitches)
-            {
-                notes.Add(new Note(p, RhythmicDuration.Quarter));
-            }
-
-            newStaff.AddRange(StaffBuilder.MakeChord(notes));
-
-            newStaff.AddBarline();
-            MusicScore.FirstStaff.Elements.Add(newStaff);
-        }
-
-        private void ClearChordChart()
-        {
-            ChordChart.Clear();
-            IsChordChartActive = false;
         }
     }
 }

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:v="clr-namespace:ChordGeneratorMAUI.Views"
+             x:Class="ChordGeneratorMAUI.Views.WritingMode">
+	<ContentView.Resources>
+		<ResourceDictionary>
+			<Style TargetType="Border">
+				<Setter Property="Stroke" Value="Gray"></Setter>
+				<Setter Property="StrokeThickness" Value="2"></Setter>
+				<Setter Property="Margin" Value="16,32"></Setter>
+				<Setter Property="StrokeShape">
+					<Setter.Value>
+						<RoundRectangle CornerRadius="10"></RoundRectangle>
+					</Setter.Value>
+				</Setter>
+			</Style>
+
+			<Style TargetType="Label">
+				<Setter Property="FontSize" Value="{OnPlatform iOS=24, Android=26, WinUI=48, MacCatalyst=48}"></Setter>
+				<Setter Property="TextColor" Value="White"></Setter>
+				<Setter Property="Opacity" Value="1"></Setter>
+				<Setter Property="HorizontalOptions" Value="Center"></Setter>
+				<Setter Property="VerticalOptions" Value="Center"></Setter>
+				<Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+				<Setter Property="VerticalTextAlignment" Value="Center"></Setter>
+				<Setter Property="Margin" Value="20"></Setter>
+			</Style>
+
+			<Style TargetType="Button">
+				<Setter Property="FontSize" Value="Header"></Setter>
+				<Setter Property="TextColor" Value="White"></Setter>
+				<Setter Property="Background" Value="Transparent"></Setter>
+				<Setter Property="Opacity" Value="1"></Setter>
+				<Setter Property="HorizontalOptions" Value="Center"></Setter>
+				<Setter Property="VerticalOptions" Value="Center"></Setter>
+				<Setter Property="FontFamily" Value="FA Pro Solid"></Setter>
+			</Style>
+		</ResourceDictionary>
+	</ContentView.Resources>
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition Height="*"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+		</Grid.RowDefinitions>
+
+		<v:Metronome Grid.Row="0"></v:Metronome>
+
+		<!--CHART-->
+		<CollectionView Grid.Row="1" Grid.RowSpan="2" Margin="20,0" ItemsSource="{Binding ChordChart.Chords}" ItemsLayout="VerticalGrid, 4" VerticalOptions="FillAndExpand" ItemSizingStrategy="MeasureFirstItem">
+			<CollectionView.ItemTemplate>
+				<DataTemplate>
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="200" />
+						</Grid.RowDefinitions>
+
+						<Border Padding="0,10">
+							<!--CHORD NAME-->
+							<Label Grid.Row="0" FontSize="Header" Margin="5" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" FontFamily="Arial" Text="{Binding Name}"></Label>
+						</Border>
+
+					</Grid>
+				</DataTemplate>
+			</CollectionView.ItemTemplate>
+		</CollectionView>
+
+		<!--BOTTOM-->
+		<Grid Grid.Row="2" HeightRequest="175">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"></ColumnDefinition>
+				<ColumnDefinition Width="*"></ColumnDefinition>
+				<ColumnDefinition Width="*"></ColumnDefinition>
+				<ColumnDefinition Width="*"></ColumnDefinition>
+				<ColumnDefinition Width="*"></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+
+			<Border Grid.ColumnSpan="5" Background="Black" Opacity=".8" Margin="0" Padding="0" StrokeThickness="0"></Border>
+
+			<Button Grid.Column="0" Text="chevron-double-left" IsEnabled="True"
+					Command="{Binding PreviousChartCommand}">
+				<Button.Triggers>
+					<DataTrigger TargetType="Button" Binding="{Binding IsPreviousEnabled}" Value="False">
+						<Setter Property="IsEnabled" Value="False"></Setter>
+					</DataTrigger>
+				</Button.Triggers>
+			</Button>
+
+			<Button Grid.Column="1" Text="undo-alt"
+					Command="{Binding ResetCommand}"></Button>
+
+			<Button Grid.Column="2" Text="pause" FontSize="72" IsEnabled="True"
+					Command="{Binding PauseToggleCommand}">
+				<Button.Triggers>
+					<DataTrigger TargetType="Button" Binding="{Binding ChordChart.IsPaused}" Value="True">
+						<Setter Property="Text" Value="play"></Setter>
+					</DataTrigger>
+					<DataTrigger TargetType="Button" Binding="{Binding ChordChart.IsChordChartActive}" Value="False">
+						<Setter Property="IsEnabled" Value="False"></Setter>
+					</DataTrigger>
+				</Button.Triggers>
+			</Button>
+
+			<Button Grid.Column="3" Text="save"
+					Command="{Binding SaveChartCommand}"></Button>
+
+			<Button Grid.Column="4" Text="chevron-double-right"
+					Command="{Binding GenerateChordsCommand}"></Button>
+		</Grid>
+	</Grid>
+</ContentView>

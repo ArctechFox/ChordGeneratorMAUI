@@ -1,9 +1,9 @@
-﻿using Manufaktura.Music.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static ChordGeneratorMAUI.DataAccess.ChordDatabase;
 
 namespace ChordGeneratorMAUI.Models
 {
@@ -16,11 +16,11 @@ namespace ChordGeneratorMAUI.Models
             set { SetProperty(ref _name, value); }
         }
 
-        private Chord _chordData;
-        public Chord ChordData
+        private ChordTypes _chordType;
+        public ChordTypes ChordType
         {
-            get { return _chordData; }
-            set { SetProperty(ref _chordData, value); }
+            get { return _chordType; }
+            set { SetProperty(ref _chordType, value); }
         }
     }
 }

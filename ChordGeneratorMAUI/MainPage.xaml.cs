@@ -8,6 +8,7 @@ public partial class MainPage : ContentPage
 	{
 		InitializeComponent();
 		this.BindingContext = new MainPageViewModel();
-	}
+		this.WritingModeView.BindingContext = this.BindingContext;
+    }
 }
 

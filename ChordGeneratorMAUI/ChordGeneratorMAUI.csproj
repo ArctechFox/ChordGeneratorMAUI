@@ -49,6 +49,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Fonts\Font Awesome 5 Brands-Regular-400.otf" />
+	  <None Remove="Resources\Fonts\Font Awesome 5 Duotone-Solid-900.otf" />
+	  <None Remove="Resources\Fonts\Font Awesome 5 Pro-Light-300.otf" />
+	  <None Remove="Resources\Fonts\Font Awesome 5 Pro-Regular-400.otf" />
+	  <None Remove="Resources\Fonts\Font Awesome 5 Pro-Solid-900.otf" />
 	  <None Remove="Resources\Fonts\LASSUS.TTF" />
 	  <None Remove="Resources\Fonts\MusAnalysis.otf" />
 	  <None Remove="Resources\Raw\chordgen.png" />
@@ -83,6 +88,9 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="Views\Metronome.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\WritingMode.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

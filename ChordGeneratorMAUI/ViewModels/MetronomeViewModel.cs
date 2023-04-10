@@ -90,7 +90,8 @@ namespace ChordGeneratorMAUI.ViewModels
             get { return _currentBeat; }
             set
             {
-                //value = value > TimeSignature ? 1 : value;
+                // TODO: subscribe to TimeSignatureChangedEvent to track this value instead of hard-coding a 4
+                value = value > 4 ? 1 : value;
                 SetProperty(ref _currentBeat, value);
             }
         }
