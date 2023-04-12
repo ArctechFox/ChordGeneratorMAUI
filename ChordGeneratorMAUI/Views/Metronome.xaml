@@ -36,13 +36,13 @@
 		<VerticalStackLayout Grid.Column="0" Grid.Row="0" VerticalOptions="Start">
 			<Label FontSize="Small" Margin="0,0,0,7" HorizontalOptions="Start">BPM</Label>
 
-			<Entry Text="{Binding Source={RelativeSource AncestorType={x:Type vm:MainPageViewModel}}, Path=ChordChart.BPM}"
+			<Entry Text="{Binding Source={RelativeSource AncestorType={x:Type vm:ChartViewModel}}, Path=ChordChart.BPM}"
 				   HorizontalOptions="StartAndExpand" TextColor="White" BackgroundColor="Purple" FontAttributes="Bold" FontSize="Small" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" 
 				   MinimumWidthRequest="60"></Entry>
 		</VerticalStackLayout>
 
 		<!--BAR COUNT-->
-		<Picker Grid.Column="1" Grid.Row="0" Title="Bar Count" SelectedItem="{Binding Source={RelativeSource AncestorType={x:Type vm:MainPageViewModel}}, Path=ChordChart.BarCount}" 
+		<Picker Grid.Column="1" Grid.Row="0" Title="Bar Count" SelectedItem="{Binding Source={RelativeSource AncestorType={x:Type vm:ChartViewModel}}, Path=ChordChart.BarCount}" 
 				MinimumWidthRequest="135" MinimumHeightRequest="78"
 				Background="Purple" TitleColor="White" TextColor="White" FontAttributes="Bold" FontSize="Small" Margin="10,0"
 				HorizontalOptions="StartAndExpand">
@@ -56,12 +56,34 @@
 			</Picker.ItemsSource>
 		</Picker>
 
-		<Picker Grid.Column="2" Grid.Row="0" Title="Chord Types" SelectedItem="{Binding Source={RelativeSource AncestorType={x:Type vm:MainPageViewModel}}, Path=ChordChart.IncludedChordTypes}" 
+		<!--CHORD TYPES-->
+		<!--<CollectionView Grid.Column="2" Grid.Row="0" SelectionMode="Multiple" ItemsLayout="HorizontalGrid, 3" MinimumWidthRequest="135" MinimumHeightRequest="78"
+						ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type vm:ChartViewModel}}, Path=ChordChart.ChordTypesValues}"
+						SelectedItems="{Binding Source={RelativeSource AncestorType={x:Type vm:ChartViewModel}}, Path=ChordChart.IncludedChordTypes}">
+
+			<CollectionView.ItemTemplate>
+				<DataTemplate>
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="100" />
+						</Grid.ColumnDefinitions>
+
+						<Border>
+							--><!--CHORD NAME--><!--
+							<Label Text="{Binding}" TextColor="Red" FontSize="Small" HeightRequest="80" BackgroundColor="Red"></Label>
+						</Border>
+
+					</Grid>
+				</DataTemplate>
+			</CollectionView.ItemTemplate>
+		</CollectionView>-->
+		
+		<!--<Picker Grid.Column="2" Grid.Row="0" Title="Chord Types" SelectedItem="{Binding Source={RelativeSource AncestorType={x:Type vm:MainPageViewModel}}, Path=ChordChart.IncludedChordTypes}" 
 				MinimumWidthRequest="135" MinimumHeightRequest="78"
 				Background="Purple" TitleColor="White" TextColor="White" FontAttributes="Bold" FontSize="Small"
 				HorizontalOptions="StartAndExpand" ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type vm:MainPageViewModel}}, Path=ChordChart.ChordTypesValues}" >
 
-		</Picker>
+		</Picker>-->
 
 		<!--TIMER-->
 		<Label Text="{Binding TotalTimeElapsedString}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" Margin="0" Opacity="1" FontSize="Large"></Label>
@@ -74,8 +96,8 @@
 
 		<!--TIME SIGNATURE-->
 		<VerticalStackLayout Grid.Column="0" Grid.Row="1" VerticalOptions="Center" HorizontalOptions="StartAndExpand" Margin="0,0">
-			<Label Margin="0" FontSize="Medium" Text="{Binding Source={RelativeSource AncestorType={x:Type vm:MainPageViewModel}}, Path=ChordChart.TimeSignature}"></Label>
-			<Label Margin="0" FontSize="Medium" Text="{Binding Source={RelativeSource AncestorType={x:Type vm:MainPageViewModel}}, Path=ChordChart.TimeSignature}"></Label>
+			<Label Margin="0" FontSize="Medium" Text="{Binding Source={RelativeSource AncestorType={x:Type vm:ChartViewModel}}, Path=ChordChart.TimeSignature}"></Label>
+			<Label Margin="0" FontSize="Medium" Text="{Binding Source={RelativeSource AncestorType={x:Type vm:ChartViewModel}}, Path=ChordChart.TimeSignature}"></Label>
 		</VerticalStackLayout>
 
 		<!--BEAT INDICATORS-->

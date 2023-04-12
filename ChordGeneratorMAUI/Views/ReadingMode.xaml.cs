@@ -3,9 +3,9 @@ using ChordGeneratorMAUI.ViewModels;
 
 namespace ChordGeneratorMAUI.Views;
 
-public partial class WritingMode : ContentPage
+public partial class ReadingMode : ContentPage
 {
-	public WritingMode()
+	public ReadingMode()
 	{
 		InitializeComponent();
     }

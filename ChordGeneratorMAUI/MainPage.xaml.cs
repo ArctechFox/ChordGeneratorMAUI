@@ -8,7 +8,11 @@ public partial class MainPage : ContentPage
 	{
 		InitializeComponent();
 		this.BindingContext = new MainPageViewModel();
-		this.WritingModeView.BindingContext = this.BindingContext;
+    }
+
+    private async void btnWritingMode_Clicked(object sender, EventArgs e)
+    {
+		await Shell.Current.GoToAsync("//Charts/WritingMode");
     }
 }
 

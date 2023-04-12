@@ -60,9 +60,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Maui" Version="5.0.0" />
 		<PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="1.0.2" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="Prism.Maui" Version="8.1.273-pre" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Views\ReadingMode.xaml.cs">
+	    <DependentUpon>ReadingMode.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -87,7 +94,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\ChartSettingsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Metronome.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ReadingMode.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\WritingMode.xaml">

@@ -28,6 +28,7 @@ namespace ChordGeneratorMAUI.Models
         }
 
         private readonly string _defaultChartName = "Chart #";
+        private List<ChordModel> _filteredChords = new List<ChordModel>();
 
         private string _chartName = "";
         public string ChartName
@@ -99,29 +100,75 @@ namespace ChordGeneratorMAUI.Models
 
         // CHORD OPTIONS
 
-        //private string _includedKeys = true;
-        //public bool IncludeAllKeys
-        //{
-        //    get { return _includeAllKeys; }
-        //    set 
-        //    { 
-        //        SetProperty(ref _includeAllKeys, value); 
+        private bool _includeChordType_All = true;
+        public bool IncludeChordType_All
+        {
+            get { return _includeChordType_All; }
+            set { SetProperty(ref _includeChordType_All, value); }
+        }
 
-        //        // Toggle All
-        //    }
-        //}
+        private bool _includeChordType_Major = false;
+        public bool IncludeChordType_Major
+        {
+            get { return _includeChordType_Major; }
+            set { SetProperty(ref _includeChordType_Major, value); }
+        }
 
-        private ChordTypes _includedChordTypes = ChordTypes.All;
-        public ChordTypes IncludedChordTypes
+        private bool _includeChordType_Minor = false;
+        public bool IncludeChordType_Minor
+        {
+            get { return _includeChordType_Minor; }
+            set { SetProperty(ref _includeChordType_Minor, value); }
+        }
+
+        private bool _includeChordType_Major7th = false;
+        public bool IncludeChordType_Major7th
+        {
+            get { return _includeChordType_Major7th; }
+            set { SetProperty(ref _includeChordType_Major7th, value); }
+        }
+
+        private bool _includeChordType_Minor7th = false;
+        public bool IncludeChordType_Minor7th
+        {
+            get { return _includeChordType_Minor7th; }
+            set { SetProperty(ref _includeChordType_Minor7th, value); }
+        }
+
+        private bool _includeChordType_Dominant7th = false;
+        public bool IncludeChordType_Dominant7th
+        {
+            get { return _includeChordType_Dominant7th; }
+            set { SetProperty(ref _includeChordType_Dominant7th, value); }
+        }
+
+        private bool _includeChordType_Diminished = false;
+        public bool IncludeChordType_Diminished
+        {
+            get { return _includeChordType_Diminished; }
+            set { SetProperty(ref _includeChordType_Diminished, value); }
+        }
+
+        private bool _includeChordType_MinorSevenFlatFive = false;
+        public bool IncludeChordType_MinorSevenFlatFive
+        {
+            get { return _includeChordType_MinorSevenFlatFive; }
+            set { SetProperty(ref _includeChordType_MinorSevenFlatFive, value); }
+        }
+
+        // ////////////////////////////////////////////////////////////////////////////////////////////
+
+        private ObservableCollection<ChordTypes> _includedChordTypes = new ObservableCollection<ChordTypes> { ChordTypes.All };
+        public ObservableCollection<ChordTypes> IncludedChordTypes
         {
             get { return _includedChordTypes; }
             set { SetProperty(ref _includedChordTypes, value); }
         }
 
         // Provides the bindable enumeration of descriptions
-        public IEnumerable<ChordTypes> ChordTypesValues
+        public IEnumerable<string> ChordTypesValues
         {
-            get { return Enum.GetValues(typeof(ChordTypes)).Cast<ChordTypes>(); }
+            get { return Enum.GetValues(typeof(ChordTypes)).Cast<string>(); }
         }
 
         //public ObservableCollection<ChordModel> Filter()
@@ -131,48 +178,56 @@ namespace ChordGeneratorMAUI.Models
 
         private void ClearChordChart()
         {
+            _filteredChords.Clear();
+
             this.Chords = new ObservableCollection<ChordModel>();
             IsChordChartActive = false;
         }
 
         public ObservableCollection<ChordModel> GenerateChords(int chartHistoryCount)
         {
-            ClearChordChart();
+            //ClearChordChart();
 
-            List<ChordModel> filteredChords = ChordDatabase.AllChords;
-
-            switch (IncludedChordTypes)
+            if (IncludedChordTypes.Contains(ChordTypes.All))
             {
-                case ChordTypes.All:
-                    filteredChords = ChordDatabase.AllChords;
-                    break;
-                case ChordTypes.Major: 
-                    filteredChords = ChordDatabase.AllChords.FindAll((c) => c.ChordType == ChordTypes.Major);
-                    break;
-                case ChordTypes.Minor:
-                    filteredChords = ChordDatabase.AllChords.FindAll((c) => c.ChordType == ChordTypes.Minor);
-                    break;
-                case ChordTypes.Major7th:
-                    filteredChords = ChordDatabase.AllChords.FindAll((c) => c.ChordType == ChordTypes.Major7th);
-                    break;
-                case ChordTypes.Minor7th:
-                    filteredChords = ChordDatabase.AllChords.FindAll((c) => c.ChordType == ChordTypes.Minor7th);
-                    break;
-                case ChordTypes.Dominant7th:
-                    filteredChords = ChordDatabase.AllChords.FindAll((c) => c.ChordType == ChordTypes.Dominant7th);
-                    break;
-                case ChordTypes.Diminished:
-                    filteredChords = ChordDatabase.AllChords.FindAll((c) => c.ChordType == ChordTypes.Diminished);
-                    break;
-                default:
-                    break;
+                _filteredChords = AllChords;
+            }
+            else
+            {
+                foreach (var c in IncludedChordTypes)
+                {
+                    switch (c)
+                    {
+                        // TODO: maybe cache these sub-collections so I dont gotta find them every time
+                        case ChordTypes.Major:
+                            _filteredChords.AddRange(ChordDatabase.AllChords.FindAll((c) => c.ChordType == ChordTypes.Major));
+                            break;
+                        case ChordTypes.Minor:
+                            _filteredChords.AddRange(ChordDatabase.AllChords.FindAll((c) => c.ChordType == ChordTypes.Minor));
+                            break;
+                        case ChordTypes.Major7th:
+                            _filteredChords.AddRange(ChordDatabase.AllChords.FindAll((c) => c.ChordType == ChordTypes.Major7th));
+                            break;
+                        case ChordTypes.Minor7th:
+                            _filteredChords.AddRange(ChordDatabase.AllChords.FindAll((c) => c.ChordType == ChordTypes.Minor7th));
+                            break;
+                        case ChordTypes.Dominant7th:
+                            _filteredChords.AddRange(ChordDatabase.AllChords.FindAll((c) => c.ChordType == ChordTypes.Dominant7th));
+                            break;
+                        case ChordTypes.Diminished:
+                            _filteredChords.AddRange(ChordDatabase.AllChords.FindAll((c) => c.ChordType == ChordTypes.Diminished));
+                            break;
+                        default:
+                            break;
+                    }
+                }
             }
 
             Random r = new Random();
             for (int i = 0; i < BarCount; i++)
             {
-                int n = r.Next(0, filteredChords.Count);
-                Chords.Add(filteredChords[n]);
+                int n = r.Next(0, _filteredChords.Count);
+                Chords.Add(_filteredChords[n]);
             }
             
             this.ChartName = _defaultChartName + chartHistoryCount.ToString();

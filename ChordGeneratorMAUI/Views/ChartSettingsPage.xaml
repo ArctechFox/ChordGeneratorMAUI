@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="ChordGeneratorMAUI.Views.ChartSettingsPage"
+             Title="Chart Settings" Background="{StaticResource Black}" Padding="10">
+	<ContentPage.Resources>
+		<ResourceDictionary>
+
+			<Style TargetType="Border">
+				<Setter Property="BackgroundColor" Value="{StaticResource Primary}"></Setter>
+				<Setter Property="StrokeThickness" Value="0"></Setter>
+				<Setter Property="Padding" Value="16,32"></Setter>
+				<Setter Property="StrokeShape">
+					<Setter.Value>
+						<RoundRectangle CornerRadius="10"></RoundRectangle>
+					</Setter.Value>
+				</Setter>
+			</Style>
+
+			<Style TargetType="Label">
+				<Setter Property="TextColor" Value="White"></Setter>
+				<Setter Property="Opacity" Value=".9"></Setter>
+				<Setter Property="FontSize" Value="Medium"></Setter>
+				<Setter Property="FontAttributes" Value="Bold"></Setter>
+			</Style>
+
+			<Style TargetType="Switch">
+				<Setter Property="OnColor" Value="{StaticResource Tertiary}"></Setter>
+				<Setter Property="VisualStateManager.VisualStateGroups">
+					<Setter.Value>
+						<VisualStateGroupList>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="On">
+									<VisualState.Setters>
+										<Setter Property="ThumbColor"
+													Value="{StaticResource Yellow100Accent}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Off">
+									<VisualState.Setters>
+										<Setter Property="ThumbColor"
+													Value="{StaticResource Primary}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateGroupList>
+					</Setter.Value>
+				</Setter>
+			</Style>
+
+		</ResourceDictionary>
+	</ContentPage.Resources>
+
+	<VerticalStackLayout>
+		<toolkit:Expander IsExpanded="True">
+			<toolkit:Expander.Header>
+				<Border>
+					<Label Text="Included Chord Types" TextColor="White" FontSize="Large" FontAttributes="None"></Label>
+				</Border>
+			</toolkit:Expander.Header>
+
+			<HorizontalStackLayout Padding="20,20">
+				<VerticalStackLayout >
+					<Label Text="All" Margin="0, 15, 0, 0"></Label>
+					<Switch IsToggled="{Binding ChordChart.IncludeChordType_All}"></Switch>
+					<Label Text="Major" Margin="0, 15, 0, 0"></Label>
+					<Switch IsToggled="{Binding ChordChart.IncludeChordType_Major}"></Switch>
+					<Label Text="Minor" Margin="0, 15, 0, 0"></Label>
+					<Switch IsToggled="{Binding ChordChart.IncludeChordType_Minor}"></Switch>
+					<Label Text="Major 7th" Margin="0, 15, 0, 0"></Label>
+					<Switch IsToggled="{Binding ChordChart.IncludeChordType_Major7th}"></Switch>
+				</VerticalStackLayout>
+
+				<VerticalStackLayout>
+					<Label Text="Minor 7th" Margin="0, 15, 0, 0"></Label>
+					<Switch IsToggled="{Binding ChordChart.IncludeChordType_Minor7th}"></Switch>
+					<Label Text="Dominant 7th" Margin="0, 15, 0, 0"></Label>
+					<Switch IsToggled="{Binding ChordChart.IncludeChordType_Dominant7th}"></Switch>
+					<Label Text="Diminished" Margin="0, 15, 0, 0"></Label>
+					<Switch IsToggled="{Binding ChordChart.IncludeChordType_Diminished}"></Switch>
+					<Label Text="Minor-Seven-Flat-Five (-7♭5)" Margin="0, 15, 0, 0"></Label>
+					<Switch IsToggled="{Binding ChordChart.IncludeChordType_MinorSevenFlatFive}"></Switch>
+				</VerticalStackLayout>
+			</HorizontalStackLayout>
+		</toolkit:Expander>
+
+		<toolkit:Expander IsExpanded="True">
+			<toolkit:Expander.Header>
+				<Border>
+					<Label Text="Included Keys" TextColor="White" FontSize="Large" FontAttributes="None"></Label>
+				</Border>
+			</toolkit:Expander.Header>
+
+			<VerticalStackLayout>
+				<Switch IsToggled="{Binding ChordChart.IncludeChordType_All}"></Switch>
+				<Switch IsToggled="{Binding ChordChart.IncludeChordType_All}"></Switch>
+			</VerticalStackLayout>
+		</toolkit:Expander>
+	</VerticalStackLayout>
+</ContentPage>
