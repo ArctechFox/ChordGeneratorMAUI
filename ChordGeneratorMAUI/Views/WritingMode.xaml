@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:v="clr-namespace:ChordGeneratorMAUI.Views"
+			 xmlns:vm="clr-namespace:ChordGeneratorMAUI.ViewModels"
              x:Class="ChordGeneratorMAUI.Views.WritingMode" Background="{StaticResource Black}">
 
 	<ContentPage.Resources>
@@ -9,7 +10,7 @@
 			<Style TargetType="Border">
 				<Setter Property="Stroke" Value="Gray"></Setter>
 				<Setter Property="StrokeThickness" Value="2"></Setter>
-				<Setter Property="Margin" Value="16,32"></Setter>
+				<Setter Property="Margin" Value="5"></Setter>
 				<Setter Property="StrokeShape">
 					<Setter.Value>
 						<RoundRectangle CornerRadius="10"></RoundRectangle>
@@ -50,20 +51,58 @@
 			<RowDefinition Height="Auto"></RowDefinition>
 		</Grid.RowDefinitions>
 
+		<!--INFO/SETTINGS-->
+		<Border Grid.Row="0" BackgroundColor="{StaticResource White}" HeightRequest="100" StrokeThickness="0" Margin="10">
+			<Border.GestureRecognizers>
+				<TapGestureRecognizer Tapped="SettingsButton_Tapped" />
+			</Border.GestureRecognizers>
+
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"></ColumnDefinition>
+					<ColumnDefinition Width="*"></ColumnDefinition>
+					<ColumnDefinition Width="*"></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				
+				<VerticalStackLayout Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center">
+					<Label Text="Key" TextColor="{StaticResource Black}" Opacity=".5" FontSize="Small" Margin="0"></Label>
+					<Label Text="{Binding ChordChart.SelectedKey}" TextColor="{StaticResource Tertiary}" Opacity="1" FontSize="Small" Margin="0" FontAttributes="Bold"></Label>
+				</VerticalStackLayout>
+
+				<Label Grid.Column="1" Text="Writing Mode" TextColor="{StaticResource Black}" Opacity="1" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Center"></Label>
+
+				<VerticalStackLayout Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center">
+					<Label Text="BPM" TextColor="{StaticResource Black}" Opacity=".5" FontSize="Small" Margin="0"></Label>
+					<Label Text="{Binding ChordChart.BPM}" TextColor="{StaticResource Tertiary}" Opacity="1" FontSize="Small" Margin="0" FontAttributes="Bold"></Label>
+				</VerticalStackLayout>
+			</Grid>
+		</Border>
+
+		<Grid Grid.Row="1">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"></ColumnDefinition>
+				<ColumnDefinition Width="*"></ColumnDefinition>
+				<ColumnDefinition Width="*"></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+
+			<Entry Grid.Column="1" Text="{Binding ChordChart.Name}" TextColor="White" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Center"></Entry>
+			<Button Grid.Column="2" HorizontalOptions="End" FontFamily="FA Pro Solid" Text="trash"></Button>
+		</Grid>
+
 		<!--<v:Metronome Grid.Row="0"></v:Metronome>-->
 
 		<!--CHART-->
-		<CollectionView Grid.Row="1" Grid.RowSpan="2" Margin="20,0" ItemsSource="{Binding ChordChart.Chords}" ItemsLayout="VerticalGrid, 4" VerticalOptions="FillAndExpand" ItemSizingStrategy="MeasureFirstItem">
+		<CollectionView Grid.Row="2" Grid.RowSpan="2" Margin="20,0" ItemsSource="{Binding ChordChart.Chords}" ItemsLayout="VerticalGrid, 4" VerticalOptions="FillAndExpand" ItemSizingStrategy="MeasureFirstItem">
 			<CollectionView.ItemTemplate>
 				<DataTemplate>
 					<Grid>
 						<Grid.RowDefinitions>
-							<RowDefinition Height="200" />
+							<RowDefinition Height="150" />
 						</Grid.RowDefinitions>
 
-						<Border Padding="0,10">
+						<Border>
 							<!--CHORD NAME-->
-							<Label Grid.Row="0" FontSize="Header" Margin="5" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" FontFamily="Arial" Text="{Binding Name}"></Label>
+							<Label Grid.Row="0" FontSize="Large" Margin="0" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" FontFamily="Arial" Text="{Binding Name}"></Label>
 						</Border>
 
 					</Grid>
@@ -72,7 +111,7 @@
 		</CollectionView>
 
 		<!--BOTTOM-->
-		<Grid Grid.Row="2" HeightRequest="100">
+		<Grid Grid.Row="3" HeightRequest="100" VerticalOptions="End">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*"></ColumnDefinition>
 				<ColumnDefinition Width="*"></ColumnDefinition>

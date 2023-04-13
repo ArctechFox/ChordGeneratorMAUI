@@ -9,4 +9,10 @@ public partial class WritingMode : ContentPage
 	{
 		InitializeComponent();
     }
+
+    private async void SettingsButton_Tapped(object sender, TappedEventArgs e)
+    {
+        await Navigation.PushAsync(new ChartSettingsPage() { BindingContext = this.BindingContext });
+        //await Shell.Current.GoToAsync("//Charts/ChartSettings");
+    }
 }

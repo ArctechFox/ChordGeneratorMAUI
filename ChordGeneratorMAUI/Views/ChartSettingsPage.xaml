@@ -2,8 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+			 xmlns:sys="clr-namespace:System;assembly=mscorlib"
              x:Class="ChordGeneratorMAUI.Views.ChartSettingsPage"
-             Title="Chart Settings" Background="{StaticResource Black}" Padding="10">
+             Title="Chart Settings" Background="{StaticResource White}" Padding="10">
 	<ContentPage.Resources>
 		<ResourceDictionary>
 
@@ -19,14 +20,14 @@
 			</Style>
 
 			<Style TargetType="Label">
-				<Setter Property="TextColor" Value="White"></Setter>
-				<Setter Property="Opacity" Value=".9"></Setter>
+				<Setter Property="TextColor" Value="{StaticResource Black}"></Setter>
+				<Setter Property="Opacity" Value=".98"></Setter>
 				<Setter Property="FontSize" Value="Medium"></Setter>
 				<Setter Property="FontAttributes" Value="Bold"></Setter>
 			</Style>
 
 			<Style TargetType="Switch">
-				<Setter Property="OnColor" Value="{StaticResource Tertiary}"></Setter>
+				<Setter Property="OnColor" Value="{StaticResource Primary}"></Setter>
 				<Setter Property="VisualStateManager.VisualStateGroups">
 					<Setter.Value>
 						<VisualStateGroupList>
@@ -34,7 +35,7 @@
 								<VisualState x:Name="On">
 									<VisualState.Setters>
 										<Setter Property="ThumbColor"
-													Value="{StaticResource Yellow100Accent}" />
+													Value="{StaticResource Tertiary}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Off">
@@ -52,50 +53,140 @@
 		</ResourceDictionary>
 	</ContentPage.Resources>
 
-	<VerticalStackLayout>
-		<toolkit:Expander IsExpanded="True">
-			<toolkit:Expander.Header>
-				<Border>
-					<Label Text="Included Chord Types" TextColor="White" FontSize="Large" FontAttributes="None"></Label>
-				</Border>
-			</toolkit:Expander.Header>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+		</Grid.RowDefinitions>
+		
+		<VerticalStackLayout>
 
-			<HorizontalStackLayout Padding="20,20">
-				<VerticalStackLayout >
-					<Label Text="All" Margin="0, 15, 0, 0"></Label>
-					<Switch IsToggled="{Binding ChordChart.IncludeChordType_All}"></Switch>
-					<Label Text="Major" Margin="0, 15, 0, 0"></Label>
-					<Switch IsToggled="{Binding ChordChart.IncludeChordType_Major}"></Switch>
-					<Label Text="Minor" Margin="0, 15, 0, 0"></Label>
-					<Switch IsToggled="{Binding ChordChart.IncludeChordType_Minor}"></Switch>
-					<Label Text="Major 7th" Margin="0, 15, 0, 0"></Label>
-					<Switch IsToggled="{Binding ChordChart.IncludeChordType_Major7th}"></Switch>
+			<Grid Margin="0,0,0,20">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"></ColumnDefinition>
+					<ColumnDefinition Width="Auto"></ColumnDefinition>
+					<ColumnDefinition Width="*"></ColumnDefinition>
+					<ColumnDefinition Width="Auto"></ColumnDefinition>
+					<ColumnDefinition Width="Auto"></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+
+				<!--KEY-->
+				<VerticalStackLayout Grid.Column="0">
+					<Label Text="Key" HorizontalTextAlignment="Start"></Label>
+
+					<Picker Grid.Column="1" Grid.Row="0" Title="" SelectedItem="{Binding ChordChart.SelectedKey}" HorizontalOptions="Start"
+							Background="{StaticResource Primary}" TextColor="{StaticResource White}" TitleColor="{StaticResource White}"
+							FontSize="Medium" HeightRequest="50" WidthRequest="150">
+						<Picker.ItemsSource>
+							<x:Array Type="{x:Type sys:String}">
+								<sys:String>All</sys:String>
+								<sys:String>Ab Major</sys:String> <sys:String>A Major</sys:String>
+								<sys:String>Ab Minor</sys:String> <sys:String>A Minor</sys:String> <sys:String>A# Minor</sys:String>
+
+								<sys:String>Bb Major</sys:String> <sys:String>B Major</sys:String>
+								<sys:String>Bb Minor</sys:String> <sys:String>B Minor</sys:String>
+								
+								<sys:String>Cb Major</sys:String> <sys:String>C Major</sys:String> <sys:String>C# Major</sys:String>
+								<sys:String>C Minor</sys:String> <sys:String>C# Minor</sys:String>
+								
+								<sys:String>Db Major</sys:String> <sys:String>D Major</sys:String>
+								<sys:String>D Minor</sys:String> <sys:String>D# Minor</sys:String>
+								
+								<sys:String>Eb Major</sys:String> <sys:String>E Major</sys:String>
+								<sys:String>Eb Minor</sys:String> <sys:String>E Minor</sys:String>
+								
+								<sys:String>F Major</sys:String> <sys:String>F# Major</sys:String>
+								<sys:String>F Minor</sys:String> <sys:String>F# Minor</sys:String>
+								
+								<sys:String>Gb Major</sys:String> <sys:String>G Major</sys:String>
+								<sys:String>G Minor</sys:String> <sys:String>G# Minor</sys:String>
+
+							</x:Array>
+						</Picker.ItemsSource>
+					</Picker>
 				</VerticalStackLayout>
 
-				<VerticalStackLayout>
-					<Label Text="Minor 7th" Margin="0, 15, 0, 0"></Label>
-					<Switch IsToggled="{Binding ChordChart.IncludeChordType_Minor7th}"></Switch>
-					<Label Text="Dominant 7th" Margin="0, 15, 0, 0"></Label>
-					<Switch IsToggled="{Binding ChordChart.IncludeChordType_Dominant7th}"></Switch>
-					<Label Text="Diminished" Margin="0, 15, 0, 0"></Label>
-					<Switch IsToggled="{Binding ChordChart.IncludeChordType_Diminished}"></Switch>
-					<Label Text="Minor-Seven-Flat-Five (-7♭5)" Margin="0, 15, 0, 0"></Label>
-					<Switch IsToggled="{Binding ChordChart.IncludeChordType_MinorSevenFlatFive}"></Switch>
+				<!--BAR COUNT-->
+				<VerticalStackLayout Margin="20,0" Grid.Column="1">
+					<Label Text="Bar Count"></Label>
+
+					<Picker Grid.Column="1" Grid.Row="0" Title="" SelectedItem="{Binding ChordChart.BarCount}" 
+				Background="{StaticResource Primary}" TextColor="{StaticResource White}" TitleColor="{StaticResource White}"
+					  FontSize="Medium" HorizontalTextAlignment="Start" HeightRequest="50">
+						<Picker.ItemsSource>
+							<x:Array Type="{x:Type sys:Int32}">
+								<sys:Int32>4</sys:Int32>
+								<sys:Int32>8</sys:Int32>
+								<sys:Int32>12</sys:Int32>
+								<sys:Int32>16</sys:Int32>
+								<sys:Int32>24</sys:Int32>
+							</x:Array>
+						</Picker.ItemsSource>
+					</Picker>
 				</VerticalStackLayout>
+
+				<!--BPM-->
+				<VerticalStackLayout Grid.Column="2" HorizontalOptions="End" Margin="20,0">
+					<Label Text="BPM"></Label>
+					<Entry Text="{Binding ChordChart.BPM}" Background="{StaticResource Primary}" TextColor="{StaticResource White}" HorizontalOptions="Start" VerticalOptions="End"
+					  FontSize="Medium" HorizontalTextAlignment="Center" WidthRequest="60" HeightRequest="49"></Entry>
+				</VerticalStackLayout>
+
+				<!--TIME SIGNATURE-->
+				<VerticalStackLayout Grid.Column="3" HorizontalOptions="End">
+					<Label Text="Time Signature" HorizontalTextAlignment="End"></Label>
+
+					<Picker Grid.Column="1" Grid.Row="0" Title="" SelectedItem="{Binding ChordChart.BarCount}" HorizontalOptions="End"
+				Background="{StaticResource Primary}" TextColor="{StaticResource White}" TitleColor="{StaticResource White}"
+					  FontSize="Medium" HorizontalTextAlignment="Start" MinimumWidthRequest="200" HeightRequest="50">
+					</Picker>
+				</VerticalStackLayout>
+
+			</Grid>
+
+			<!--INCLUDED CHORD TYPES-->
+			<toolkit:Expander IsExpanded="True">
+				<toolkit:Expander.Header>
+					<Border>
+						<Label Text="Included Chord Types" TextColor="White" FontSize="Large" FontAttributes="None"></Label>
+					</Border>
+				</toolkit:Expander.Header>
+
+				<HorizontalStackLayout Padding="20,20">
+					<VerticalStackLayout >
+						<Label Text="All" Margin="0, 15, 0, 0"></Label>
+						<Switch IsToggled="{Binding ChordChart.IncludeChordType_All}"></Switch>
+						<Label Text="Major" Margin="0, 15, 0, 0"></Label>
+						<Switch IsToggled="{Binding ChordChart.IncludeChordType_Major}"></Switch>
+						<Label Text="Minor" Margin="0, 15, 0, 0"></Label>
+						<Switch IsToggled="{Binding ChordChart.IncludeChordType_Minor}"></Switch>
+						<Label Text="Major 7th" Margin="0, 15, 0, 0"></Label>
+						<Switch IsToggled="{Binding ChordChart.IncludeChordType_Major7th}"></Switch>
+					</VerticalStackLayout>
+
+					<VerticalStackLayout>
+						<Label Text="Minor 7th" Margin="0, 15, 0, 0"></Label>
+						<Switch IsToggled="{Binding ChordChart.IncludeChordType_Minor7th}"></Switch>
+						<Label Text="Dominant 7th" Margin="0, 15, 0, 0"></Label>
+						<Switch IsToggled="{Binding ChordChart.IncludeChordType_Dominant7th}"></Switch>
+						<Label Text="Diminished" Margin="0, 15, 0, 0"></Label>
+						<Switch IsToggled="{Binding ChordChart.IncludeChordType_Diminished}"></Switch>
+						<Label Text="Minor-Seven-Flat-Five (-7♭5)" Margin="0, 15, 0, 0"></Label>
+						<Switch IsToggled="{Binding ChordChart.IncludeChordType_MinorSevenFlatFive}"></Switch>
+					</VerticalStackLayout>
+				</HorizontalStackLayout>
+			</toolkit:Expander>
+
+		</VerticalStackLayout>
+
+		<VerticalStackLayout Grid.Row="1" HorizontalOptions="Start">
+			<Label Text=""></Label>
+			<HorizontalStackLayout>
+				<Button x:Name="btnWritingMode" Text="Writing Mode" Clicked="btnWritingMode_Clicked"></Button>
+				<Button x:Name="btnReadingMode" Text="Reading Mode" Clicked="btnReadingMode_Clicked"></Button>
 			</HorizontalStackLayout>
-		</toolkit:Expander>
+		</VerticalStackLayout>
 
-		<toolkit:Expander IsExpanded="True">
-			<toolkit:Expander.Header>
-				<Border>
-					<Label Text="Included Keys" TextColor="White" FontSize="Large" FontAttributes="None"></Label>
-				</Border>
-			</toolkit:Expander.Header>
+	</Grid>
 
-			<VerticalStackLayout>
-				<Switch IsToggled="{Binding ChordChart.IncludeChordType_All}"></Switch>
-				<Switch IsToggled="{Binding ChordChart.IncludeChordType_All}"></Switch>
-			</VerticalStackLayout>
-		</toolkit:Expander>
-	</VerticalStackLayout>
 </ContentPage>
