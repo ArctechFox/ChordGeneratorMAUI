@@ -22,5 +22,13 @@ namespace ChordGeneratorMAUI.Models
             get { return _chordType; }
             set { SetProperty(ref _chordType, value); }
         }
+
+        // Toggle this to show border highlight in WritingMode for chords that don't belong in selected key.
+        private bool _belongsInKey = true;
+        public bool BelongsInKey
+        {
+            get { return _belongsInKey; }
+            set { SetProperty(ref _belongsInKey, value); }
+        }
     }
 }

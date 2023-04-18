@@ -262,21 +262,21 @@ namespace ChordGeneratorMAUI.DataAccess
                                                                                                                               c.Name == "A#-7♭5");
 
         public static readonly List<ChordModel> Key_Cb_Major_Chords = AllChords.FindAll((c) =>
-                                                                                                                              c.Name == "Cb" ||
-                                                                                                                              c.Name == "Dbmi" ||
-                                                                                                                              c.Name == "Ebmi" ||
-                                                                                                                              c.Name == "Fb" ||
-                                                                                                                              c.Name == "Gb" ||
-                                                                                                                              c.Name == "Abmi" ||
-                                                                                                                              c.Name == "Bb°" ||
-                                                                                                                              c.Name == "Bbmi" ||
-                                                                                                                              c.Name == "CbMa7" ||
-                                                                                                                              c.Name == "Db-7" ||
-                                                                                                                              c.Name == "Eb-7" ||
-                                                                                                                              c.Name == "FbMa7" ||
-                                                                                                                              c.Name == "Gb7" ||
-                                                                                                                              c.Name == "Ab-7" ||
-                                                                                                                              c.Name == "Bb-7♭5");
+                                                                                                                              c.Name == "C♭" ||
+                                                                                                                              c.Name == "D♭mi" ||
+                                                                                                                              c.Name == "E♭mi" ||
+                                                                                                                              c.Name == "F♭" ||
+                                                                                                                              c.Name == "G♭" ||
+                                                                                                                              c.Name == "A♭mi" ||
+                                                                                                                              c.Name == "B♭°" ||
+                                                                                                                              c.Name == "B♭mi" ||
+                                                                                                                              c.Name == "C♭Ma7" ||
+                                                                                                                              c.Name == "D♭-7" ||
+                                                                                                                              c.Name == "E♭-7" ||
+                                                                                                                              c.Name == "F♭Ma7" ||
+                                                                                                                              c.Name == "G♭7" ||
+                                                                                                                              c.Name == "A♭-7" ||
+                                                                                                                              c.Name == "B♭-7♭5");
 
         public static readonly List<ChordModel> Key_C_Major_Chords = AllChords.FindAll((c) =>
                                                                                                                               c.Name == "C" ||

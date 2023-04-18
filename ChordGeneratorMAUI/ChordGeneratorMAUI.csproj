@@ -30,6 +30,52 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(TargetFramework)'=='net7.0-ios'">
+	  <ProvisioningType>manual</ProvisioningType>
+	  <CodesignKey>Apple Development: Created via API (FSV7CFDFJ9)</CodesignKey>
+	  <CodesignProvision>chordstar_dev</CodesignProvision>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-android|AnyCPU'">
+	  <ApplicationId>app.chordjewels.chordstar</ApplicationId>
+	  <ApplicationTitle>Chord Star</ApplicationTitle>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-android|AnyCPU'">
+	  <ApplicationId>app.chordjewels.chordstar</ApplicationId>
+	  <ApplicationTitle>Chord Star</ApplicationTitle>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-ios|AnyCPU'">
+	  <ApplicationId>app.chordjewels.chordstar</ApplicationId>
+	  <ApplicationTitle>Chord Star</ApplicationTitle>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-ios|AnyCPU'">
+	  <ApplicationId>app.chordjewels.chordstar</ApplicationId>
+	  <ApplicationTitle>Chord Star</ApplicationTitle>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-maccatalyst|AnyCPU'">
+	  <ApplicationId>app.chordjewels.chordstar</ApplicationId>
+	  <ApplicationTitle>Chord Star</ApplicationTitle>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-maccatalyst|AnyCPU'">
+	  <ApplicationId>app.chordjewels.chordstar</ApplicationId>
+	  <ApplicationTitle>Chord Star</ApplicationTitle>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-windows10.0.19041.0|AnyCPU'">
+	  <ApplicationId>app.chordjewels.chordstar</ApplicationId>
+	  <ApplicationTitle>Chord Star</ApplicationTitle>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-windows10.0.19041.0|AnyCPU'">
+	  <ApplicationId>app.chordjewels.chordstar</ApplicationId>
+	  <ApplicationTitle>Chord Star</ApplicationTitle>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
@@ -40,6 +86,11 @@
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
 		<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
+    
+		<MauiImage Update="Resources\Images\home.svg" BaseSize="28,28" />
+		<MauiImage Update="Resources\Images\listmusic.svg" BaseSize="28,28" />
+		<MauiImage Update="Resources\Images\tools.svg" BaseSize="28,28" />
+		<MauiImage Update="Resources\Images\chordgen.png" BaseSize="28,28" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -56,7 +107,6 @@
 	  <None Remove="Resources\Fonts\Font Awesome 5 Pro-Solid-900.otf" />
 	  <None Remove="Resources\Fonts\LASSUS.TTF" />
 	  <None Remove="Resources\Fonts\MusAnalysis.otf" />
-	  <None Remove="Resources\Raw\chordgen.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -95,6 +145,9 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="Views\ChartSettingsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ChordBuilderPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Metronome.xaml">

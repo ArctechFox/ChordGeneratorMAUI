@@ -6,20 +6,20 @@
     xmlns:local="clr-namespace:ChordGeneratorMAUI"
 	xmlns:v="clr-namespace:ChordGeneratorMAUI.Views"
 	xmlns:vm="clr-namespace:ChordGeneratorMAUI.ViewModels"
-    IconImageSource="embed://chordgen.png" FlyoutBehavior="Disabled" >
+    IconImageSource="chordgen.png">
 
 	<TabBar>
-		<Tab Title="Home" Route="Home">
+		<Tab Title="Home" Route="Home" Icon="home.png">
 			<ShellContent ContentTemplate="{DataTemplate local:MainPage}"/>
 		</Tab>
 
-		<Tab Title="Charts" Route="Charts" x:Name="ChartsTab">
+		<Tab Title="Charts" Route="Charts" x:Name="ChartsTab" Icon="listmusic.png">
 			<ShellContent Title="Read" Route="ReadingMode" ContentTemplate="{DataTemplate v:ReadingMode}"/>
 			<ShellContent Title="Write" Route="WritingMode" ContentTemplate="{DataTemplate v:WritingMode}"/>
 			<ShellContent Title="Chart Settings" Route="ChartSettings" ContentTemplate="{DataTemplate v:ChartSettingsPage}"/>
 		</Tab>
 
-		<Tab Title="App Settings" Route="AppSettings">
+		<Tab Title="App Settings" Route="AppSettings" Icon="tools.png">
 			<ShellContent ContentTemplate="{DataTemplate v:ChartSettingsPage}"/>
 		</Tab>
 	</TabBar>

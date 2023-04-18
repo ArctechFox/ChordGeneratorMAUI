@@ -22,7 +22,7 @@
 	</ContentView.Resources>
 	
     <Grid>
-		<Grid.ColumnDefinitions>
+		<!--<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="Auto"></ColumnDefinition>
 			<ColumnDefinition Width="Auto"></ColumnDefinition>
 			<ColumnDefinition Width="*"></ColumnDefinition>
@@ -30,33 +30,16 @@
 		<Grid.RowDefinitions>
 			<RowDefinition Height="100"></RowDefinition>
 			<RowDefinition Height="*"></RowDefinition>
-		</Grid.RowDefinitions>
-
-		<!--BPM-->
-		<VerticalStackLayout Grid.Column="0" Grid.Row="0" VerticalOptions="Start">
-			<Label FontSize="Small" Margin="0,0,0,7" HorizontalOptions="Start">BPM</Label>
-
-			<Entry Text="{Binding Source={RelativeSource AncestorType={x:Type vm:ChartViewModel}}, Path=ChordChart.BPM}"
-				   HorizontalOptions="StartAndExpand" TextColor="White" BackgroundColor="Purple" FontAttributes="Bold" FontSize="Small" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" 
-				   MinimumWidthRequest="60"></Entry>
-		</VerticalStackLayout>
-
-		
+		</Grid.RowDefinitions>-->
 
 		<!--TIMER-->
-		<Label Text="{Binding TotalTimeElapsedString}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" Margin="0" Opacity="1" FontSize="Large"></Label>
-
-		<!--CHART COUNT-->
-		<!--<VerticalStackLayout Grid.Column="3" Grid.Row="0" HorizontalOptions="End" VerticalOptions="End">
-			<Label FontSize="Small" HorizontalOptions="End" Margin="0">Chart</Label>
-			<Label FontSize="Medium" Opacity="1" FontAttributes="Bold" HorizontalOptions="End" Margin="0" Text="{Binding ChartCount}"></Label>
-		</VerticalStackLayout>-->
+		<!--<Label Text="{Binding TotalTimeElapsedString}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" Margin="0" Opacity="1" FontSize="Large"></Label>-->
 
 		<!--TIME SIGNATURE-->
-		<VerticalStackLayout Grid.Column="0" Grid.Row="1" VerticalOptions="Center" HorizontalOptions="StartAndExpand" Margin="0,0">
+		<!--<VerticalStackLayout Grid.Column="0" Grid.Row="1" VerticalOptions="Center" HorizontalOptions="StartAndExpand" Margin="0,0">
 			<Label Margin="0" FontSize="Medium" Text="{Binding Source={RelativeSource AncestorType={x:Type vm:ChartViewModel}}, Path=ChordChart.TimeSignature}"></Label>
 			<Label Margin="0" FontSize="Medium" Text="{Binding Source={RelativeSource AncestorType={x:Type vm:ChartViewModel}}, Path=ChordChart.TimeSignature}"></Label>
-		</VerticalStackLayout>
+		</VerticalStackLayout>-->
 
 		<!--BEAT INDICATORS-->
 		<Grid Grid.ColumnSpan="4" Grid.Row="1" VerticalOptions="Center" Margin="0,0" Padding="0,0">

@@ -21,20 +21,18 @@ namespace ChordGeneratorMAUI.Models
 
         public ChartModel(ChartModel c)
         {
+            this.SelectedKey = c.SelectedKey;
             this.BPM = c.BPM;
             this.BarCount = c.BarCount;
             this.TimeSignature = c.TimeSignature;
+            this.ShowDiminishedAsMinor = c.ShowDiminishedAsMinor;
+            this.LoopPlayback = c.LoopPlayback;
 
             this.IncludeChordType_All = c.IncludeChordType_All;
             this.IncludeChordType_Major = c.IncludeChordType_Major;
             this.IncludeChordType_Minor = c.IncludeChordType_Minor;
-            this.IncludeChordType_Major7th = c.IncludeChordType_Major7th;
-            this.IncludeChordType_Minor7th = c.IncludeChordType_Minor7th;
-            this.IncludeChordType_Dominant7th = c.IncludeChordType_Dominant7th;
-            this.IncludeChordType_Diminished = c.IncludeChordType_Diminished;
-            this.IncludeChordType_MinorSevenFlatFive = c.IncludeChordType_MinorSevenFlatFive;
+            this.IncludeChordType_7th = c.IncludeChordType_7th;
 
-            this.SelectedKey = c.SelectedKey;
         }
 
         private readonly string _defaultChartName = "Chart #";
@@ -94,6 +92,20 @@ namespace ChordGeneratorMAUI.Models
             }
         }
 
+        private bool _showDiminishedAsMinor = true;
+        public bool ShowDiminishedAsMinor
+        {
+            get { return _showDiminishedAsMinor; }
+            set { SetProperty(ref _showDiminishedAsMinor, value); }
+        }
+
+        private bool _loopPlayback = true;
+        public bool LoopPlayback
+        {
+            get { return _loopPlayback; }
+            set { SetProperty(ref _loopPlayback, value); }
+        }
+
         private bool _isPaused = true;
         public bool IsPaused
         {
@@ -114,7 +126,15 @@ namespace ChordGeneratorMAUI.Models
         public string SelectedKey
         {
             get { return _selectedKey; }
-            set { SetProperty(ref _selectedKey, value); }
+            set 
+            { 
+                SetProperty(ref _selectedKey, value);
+
+                //Application.Current?.Dispatcher.Dispatch(() =>
+                //{
+                //    Helpers.EventManager.Instance.EventAggregator.GetEvent<KeyChangedEvent>().Publish(_selectedKey);
+                //});
+            }
         }
 
         // CHORD OPTIONS
@@ -123,57 +143,70 @@ namespace ChordGeneratorMAUI.Models
         public bool IncludeChordType_All
         {
             get { return _includeChordType_All; }
-            set { SetProperty(ref _includeChordType_All, value); }
+            set 
+            { 
+                SetProperty(ref _includeChordType_All, value); 
+                if (value)
+                {
+                    IncludeChordType_Major = false;
+                    IncludeChordType_Minor = false;
+                    IncludeChordType_7th = false;
+                    //IncludeChordType_Minor7th = false;
+                    //IncludeChordType_Dominant7th = false;
+                    //IncludeChordType_Diminished = false;
+                    //IncludeChordType_MinorSevenFlatFive = false;
+                }
+            }
         }
 
         private bool _includeChordType_Major = false;
         public bool IncludeChordType_Major
         {
             get { return _includeChordType_Major; }
-            set { SetProperty(ref _includeChordType_Major, value); }
+            set { SetProperty(ref _includeChordType_Major, value); if (value) IncludeChordType_All = false; }
         }
 
         private bool _includeChordType_Minor = false;
         public bool IncludeChordType_Minor
         {
             get { return _includeChordType_Minor; }
-            set { SetProperty(ref _includeChordType_Minor, value); }
+            set { SetProperty(ref _includeChordType_Minor, value); if (value) IncludeChordType_All = false; }
         }
 
-        private bool _includeChordType_Major7th = false;
-        public bool IncludeChordType_Major7th
+        private bool _includeChordType_7th = false;
+        public bool IncludeChordType_7th
         {
-            get { return _includeChordType_Major7th; }
-            set { SetProperty(ref _includeChordType_Major7th, value); }
+            get { return _includeChordType_7th; }
+            set { SetProperty(ref _includeChordType_7th, value); if (value) IncludeChordType_All = false; }
         }
 
-        private bool _includeChordType_Minor7th = false;
-        public bool IncludeChordType_Minor7th
-        {
-            get { return _includeChordType_Minor7th; }
-            set { SetProperty(ref _includeChordType_Minor7th, value); }
-        }
+        //private bool _includeChordType_Minor7th = false;
+        //public bool IncludeChordType_Minor7th
+        //{
+        //    get { return _includeChordType_Minor7th; }
+        //    set { SetProperty(ref _includeChordType_Minor7th, value); if (value) IncludeChordType_All = false; }
+        //}
 
-        private bool _includeChordType_Dominant7th = false;
-        public bool IncludeChordType_Dominant7th
-        {
-            get { return _includeChordType_Dominant7th; }
-            set { SetProperty(ref _includeChordType_Dominant7th, value); }
-        }
+        //private bool _includeChordType_Dominant7th = false;
+        //public bool IncludeChordType_Dominant7th
+        //{
+        //    get { return _includeChordType_Dominant7th; }
+        //    set { SetProperty(ref _includeChordType_Dominant7th, value); if (value) IncludeChordType_All = false; }
+        //}
 
-        private bool _includeChordType_Diminished = false;
-        public bool IncludeChordType_Diminished
-        {
-            get { return _includeChordType_Diminished; }
-            set { SetProperty(ref _includeChordType_Diminished, value); }
-        }
+        //private bool _includeChordType_Diminished = false;
+        //public bool IncludeChordType_Diminished
+        //{
+        //    get { return _includeChordType_Diminished; }
+        //    set { SetProperty(ref _includeChordType_Diminished, value); if (value) IncludeChordType_All = false; }
+        //}
 
-        private bool _includeChordType_MinorSevenFlatFive = false;
-        public bool IncludeChordType_MinorSevenFlatFive
-        {
-            get { return _includeChordType_MinorSevenFlatFive; }
-            set { SetProperty(ref _includeChordType_MinorSevenFlatFive, value); }
-        }
+        //private bool _includeChordType_MinorSevenFlatFive = false;
+        //public bool IncludeChordType_MinorSevenFlatFive
+        //{
+        //    get { return _includeChordType_MinorSevenFlatFive; }
+        //    set { SetProperty(ref _includeChordType_MinorSevenFlatFive, value); if (value) IncludeChordType_All = false; }
+        //}
 
         // ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -198,7 +231,7 @@ namespace ChordGeneratorMAUI.Models
             #region Filter by Key
             switch (SelectedKey)
             {
-                case "All": _filteredChords.AddRange( AllChords); break;
+                case "All": _filteredChords.AddRange(AllChords); break;
 
                 case "Ab Major": _filteredChords.AddRange( Key_Ab_Major_Chords); break;
                 case "A Major":  _filteredChords.AddRange( Key_A_Major_Chords); break;
@@ -236,6 +269,8 @@ namespace ChordGeneratorMAUI.Models
                 case "G Major": _filteredChords.AddRange( Key_G_Major_Chords); break;
                 case "G Minor": _filteredChords.AddRange( Key_G_Minor_Chords); break;
                 case "G# Minor": _filteredChords.AddRange( Key_GSharp_Minor_Chords); break;
+
+                case "8==D": _filteredChords.AddRange( Key_D_Major_Chords); break; // ;)
             }
 
             #endregion
@@ -248,28 +283,26 @@ namespace ChordGeneratorMAUI.Models
                 {
                     _filteredChords.RemoveAll((c) => c.ChordType == ChordTypes.Major);
                 }
+
                 if (!IncludeChordType_Minor)
                 {
                     _filteredChords.RemoveAll((c) => c.ChordType == ChordTypes.Minor);
+                    _filteredChords.RemoveAll((c) => c.ChordType == ChordTypes.Diminished);
                 }
-                if (!IncludeChordType_Major7th)
-                {
-                    _filteredChords.RemoveAll((c) => c.ChordType == ChordTypes.Major7th);
-                }
-                if (!IncludeChordType_Minor7th)
-                {
-                    _filteredChords.RemoveAll((c) => c.ChordType == ChordTypes.Minor7th);
-                }
-                if (!IncludeChordType_Dominant7th)
-                {
-                    _filteredChords.RemoveAll((c) => c.ChordType == ChordTypes.Dominant7th);
-                }
-                if (!IncludeChordType_Diminished)
+                else if (ShowDiminishedAsMinor)
                 {
                     _filteredChords.RemoveAll((c) => c.ChordType == ChordTypes.Diminished);
                 }
-                if (!IncludeChordType_MinorSevenFlatFive)
+                else
                 {
+                    _filteredChords.RemoveAll((c) => c.ChordType == ChordTypes.Minor);
+                }
+
+                if (!IncludeChordType_7th)
+                {
+                    _filteredChords.RemoveAll((c) => c.ChordType == ChordTypes.Major7th);
+                    _filteredChords.RemoveAll((c) => c.ChordType == ChordTypes.Minor7th);
+                    _filteredChords.RemoveAll((c) => c.ChordType == ChordTypes.Dominant7th);
                     _filteredChords.RemoveAll((c) => c.ChordType == ChordTypes.MinorSevenFlatFive);
                 }
             }

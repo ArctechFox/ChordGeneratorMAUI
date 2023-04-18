@@ -3,7 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:v="clr-namespace:ChordGeneratorMAUI.Views"
 			 xmlns:vm="clr-namespace:ChordGeneratorMAUI.ViewModels"
-             x:Class="ChordGeneratorMAUI.Views.WritingMode" Background="{StaticResource Black}">
+             x:Class="ChordGeneratorMAUI.Views.WritingMode" Background="{StaticResource Black}" Shell.TabBarIsVisible="False">
+	<ContentPage.Padding>
+		<OnPlatform x:TypeArguments="Thickness">
+			<On Platform="iOS, Android" Value="0, 50, 0, 0" />
+		</OnPlatform>
+	</ContentPage.Padding>
 
 	<ContentPage.Resources>
 		<ResourceDictionary>
@@ -29,7 +34,7 @@
 				<Setter Property="Margin" Value="20"></Setter>
 			</Style>
 
-			<Style TargetType="Button">
+			<Style TargetType="Button" x:Key="PlaybackButton">
 				<Setter Property="FontSize" Value="Large"></Setter>
 				<Setter Property="TextColor" Value="White"></Setter>
 				<Setter Property="Background" Value="Transparent"></Setter>
@@ -44,6 +49,7 @@
 
 	<Grid>
 		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"></RowDefinition>
 			<RowDefinition Height="Auto"></RowDefinition>
 			<RowDefinition Height="Auto"></RowDefinition>
 			<RowDefinition Height="Auto"></RowDefinition>
@@ -63,7 +69,7 @@
 					<ColumnDefinition Width="*"></ColumnDefinition>
 					<ColumnDefinition Width="*"></ColumnDefinition>
 				</Grid.ColumnDefinitions>
-				
+
 				<VerticalStackLayout Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center">
 					<Label Text="Key" TextColor="{StaticResource Black}" Opacity=".5" FontSize="Small" Margin="0"></Label>
 					<Label Text="{Binding ChordChart.SelectedKey}" TextColor="{StaticResource Tertiary}" Opacity="1" FontSize="Small" Margin="0" FontAttributes="Bold"></Label>
@@ -78,31 +84,46 @@
 			</Grid>
 		</Border>
 
+		<!--CHART NAME-->
 		<Grid Grid.Row="1">
 			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"></ColumnDefinition>
 				<ColumnDefinition Width="*"></ColumnDefinition>
-				<ColumnDefinition Width="*"></ColumnDefinition>
-				<ColumnDefinition Width="*"></ColumnDefinition>
+				<ColumnDefinition Width="Auto"></ColumnDefinition>
 			</Grid.ColumnDefinitions>
 
-			<Entry Grid.Column="1" Text="{Binding ChordChart.Name}" TextColor="White" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Center"></Entry>
+			<Entry Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding ChordChart.Name}" TextColor="White" PlaceholderColor="{StaticResource Gray500}" Placeholder="Chart Name"
+						FontSize="Small" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" MaximumWidthRequest="350"></Entry>
 			<Button Grid.Column="2" HorizontalOptions="End" FontFamily="FA Pro Solid" Text="trash"></Button>
 		</Grid>
 
-		<!--<v:Metronome Grid.Row="0"></v:Metronome>-->
+		<!--METRONOME-->
+		<v:Metronome Grid.Row="2" Margin="20,10,20,0"></v:Metronome>
 
 		<!--CHART-->
-		<CollectionView Grid.Row="2" Grid.RowSpan="2" Margin="20,0" ItemsSource="{Binding ChordChart.Chords}" ItemsLayout="VerticalGrid, 4" VerticalOptions="FillAndExpand" ItemSizingStrategy="MeasureFirstItem">
+		<CollectionView Grid.Row="3" Grid.RowSpan="2" Margin="20,0,20,100" ItemsSource="{Binding ChordChart.Chords}" SelectedItem="{Binding SelectedWritingModeChord}" SelectionChanged="CollectionView_SelectionChanged"
+						SelectionMode="Single" ItemsLayout="VerticalGrid, 4" VerticalOptions="FillAndExpand" ItemSizingStrategy="MeasureFirstItem">
 			<CollectionView.ItemTemplate>
 				<DataTemplate>
 					<Grid>
 						<Grid.RowDefinitions>
-							<RowDefinition Height="150" />
+							<RowDefinition Height="75" />
 						</Grid.RowDefinitions>
 
+						<Border StrokeThickness="0" BackgroundColor="Transparent"></Border>
+
 						<Border>
+							<Border.Triggers>
+								<DataTrigger TargetType="Border" Binding="{Binding BelongsInKey}" Value="True">
+									<Setter Property="Stroke" Value="Green"></Setter>
+								</DataTrigger>
+								<DataTrigger TargetType="Border" Binding="{Binding BelongsInKey}" Value="False">
+									<Setter Property="Stroke" Value="Red"></Setter>
+								</DataTrigger>
+							</Border.Triggers>
+							
 							<!--CHORD NAME-->
-							<Label Grid.Row="0" FontSize="Large" Margin="0" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" FontFamily="Arial" Text="{Binding Name}"></Label>
+							<Label Grid.Row="0" FontSize="Medium" Margin="0" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" FontFamily="Arial" Text="{Binding Name}"></Label>
 						</Border>
 
 					</Grid>
@@ -110,8 +131,8 @@
 			</CollectionView.ItemTemplate>
 		</CollectionView>
 
-		<!--BOTTOM-->
-		<Grid Grid.Row="3" HeightRequest="100" VerticalOptions="End">
+		<!--BOTTOM/PLAYBACK-->
+		<Grid Grid.Row="4" HeightRequest="100" VerticalOptions="End">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*"></ColumnDefinition>
 				<ColumnDefinition Width="*"></ColumnDefinition>
@@ -122,7 +143,7 @@
 
 			<Border Grid.ColumnSpan="5" Background="{StaticResource Primary}" Opacity=".98" Margin="0" Padding="0" StrokeThickness="0"></Border>
 
-			<Button Grid.Column="0" Text="chevron-double-left" IsEnabled="True" TextColor="White"
+			<Button Grid.Column="0" Text="chevron-double-left" IsEnabled="True" TextColor="White" Style="{StaticResource PlaybackButton}"
 					Command="{Binding PreviousChartCommand}">
 				<Button.Triggers>
 					<DataTrigger TargetType="Button" Binding="{Binding IsPreviousEnabled}" Value="False">
@@ -132,10 +153,10 @@
 				</Button.Triggers>
 			</Button>
 
-			<Button Grid.Column="1" Text="undo-alt"
+			<Button Grid.Column="1" Text="undo-alt" Style="{StaticResource PlaybackButton}"
 					Command="{Binding ResetCommand}"></Button>
 
-			<Button Grid.Column="2" Text="pause" FontSize="Header" IsEnabled="True" TextColor="White"
+			<Button Grid.Column="2" Text="pause" FontSize="Header" IsEnabled="True" TextColor="White" Style="{StaticResource PlaybackButton}"
 					Command="{Binding PauseToggleCommand}">
 				<Button.Triggers>
 					<DataTrigger TargetType="Button" Binding="{Binding ChordChart.IsPaused}" Value="True">
@@ -148,10 +169,10 @@
 				</Button.Triggers>
 			</Button>
 
-			<Button Grid.Column="3" Text="save"
+			<Button Grid.Column="3" Text="save" Style="{StaticResource PlaybackButton}"
 					Command="{Binding SaveChartCommand}"></Button>
 
-			<Button Grid.Column="4" Text="chevron-double-right"
+			<Button Grid.Column="4" Text="chevron-double-right" Style="{StaticResource PlaybackButton}"
 					Command="{Binding GenerateChordsCommand}"></Button>
 		</Grid>
 	</Grid>
