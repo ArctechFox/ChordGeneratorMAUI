@@ -155,7 +155,6 @@ namespace ChordGeneratorMAUI.ViewModels
 
         public ChartViewModel()
         {
-            ChordBuilderSearchResults = new ObservableCollection<ChordModel>(ChordBuilderChords);
 
             GenerateChordsCommand = new DelegateCommand(() =>
             {
@@ -175,12 +174,30 @@ namespace ChordGeneratorMAUI.ViewModels
 
             SearchChordsCommand = new DelegateCommand<string>(s => 
             {
-                ChordBuilderSearchResults = new ObservableCollection<ChordModel>(ChordBuilderChords.FindAll(c => c.Name.Contains(s, StringComparison.CurrentCultureIgnoreCase)));
+                if (WriteOnlyChordsInKey)
+                {
+                    ChordBuilderSearchResults = new ObservableCollection<ChordModel>(ChordChart.KeyChords.Where(c => c.Name.Contains(s, StringComparison.CurrentCultureIgnoreCase)));
+                }
+                else
+                {
+                    ChordBuilderSearchResults = new ObservableCollection<ChordModel>(ChordBuilderChords.FindAll(c => c.Name.Contains(s, StringComparison.CurrentCultureIgnoreCase)));
+                }
             });
 
             WriteNewChordCommand = new DelegateCommand(() =>
             {
-                SelectedWritingModeChord = SelectedChordBuilderChord;
+                try
+                {
+                    int indexOfChord = ChordChart.Chords.IndexOf(SelectedWritingModeChord);
+                    ChordChart.Chords[indexOfChord] = SelectedChordBuilderChord;
+                    ChordChart.Chords[indexOfChord].BelongsInKey = ChordChart.KeyChords.Any(c => c.Name == ChordChart.Chords[indexOfChord].Name);
+
+                    //SelectedWritingModeChord = null;
+                }
+                catch(Exception ex)
+                {
+
+                }
             });
 
             PreviousChartCommand = new DelegateCommand(() =>
@@ -222,6 +239,8 @@ namespace ChordGeneratorMAUI.ViewModels
                     Helpers.EventManager.Instance.EventAggregator.GetEvent<TimerPauseEvent>().Publish();
                 });
             });
+
+            ChordBuilderSearchResults = new ObservableCollection<ChordModel>(ChordBuilderChords);
         }
     }
 }

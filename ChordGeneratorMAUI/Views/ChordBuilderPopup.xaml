@@ -3,48 +3,46 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
 			 xmlns:db="clr-namespace:ChordGeneratorMAUI.DataAccess"
+			 xmlns:m="clr-namespace:ChordGeneratorMAUI.Models"
              x:Class="ChordGeneratorMAUI.Views.ChordBuilderPopup">
-	
+
 	<Grid Background="{StaticResource White}">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"></ColumnDefinition>
-			<ColumnDefinition Width="Auto"></ColumnDefinition>
+			<ColumnDefinition Width="*"></ColumnDefinition>
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"></RowDefinition>
 			<RowDefinition Height="Auto"></RowDefinition>
 			<RowDefinition Height="*"></RowDefinition>
 			<RowDefinition Height="Auto"></RowDefinition>
 		</Grid.RowDefinitions>
 
-		<SearchBar Grid.Column="0" Grid.Row="0" x:Name="searchBar" Placeholder="Search chords..." IsTextPredictionEnabled="True" FontSize="Large"
+		<HorizontalStackLayout Grid.ColumnSpan="2" Grid.Row="0" Padding="5" Margin="0" HorizontalOptions="Start">
+			<Label Text="In Key" TextColor="{StaticResource Black}" FontSize="12" HorizontalTextAlignment="Start" Margin="0" Opacity=".98"></Label>
+			<Label Text="{Binding ChordChart.SelectedKey}" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="12" HorizontalTextAlignment="Start" Margin="5,0"></Label>
+			<Switch IsToggled="{Binding WriteOnlyChordsInKey}" HorizontalOptions="End"></Switch>
+		</HorizontalStackLayout>
+
+		<SearchBar Grid.ColumnSpan="2" Grid.Row="1" x:Name="searchBar" Placeholder="Search chords..." IsTextPredictionEnabled="True" FontSize="Medium"
 				   Text="{Binding ChordSearchQuery}"
 				   SearchCommand="{Binding SearchChordsCommand}" 
 				   SearchCommandParameter="{Binding ChordSearchQuery}"></SearchBar>
 
-		<VerticalStackLayout Grid.Column="1" Grid.Row="0" Padding="5" Margin="0">
-			<HorizontalStackLayout>
-				<Switch IsToggled="{Binding WriteOnlyChordsInKey}" HorizontalOptions="Start" Margin="0,0,15,0"></Switch>
-				<Label Text="In Key" TextColor="{StaticResource Black}" FontSize="Body" HorizontalTextAlignment="Start" Margin="0"></Label>
-				<Label Text="{Binding ChordChart.SelectedKey}" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Body" HorizontalTextAlignment="Start" Margin="0"></Label>
-			</HorizontalStackLayout>
-
-			<Button Text="Empty Slot" TextColor="{StaticResource White}"></Button>
-		</VerticalStackLayout>
-
-		<ListView Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" SelectionMode="Single" Background="{StaticResource Gray600Brush}"
-				  ItemsSource="{Binding ChordBuilderSearchResults}" 
+		<ListView Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" SelectionMode="Single" Background="{StaticResource Gray600Brush}" MinimumHeightRequest="300" Margin="0,0,0,40"
+				  ItemsSource="{Binding ChordBuilderSearchResults}"
 				  SelectedItem="{Binding SelectedChordBuilderChord}">
 
 			<ListView.ItemTemplate>
 				<DataTemplate>
-					<ViewCell>
-						<Label Text="{Binding Name}" TextColor="{StaticResource White}" FontSize="Small" Margin="2"></Label>
-					</ViewCell>
+					<TextCell x:DataType="{x:Type m:ChordModel}" Text="{Binding Name}" TextColor="White"/>
 				</DataTemplate>
 			</ListView.ItemTemplate>
+
 		</ListView>
 
-		<Button Text="Insert" Grid.ColumnSpan="2" Grid.Row="2" Command="{Binding WriteNewChordCommand}" Margin="5"></Button>
+		<Button Text="Empty" Grid.Column="0" Grid.Row="3"></Button>
+		<Button Text="Insert" Grid.Column="1" Grid.Row="3" Command="{Binding WriteNewChordCommand}"></Button>
 
 	</Grid>
 </toolkit:Popup>

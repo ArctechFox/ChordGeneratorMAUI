@@ -9,6 +9,14 @@ namespace ChordGeneratorMAUI.Models
 {
     public class ChordModel : BindableBase
     {
+        public ChordModel() { }
+
+        public ChordModel(ChordModel copy)
+        {
+            this.Name = copy.Name;
+            this.ChordType = copy.ChordType;
+        }
+
         private string _name;
         public string Name
         {

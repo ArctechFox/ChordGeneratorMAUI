@@ -36,7 +36,6 @@ namespace ChordGeneratorMAUI.Models
         }
 
         private readonly string _defaultChartName = "Chart #";
-        private List<ChordModel> _filteredChords = new List<ChordModel>();
 
         private string _name = "";
         public string Name
@@ -122,6 +121,20 @@ namespace ChordGeneratorMAUI.Models
 
         // KEY OPTIONS
 
+        private ObservableCollection<ChordModel> _filteredChords = new ObservableCollection<ChordModel>();
+        public ObservableCollection<ChordModel> FilteredChords
+        {
+            get { return _filteredChords; }
+            set { SetProperty(ref _filteredChords, value); }
+        }
+
+        private ObservableCollection<ChordModel> _keyChords = new ObservableCollection<ChordModel>();
+        public ObservableCollection<ChordModel> KeyChords
+        {
+            get { return _keyChords; }
+            set { SetProperty(ref _keyChords, value); }
+        }
+
         private string _selectedKey = "All";
         public string SelectedKey
         {
@@ -130,10 +143,57 @@ namespace ChordGeneratorMAUI.Models
             { 
                 SetProperty(ref _selectedKey, value);
 
-                //Application.Current?.Dispatcher.Dispatch(() =>
-                //{
-                //    Helpers.EventManager.Instance.EventAggregator.GetEvent<KeyChangedEvent>().Publish(_selectedKey);
-                //});
+                #region Filter by Key
+
+                List<ChordModel> keyChords = AllChords;
+
+                switch (_selectedKey)
+                {
+                    case "All": break;
+
+                    case "Ab Major": keyChords = Key_Ab_Major_Chords; break;
+                    case "A Major": keyChords = Key_A_Major_Chords; break;
+                    case "Ab Minor": keyChords = Key_Ab_Minor_Chords; break;
+                    case "A Minor": keyChords = Key_A_Minor_Chords; break;
+                    case "A# Minor": keyChords = Key_ASharp_Minor_Chords; break;
+
+                    case "Bb Major": keyChords = Key_Bb_Major_Chords; break;
+                    case "B Major": keyChords = Key_B_Major_Chords; break;
+                    case "Bb Minor": keyChords = Key_Bb_Minor_Chords; break;
+                    case "B Minor": keyChords = Key_B_Minor_Chords; break;
+
+                    case "Cb Major": keyChords = Key_Cb_Major_Chords; break;
+                    case "C Major": keyChords = Key_C_Major_Chords; break;
+                    case "C# Major": keyChords = Key_CSharp_Major_Chords; break;
+                    case "C Minor": keyChords = Key_C_Minor_Chords; break;
+                    case "C# Minor": keyChords = Key_CSharp_Minor_Chords; break;
+
+                    case "Db Major": keyChords = Key_Db_Major_Chords; break;
+                    case "D Major": keyChords = Key_D_Major_Chords; break;
+                    case "D Minor": keyChords = Key_D_Minor_Chords; break;
+                    case "D# Minor": keyChords = Key_DSharp_Minor_Chords; break;
+
+                    case "Eb Major": keyChords = Key_Eb_Major_Chords; break;
+                    case "E Major": keyChords = Key_E_Major_Chords; break;
+                    case "Eb Minor": keyChords = Key_Eb_Minor_Chords; break;
+                    case "E Minor": keyChords = Key_E_Minor_Chords; break;
+
+                    case "F Major": keyChords = Key_F_Major_Chords; break;
+                    case "F# Major": keyChords = Key_FSharp_Major_Chords; break;
+                    case "F Minor": keyChords = Key_F_Minor_Chords; break;
+                    case "F# Minor": keyChords = Key_FSharp_Minor_Chords; break;
+
+                    case "Gb Major": keyChords = Key_Gb_Major_Chords; break;
+                    case "G Major": keyChords = Key_G_Major_Chords; break;
+                    case "G Minor": keyChords = Key_G_Minor_Chords; break;
+                    case "G# Minor": keyChords = Key_GSharp_Minor_Chords; break;
+
+                    case "8==D": keyChords = Key_D_Major_Chords; break; // ;)
+                }
+
+                KeyChords = new ObservableCollection<ChordModel>(keyChords);
+
+                #endregion
             }
         }
 
@@ -151,10 +211,6 @@ namespace ChordGeneratorMAUI.Models
                     IncludeChordType_Major = false;
                     IncludeChordType_Minor = false;
                     IncludeChordType_7th = false;
-                    //IncludeChordType_Minor7th = false;
-                    //IncludeChordType_Dominant7th = false;
-                    //IncludeChordType_Diminished = false;
-                    //IncludeChordType_MinorSevenFlatFive = false;
                 }
             }
         }
@@ -180,34 +236,6 @@ namespace ChordGeneratorMAUI.Models
             set { SetProperty(ref _includeChordType_7th, value); if (value) IncludeChordType_All = false; }
         }
 
-        //private bool _includeChordType_Minor7th = false;
-        //public bool IncludeChordType_Minor7th
-        //{
-        //    get { return _includeChordType_Minor7th; }
-        //    set { SetProperty(ref _includeChordType_Minor7th, value); if (value) IncludeChordType_All = false; }
-        //}
-
-        //private bool _includeChordType_Dominant7th = false;
-        //public bool IncludeChordType_Dominant7th
-        //{
-        //    get { return _includeChordType_Dominant7th; }
-        //    set { SetProperty(ref _includeChordType_Dominant7th, value); if (value) IncludeChordType_All = false; }
-        //}
-
-        //private bool _includeChordType_Diminished = false;
-        //public bool IncludeChordType_Diminished
-        //{
-        //    get { return _includeChordType_Diminished; }
-        //    set { SetProperty(ref _includeChordType_Diminished, value); if (value) IncludeChordType_All = false; }
-        //}
-
-        //private bool _includeChordType_MinorSevenFlatFive = false;
-        //public bool IncludeChordType_MinorSevenFlatFive
-        //{
-        //    get { return _includeChordType_MinorSevenFlatFive; }
-        //    set { SetProperty(ref _includeChordType_MinorSevenFlatFive, value); if (value) IncludeChordType_All = false; }
-        //}
-
         // ////////////////////////////////////////////////////////////////////////////////////////////
 
         // Provides the bindable enumeration of descriptions
@@ -218,7 +246,7 @@ namespace ChordGeneratorMAUI.Models
 
         private void ClearChordChart()
         {
-            _filteredChords.Clear();
+            //_filteredChords.Clear();
 
             this.Chords = new ObservableCollection<ChordModel>();
             IsChordChartActive = false;
@@ -228,94 +256,60 @@ namespace ChordGeneratorMAUI.Models
         {
             ClearChordChart();
 
-            #region Filter by Key
-            switch (SelectedKey)
+            #region Filter by Chord Type
+
+            if (SelectedKey != "All")
             {
-                case "All": _filteredChords.AddRange(AllChords); break;
-
-                case "Ab Major": _filteredChords.AddRange( Key_Ab_Major_Chords); break;
-                case "A Major":  _filteredChords.AddRange( Key_A_Major_Chords); break;
-                case "Ab Minor":  _filteredChords.AddRange( Key_Ab_Minor_Chords); break;
-                case "A Minor":  _filteredChords.AddRange( Key_A_Minor_Chords); break;
-                case "A# Minor":  _filteredChords.AddRange( Key_ASharp_Minor_Chords); break;
-
-                case "Bb Major":  _filteredChords.AddRange( Key_Bb_Major_Chords); break;
-                case "B Major":  _filteredChords.AddRange( Key_B_Major_Chords); break;
-                case "Bb Minor":  _filteredChords.AddRange( Key_Bb_Minor_Chords); break;
-                case "B Minor":  _filteredChords.AddRange( Key_B_Minor_Chords); break;
-
-                case "Cb Major": _filteredChords.AddRange( Key_Cb_Major_Chords); break;
-                case "C Major": _filteredChords.AddRange( Key_C_Major_Chords); break;
-                case "C# Major": _filteredChords.AddRange( Key_CSharp_Major_Chords); break;
-                case "C Minor": _filteredChords.AddRange( Key_C_Minor_Chords); break;
-                case "C# Minor": _filteredChords.AddRange( Key_CSharp_Minor_Chords); break;
-
-                case "Db Major": _filteredChords.AddRange( Key_Db_Major_Chords); break;
-                case "D Major": _filteredChords.AddRange( Key_D_Major_Chords); break;
-                case "D Minor": _filteredChords.AddRange( Key_D_Minor_Chords); break;
-                case "D# Minor": _filteredChords.AddRange( Key_DSharp_Minor_Chords); break;
-
-                case "Eb Major": _filteredChords.AddRange( Key_Eb_Major_Chords); break;
-                case "E Major": _filteredChords.AddRange( Key_E_Major_Chords); break;
-                case "Eb Minor": _filteredChords.AddRange( Key_Eb_Minor_Chords); break;
-                case "E Minor": _filteredChords.AddRange( Key_E_Minor_Chords); break;
-
-                case "F Major": _filteredChords.AddRange( Key_F_Major_Chords); break;
-                case "F# Major": _filteredChords.AddRange( Key_FSharp_Major_Chords); break;
-                case "F Minor": _filteredChords.AddRange( Key_F_Minor_Chords); break;
-                case "F# Minor": _filteredChords.AddRange( Key_FSharp_Minor_Chords); break;
-
-                case "Gb Major": _filteredChords.AddRange( Key_Gb_Major_Chords); break;
-                case "G Major": _filteredChords.AddRange( Key_G_Major_Chords); break;
-                case "G Minor": _filteredChords.AddRange( Key_G_Minor_Chords); break;
-                case "G# Minor": _filteredChords.AddRange( Key_GSharp_Minor_Chords); break;
-
-                case "8==D": _filteredChords.AddRange( Key_D_Major_Chords); break; // ;)
+                FilteredChords = KeyChords;
+            }
+            else
+            {
+                FilteredChords = new ObservableCollection<ChordModel>(AllChords);
             }
 
-            #endregion
-
-            #region Filter by Chord Type
+            var filteredChordsList = FilteredChords.ToList();
 
             if (!IncludeChordType_All)
             {
                 if (!IncludeChordType_Major)
                 {
-                    _filteredChords.RemoveAll((c) => c.ChordType == ChordTypes.Major);
+                    filteredChordsList.RemoveAll((c) => c.ChordType == ChordTypes.Major);
                 }
 
                 if (!IncludeChordType_Minor)
                 {
-                    _filteredChords.RemoveAll((c) => c.ChordType == ChordTypes.Minor);
-                    _filteredChords.RemoveAll((c) => c.ChordType == ChordTypes.Diminished);
+                    filteredChordsList.RemoveAll((c) => c.ChordType == ChordTypes.Minor);
+                    filteredChordsList.RemoveAll((c) => c.ChordType == ChordTypes.Diminished);
                 }
                 else if (ShowDiminishedAsMinor)
                 {
-                    _filteredChords.RemoveAll((c) => c.ChordType == ChordTypes.Diminished);
+                    filteredChordsList.RemoveAll((c) => c.ChordType == ChordTypes.Diminished);
                 }
                 else
                 {
-                    _filteredChords.RemoveAll((c) => c.ChordType == ChordTypes.Minor);
+                    filteredChordsList.RemoveAll((c) => c.ChordType == ChordTypes.Minor);
                 }
 
                 if (!IncludeChordType_7th)
                 {
-                    _filteredChords.RemoveAll((c) => c.ChordType == ChordTypes.Major7th);
-                    _filteredChords.RemoveAll((c) => c.ChordType == ChordTypes.Minor7th);
-                    _filteredChords.RemoveAll((c) => c.ChordType == ChordTypes.Dominant7th);
-                    _filteredChords.RemoveAll((c) => c.ChordType == ChordTypes.MinorSevenFlatFive);
+                    filteredChordsList.RemoveAll((c) => c.ChordType == ChordTypes.Major7th);
+                    filteredChordsList.RemoveAll((c) => c.ChordType == ChordTypes.Minor7th);
+                    filteredChordsList.RemoveAll((c) => c.ChordType == ChordTypes.Dominant7th);
+                    filteredChordsList.RemoveAll((c) => c.ChordType == ChordTypes.MinorSevenFlatFive);
                 }
             }
 
+            FilteredChords = new ObservableCollection<ChordModel>(filteredChordsList);
+
             #endregion
 
-            if (_filteredChords.Any())
+            if (FilteredChords.Any())
             {
                 Random r = new Random();
                 for (int i = 0; i < BarCount; i++)
                 {
-                    int n = r.Next(0, _filteredChords.Count);
-                    Chords.Add(_filteredChords[n]);
+                    int n = r.Next(0, FilteredChords.Count);
+                    Chords.Add(new ChordModel(FilteredChords[n]));
                 }
             }
             

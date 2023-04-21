@@ -94,6 +94,8 @@
 
 			<Entry Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding ChordChart.Name}" TextColor="White" PlaceholderColor="{StaticResource Gray500}" Placeholder="Chart Name"
 						FontSize="Small" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" MaximumWidthRequest="350"></Entry>
+			
+			<!--TODO:-->
 			<Button Grid.Column="2" HorizontalOptions="End" FontFamily="FA Pro Solid" Text="trash"></Button>
 		</Grid>
 
@@ -103,30 +105,50 @@
 		<!--CHART-->
 		<CollectionView Grid.Row="3" Grid.RowSpan="2" Margin="20,0,20,100" ItemsSource="{Binding ChordChart.Chords}" SelectedItem="{Binding SelectedWritingModeChord}" SelectionChanged="CollectionView_SelectionChanged"
 						SelectionMode="Single" ItemsLayout="VerticalGrid, 4" VerticalOptions="FillAndExpand" ItemSizingStrategy="MeasureFirstItem">
+
+			<CollectionView.Resources>
+				<Style TargetType="Border">
+					<Setter Property="VisualStateManager.VisualStateGroups">
+						<VisualStateGroupList>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="Selected">
+									<VisualState.Setters>
+										<Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateGroupList>
+					</Setter>
+
+					<Setter Property="Stroke" Value="Gray"></Setter>
+					<Setter Property="StrokeThickness" Value="2"></Setter>
+					<Setter Property="Margin" Value="5"></Setter>
+					<Setter Property="StrokeShape">
+						<Setter.Value>
+							<RoundRectangle CornerRadius="10"></RoundRectangle>
+						</Setter.Value>
+					</Setter>
+				</Style>
+			</CollectionView.Resources>
+
 			<CollectionView.ItemTemplate>
 				<DataTemplate>
-					<Grid>
-						<Grid.RowDefinitions>
-							<RowDefinition Height="75" />
-						</Grid.RowDefinitions>
 
-						<Border StrokeThickness="0" BackgroundColor="Transparent"></Border>
+					<Border x:Name="ChordSlotBorder" HeightRequest="75">
+						<Border.Triggers>
+							<DataTrigger TargetType="Border" Binding="{Binding BelongsInKey}" Value="True">
+								<Setter Property="Stroke" Value="Green"></Setter>
+							</DataTrigger>
+							<DataTrigger TargetType="Border" Binding="{Binding BelongsInKey}" Value="False">
+								<Setter Property="Stroke" Value="Red"></Setter>
+							</DataTrigger>
+						</Border.Triggers>
 
-						<Border>
-							<Border.Triggers>
-								<DataTrigger TargetType="Border" Binding="{Binding BelongsInKey}" Value="True">
-									<Setter Property="Stroke" Value="Green"></Setter>
-								</DataTrigger>
-								<DataTrigger TargetType="Border" Binding="{Binding BelongsInKey}" Value="False">
-									<Setter Property="Stroke" Value="Red"></Setter>
-								</DataTrigger>
-							</Border.Triggers>
-							
-							<!--CHORD NAME-->
-							<Label Grid.Row="0" FontSize="Medium" Margin="0" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" FontFamily="Arial" Text="{Binding Name}"></Label>
-						</Border>
+						<!--CHORD NAME-->
+						<Label Grid.Row="0" FontSize="Medium" Margin="2" FontAttributes="None" HorizontalOptions="CenterAndExpand" FontFamily="Arial" Text="{Binding Name}" FontAutoScalingEnabled="True"></Label>
+					</Border>
 
-					</Grid>
 				</DataTemplate>
 			</CollectionView.ItemTemplate>
 		</CollectionView>

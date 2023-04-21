@@ -20,6 +20,7 @@ public partial class WritingMode : ContentPage
     private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         var popup = new ChordBuilderPopup();
+        //popup.Closed += (o, e) => { (sender as CollectionView).SelectedItem = null; };
         this.ShowPopup(popup);
     }
 }
