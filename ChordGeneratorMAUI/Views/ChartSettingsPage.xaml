@@ -70,11 +70,11 @@
 
 					<!--KEY-->
 					<VerticalStackLayout Grid.Column="0">
-						<Label Text="Key" FontSize="Medium" FontAttributes="Bold" HorizontalTextAlignment="Center"></Label>
+						<!--<Label Text="Key" FontSize="Medium" FontAttributes="Bold" HorizontalTextAlignment="Start"></Label>-->
 
-						<Picker Title="" SelectedItem="{Binding ChordChart.SelectedKey}" HorizontalOptions="StartAndExpand"
-							Background="{StaticResource Primary}" TextColor="{StaticResource White}" TitleColor="{StaticResource White}"
-							FontSize="Medium" HeightRequest="50" VerticalOptions="End">
+						<Picker Title="Key" SelectedItem="{Binding ChordChart.SelectedKey, Mode=OneWayToSource}" HorizontalOptions="StartAndExpand"
+							Background="{StaticResource Primary}" TextColor="{StaticResource White}" TitleColor="{StaticResource Black}"
+							FontSize="Medium" MinimumWidthRequest="150" VerticalOptions="End">
 							<Picker.ItemsSource>
 								<x:Array Type="{x:Type sys:String}">
 									<sys:String>All</sys:String>
@@ -122,9 +122,45 @@
 
 					<!--BPM-->
 					<VerticalStackLayout Grid.Column="1" HorizontalOptions="End">
-						<Label Text="BPM" FontSize="Medium" FontAttributes="Bold" HorizontalTextAlignment="Center"></Label>
-						<Entry Text="{Binding ChordChart.BPM}" Background="{StaticResource Primary}" TextColor="{StaticResource White}" VerticalOptions="End"
-					  FontSize="Medium" HorizontalTextAlignment="Center" MinimumWidthRequest="60" HeightRequest="50"></Entry>
+						<!--<Label Text="BPM" FontSize="Medium" FontAttributes="Bold" HorizontalTextAlignment="Start"></Label>-->
+
+						<Picker Title="BPM" SelectedItem="{Binding ChordChart.BPM, Mode=OneWayToSource}"
+							Background="{StaticResource Primary}" TextColor="{StaticResource White}" TitleColor="{StaticResource Black}"
+							FontSize="Medium" MinimumWidthRequest="150" VerticalOptions="End">
+							<Picker.ItemsSource>
+								<x:Array Type="{x:Type sys:Int32}">
+									<sys:Int32>60</sys:Int32>
+									<sys:Int32>65</sys:Int32>
+									<sys:Int32>70</sys:Int32>
+									<sys:Int32>75</sys:Int32>
+									<sys:Int32>80</sys:Int32>
+									<sys:Int32>85</sys:Int32>
+									<sys:Int32>90</sys:Int32>
+									<sys:Int32>95</sys:Int32>
+									<sys:Int32>100</sys:Int32>
+									<sys:Int32>105</sys:Int32>
+									<sys:Int32>110</sys:Int32>
+									<sys:Int32>115</sys:Int32>
+									<sys:Int32>120</sys:Int32>
+									<sys:Int32>125</sys:Int32>
+									<sys:Int32>130</sys:Int32>
+									<sys:Int32>135</sys:Int32>
+									<sys:Int32>140</sys:Int32>
+									<sys:Int32>145</sys:Int32>
+									<sys:Int32>150</sys:Int32>
+									<sys:Int32>155</sys:Int32>
+									<sys:Int32>160</sys:Int32>
+									<sys:Int32>165</sys:Int32>
+									<sys:Int32>170</sys:Int32>
+									<sys:Int32>175</sys:Int32>
+									<sys:Int32>180</sys:Int32>
+									<sys:Int32>185</sys:Int32>
+									<sys:Int32>190</sys:Int32>
+									<sys:Int32>195</sys:Int32>
+									<sys:Int32>200</sys:Int32>
+								</x:Array>
+							</Picker.ItemsSource>
+						</Picker>
 					</VerticalStackLayout>
 
 				</Grid>
@@ -189,7 +225,7 @@
 					</Grid.ColumnDefinitions>
 
 					<!--BAR COUNT-->
-					<Picker Grid.Column="0" Title="Bar Count" SelectedItem="{Binding ChordChart.BarCount}" MinimumWidthRequest="100"
+					<Picker Grid.Column="0" Title="Bar Count" SelectedItem="{Binding ChordChart.BarCount, Mode=OneWayToSource}" MinimumWidthRequest="100"
 						Background="{StaticResource Primary}" TextColor="{StaticResource White}" TitleColor="{StaticResource Black}"
 						FontSize="Medium" HorizontalOptions="End">
 						<Picker.ItemsSource>
@@ -205,8 +241,8 @@
 					</Picker>
 
 					<!--TIME SIGNATURE-->
-					<Picker Grid.Column="1" TitleColor="{StaticResource Black}" Title="Time Signature" SelectedItem="{Binding ChordChart.BarCount}" MinimumWidthRequest="100"
-						Background="{StaticResource Primary}" TextColor="{StaticResource White}" HorizontalTextAlignment="End"
+					<Picker Grid.Column="1" TitleColor="{StaticResource Black}" Title="Time Signature" SelectedItem="{Binding ChordChart.TimeSignature, Mode=OneWayToSource}" MinimumWidthRequest="100"
+						Background="{StaticResource Primary}" TextColor="{StaticResource White}" HorizontalTextAlignment="Start"
 						FontSize="Medium" HorizontalOptions="End">
 					</Picker>
 				</Grid>

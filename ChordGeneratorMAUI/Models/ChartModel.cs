@@ -316,7 +316,7 @@ namespace ChordGeneratorMAUI.Models
             this.Name = _defaultChartName + chartHistoryCount.ToString();
 
             IsChordChartActive = true;
-            IsPaused = false;
+            IsPaused = true;
 
             Application.Current?.Dispatcher.Dispatch(() =>
             {

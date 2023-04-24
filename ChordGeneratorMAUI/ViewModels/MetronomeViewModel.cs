@@ -143,7 +143,7 @@ namespace ChordGeneratorMAUI.ViewModels
         private void ChartGeneratedHandler()
         {
             ResetToDefaultSettings();
-            StartTotalTimer();
+            StopMetronome();
 
             ChartCount++;
         }

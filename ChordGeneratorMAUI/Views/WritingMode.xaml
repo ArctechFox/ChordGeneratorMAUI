@@ -6,7 +6,7 @@
              x:Class="ChordGeneratorMAUI.Views.WritingMode" Background="{StaticResource Black}" Shell.TabBarIsVisible="False">
 	<ContentPage.Padding>
 		<OnPlatform x:TypeArguments="Thickness">
-			<On Platform="iOS, Android" Value="0, 50, 0, 0" />
+			<On Platform="iOS, Android" Value="0, 35, 0, 0" />
 		</OnPlatform>
 	</ContentPage.Padding>
 
@@ -58,10 +58,14 @@
 		</Grid.RowDefinitions>
 
 		<!--INFO/SETTINGS-->
-		<Border Grid.Row="0" BackgroundColor="{StaticResource White}" HeightRequest="100" StrokeThickness="0" Margin="10">
+		<Border Grid.Row="0" BackgroundColor="{StaticResource White}" HeightRequest="100" StrokeThickness="0" Margin="10,0,10,10">
 			<Border.GestureRecognizers>
 				<TapGestureRecognizer Tapped="SettingsButton_Tapped" />
 			</Border.GestureRecognizers>
+
+			<Border.StrokeShape>
+				<RoundRectangle CornerRadius="0, 0, 10, 10"></RoundRectangle>
+			</Border.StrokeShape>
 
 			<Grid>
 				<Grid.ColumnDefinitions>
@@ -85,42 +89,31 @@
 		</Border>
 
 		<!--CHART NAME-->
-		<Grid Grid.Row="1">
+		<Grid Grid.Row="1" Margin="10">
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto"></ColumnDefinition>
+				<ColumnDefinition Width="50"></ColumnDefinition>
 				<ColumnDefinition Width="*"></ColumnDefinition>
-				<ColumnDefinition Width="Auto"></ColumnDefinition>
+				<ColumnDefinition Width="50"></ColumnDefinition>
 			</Grid.ColumnDefinitions>
 
-			<Entry Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding ChordChart.Name}" TextColor="White" PlaceholderColor="{StaticResource Gray500}" Placeholder="Chart Name"
-						FontSize="Small" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" MaximumWidthRequest="350"></Entry>
+			<Entry Grid.Column="1" Text="{Binding ChordChart.Name}" TextColor="White" PlaceholderColor="Gray" Placeholder="Chart Name"
+						FontSize="Small" FontAttributes="Bold" HorizontalOptions="Center" HorizontalTextAlignment="Center" Margin="5,0"></Entry>
 			
 			<!--TODO:-->
-			<Button Grid.Column="2" HorizontalOptions="End" FontFamily="FA Pro Solid" Text="trash"></Button>
+			<Button Grid.Column="2" FontFamily="FA Pro Solid" Text="trash"></Button>
 		</Grid>
 
 		<!--METRONOME-->
-		<v:Metronome Grid.Row="2" Margin="20,10,20,0"></v:Metronome>
+		<v:Metronome Grid.Row="2" Margin="20,10"></v:Metronome>
 
 		<!--CHART-->
-		<CollectionView Grid.Row="3" Grid.RowSpan="2" Margin="20,0,20,100" ItemsSource="{Binding ChordChart.Chords}" SelectedItem="{Binding SelectedWritingModeChord}" SelectionChanged="CollectionView_SelectionChanged"
-						SelectionMode="Single" ItemsLayout="VerticalGrid, 4" VerticalOptions="FillAndExpand" ItemSizingStrategy="MeasureFirstItem">
+		<CollectionView x:Name="ChordChartCollectionView" Grid.Row="3" Grid.RowSpan="2" Margin="20,0" 
+						ItemsSource="{Binding ChordChart.Chords}" SelectedItem="{Binding SelectedWritingModeChord}" SelectionChanged="CollectionView_SelectionChanged"
+						SelectionMode="Single" ItemsLayout="VerticalGrid, 4" VerticalOptions="FillAndExpand" ItemSizingStrategy="MeasureFirstItem" Background="{StaticResource BlackBrush}">
 
 			<CollectionView.Resources>
 				<Style TargetType="Border">
-					<Setter Property="VisualStateManager.VisualStateGroups">
-						<VisualStateGroupList>
-							<VisualStateGroup x:Name="CommonStates">
-								<VisualState x:Name="Normal" />
-								<VisualState x:Name="Selected">
-									<VisualState.Setters>
-										<Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
-									</VisualState.Setters>
-								</VisualState>
-							</VisualStateGroup>
-						</VisualStateGroupList>
-					</Setter>
-
+					<Setter Property="BackgroundColor" Value="{StaticResource Black}"></Setter>
 					<Setter Property="Stroke" Value="Gray"></Setter>
 					<Setter Property="StrokeThickness" Value="2"></Setter>
 					<Setter Property="Margin" Value="5"></Setter>
@@ -129,13 +122,33 @@
 							<RoundRectangle CornerRadius="10"></RoundRectangle>
 						</Setter.Value>
 					</Setter>
+
+					<Setter Property="VisualStateManager.VisualStateGroups">
+						<VisualStateGroupList>
+							<VisualStateGroup x:Name="CommonStates">
+
+								<VisualState x:Name="Normal">
+									<VisualState.Setters>
+										<Setter Property="StrokeThickness" Value="2" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Selected">
+									<VisualState.Setters>
+										<Setter Property="StrokeThickness" Value="5" />
+									</VisualState.Setters>
+								</VisualState>
+								
+							</VisualStateGroup>
+						</VisualStateGroupList>
+					</Setter>
 				</Style>
 			</CollectionView.Resources>
 
 			<CollectionView.ItemTemplate>
 				<DataTemplate>
 
-					<Border x:Name="ChordSlotBorder" HeightRequest="75">
+					<Border MinimumHeightRequest="70" Padding="0" BackgroundColor="{StaticResource Black}">
 						<Border.Triggers>
 							<DataTrigger TargetType="Border" Binding="{Binding BelongsInKey}" Value="True">
 								<Setter Property="Stroke" Value="Green"></Setter>
@@ -146,7 +159,7 @@
 						</Border.Triggers>
 
 						<!--CHORD NAME-->
-						<Label Grid.Row="0" FontSize="Medium" Margin="2" FontAttributes="None" HorizontalOptions="CenterAndExpand" FontFamily="Arial" Text="{Binding Name}" FontAutoScalingEnabled="True"></Label>
+						<Label FontSize="Medium" Margin="4" FontAttributes="None" HorizontalOptions="Center" FontFamily="Arial" Text="{Binding Name}"></Label>
 					</Border>
 
 				</DataTemplate>
@@ -154,7 +167,7 @@
 		</CollectionView>
 
 		<!--BOTTOM/PLAYBACK-->
-		<Grid Grid.Row="4" HeightRequest="100" VerticalOptions="End">
+		<Grid Grid.Row="4" VerticalOptions="End" Padding="10,0">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*"></ColumnDefinition>
 				<ColumnDefinition Width="*"></ColumnDefinition>
@@ -163,9 +176,13 @@
 				<ColumnDefinition Width="*"></ColumnDefinition>
 			</Grid.ColumnDefinitions>
 
-			<Border Grid.ColumnSpan="5" Background="{StaticResource Primary}" Opacity=".98" Margin="0" Padding="0" StrokeThickness="0"></Border>
+			<Border Grid.ColumnSpan="5" Background="{StaticResource Primary}" Opacity=".98" Margin="0" StrokeThickness="0" MinimumHeightRequest="80">
+				<Border.StrokeShape>
+					<RoundRectangle CornerRadius="10,10,0,0"></RoundRectangle>
+				</Border.StrokeShape>
+			</Border>
 
-			<Button Grid.Column="0" Text="chevron-double-left" IsEnabled="True" TextColor="White" Style="{StaticResource PlaybackButton}"
+			<Button Grid.Column="0" Text="chevron-double-left" IsEnabled="True" Style="{StaticResource PlaybackButton}"
 					Command="{Binding PreviousChartCommand}">
 				<Button.Triggers>
 					<DataTrigger TargetType="Button" Binding="{Binding IsPreviousEnabled}" Value="False">
@@ -178,7 +195,7 @@
 			<Button Grid.Column="1" Text="undo-alt" Style="{StaticResource PlaybackButton}"
 					Command="{Binding ResetCommand}"></Button>
 
-			<Button Grid.Column="2" Text="pause" FontSize="Header" IsEnabled="True" TextColor="White" Style="{StaticResource PlaybackButton}"
+			<Button Grid.Column="2" Text="pause" IsEnabled="True" Style="{StaticResource PlaybackButton}"
 					Command="{Binding PauseToggleCommand}">
 				<Button.Triggers>
 					<DataTrigger TargetType="Button" Binding="{Binding ChordChart.IsPaused}" Value="True">
@@ -186,7 +203,7 @@
 					</DataTrigger>
 					<DataTrigger TargetType="Button" Binding="{Binding ChordChart.IsChordChartActive}" Value="False">
 						<Setter Property="IsEnabled" Value="False"></Setter>
-						<Setter Property="Opacity" Value=".1"></Setter>
+						<Setter Property="Opacity" Value=".2"></Setter>
 					</DataTrigger>
 				</Button.Triggers>
 			</Button>

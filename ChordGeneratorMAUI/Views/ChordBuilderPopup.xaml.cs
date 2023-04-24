@@ -7,4 +7,14 @@ public partial class ChordBuilderPopup : Popup
 	{
 		InitializeComponent();
 	}
+
+    private void btnInsertChord_Clicked(object sender, EventArgs e)
+    {
+		this.Close();
+    }
+
+    private void btnEmptyChord_Clicked(object sender, EventArgs e)
+    {
+        this.Close();
+    }
 }

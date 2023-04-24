@@ -17,10 +17,19 @@ public partial class WritingMode : ContentPage
         await Navigation.PushAsync(new ChartSettingsPage() { BindingContext = this.BindingContext });
     }
 
-    private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        var popup = new ChordBuilderPopup();
-        //popup.Closed += (o, e) => { (sender as CollectionView).SelectedItem = null; };
-        this.ShowPopup(popup);
+        var collectionView = (sender as CollectionView);
+        //var selectedItem = collectionView.SelectedItem;
+
+        if (e.CurrentSelection.Count == 0) return;
+
+        if (e.PreviousSelection.Count == 0 || e.CurrentSelection[0] != e.PreviousSelection[0])
+        {
+            var popup = new ChordBuilderPopup();
+            popup.Closed += (o, e) => { collectionView.SelectedItem = null; };
+
+            await this.ShowPopupAsync(popup);
+        }
     }
 }

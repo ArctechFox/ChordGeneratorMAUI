@@ -37,8 +37,8 @@ namespace ChordGeneratorMAUI.ViewModels
         public bool WriteOnlyChordsInKey
         {
             get { return _writeOnlyChordsInKey; }
-            set 
-            { 
+            set
+            {
                 SetProperty(ref _writeOnlyChordsInKey, value);
                 SearchChordsCommand.Execute(ChordSearchQuery);
             }
@@ -47,7 +47,7 @@ namespace ChordGeneratorMAUI.ViewModels
         public List<ChordModel> ChordBuilderChords
         {
             get
-            { 
+            {
                 if (WriteOnlyChordsInKey)
                 {
                     #region Filter by Key
@@ -56,9 +56,9 @@ namespace ChordGeneratorMAUI.ViewModels
                         case "All": return ChordDatabase.AllChords;
 
                         case "Ab Major": return ChordDatabase.Key_Ab_Major_Chords;
-                        case "A Major":  return ChordDatabase.Key_A_Major_Chords;
-                        case "Ab Minor":  return ChordDatabase.Key_Ab_Minor_Chords;
-                        case "A Minor":  return ChordDatabase.Key_A_Minor_Chords;
+                        case "A Major": return ChordDatabase.Key_A_Major_Chords;
+                        case "Ab Minor": return ChordDatabase.Key_Ab_Minor_Chords;
+                        case "A Minor": return ChordDatabase.Key_A_Minor_Chords;
                         case "A# Minor": return ChordDatabase.Key_ASharp_Minor_Chords;
 
                         case "Bb Major": return ChordDatabase.Key_Bb_Major_Chords;
@@ -102,7 +102,7 @@ namespace ChordGeneratorMAUI.ViewModels
             }
         }
 
-        private string _chordSearchQuery;
+        private string _chordSearchQuery = "";
         public string ChordSearchQuery
         {
             get { return _chordSearchQuery; }
@@ -127,16 +127,16 @@ namespace ChordGeneratorMAUI.ViewModels
         public ChordModel SelectedWritingModeChord
         {
             get { return _selectedWritingModeChord; }
-            set 
-            { 
-                if (value != null) 
+            set
+            {
+                if (value != null)
                 {
-                    SetProperty(ref _selectedWritingModeChord, value); 
+                    SetProperty(ref _selectedWritingModeChord, value);
 
                     if (!ChordChart.IsPaused)
                         PauseToggleCommand.Execute();
 
-                    ChordSearchQuery = _selectedWritingModeChord.Name; 
+                    //ChordSearchQuery = _selectedWritingModeChord.Name; 
                 }
             }
         }
@@ -146,6 +146,7 @@ namespace ChordGeneratorMAUI.ViewModels
         public DelegateCommand GenerateChordsCommand { get; set; }
         public DelegateCommand<string> SearchChordsCommand { get; set; }
         public DelegateCommand WriteNewChordCommand { get; set; }
+        public DelegateCommand WriteEmptyChordCommand { get; set; }
         public DelegateCommand PauseToggleCommand { get; set; }
         public DelegateCommand ResetCommand { get; set; }
         public DelegateCommand PreviousChartCommand { get; set; }
@@ -172,7 +173,7 @@ namespace ChordGeneratorMAUI.ViewModels
                 IsPreviousEnabled = ChartHistory.Count > 1;
             });
 
-            SearchChordsCommand = new DelegateCommand<string>(s => 
+            SearchChordsCommand = new DelegateCommand<string>(s =>
             {
                 if (WriteOnlyChordsInKey)
                 {
@@ -186,18 +187,19 @@ namespace ChordGeneratorMAUI.ViewModels
 
             WriteNewChordCommand = new DelegateCommand(() =>
             {
-                try
-                {
-                    int indexOfChord = ChordChart.Chords.IndexOf(SelectedWritingModeChord);
-                    ChordChart.Chords[indexOfChord] = SelectedChordBuilderChord;
-                    ChordChart.Chords[indexOfChord].BelongsInKey = ChordChart.KeyChords.Any(c => c.Name == ChordChart.Chords[indexOfChord].Name);
+                int indexOfChord = ChordChart.Chords.IndexOf(SelectedWritingModeChord);
+                ChordChart.Chords[indexOfChord] = SelectedChordBuilderChord;
+                ChordChart.Chords[indexOfChord].BelongsInKey = ChordChart.KeyChords.Any(c => c.Name == ChordChart.Chords[indexOfChord].Name);
 
-                    //SelectedWritingModeChord = null;
-                }
-                catch(Exception ex)
-                {
+                SelectedWritingModeChord = null;
+            });
 
-                }
+            WriteEmptyChordCommand = new DelegateCommand(() =>
+            {
+                int indexOfChord = ChordChart.Chords.IndexOf(SelectedWritingModeChord);
+                ChordChart.Chords[indexOfChord] = new ChordModel();
+
+                SelectedWritingModeChord = null;
             });
 
             PreviousChartCommand = new DelegateCommand(() =>

@@ -18,15 +18,15 @@ namespace ChordGeneratorMAUI.DataAccess
             Major,
             [Description("Minor")]
             Minor,
-            [Description("Major7th")]
+            [Description("Major 7th")]
             Major7th,
-            [Description("Minor7th")]
+            [Description("Minor 7th")]
             Minor7th,
-            [Description("Dominant7th")]
+            [Description("Dominant 7th")]
             Dominant7th,
             [Description("Diminished")]
             Diminished,
-            [Description("MinorSevenFlatFive")]
+            [Description("Minor Seven Flat Five")]
             MinorSevenFlatFive,
 
             [Description("All")]
