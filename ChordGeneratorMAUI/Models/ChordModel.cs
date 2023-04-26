@@ -38,5 +38,13 @@ namespace ChordGeneratorMAUI.Models
             get { return _belongsInKey; }
             set { SetProperty(ref _belongsInKey, value); }
         }
+
+        // Toggle this to show border highlight in ReadingMode during playback.
+        private bool _isHighlighted = false;
+        public bool IsHighlighted
+        {
+            get { return _isHighlighted; }
+            set { SetProperty(ref _isHighlighted, value); }
+        }
     }
 }

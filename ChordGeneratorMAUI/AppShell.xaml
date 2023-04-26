@@ -16,7 +16,7 @@
 		<Tab Title="Charts" Route="Charts" x:Name="ChartsTab" Icon="listmusic.png">
 			<ShellContent Title="Read" Route="ReadingMode" ContentTemplate="{DataTemplate v:ReadingMode}"/>
 			<ShellContent Title="Write" Route="WritingMode" ContentTemplate="{DataTemplate v:WritingMode}"/>
-			<ShellContent Title="Chart Settings" Route="ChartSettings" ContentTemplate="{DataTemplate v:ChartSettingsPage}"/>
+			<!--<ShellContent Title="Chart Settings" Route="ChartSettings" ContentTemplate="{DataTemplate v:ChartSettingsPage}"/>-->
 		</Tab>
 
 		<Tab Title="App Settings" Route="AppSettings" Icon="tools.png">

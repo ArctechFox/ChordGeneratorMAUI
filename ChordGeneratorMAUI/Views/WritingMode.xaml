@@ -107,7 +107,7 @@
 		<v:Metronome Grid.Row="2" Margin="20,10"></v:Metronome>
 
 		<!--CHART-->
-		<CollectionView x:Name="ChordChartCollectionView" Grid.Row="3" Grid.RowSpan="2" Margin="20,0" 
+		<CollectionView x:Name="ChordChartCollectionView" Grid.Row="3" Grid.RowSpan="2" Margin="20,0,0,60" 
 						ItemsSource="{Binding ChordChart.Chords}" SelectedItem="{Binding SelectedWritingModeChord}" SelectionChanged="CollectionView_SelectionChanged"
 						SelectionMode="Single" ItemsLayout="VerticalGrid, 4" VerticalOptions="FillAndExpand" ItemSizingStrategy="MeasureFirstItem" Background="{StaticResource BlackBrush}">
 
@@ -135,7 +135,7 @@
 
 								<VisualState x:Name="Selected">
 									<VisualState.Setters>
-										<Setter Property="StrokeThickness" Value="5" />
+										<Setter Property="StrokeThickness" Value="4" />
 									</VisualState.Setters>
 								</VisualState>
 								
@@ -159,7 +159,7 @@
 						</Border.Triggers>
 
 						<!--CHORD NAME-->
-						<Label FontSize="Medium" Margin="4" FontAttributes="None" HorizontalOptions="Center" FontFamily="Arial" Text="{Binding Name}"></Label>
+						<Label FontSize="Medium" Margin="4" FontAttributes="None" HorizontalOptions="Center" FontFamily="OpenSansSemibold" Text="{Binding Name}"></Label>
 					</Border>
 
 				</DataTemplate>

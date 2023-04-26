@@ -98,7 +98,7 @@ namespace ChordGeneratorMAUI.Models
             set { SetProperty(ref _showDiminishedAsMinor, value); }
         }
 
-        private bool _loopPlayback = true;
+        private bool _loopPlayback = false;
         public bool LoopPlayback
         {
             get { return _loopPlayback; }

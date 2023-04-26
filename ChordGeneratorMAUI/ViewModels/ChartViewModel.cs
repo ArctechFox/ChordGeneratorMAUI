@@ -26,6 +26,13 @@ namespace ChordGeneratorMAUI.ViewModels
             set { SetProperty(ref _chartHistory, value); }
         }
 
+        private int _readingModeActiveChordIndex = -1;
+        public int ReadingModeActiveChordIndex
+        {
+            get { return _readingModeActiveChordIndex; }
+            set { SetProperty(ref _readingModeActiveChordIndex, value); }
+        }
+
         private bool _isPreviousEnabled = false;
         public bool IsPreviousEnabled
         {
@@ -141,6 +148,13 @@ namespace ChordGeneratorMAUI.ViewModels
             }
         }
 
+        private ChordModel _selectedReadingModeChord;
+        public ChordModel SelectedReadingModeChord
+        {
+            get { return _selectedReadingModeChord; }
+            set { SetProperty(ref _selectedReadingModeChord, value); }
+        }
+
         // /////////////////////////////////////////////////////////////////////////////////////////
 
         public DelegateCommand GenerateChordsCommand { get; set; }
@@ -156,6 +170,13 @@ namespace ChordGeneratorMAUI.ViewModels
 
         public ChartViewModel()
         {
+            Helpers.EventManager.Instance.EventAggregator
+                .GetEvent<BeatElapsedEvent>()
+                .Subscribe(BeatElapsedHandler);
+
+            Helpers.EventManager.Instance.EventAggregator
+                .GetEvent<ResetToDefaultSettingsEvent>()
+                .Subscribe(ResetPlaybackHandler);
 
             GenerateChordsCommand = new DelegateCommand(() =>
             {
@@ -171,6 +192,7 @@ namespace ChordGeneratorMAUI.ViewModels
                 ChartHistory.Add(ChordChart);
 
                 IsPreviousEnabled = ChartHistory.Count > 1;
+                ReadingModeActiveChordIndex = -1;
             });
 
             SearchChordsCommand = new DelegateCommand<string>(s =>
@@ -243,6 +265,42 @@ namespace ChordGeneratorMAUI.ViewModels
             });
 
             ChordBuilderSearchResults = new ObservableCollection<ChordModel>(ChordBuilderChords);
+        }
+
+        private void BeatElapsedHandler(int currentBeat)
+        {
+            if (currentBeat == 1)
+            {
+                ReadingModeActiveChordIndex++;
+
+                // Remove highlight from previous chord
+                if (ReadingModeActiveChordIndex > 0)
+                    ChordChart.Chords[ReadingModeActiveChordIndex - 1].IsHighlighted = false;
+
+                if (ReadingModeActiveChordIndex >= ChordChart.Chords.Count)
+                {
+                    ReadingModeActiveChordIndex = 0;
+
+                    if (!ChordChart.LoopPlayback)
+                    {
+                        GenerateChordsCommand.Execute();
+                        PauseToggleCommand.Execute();
+                        return;
+                    }
+                }
+
+                // Highlight current chord
+                ChordChart.Chords[ReadingModeActiveChordIndex].IsHighlighted = true;
+            }
+        }
+
+        private void ResetPlaybackHandler()
+        {
+            if (ReadingModeActiveChordIndex > 0)
+                ChordChart.Chords[ReadingModeActiveChordIndex].IsHighlighted = false;
+
+            ReadingModeActiveChordIndex = -1;
+            SelectedReadingModeChord = null;
         }
     }
 }
