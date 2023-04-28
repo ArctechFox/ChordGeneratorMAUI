@@ -301,6 +301,8 @@ namespace ChordGeneratorMAUI.ViewModels
 
             ReadingModeActiveChordIndex = -1;
             SelectedReadingModeChord = null;
+
+            ChordChart.IsPaused = true;
         }
     }
 }

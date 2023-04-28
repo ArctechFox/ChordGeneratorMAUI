@@ -10,6 +10,7 @@ public partial class WritingMode : ContentPage
 	public WritingMode()
 	{
 		InitializeComponent();
+        MetronomeControl.BindingContext = MetronomeViewModel.Instance;
     }
 
     private async void SettingsButton_Tapped(object sender, TappedEventArgs e)
@@ -20,7 +21,6 @@ public partial class WritingMode : ContentPage
     private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         var collectionView = (sender as CollectionView);
-        //var selectedItem = collectionView.SelectedItem;
 
         if (e.CurrentSelection.Count == 0) return;
 

@@ -8,43 +8,36 @@ public partial class Metronome : ContentView
 	public Metronome()
 	{
 		InitializeComponent();
-		this.BindingContext = new MetronomeViewModel();
 
-        // Subscribe to relevant events
-        Helpers.EventManager.Instance.EventAggregator
-            .GetEvent<BeatElapsedEvent>()
-            .Subscribe(PlayClickSound);
+        //ME_MetronomeClickHi.SeekCompleted += ((object sender, EventArgs e) =>
+        //{
+        //    Application.Current?.Dispatcher.Dispatch(() =>
+        //    {
+        //        ME_MetronomeClickHi.Play();
+        //    });
+        //});
 
-        // Ugh fuck this on mac. Audio player just cant keep up
-        ME_MetronomeClickHi.SeekCompleted += ((object sender, EventArgs e) =>
-        {
-            Application.Current?.Dispatcher.Dispatch(() =>
-            {
-                ME_MetronomeClickHi.Play();
-            });
-        });
-
-        ME_MetronomeClickLo.SeekCompleted += ((object sender, EventArgs e) =>
-        {
-            Application.Current?.Dispatcher.Dispatch(() =>
-            {
-                ME_MetronomeClickLo.Play();
-            });
-        });
+        //ME_MetronomeClickLo.SeekCompleted += ((object sender, EventArgs e) =>
+        //{
+        //    Application.Current?.Dispatcher.Dispatch(() =>
+        //    {
+        //        ME_MetronomeClickLo.Play();
+        //    });
+        //});
     }
 
-    private void PlayClickSound(int beat)
-    {
-        if (beat == 1)
-        {
-            ME_MetronomeClickHi.Stop();
-            ME_MetronomeClickHi.SeekTo(TimeSpan.Zero);
-        }
+    //private void PlayClickSound(int beat)
+    //{
+    //    if (beat == 1)
+    //    {
+    //        ME_MetronomeClickHi.Stop();
+    //        ME_MetronomeClickHi.SeekTo(TimeSpan.Zero);
+    //    }
             
-        else
-        {
-            ME_MetronomeClickLo.Stop();
-            ME_MetronomeClickLo.SeekTo(TimeSpan.Zero);
-        }  
-    }
+    //    else
+    //    {
+    //        ME_MetronomeClickLo.Stop();
+    //        ME_MetronomeClickLo.SeekTo(TimeSpan.Zero);
+    //    }  
+    //}
 }

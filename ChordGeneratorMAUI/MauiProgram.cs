@@ -1,5 +1,7 @@
-﻿using CommunityToolkit.Maui;
+﻿using ChordGeneratorMAUI.ViewModels;
+using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using Plugin.Maui.Audio;
 
 namespace ChordGeneratorMAUI;
 
@@ -26,6 +28,8 @@ public static class MauiProgram
 				fonts.AddFont("Font Awesome 5 Pro-Solid-900.otf", "FA Pro Solid");
 			});
 
+		builder.Services.AddSingleton(AudioManager.Current);
+		//builder.Services.AddTransient<MetronomeViewModel>();
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif

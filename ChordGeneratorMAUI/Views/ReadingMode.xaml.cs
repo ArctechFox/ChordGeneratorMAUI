@@ -9,6 +9,7 @@ public partial class ReadingMode : ContentPage
 	public ReadingMode()
 	{
 		InitializeComponent();
+        MetronomeControl.BindingContext = MetronomeViewModel.Instance;
     }
 
     private async void SettingsButton_Tapped(object sender, TappedEventArgs e)

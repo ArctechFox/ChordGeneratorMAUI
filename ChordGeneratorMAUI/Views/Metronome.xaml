@@ -12,7 +12,7 @@
 			<Style TargetType="RoundRectangle">
 				<Setter Property="Margin" Value="4,0"></Setter>
 				<Setter Property="BackgroundColor" Value="Transparent"></Setter>
-				<Setter Property="Fill" Value="{StaticResource Gray600Brush}"></Setter>
+				<Setter Property="Fill" Value="{StaticResource Gray500Brush}"></Setter>
 				<Setter Property="Opacity" Value=".3"></Setter>
 				<Setter Property="CornerRadius" Value="5"></Setter>
 			</Style>
@@ -53,8 +53,8 @@
 				<RowDefinition Height="25"></RowDefinition>
 			</Grid.RowDefinitions>
 
-			<toolkit:MediaElement x:Name="ME_MetronomeClickHi" Source="embed://Perc_PracticePad_hi.wav" IsVisible="False"></toolkit:MediaElement>
-			<toolkit:MediaElement x:Name="ME_MetronomeClickLo" Source="embed://Perc_PracticePad_lo.wav" IsVisible="False"></toolkit:MediaElement>
+			<!--<toolkit:MediaElement x:Name="ME_MetronomeClickHi" Source="embed://Perc_PracticePad_hi.wav" IsVisible="False"></toolkit:MediaElement>
+			<toolkit:MediaElement x:Name="ME_MetronomeClickLo" Source="embed://Perc_PracticePad_lo.wav" IsVisible="False"></toolkit:MediaElement>-->
 
 			<RoundRectangle Grid.Column="0">
 				<RoundRectangle.Triggers>

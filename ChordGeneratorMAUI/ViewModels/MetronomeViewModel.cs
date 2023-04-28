@@ -1,5 +1,6 @@
 ﻿using ChordGeneratorMAUI.Helpers;
 using CommunityToolkit.Maui.Views;
+using Plugin.Maui.Audio;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,16 +11,36 @@ using TimeSpan = System.TimeSpan;
 
 namespace ChordGeneratorMAUI.ViewModels
 {
-    public class MetronomeViewModel : BindableBase
+    public sealed class MetronomeViewModel : BindableBase
     {
+        private static readonly Lazy<MetronomeViewModel> lazy = new Lazy<MetronomeViewModel>(() => new MetronomeViewModel());
+        public static MetronomeViewModel Instance
+        {
+            get
+            {
+                return lazy.Value;
+            }
+        }
+
+        // METRONOME SOUNDS
+        private readonly string _metronome_practicePad_hi = "Perc_PracticePad_hi.wav";
+        private readonly string _metronome_practicePad_lo = "Perc_PracticePad_lo.wav";
+
+        private IAudioPlayer _audioPlayer_metronome_practicePad_lo;
+        private IAudioPlayer _audioPlayer_metronome_practicePad_hi;
+
+        // TIMERS
         private System.Timers.Timer _totalTimer;
         private System.Timers.Timer _beatTimer;
 
         // In miliseconds
         private readonly double _totalTimeInterval = 1000;
 
-        public MetronomeViewModel()
+        private MetronomeViewModel()
         {
+            SetupAudioPlayers();
+
+            // Timers setup
             _totalTimer = new System.Timers.Timer();
             _totalTimer.Interval = _totalTimeInterval;
             _totalTimer.Elapsed += new ElapsedEventHandler(OnTotalTimerElapsed);
@@ -29,7 +50,6 @@ namespace ChordGeneratorMAUI.ViewModels
             _beatTimer.Elapsed += new ElapsedEventHandler(OnBeatTimerElapsed);
 
             // Subscribe to relevant events
-
             Helpers.EventManager.Instance.EventAggregator
                 .GetEvent<ChartGeneratedEvent>()
                 .Subscribe(ChartGeneratedHandler);
@@ -49,14 +69,24 @@ namespace ChordGeneratorMAUI.ViewModels
             Helpers.EventManager.Instance.EventAggregator
                 .GetEvent<BPMChangedEvent>()
                 .Subscribe(BPMChangedHandler);
+
+            //Helpers.EventManager.Instance.EventAggregator
+            //    .GetEvent<BeatElapsedEvent>()
+            //    .Subscribe(PlayClickSound);
+
+        }
+        ~MetronomeViewModel() // TODO: Hmm... ¯\_(ツ)_/¯
+        {
+            _audioPlayer_metronome_practicePad_hi.Dispose();
+            _audioPlayer_metronome_practicePad_lo.Dispose();
         }
 
         private TimeSpan _totalTimeElapsed = TimeSpan.Zero;
         public TimeSpan TotalTimeElapsed
         {
             get { return _totalTimeElapsed; }
-            set 
-            { 
+            set
+            {
                 SetProperty(ref _totalTimeElapsed, value);
 
                 string formatString;
@@ -105,6 +135,24 @@ namespace ChordGeneratorMAUI.ViewModels
 
         /////////////////////////////////////////////////////////////////////////
 
+        private async void SetupAudioPlayers()
+        {
+            _audioPlayer_metronome_practicePad_hi = AudioManager.Current.CreatePlayer(await FileSystem.OpenAppPackageFileAsync(_metronome_practicePad_hi));
+            _audioPlayer_metronome_practicePad_lo = AudioManager.Current.CreatePlayer(await FileSystem.OpenAppPackageFileAsync(_metronome_practicePad_lo));
+        }
+
+        private void PlayClickSound(int beat)
+        {
+            if (beat == 1)
+            {
+                _audioPlayer_metronome_practicePad_hi.Play();
+            }
+            else
+            {
+                _audioPlayer_metronome_practicePad_lo.Play();
+            }
+        }
+
         private void StartMetronome()
         {
             CurrentBeat = 0;
@@ -137,7 +185,7 @@ namespace ChordGeneratorMAUI.ViewModels
 
         private void BPMChangedHandler(int bpm)
         {
-           _beatTimer.Interval = 60000 / bpm;
+            _beatTimer.Interval = 60000 / bpm;
         }
 
         private void ChartGeneratedHandler()
@@ -156,10 +204,13 @@ namespace ChordGeneratorMAUI.ViewModels
         private void OnBeatTimerElapsed(object sender, ElapsedEventArgs e)
         {
             CurrentBeat++;
+            PlayClickSound(CurrentBeat);
+
+            //await Task.Factory.StartNew(() => { EventManager.Instance.EventAggregator.GetEvent<BeatElapsedEvent>().Publish(CurrentBeat); });
 
             Application.Current?.Dispatcher.Dispatch(() =>
             {
-                Helpers.EventManager.Instance.EventAggregator.GetEvent<BeatElapsedEvent>().Publish(CurrentBeat);
+                EventManager.Instance.EventAggregator.GetEvent<BeatElapsedEvent>().Publish(CurrentBeat);
             });
         }
     }

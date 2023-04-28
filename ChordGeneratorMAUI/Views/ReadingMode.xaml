@@ -39,7 +39,7 @@
 
 	<Grid>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="100"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
 			<RowDefinition Height="Auto"></RowDefinition>
 			<RowDefinition Height="Auto"></RowDefinition>
 			<RowDefinition Height="Auto"></RowDefinition>
@@ -59,19 +59,19 @@
 
 			<Grid>
 				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"></ColumnDefinition>
 					<ColumnDefinition Width="*"></ColumnDefinition>
-					<ColumnDefinition Width="*"></ColumnDefinition>
-					<ColumnDefinition Width="*"></ColumnDefinition>
+					<ColumnDefinition Width="Auto"></ColumnDefinition>
 				</Grid.ColumnDefinitions>
 
-				<VerticalStackLayout Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center">
+				<VerticalStackLayout Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Margin="35,0">
 					<Label Text="Key" TextColor="{StaticResource Black}" Opacity=".5" FontSize="Small" Margin="0"></Label>
 					<Label Text="{Binding ChordChart.SelectedKey}" TextColor="{StaticResource Tertiary}" Opacity="1" FontSize="Small" Margin="0" FontAttributes="Bold"></Label>
 				</VerticalStackLayout>
 
 				<Label Grid.Column="1" Text="Reading Mode" TextColor="{StaticResource Black}" Opacity="1" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Center"></Label>
 
-				<VerticalStackLayout Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center">
+				<VerticalStackLayout Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Margin="35,0">
 					<Label Text="BPM" TextColor="{StaticResource Black}" Opacity=".5" FontSize="Small" Margin="0"></Label>
 					<Label Text="{Binding ChordChart.BPM}" TextColor="{StaticResource Tertiary}" Opacity="1" FontSize="Small" Margin="0" FontAttributes="Bold"></Label>
 				</VerticalStackLayout>
@@ -94,7 +94,7 @@
 		</Grid>
 
 		<!--METRONOME-->
-		<v:Metronome Grid.Row="2" Margin="20,10"></v:Metronome>
+		<v:Metronome x:Name="MetronomeControl" Grid.Row="2" Margin="20,10"></v:Metronome>
 
 		<!--CHART-->
 		<CollectionView x:Name="ChordChartCollectionView" Grid.Row="3" Grid.RowSpan="2" Margin="20,0,0,60" 
