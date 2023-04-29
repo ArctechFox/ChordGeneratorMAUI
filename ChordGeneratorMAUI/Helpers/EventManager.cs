@@ -35,6 +35,9 @@ namespace ChordGeneratorMAUI.Helpers
     public class TimerPauseEvent : PubSubEvent { }
     public class ResetToDefaultSettingsEvent : PubSubEvent { }
     public class BeatElapsedEvent : PubSubEvent<int> { }
+    public class BarCountChangedEvent : PubSubEvent<int> { }
+    public class BPMChangedEvent : PubSubEvent<int> { }
+    public class KeyChangedEvent : PubSubEvent<string> { }
 
     //public class DataReceivedEvent : PubSubEvent<DataReceivedEvent_Parameters> { }
     //public class FreezeEvent : PubSubEvent<bool> { }

@@ -4,11 +4,24 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:ChordGeneratorMAUI"
-    Shell.FlyoutBehavior="Disabled" IconImageSource="embed://chordgen.png">
+	xmlns:v="clr-namespace:ChordGeneratorMAUI.Views"
+	xmlns:vm="clr-namespace:ChordGeneratorMAUI.ViewModels"
+    IconImageSource="chordgen.png">
 
-    <ShellContent
-        Title="Chord Generator"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+	<TabBar>
+		<Tab Title="Home" Route="Home" Icon="home.png">
+			<ShellContent ContentTemplate="{DataTemplate local:MainPage}"/>
+		</Tab>
+
+		<Tab Title="Charts" Route="Charts" x:Name="ChartsTab" Icon="listmusic.png">
+			<ShellContent Title="Read" Route="ReadingMode" ContentTemplate="{DataTemplate v:ReadingMode}"/>
+			<ShellContent Title="Write" Route="WritingMode" ContentTemplate="{DataTemplate v:WritingMode}"/>
+			<!--<ShellContent Title="Chart Settings" Route="ChartSettings" ContentTemplate="{DataTemplate v:ChartSettingsPage}"/>-->
+		</Tab>
+
+		<Tab Title="App Settings" Route="AppSettings" Icon="tools.png">
+			<ShellContent ContentTemplate="{DataTemplate v:ChartSettingsPage}"/>
+		</Tab>
+	</TabBar>
 
 </Shell>

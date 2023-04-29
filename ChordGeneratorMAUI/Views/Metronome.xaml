@@ -1,49 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:sys="clr-namespace:System;assembly=mscorlib"
 			 xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+			 xmlns:vm="clr-namespace:ChordGeneratorMAUI.ViewModels"
+			 xmlns:db="clr-namespace:ChordGeneratorMAUI.DataAccess"
              x:Class="ChordGeneratorMAUI.Views.Metronome">
 	
 	<ContentView.Resources>
 		<ResourceDictionary>
 			<Style TargetType="RoundRectangle">
-				<Setter Property="Margin" Value="5,0"></Setter>
+				<Setter Property="Margin" Value="4,0"></Setter>
 				<Setter Property="BackgroundColor" Value="Transparent"></Setter>
-				<Setter Property="Fill" Value="Black"></Setter>
+				<Setter Property="Fill" Value="{StaticResource Gray500Brush}"></Setter>
 				<Setter Property="Opacity" Value=".3"></Setter>
 				<Setter Property="CornerRadius" Value="5"></Setter>
 			</Style>
+
+			<SolidColorBrush x:Key="ComboBoxDropDownBackground" Color="#464E51" />
 		</ResourceDictionary>
 	</ContentView.Resources>
-	
-    <Grid>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*"></ColumnDefinition>
-			<ColumnDefinition Width="*"></ColumnDefinition>
-			<ColumnDefinition Width="*"></ColumnDefinition>
-		</Grid.ColumnDefinitions>
+
+	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"></RowDefinition>
 			<RowDefinition Height="*"></RowDefinition>
 		</Grid.RowDefinitions>
 
-		<VerticalStackLayout Grid.Column="0" Grid.Row="0" VerticalOptions="End">
-			<Label FontSize="Small" Margin="0" HorizontalOptions="Start">BPM</Label>
-			
-			<Entry Text="{Binding BPM}" 
-				   HorizontalOptions="StartAndExpand" TextColor="White" BackgroundColor="Purple" FontAttributes="Bold" FontSize="26" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" 
-				   MinimumWidthRequest="100"></Entry>
-		</VerticalStackLayout>
-
-		<Label Grid.Column="1" Grid.Row="0" Margin="0" Opacity="1" Text="{Binding TotalTimeElapsed}"></Label>
-
-		<VerticalStackLayout Grid.Column="2" Grid.Row="0" HorizontalOptions="End" VerticalOptions="End">
-			<Label FontSize="Small" HorizontalOptions="End" Margin="0">Chart</Label>
-			<Label FontSize="Medium" Opacity="1" FontAttributes="Bold" HorizontalOptions="End" Margin="0" Text="{Binding ChartCount}"></Label>
-		</VerticalStackLayout>
+		<!--TIMER-->
+		<Label Text="{Binding TotalTimeElapsedString}" Grid.Row="0" Margin="0,0,0,5" Opacity=".5" FontSize="Small"></Label>
 
 		<!--BEAT INDICATORS-->
-		<Grid Grid.ColumnSpan="3" Grid.Row="1" VerticalOptions="End" Margin="0,5">
+		<Grid Grid.Row="1" VerticalOptions="Center" Margin="0,0" Padding="0,0">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*"></ColumnDefinition>
 				<ColumnDefinition Width="*"></ColumnDefinition>
@@ -53,9 +41,6 @@
 			<Grid.RowDefinitions>
 				<RowDefinition Height="25"></RowDefinition>
 			</Grid.RowDefinitions>
-
-			<toolkit:MediaElement x:Name="ME_MetronomeClickHi" Source="embed://Perc_PracticePad_hi.wav" IsVisible="False"></toolkit:MediaElement>
-			<toolkit:MediaElement x:Name="ME_MetronomeClickLo" Source="embed://Perc_PracticePad_lo.wav" IsVisible="False"></toolkit:MediaElement>
 
 			<RoundRectangle Grid.Column="0">
 				<RoundRectangle.Triggers>

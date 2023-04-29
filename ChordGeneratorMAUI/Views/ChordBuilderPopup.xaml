@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+			 xmlns:db="clr-namespace:ChordGeneratorMAUI.DataAccess"
+			 xmlns:m="clr-namespace:ChordGeneratorMAUI.Models"
+             x:Class="ChordGeneratorMAUI.Views.ChordBuilderPopup">
+
+	<Grid Background="{StaticResource White}" HorizontalOptions="Fill" Padding="5" MaximumWidthRequest="{OnPlatform Android='350', Default='1200'}">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition Height="*"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+		</Grid.RowDefinitions>
+
+		<!--INFO-->
+		<HorizontalStackLayout Grid.Column="0" Grid.Row="0" Margin="5,0,0,0">
+			<Label Text="{Binding SelectedWritingModeChord.Name}" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0" HorizontalTextAlignment="Center"></Label>
+			<Label Text="arrow-right" FontFamily="FA Pro Light" TextColor="{StaticResource Black}" FontSize="Medium" Opacity=".5" Margin="10,0" HorizontalTextAlignment="Center"></Label>
+			<Label Text="{Binding SelectedChordBuilderChord.Name}" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0" HorizontalTextAlignment="Center"></Label>
+		</HorizontalStackLayout>
+		
+		<!--OPTIONS-->
+		<HorizontalStackLayout Grid.Column="1" Grid.Row="0" Margin="0,0,5,0" HorizontalOptions="End">
+			<Label Text="In Key" TextColor="{StaticResource Black}" FontSize="Micro" Opacity=".98" HorizontalTextAlignment="Center" Padding="0"></Label>
+			<Label Text="{Binding ChordChart.SelectedKey, FallbackValue=None}" FontAttributes="Bold" TextColor="{StaticResource Black}" Padding="0" FontSize="Micro" Margin="0" HorizontalTextAlignment="Center"></Label>
+			<CheckBox IsChecked="{Binding WriteOnlyChordsInKey}" Color="{StaticResource Black}"></CheckBox>
+		</HorizontalStackLayout>
+
+		<!--SEARCH-->
+		<SearchBar Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" x:Name="searchBar" Placeholder="Find chord..." FontSize="Small" Margin="0" 
+				   Background="{StaticResource White}" TextColor="{StaticResource Black}" CancelButtonColor="{StaticResource Black}"
+				   Text="{Binding ChordSearchQuery}"
+				   SearchCommand="{Binding SearchChordsCommand}" 
+				   SearchCommandParameter="{Binding ChordSearchQuery}"></SearchBar>
+
+		<!--RESULTS LISTVIEW-->
+		<ListView Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" SelectionMode="Single" Background="{StaticResource White}" Margin="{OnPlatform WinUI='10,0,0,0', Default='0'}" 
+				  MinimumHeightRequest="250" MaximumHeightRequest="{OnPlatform Android='500', Default='800'}"
+				  ItemsSource="{Binding ChordBuilderSearchResults}"
+				  SelectedItem="{Binding SelectedChordBuilderChord}">
+
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<TextCell x:DataType="{x:Type m:ChordModel}"
+							  Text="{Binding Name}" TextColor="{StaticResource Gray500}" 
+							  Detail="{Binding ChordType}" DetailColor="{StaticResource Gray300}" />
+				</DataTemplate>
+			</ListView.ItemTemplate>
+
+		</ListView>
+
+		<!--BOTTOM BUTTONS-->
+		<Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"></ColumnDefinition>
+				<ColumnDefinition Width="*"></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+
+			<Button Grid.Column="0" x:Name="btnEmptyChord" Text="Empty" Command="{Binding WriteEmptyChordCommand}" Clicked="btnEmptyChord_Clicked" 
+					Background="{StaticResource Primary}" TextColor="White" BorderColor="White" BorderWidth="2"></Button>
+			<Button Grid.Column="1" x:Name="btnInsertChord" Text="Insert" Command="{Binding WriteNewChordCommand}" Clicked="btnInsertChord_Clicked" 
+					Background="{StaticResource Primary}" TextColor="White" BorderColor="White" BorderWidth="2"></Button>
+		</Grid>
+
+	</Grid>
+</toolkit:Popup>

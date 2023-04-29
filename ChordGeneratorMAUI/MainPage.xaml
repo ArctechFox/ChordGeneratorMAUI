@@ -2,124 +2,15 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:v="clr-namespace:ChordGeneratorMAUI.Views"
-             x:Class="ChordGeneratorMAUI.MainPage" BackgroundColor="#001530">
+             x:Class="ChordGeneratorMAUI.MainPage" BackgroundColor="{StaticResource Black}" Title="Chord Star">
 
-	<ContentPage.Resources>
-		<ResourceDictionary>
-			<Style TargetType="Border">
-				<Setter Property="Stroke" Value="Purple"></Setter>
-				<Setter Property="StrokeThickness" Value="2"></Setter>
-			</Style>
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+		</Grid.ColumnDefinitions>
 
-			<Style TargetType="Label">
-				<Setter Property="FontSize" Value="{OnPlatform iOS=24, Android=26, WinUI=48, MacCatalyst=48}"></Setter>
-				<Setter Property="TextColor" Value="White"></Setter>
-				<Setter Property="Opacity" Value=".85"></Setter>
-				<Setter Property="HorizontalOptions" Value="Center"></Setter>
-				<Setter Property="VerticalOptions" Value="Center"></Setter>
-				<Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
-				<Setter Property="VerticalTextAlignment" Value="Center"></Setter>
-				<Setter Property="Margin" Value="20"></Setter>
-			</Style>
-		</ResourceDictionary>
-	</ContentPage.Resources>
-	
-	<StackLayout Margin="20,20,20,0">
-		<v:Metronome></v:Metronome>
-		
-		<Grid HorizontalOptions="FillAndExpand"  VerticalOptions="FillAndExpand">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="*"></ColumnDefinition>
-				<ColumnDefinition Width="*"></ColumnDefinition>
-				<ColumnDefinition Width="*"></ColumnDefinition>
-				<ColumnDefinition Width="*"></ColumnDefinition>
-			</Grid.ColumnDefinitions>
-			<Grid.RowDefinitions>
-				<RowDefinition Height="*"></RowDefinition>
-				<RowDefinition Height="*"></RowDefinition>
-				<RowDefinition Height="*"></RowDefinition>
-				<RowDefinition Height="*"></RowDefinition>
-			</Grid.RowDefinitions>
-
-			<Border Grid.Column="0" Grid.Row="0">
-				<Label Text="{Binding Chord1.Name}"></Label>
-			</Border>
-			<Border Grid.Column="1" Grid.Row="0">
-				<Label Text="{Binding Chord2.Name}"></Label>
-			</Border>
-			<Border Grid.Column="2" Grid.Row="0">
-				<Label Text="{Binding Chord3.Name}"></Label>
-			</Border>
-			<Border Grid.Column="3" Grid.Row="0">
-				<Label Text="{Binding Chord4.Name}"></Label>
-			</Border>
-			<Border Grid.Column="0" Grid.Row="1">
-				<Label Text="{Binding Chord5.Name}"></Label>
-			</Border>
-			<Border Grid.Column="1" Grid.Row="1">
-				<Label Text="{Binding Chord6.Name}"></Label>
-			</Border>
-			<Border Grid.Column="2" Grid.Row="1">
-				<Label Text="{Binding Chord7.Name}"></Label>
-			</Border>
-			<Border Grid.Column="3" Grid.Row="1">
-				<Label Text="{Binding Chord8.Name}"></Label>
-			</Border>
-			<Border Grid.Column="0" Grid.Row="2">
-				<Label Text="{Binding Chord9.Name}"></Label>
-			</Border>
-			<Border Grid.Column="1" Grid.Row="2">
-				<Label Text="{Binding Chord10.Name}"></Label>
-			</Border>
-			<Border Grid.Column="2" Grid.Row="2">
-				<Label Text="{Binding Chord11.Name}"></Label>
-			</Border>
-			<Border Grid.Column="3" Grid.Row="2">
-				<Label Text="{Binding Chord12.Name}"></Label>
-			</Border>
-			<Border Grid.Column="0" Grid.Row="3">
-				<Label Text="{Binding Chord13.Name}"></Label>
-			</Border>
-			<Border Grid.Column="1" Grid.Row="3">
-				<Label Text="{Binding Chord14.Name}"></Label>
-			</Border>
-			<Border Grid.Column="2" Grid.Row="3">
-				<Label Text="{Binding Chord15.Name}"></Label>
-			</Border>
-			<Border Grid.Column="3" Grid.Row="3">
-				<Label Text="{Binding Chord16.Name}"></Label>
-			</Border>
-		</Grid>
-
-		<Grid HeightRequest="80" Margin="0,10">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto"></ColumnDefinition>
-				<ColumnDefinition Width="*"></ColumnDefinition>
-				<ColumnDefinition Width=".5*"></ColumnDefinition>
-			</Grid.ColumnDefinitions>
-
-			<Button Grid.Column="0" Margin="0,0,10,0" Background="Transparent"  BorderColor="Red" TextColor="White" FontSize="32" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Text="RESET"
-					Command="{Binding ResetCommand}"></Button>
-
-			<Button Grid.Column="1" Background="Transparent" BorderColor="Gray" TextColor="White" FontSize="32" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Text="PAUSE"
-					Command="{Binding PauseToggleCommand}">
-				<Button.Triggers>
-					<DataTrigger TargetType="Button" Binding="{Binding IsPaused}" Value="True">
-						<Setter Property="Text" Value="PLAY"></Setter>
-						<Setter Property="BorderColor" Value="Green"></Setter>
-						<Setter Property="Background" Value="Green"></Setter>
-						<Setter Property="BorderWidth" Value="3"></Setter>
-					</DataTrigger>
-					<DataTrigger TargetType="Button" Binding="{Binding IsChordChartActive}" Value="False">
-						<Setter Property="IsEnabled" Value="False"></Setter>
-						<Setter Property="Opacity" Value=".3"></Setter>
-					</DataTrigger>
-				</Button.Triggers>
-			</Button>
-
-			<Button Grid.Column="2" Margin="10,0,0,0" Background="Teal" TextColor="#001530" FontAttributes="Bold" FontSize="32" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Text="GENERATE"
-					Command="{Binding GenerateChordsCommand}"></Button>
-		</Grid>
-	</StackLayout>
-
+		<Button Grid.Column="0" x:Name="btnWritingMode" Text="Writing Mode" Clicked="btnWritingMode_Clicked"></Button>
+		<Button Grid.Column="1" x:Name="btnReadingMode" Text="Reading Mode" Clicked="btnReadingMode_Clicked"></Button>
+	</Grid>
 </ContentPage>
