@@ -262,10 +262,6 @@ namespace ChordGeneratorMAUI.Models
             {
                 FilteredChords = KeyChords;
             }
-            else
-            {
-                FilteredChords = new ObservableCollection<ChordModel>(AllChords);
-            }
 
             var filteredChordsList = FilteredChords.ToList();
 
@@ -297,13 +293,17 @@ namespace ChordGeneratorMAUI.Models
                     filteredChordsList.RemoveAll((c) => c.ChordType == ChordTypes.Dominant7th);
                     filteredChordsList.RemoveAll((c) => c.ChordType == ChordTypes.MinorSevenFlatFive);
                 }
-            }
 
-            FilteredChords = new ObservableCollection<ChordModel>(filteredChordsList);
+                FilteredChords = new ObservableCollection<ChordModel>(filteredChordsList);
+            }
+            else
+            {
+                FilteredChords = new ObservableCollection<ChordModel>(AllChords);
+            }
 
             #endregion
 
-            if (FilteredChords.Any())
+            if (FilteredChords.Count > 0)
             {
                 Random r = new Random();
                 for (int i = 0; i < BarCount; i++)
@@ -316,7 +316,7 @@ namespace ChordGeneratorMAUI.Models
             this.Name = _defaultChartName + chartHistoryCount.ToString();
 
             IsChordChartActive = true;
-            IsPaused = true;
+            //IsPaused = true;
 
             Application.Current?.Dispatcher.Dispatch(() =>
             {

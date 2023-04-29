@@ -241,7 +241,7 @@
 					</Picker>
 
 					<!--TIME SIGNATURE-->
-					<Picker Grid.Column="1" TitleColor="{StaticResource Black}" Title="Time Signature" SelectedItem="{Binding ChordChart.TimeSignature}"
+					<Picker Grid.Column="1" TitleColor="{StaticResource Black}" Title="Time Signature" SelectedItem="{Binding ChordChart.TimeSignature}" IsEnabled="False" Opacity=".5"
 						Background="{StaticResource Primary}" TextColor="{StaticResource White}" HorizontalTextAlignment="Start"
 						FontSize="Medium" HorizontalOptions="End">
 					</Picker>

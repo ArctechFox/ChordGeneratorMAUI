@@ -178,8 +178,8 @@ namespace ChordGeneratorMAUI.ViewModels
 
         private void ResetToDefaultSettings()
         {
-            TotalTimeElapsed = TimeSpan.Zero;
             CurrentBeat = 0;
+            TotalTimeElapsed = TimeSpan.Zero;
             //ChartCount = ChartCount <= 0 ? 0 : ChartCount-1;
         }
 

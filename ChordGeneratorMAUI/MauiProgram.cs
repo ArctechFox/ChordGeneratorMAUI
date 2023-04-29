@@ -29,7 +29,6 @@ public static class MauiProgram
 			});
 
 		builder.Services.AddSingleton(AudioManager.Current);
-		//builder.Services.AddTransient<MetronomeViewModel>();
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif

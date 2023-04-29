@@ -20,29 +20,18 @@
 			<SolidColorBrush x:Key="ComboBoxDropDownBackground" Color="#464E51" />
 		</ResourceDictionary>
 	</ContentView.Resources>
-	
-    <Grid>
-		<!--<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="Auto"></ColumnDefinition>
-			<ColumnDefinition Width="Auto"></ColumnDefinition>
-			<ColumnDefinition Width="*"></ColumnDefinition>
-		</Grid.ColumnDefinitions>
+
+	<Grid>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="100"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
 			<RowDefinition Height="*"></RowDefinition>
-		</Grid.RowDefinitions>-->
+		</Grid.RowDefinitions>
 
 		<!--TIMER-->
-		<!--<Label Text="{Binding TotalTimeElapsedString}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" Margin="0" Opacity="1" FontSize="Large"></Label>-->
-
-		<!--TIME SIGNATURE-->
-		<!--<VerticalStackLayout Grid.Column="0" Grid.Row="1" VerticalOptions="Center" HorizontalOptions="StartAndExpand" Margin="0,0">
-			<Label Margin="0" FontSize="Medium" Text="{Binding Source={RelativeSource AncestorType={x:Type vm:ChartViewModel}}, Path=ChordChart.TimeSignature}"></Label>
-			<Label Margin="0" FontSize="Medium" Text="{Binding Source={RelativeSource AncestorType={x:Type vm:ChartViewModel}}, Path=ChordChart.TimeSignature}"></Label>
-		</VerticalStackLayout>-->
+		<Label Text="{Binding TotalTimeElapsedString}" Grid.Row="0" Margin="0,0,0,5" Opacity=".5" FontSize="Small"></Label>
 
 		<!--BEAT INDICATORS-->
-		<Grid Grid.ColumnSpan="4" Grid.Row="1" VerticalOptions="Center" Margin="0,0" Padding="0,0">
+		<Grid Grid.Row="1" VerticalOptions="Center" Margin="0,0" Padding="0,0">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*"></ColumnDefinition>
 				<ColumnDefinition Width="*"></ColumnDefinition>
@@ -52,9 +41,6 @@
 			<Grid.RowDefinitions>
 				<RowDefinition Height="25"></RowDefinition>
 			</Grid.RowDefinitions>
-
-			<!--<toolkit:MediaElement x:Name="ME_MetronomeClickHi" Source="embed://Perc_PracticePad_hi.wav" IsVisible="False"></toolkit:MediaElement>
-			<toolkit:MediaElement x:Name="ME_MetronomeClickLo" Source="embed://Perc_PracticePad_lo.wav" IsVisible="False"></toolkit:MediaElement>-->
 
 			<RoundRectangle Grid.Column="0">
 				<RoundRectangle.Triggers>
