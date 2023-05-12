@@ -59,13 +59,13 @@
 
 			<Grid>
 				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
 					<ColumnDefinition Width="*"></ColumnDefinition>
-					<ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
 				</Grid.ColumnDefinitions>
 
 				<VerticalStackLayout Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Margin="35,0">
-					<Label Text="Key" TextColor="{StaticResource Black}" Opacity=".55" FontSize="Small" Margin="0"></Label>
+					<Label Text="Key" TextColor="{StaticResource Black}" Opacity=".5" FontSize="Small" Margin="0"></Label>
 					<Label Text="{Binding ChordChart.SelectedKey}" TextColor="{StaticResource Tertiary}" Opacity="1" FontSize="Small" Margin="0" FontAttributes="Bold"></Label>
 				</VerticalStackLayout>
 
@@ -184,7 +184,7 @@
 			<Button Grid.Column="1" Text="undo-alt" Style="{StaticResource PlaybackButton}"
 					Command="{Binding ResetCommand}"></Button>
 
-			<Button Grid.Column="2" Text="pause" IsEnabled="True" Style="{StaticResource PlaybackButton}"
+            <Button Grid.Column="2" Text="pause" IsEnabled="True" Style="{StaticResource PlaybackButton}" FontSize="{OnPlatform iOS=32, WinUI=Large}"
 					Command="{Binding PauseToggleCommand}">
 				<Button.Triggers>
 					<DataTrigger TargetType="Button" Binding="{Binding ChordChart.IsPaused}" Value="True">

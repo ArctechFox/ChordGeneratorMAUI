@@ -4,13 +4,18 @@
 			 xmlns:v="clr-namespace:ChordGeneratorMAUI.Views"
              x:Class="ChordGeneratorMAUI.MainPage" BackgroundColor="{StaticResource Black}" Title="Chord Star">
 
-	<Grid>
+	<Grid Padding="10">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"></ColumnDefinition>
 			<ColumnDefinition Width="*"></ColumnDefinition>
 		</Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
 
-		<Button Grid.Column="0" x:Name="btnWritingMode" Text="Writing Mode" Clicked="btnWritingMode_Clicked"></Button>
-		<Button Grid.Column="1" x:Name="btnReadingMode" Text="Reading Mode" Clicked="btnReadingMode_Clicked"></Button>
+		<Button Grid.Column="0" x:Name="btnWritingMode" Text="Writing Mode" Clicked="btnWritingMode_Clicked" Margin="5"></Button>
+        <Button Grid.Column="1" x:Name="btnReadingMode" Text="Reading Mode" Clicked="btnReadingMode_Clicked" Margin="5"></Button>
 	</Grid>
 </ContentPage>

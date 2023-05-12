@@ -254,6 +254,8 @@ namespace ChordGeneratorMAUI.Models
 
         public ObservableCollection<ChordModel> GenerateChords(int chartHistoryCount)
         {
+            // TODO: Debug
+
             ClearChordChart();
 
             #region Filter by Chord Type
@@ -261,6 +263,10 @@ namespace ChordGeneratorMAUI.Models
             if (SelectedKey != "All")
             {
                 FilteredChords = KeyChords;
+            }
+            else
+            {
+                FilteredChords = new ObservableCollection<ChordModel>(AllChords);
             }
 
             var filteredChordsList = FilteredChords.ToList();
@@ -296,10 +302,7 @@ namespace ChordGeneratorMAUI.Models
 
                 FilteredChords = new ObservableCollection<ChordModel>(filteredChordsList);
             }
-            else
-            {
-                FilteredChords = new ObservableCollection<ChordModel>(AllChords);
-            }
+            
 
             #endregion
 

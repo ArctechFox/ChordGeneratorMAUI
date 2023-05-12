@@ -6,10 +6,10 @@
 			 xmlns:m="clr-namespace:ChordGeneratorMAUI.Models"
              x:Class="ChordGeneratorMAUI.Views.ChordBuilderPopup">
 
-	<Grid Background="{StaticResource White}" HorizontalOptions="Fill" Padding="5" MaximumWidthRequest="{OnPlatform Android='350', Default='1200'}">
+	<Grid Background="{StaticResource White}" HorizontalOptions="CenterAndExpand" Padding="5" MaximumWidthRequest="{OnPlatform Android='350', Default='1200'}">
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*"></ColumnDefinition>
-			<ColumnDefinition Width="*"></ColumnDefinition>
+			<ColumnDefinition Width="150"></ColumnDefinition>
+			<ColumnDefinition Width="150"></ColumnDefinition>
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"></RowDefinition>

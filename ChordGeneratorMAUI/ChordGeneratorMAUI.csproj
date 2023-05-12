@@ -31,9 +31,9 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(TargetFramework)'=='net7.0-ios'">
-	  <ProvisioningType>manual</ProvisioningType>
+	  <ProvisioningType>automatic</ProvisioningType>
 	  <CodesignKey>Apple Development: Created via API (FSV7CFDFJ9)</CodesignKey>
-	  <CodesignProvision>chordstar_dev</CodesignProvision>
+	  <CodesignProvision>VS: app.chordjewels.chordstar Development</CodesignProvision>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-android|AnyCPU'">
