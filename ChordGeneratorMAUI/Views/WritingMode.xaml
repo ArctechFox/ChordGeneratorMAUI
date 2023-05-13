@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:v="clr-namespace:ChordGeneratorMAUI.Views"
@@ -43,7 +43,6 @@
 			<RowDefinition Height="Auto"></RowDefinition>
 			<RowDefinition Height="Auto"></RowDefinition>
 			<RowDefinition Height="Auto"></RowDefinition>
-			<RowDefinition Height="*"></RowDefinition>
 			<RowDefinition Height="Auto"></RowDefinition>
 		</Grid.RowDefinitions>
 
@@ -97,7 +96,7 @@
 		<v:Metronome x:Name="MetronomeControl" Grid.Row="2" Margin="20,10"></v:Metronome>
 
 		<!--CHART-->
-		<CollectionView x:Name="ChordChartCollectionView" Grid.Row="3" Grid.RowSpan="2" Margin="10,0,10,60" 
+		<CollectionView x:Name="ChordChartCollectionView" Grid.Row="3" Grid.RowSpan="2" Margin="10,0,10,0" 
 						ItemsSource="{Binding ChordChart.Chords}" SelectedItem="{Binding SelectedWritingModeChord}" SelectionChanged="CollectionView_SelectionChanged"
 						SelectionMode="Single" ItemsLayout="VerticalGrid, 4" VerticalOptions="FillAndExpand" ItemSizingStrategy="MeasureFirstItem" Background="{StaticResource BlackBrush}">
 
@@ -157,7 +156,7 @@
 		</CollectionView>
 
 		<!--BOTTOM/PLAYBACK-->
-		<Grid Grid.Row="4" VerticalOptions="End" Padding="10,0">
+		<Grid Grid.Row="4" VerticalOptions="Center" Padding="10,0">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*"></ColumnDefinition>
 				<ColumnDefinition Width="*"></ColumnDefinition>
