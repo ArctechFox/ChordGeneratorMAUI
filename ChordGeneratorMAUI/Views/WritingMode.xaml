@@ -42,7 +42,7 @@
 			<RowDefinition Height="Auto"></RowDefinition>
 			<RowDefinition Height="Auto"></RowDefinition>
 			<RowDefinition Height="Auto"></RowDefinition>
-			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition Height="*"></RowDefinition>
 			<RowDefinition Height="Auto"></RowDefinition>
 		</Grid.RowDefinitions>
 
@@ -156,7 +156,7 @@
 		</CollectionView>
 
 		<!--BOTTOM/PLAYBACK-->
-		<Grid Grid.Row="4" VerticalOptions="Center" Padding="10,0">
+        <Grid Grid.Row="4" VerticalOptions="End" Padding="10,2" MinimumHeightRequest="80">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*"></ColumnDefinition>
 				<ColumnDefinition Width="*"></ColumnDefinition>
