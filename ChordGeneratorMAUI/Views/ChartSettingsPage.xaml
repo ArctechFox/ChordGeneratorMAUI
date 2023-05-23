@@ -56,8 +56,8 @@
 	<ScrollView VerticalScrollBarVisibility="Always">
 		<Grid>
 			<Grid.RowDefinitions>
-				<RowDefinition Height="*"></RowDefinition>
 				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="*"></RowDefinition>
 			</Grid.RowDefinitions>
 
 			<VerticalStackLayout>
@@ -249,11 +249,11 @@
 
 			</VerticalStackLayout>
 
-			<VerticalStackLayout Grid.Row="1" HorizontalOptions="Start">
-				<Label Text=""></Label>
+            <!--WRITING/READING MODE-->
+			<VerticalStackLayout Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center">
 				<HorizontalStackLayout>
-					<Button x:Name="btnWritingMode" Text="Writing Mode" Clicked="btnWritingMode_Clicked"></Button>
-					<Button x:Name="btnReadingMode" Text="Reading Mode" Clicked="btnReadingMode_Clicked"></Button>
+					<Button x:Name="btnWritingMode" Text="Writing Mode" Clicked="btnWritingMode_Clicked" Margin="2"></Button>
+                    <Button x:Name="btnReadingMode" Text="Reading Mode" Clicked="btnReadingMode_Clicked" Margin="2"></Button>
 				</HorizontalStackLayout>
 			</VerticalStackLayout>
 

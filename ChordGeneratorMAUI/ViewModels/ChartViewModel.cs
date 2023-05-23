@@ -265,6 +265,11 @@ namespace ChordGeneratorMAUI.ViewModels
             });
 
             ChordBuilderSearchResults = new ObservableCollection<ChordModel>(ChordBuilderChords);
+
+            for (int i = 0; i < ChordChart.BarCount; i++)
+            {
+                ChordChart.Chords.Add(new ChordModel());
+            }
         }
 
         private void BeatElapsedHandler(int currentBeat)

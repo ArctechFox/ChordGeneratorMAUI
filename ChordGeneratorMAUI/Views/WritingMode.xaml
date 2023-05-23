@@ -6,7 +6,7 @@
              x:Class="ChordGeneratorMAUI.Views.WritingMode" Background="{StaticResource Black}" Shell.TabBarIsVisible="False">
 	<ContentPage.Padding>
 		<OnPlatform x:TypeArguments="Thickness">
-			<On Platform="iOS" Value="0, 35, 0, 0" />
+			<On Platform="iOS" Value="0, 35, 0, 20" />
 		</OnPlatform>
 	</ContentPage.Padding>
 
@@ -95,10 +95,10 @@
 		<!--METRONOME-->
 		<v:Metronome x:Name="MetronomeControl" Grid.Row="2" Margin="20,10"></v:Metronome>
 
-		<!--CHART-->
-		<CollectionView x:Name="ChordChartCollectionView" Grid.Row="3" Grid.RowSpan="2" Margin="10,0,10,0" 
+        <!--CHART-->
+		<CollectionView x:Name="ChordChartCollectionView" Grid.Row="3" Margin="10,0" MaximumHeightRequest="{OnPlatform iOS=350, Default=2000}"
 						ItemsSource="{Binding ChordChart.Chords}" SelectedItem="{Binding SelectedWritingModeChord}" SelectionChanged="CollectionView_SelectionChanged"
-						SelectionMode="Single" ItemsLayout="VerticalGrid, 4" VerticalOptions="FillAndExpand" ItemSizingStrategy="MeasureFirstItem" Background="{StaticResource BlackBrush}">
+						SelectionMode="Single" ItemsLayout="VerticalGrid, 4" ItemSizingStrategy="MeasureFirstItem" Background="{StaticResource BlackBrush}">
 
 			<CollectionView.Resources>
 				<Style TargetType="Border">
@@ -155,51 +155,57 @@
 			</CollectionView.ItemTemplate>
 		</CollectionView>
 
-		<!--BOTTOM/PLAYBACK-->
-        <Grid Grid.Row="4" VerticalOptions="End" Padding="10,2" MinimumHeightRequest="80">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="*"></ColumnDefinition>
-				<ColumnDefinition Width="*"></ColumnDefinition>
-				<ColumnDefinition Width="*"></ColumnDefinition>
-				<ColumnDefinition Width="*"></ColumnDefinition>
-				<ColumnDefinition Width="*"></ColumnDefinition>
-			</Grid.ColumnDefinitions>
+        <!--BOTTOM/PLAYBACK-->
+        <Grid Grid.Row="4" VerticalOptions="Start" Padding="10,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
 
-			<Border Grid.ColumnSpan="5" Background="{StaticResource Primary}" Opacity=".98" Margin="0" StrokeThickness="0" MinimumHeightRequest="80">
-				<Border.StrokeShape>
-					<RoundRectangle CornerRadius="10,10,0,0"></RoundRectangle>
-				</Border.StrokeShape>
-			</Border>
+            <Border Grid.ColumnSpan="5" Background="{StaticResource Primary}" Opacity=".98" Margin="0" StrokeThickness="0">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10,10,0,0"></RoundRectangle>
+                </Border.StrokeShape>
+            </Border>
 
-			<Button Grid.Column="0" Text="chevron-double-left" IsEnabled="True" Style="{StaticResource PlaybackButton}"
+            <Button Grid.Column="0" Text="step-backward" IsEnabled="True" Style="{StaticResource PlaybackButton}"
 					Command="{Binding PreviousChartCommand}">
-				<Button.Triggers>
-					<DataTrigger TargetType="Button" Binding="{Binding IsPreviousEnabled}" Value="False">
-						<Setter Property="IsEnabled" Value="False"></Setter>
-					</DataTrigger>
-				</Button.Triggers>
-			</Button>
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button" Binding="{Binding IsPreviousEnabled}" Value="False">
+                        <Setter Property="IsEnabled" Value="False"></Setter>
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
 
-			<Button Grid.Column="1" Text="undo-alt" Style="{StaticResource PlaybackButton}"
+            <Button Grid.Column="1" Text="undo-alt" Style="{StaticResource PlaybackButton}"
 					Command="{Binding ResetCommand}"></Button>
 
-            <Button Grid.Column="2" Text="pause" IsEnabled="True" Style="{StaticResource PlaybackButton}" FontSize="{OnPlatform iOS=32, WinUI=Large}"
+            <Button Grid.Column="2" Text="pause-circle" FontFamily="FA Pro Light" IsEnabled="True" Style="{StaticResource PlaybackButton}" FontSize="{OnPlatform iOS=40, WinUI=Large}"
 					Command="{Binding PauseToggleCommand}">
-				<Button.Triggers>
-					<DataTrigger TargetType="Button" Binding="{Binding ChordChart.IsPaused}" Value="True">
-						<Setter Property="Text" Value="play"></Setter>
-					</DataTrigger>
-					<DataTrigger TargetType="Button" Binding="{Binding ChordChart.IsChordChartActive}" Value="False">
-						<Setter Property="IsEnabled" Value="False"></Setter>
-					</DataTrigger>
-				</Button.Triggers>
-			</Button>
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button" Binding="{Binding ChordChart.IsPaused}" Value="True">
+                        <Setter Property="Text" Value="play-circle"></Setter>
+                        <Setter Property="FontFamily" Value="FA Pro Solid"></Setter>
+                    </DataTrigger>
+                    <DataTrigger TargetType="Button" Binding="{Binding ChordChart.IsPaused}" Value="False">
+                        <Setter Property="Text" Value="pause-circle"></Setter>
+                        <Setter Property="FontFamily" Value="FA Pro Light"></Setter>
+                    </DataTrigger>
+                    <DataTrigger TargetType="Button" Binding="{Binding ChordChart.IsChordChartActive}" Value="False">
+                        <Setter Property="IsEnabled" Value="False"></Setter>
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
 
-			<Button Grid.Column="3" Text="save" Style="{StaticResource PlaybackButton}" IsEnabled="False"
+            <Button Grid.Column="3" Text="save" Style="{StaticResource PlaybackButton}" IsEnabled="False"
 					Command="{Binding SaveChartCommand}"></Button>
 
-			<Button Grid.Column="4" Text="chevron-double-right" Style="{StaticResource PlaybackButton}"
+            <Button Grid.Column="4" Text="step-forward" Style="{StaticResource PlaybackButton}"
 					Command="{Binding GenerateChordsCommand}"></Button>
-		</Grid>
+        </Grid>
+		
 	</Grid>
 </ContentPage>
