@@ -4,7 +4,7 @@
 			 xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
 			 xmlns:sys="clr-namespace:System;assembly=mscorlib"
              x:Class="ChordGeneratorMAUI.Views.ChartSettingsPage"
-             Title="Chart Settings" Background="{StaticResource Gray100}" Padding="10">
+             Title="Chart Settings" Background="{StaticResource Black}" Padding="10">
 	<ContentPage.Resources>
 		<ResourceDictionary>
 
@@ -20,7 +20,7 @@
 			</Style>
 
 			<Style TargetType="Label">
-				<Setter Property="TextColor" Value="{StaticResource Black}"></Setter>
+				<Setter Property="TextColor" Value="{StaticResource White}"></Setter>
 				<Setter Property="Opacity" Value=".98"></Setter>
 				<Setter Property="FontSize" Value="Small"></Setter>
 				<Setter Property="FontAttributes" Value="None"></Setter>
@@ -35,7 +35,7 @@
 								<VisualState x:Name="On">
 									<VisualState.Setters>
 										<Setter Property="ThumbColor"
-													Value="{StaticResource Tertiary}" />
+													Value="{StaticResource Secondary}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Off">
@@ -70,7 +70,7 @@
 
 					<!--KEY-->
 					<VerticalStackLayout Grid.Column="0">
-						<!--<Label Text="Key" FontSize="Medium" FontAttributes="Bold" HorizontalTextAlignment="Start"></Label>-->
+						<Label Text="Key" FontSize="Medium" FontAttributes="Bold" HorizontalTextAlignment="Start" IsVisible="{OnPlatform iOS=True, Default=False}"></Label>
 
 						<Picker Title="Key" SelectedItem="{Binding ChordChart.SelectedKey}" HorizontalOptions="StartAndExpand"
 							Background="{StaticResource Primary}" TextColor="{StaticResource White}" TitleColor="{StaticResource Black}"
@@ -122,9 +122,9 @@
 
 					<!--BPM-->
 					<VerticalStackLayout Grid.Column="1" HorizontalOptions="End">
-						<!--<Label Text="BPM" FontSize="Medium" FontAttributes="Bold" HorizontalTextAlignment="Start"></Label>-->
+                        <Label Text="BPM" FontSize="Medium" FontAttributes="Bold" HorizontalTextAlignment="End" IsVisible="{OnPlatform iOS=True, Default=False}"></Label>
 
-						<Picker Title="BPM" SelectedItem="{Binding ChordChart.BPM}"
+						<Picker Title="BPM" SelectedItem="{Binding ChordChart.BPM}" HorizontalTextAlignment="End"
 							Background="{StaticResource Primary}" TextColor="{StaticResource White}" TitleColor="{StaticResource Black}"
 							FontSize="Medium" MinimumWidthRequest="150" VerticalOptions="End">
 							<Picker.ItemsSource>
@@ -165,7 +165,42 @@
 
 				</Grid>
 
-				<!--INCLUDED CHORD TYPES-->
+                <Grid Margin="0,0,0,20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <!--BAR COUNT-->
+                    <Label Text="Bar Count" FontSize="Medium" FontAttributes="Bold" HorizontalTextAlignment="Start" IsVisible="{OnPlatform iOS=True, Default=False}"></Label>
+
+                    <Picker Grid.Row="1" Grid.Column="0" Title="Bar Count" SelectedItem="{Binding ChordChart.BarCount}" MinimumWidthRequest="100"
+						Background="{StaticResource Primary}" TextColor="{StaticResource White}" TitleColor="{StaticResource Black}"
+						FontSize="Medium" HorizontalOptions="Start" VerticalOptions="Start">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type sys:Int32}">
+                                <sys:Int32>4</sys:Int32>
+                                <sys:Int32>8</sys:Int32>
+                                <sys:Int32>12</sys:Int32>
+                                <sys:Int32>16</sys:Int32>
+                                <sys:Int32>24</sys:Int32>
+                                <sys:Int32>36</sys:Int32>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+
+                    <!--TIME SIGNATURE-->
+                    <Picker Grid.Row="1" Grid.Column="1" TitleColor="{StaticResource Black}" Title="Time Signature" SelectedItem="{Binding ChordChart.TimeSignature}" IsEnabled="False" Opacity=".5"
+						Background="{StaticResource Primary}" TextColor="{StaticResource White}" HorizontalTextAlignment="End"
+						FontSize="Medium" HorizontalOptions="End">
+                    </Picker>
+                </Grid>
+
+                <!--INCLUDED CHORD TYPES-->
 				<toolkit:Expander IsExpanded="True" Margin="0,0,0,10">
 					<toolkit:Expander.Header>
 						<Border Padding="10">
@@ -186,11 +221,11 @@
 						</VerticalStackLayout>
 
 						<VerticalStackLayout Margin="40,0">
-							<Label IsEnabled="False" Text="6th" Margin="0, 10, 0, 0"></Label>
+							<Label IsEnabled="False" Text="6th" Margin="0, 10, 0, 0" Opacity=".5"></Label>
 							<Switch IsEnabled="False"></Switch>
-							<Label IsEnabled="False" Text="9th" Margin="0, 10, 0, 0"></Label>
+                            <Label IsEnabled="False" Text="9th" Margin="0, 10, 0, 0" Opacity=".5"></Label>
 							<Switch IsEnabled="False"></Switch>
-							<Label IsEnabled="False" Text="13th" Margin="0, 10, 0, 0"></Label>
+                            <Label IsEnabled="False" Text="13th" Margin="0, 10, 0, 0" Opacity=".5"></Label>
 							<Switch IsEnabled="False"></Switch>
 						</VerticalStackLayout>
 					</HorizontalStackLayout>
@@ -208,7 +243,7 @@
 				</Grid>
 
 				<!--LOOP PLAYBACK-->
-				<Grid Margin="0,0">
+				<Grid Margin="0,10,0,0">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="*"></ColumnDefinition>
 						<ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -218,34 +253,7 @@
 					<Switch Grid.Column="1" IsToggled="{Binding ChordChart.LoopPlayback}" HorizontalOptions="End" VerticalOptions="Center"></Switch>
 				</Grid>
 
-				<Grid Margin="0,10">
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="Auto"></ColumnDefinition>
-						<ColumnDefinition Width="*"></ColumnDefinition>
-					</Grid.ColumnDefinitions>
-
-					<!--BAR COUNT-->
-					<Picker Grid.Column="0" Title="Bar Count" SelectedItem="{Binding ChordChart.BarCount}" MinimumWidthRequest="100"
-						Background="{StaticResource Primary}" TextColor="{StaticResource White}" TitleColor="{StaticResource Black}"
-						FontSize="Medium" HorizontalOptions="End">
-						<Picker.ItemsSource>
-							<x:Array Type="{x:Type sys:Int32}">
-								<sys:Int32>4</sys:Int32>
-								<sys:Int32>8</sys:Int32>
-								<sys:Int32>12</sys:Int32>
-								<sys:Int32>16</sys:Int32>
-								<sys:Int32>24</sys:Int32>
-								<sys:Int32>36</sys:Int32>
-							</x:Array>
-						</Picker.ItemsSource>
-					</Picker>
-
-					<!--TIME SIGNATURE-->
-					<Picker Grid.Column="1" TitleColor="{StaticResource Black}" Title="Time Signature" SelectedItem="{Binding ChordChart.TimeSignature}" IsEnabled="False" Opacity=".5"
-						Background="{StaticResource Primary}" TextColor="{StaticResource White}" HorizontalTextAlignment="Start"
-						FontSize="Medium" HorizontalOptions="End">
-					</Picker>
-				</Grid>
+				
 
 			</VerticalStackLayout>
 

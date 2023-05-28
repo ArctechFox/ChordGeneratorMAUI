@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:v="clr-namespace:ChordGeneratorMAUI.Views"
-             x:Class="ChordGeneratorMAUI.MainPage" BackgroundColor="{StaticResource Black}" Title="Chord Star">
+             x:Class="ChordGeneratorMAUI.MainPage" BackgroundColor="{StaticResource Black}" Title="Chord Star Pro">
 
 	<Grid Padding="10">
 		<Grid.ColumnDefinitions>
@@ -10,12 +10,79 @@
 			<ColumnDefinition Width="*"></ColumnDefinition>
 		</Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height=".65*"></RowDefinition>
+            <RowDefinition Height=".35*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-		<Button Grid.Column="0" x:Name="btnWritingMode" Text="Writing Mode" Clicked="btnWritingMode_Clicked" Margin="5"></Button>
-        <Button Grid.Column="1" x:Name="btnReadingMode" Text="Reading Mode" Clicked="btnReadingMode_Clicked" Margin="5"></Button>
+        <VerticalStackLayout Grid.Row="0" Grid.ColumnSpan="2" HorizontalOptions="Center" Padding="20">
+            <Label Text="Hi, " HorizontalTextAlignment="Center" TextColor="{StaticResource Secondary}" FontSize="{OnPlatform iOS=Header, Default=Large}"></Label>
+            <!--USERNAME-->
+            <Label Text="nerd" HorizontalTextAlignment="Center" TextColor="{StaticResource Secondary}" FontSize="{OnPlatform iOS=Title, Default=Header}"></Label>
+
+            <ImageButton BackgroundColor="{StaticResource Primary}" WidthRequest="75" HeightRequest="75" Opacity=".5" CornerRadius="35" Margin="10"></ImageButton>
+        </VerticalStackLayout>
+
+        <Button Grid.Column="0" Grid.Row="1" x:Name="btnReadingMode" Text="Reading Mode" Clicked="btnReadingMode_Clicked" Margin="5" FontSize="Medium"></Button>
+		<Button Grid.Column="1" Grid.Row="1" x:Name="btnWritingMode" Text="Writing Mode" Clicked="btnWritingMode_Clicked" Margin="5" FontSize="Medium"></Button>
+        
+        <!--STATS PANEL-->
+        <Grid Grid.Row="2" Grid.ColumnSpan="2" Padding="20" Opacity=".9">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <!--background-->
+            <ImageButton Grid.ColumnSpan="8" Grid.RowSpan="8" Background="{StaticResource Tertiary}" Opacity=".05" CornerRadius="15" IsEnabled="False" Margin="-15"/>
+
+            <!--"Stats"-->
+            <Label Text="Stats" TextColor="{StaticResource Secondary}" FontAttributes="Bold" FontSize="26" Opacity="1"></Label>
+            
+            <!--TODAY-->
+            <Rectangle Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" BackgroundColor="{StaticResource Primary}" RotationX="80" Opacity=".35" Margin="10"/>
+            <Label Text="Today" Grid.Row="1" TextColor="{StaticResource Secondary}" FontAttributes="Bold" FontSize="Small" Opacity=".8" VerticalTextAlignment="Start"/>
+
+            <HorizontalStackLayout Grid.Row="1" Grid.ColumnSpan="4" VerticalOptions="Center" Padding="15,0,0,10">
+                <Label Text="Charts Read" TextColor="{StaticResource Secondary}" FontAttributes="None" FontSize="Micro" Opacity=".75" VerticalTextAlignment="Start" Margin="0,0,10,0"/>
+                <Label Text="12" TextColor="{StaticResource White}" FontAttributes="Bold" FontSize="Micro" Opacity=".9" VerticalTextAlignment="Start"/>
+
+                <Label Text="Shits Given" TextColor="{StaticResource Secondary}" FontAttributes="None" FontSize="Micro" Opacity=".75" VerticalTextAlignment="Start" Margin="20,0,10,0"/>
+                <Label Text="0" TextColor="{StaticResource White}" FontAttributes="Bold" FontSize="Micro" Opacity=".9" VerticalTextAlignment="Start"/>
+            </HorizontalStackLayout>
+
+            <!--THIS WEEK-->
+            <Rectangle Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" BackgroundColor="{StaticResource Primary}" RotationX="80" Opacity=".35" Margin="10"/>
+            <Label Text="This Week" Grid.Row="2" TextColor="{StaticResource Secondary}" FontAttributes="Bold" FontSize="Small" Opacity=".8" VerticalTextAlignment="Start"/>
+
+            <HorizontalStackLayout Grid.Row="2" Grid.ColumnSpan="4" VerticalOptions="Center" Padding="15,0,0,10">
+                <Label Text="Charts Read" TextColor="{StaticResource Secondary}" FontAttributes="None" FontSize="Micro" Opacity=".75" VerticalTextAlignment="Start" Margin="0,0,10,0"/>
+                <Label Text="204" TextColor="{StaticResource White}" FontAttributes="Bold" FontSize="Micro" Opacity=".9" VerticalTextAlignment="Start"/>
+
+                <Label Text="Shits Given" TextColor="{StaticResource Secondary}" FontAttributes="None" FontSize="Micro" Opacity=".75" VerticalTextAlignment="Start" Margin="20,0,10,0"/>
+                <Label Text="0" TextColor="{StaticResource White}" FontAttributes="Bold" FontSize="Micro" Opacity=".9" VerticalTextAlignment="Start"/>
+            </HorizontalStackLayout>
+
+            <!--ALL TIME-->
+            <Rectangle Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" BackgroundColor="{StaticResource Primary}" RotationX="80" Opacity=".35" Margin="10"/>
+            <Label Text="All Time" Grid.Row="3" TextColor="{StaticResource Secondary}" FontAttributes="Bold" FontSize="Small" Opacity=".8" VerticalTextAlignment="Start"/>
+
+            <HorizontalStackLayout Grid.Row="3" Grid.ColumnSpan="4" VerticalOptions="Center" Padding="15,0,0,10">
+                <Label Text="Charts Read" TextColor="{StaticResource Secondary}" FontAttributes="None" FontSize="Micro" Opacity=".75" VerticalTextAlignment="Start" Margin="0,0,10,0"/>
+                <Label Text="1529" TextColor="{StaticResource White}" FontAttributes="Bold" FontSize="Micro" Opacity=".9" VerticalTextAlignment="Start"/>
+
+                <Label Text="Shits Given" TextColor="{StaticResource Secondary}" FontAttributes="None" FontSize="Micro" Opacity=".75" VerticalTextAlignment="Start" Margin="20,0,10,0"/>
+                <Label Text="0" TextColor="{StaticResource White}" FontAttributes="Bold" FontSize="Micro" Opacity=".9" VerticalTextAlignment="Start"/>
+            </HorizontalStackLayout>
+
+        </Grid>
 	</Grid>
 </ContentPage>

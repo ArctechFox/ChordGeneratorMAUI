@@ -16,7 +16,7 @@ namespace ChordGeneratorMAUI.Models
     {
         public ChartModel()
         {
-            
+
         }
 
         public ChartModel(ChartModel c)
@@ -139,8 +139,8 @@ namespace ChordGeneratorMAUI.Models
         public string SelectedKey
         {
             get { return _selectedKey; }
-            set 
-            { 
+            set
+            {
                 SetProperty(ref _selectedKey, value);
 
                 #region Filter by Key
@@ -203,9 +203,9 @@ namespace ChordGeneratorMAUI.Models
         public bool IncludeChordType_All
         {
             get { return _includeChordType_All; }
-            set 
-            { 
-                SetProperty(ref _includeChordType_All, value); 
+            set
+            {
+                SetProperty(ref _includeChordType_All, value);
                 if (value)
                 {
                     IncludeChordType_Major = false;
@@ -283,14 +283,6 @@ namespace ChordGeneratorMAUI.Models
                     filteredChordsList.RemoveAll((c) => c.ChordType == ChordTypes.Minor);
                     filteredChordsList.RemoveAll((c) => c.ChordType == ChordTypes.Diminished);
                 }
-                else if (ShowDiminishedAsMinor)
-                {
-                    filteredChordsList.RemoveAll((c) => c.ChordType == ChordTypes.Diminished);
-                }
-                else
-                {
-                    filteredChordsList.RemoveAll((c) => c.ChordType == ChordTypes.Minor);
-                }
 
                 if (!IncludeChordType_7th)
                 {
@@ -299,10 +291,18 @@ namespace ChordGeneratorMAUI.Models
                     filteredChordsList.RemoveAll((c) => c.ChordType == ChordTypes.Dominant7th);
                     filteredChordsList.RemoveAll((c) => c.ChordType == ChordTypes.MinorSevenFlatFive);
                 }
-
-                FilteredChords = new ObservableCollection<ChordModel>(filteredChordsList);
             }
-            
+
+            if (ShowDiminishedAsMinor)
+            {
+                filteredChordsList.RemoveAll((c) => c.ChordType == ChordTypes.Minor);
+            }
+            else
+            {
+                filteredChordsList.RemoveAll((c) => c.ChordType == ChordTypes.Diminished);
+            }
+
+            FilteredChords = new ObservableCollection<ChordModel>(filteredChordsList);
 
             #endregion
 
@@ -315,7 +315,7 @@ namespace ChordGeneratorMAUI.Models
                     Chords.Add(new ChordModel(FilteredChords[n]));
                 }
             }
-            
+
             this.Name = _defaultChartName + chartHistoryCount.ToString();
 
             IsChordChartActive = true;
