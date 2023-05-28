@@ -20,16 +20,16 @@
 
 		<!--INFO-->
 		<HorizontalStackLayout Grid.Column="0" Grid.Row="0" Margin="5,0,0,0">
-			<Label Text="{Binding SelectedWritingModeChord.Name}" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0" HorizontalTextAlignment="Center"></Label>
-			<Label Text="arrow-right" FontFamily="FA Pro Light" TextColor="{StaticResource Black}" FontSize="Medium" Opacity=".5" Margin="10,0" HorizontalTextAlignment="Center"></Label>
-			<Label Text="{Binding SelectedChordBuilderChord.Name}" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0" HorizontalTextAlignment="Center"></Label>
+			<Label Text="{Binding SelectedWritingModeChord.Name}" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Small" Margin="0" HorizontalTextAlignment="Center"></Label>
+            <Label Text="arrow-right" FontFamily="FA Pro Light" TextColor="{StaticResource Black}" FontSize="Small" Opacity=".5" Margin="10,0" HorizontalTextAlignment="Center"></Label>
+            <Label Text="{Binding SelectedChordBuilderChord.Name}" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Small" Margin="0" HorizontalTextAlignment="Center"></Label>
 		</HorizontalStackLayout>
 		
 		<!--OPTIONS-->
 		<HorizontalStackLayout Grid.Column="1" Grid.Row="0" Margin="0,0,5,0" HorizontalOptions="End">
-			<Label Text="In Key" TextColor="{StaticResource Black}" FontSize="Micro" Opacity=".98" HorizontalTextAlignment="Center" Padding="0"></Label>
+			<Label Text="In Key" TextColor="{StaticResource Black}" FontSize="Micro" Opacity=".98" HorizontalTextAlignment="End" Padding="0"></Label>
 			<Label Text="{Binding ChordChart.SelectedKey, FallbackValue=None}" FontAttributes="Bold" TextColor="{StaticResource Black}" Padding="0" FontSize="Micro" Margin="0" HorizontalTextAlignment="Center"></Label>
-			<CheckBox IsChecked="{Binding WriteOnlyChordsInKey}" Color="{StaticResource Black}"></CheckBox>
+			<CheckBox IsChecked="{Binding WriteOnlyChordsInKey}" Color="{StaticResource Black}" Margin="0,0,10,0"></CheckBox>
 		</HorizontalStackLayout>
 
 		<!--SEARCH-->

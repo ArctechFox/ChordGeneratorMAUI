@@ -249,7 +249,7 @@
 						<ColumnDefinition Width="Auto"></ColumnDefinition>
 					</Grid.ColumnDefinitions>
 
-					<Label Grid.Column="0" Text="Loop Playback" HorizontalOptions="Start" VerticalOptions="Center"></Label>
+					<Label Grid.Column="0" Text="Loop" HorizontalOptions="Start" VerticalOptions="Center"></Label>
 					<Switch Grid.Column="1" IsToggled="{Binding ChordChart.LoopPlayback}" HorizontalOptions="End" VerticalOptions="Center"></Switch>
 				</Grid>
 
@@ -260,8 +260,8 @@
             <!--WRITING/READING MODE-->
 			<VerticalStackLayout Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center">
 				<HorizontalStackLayout>
-					<Button x:Name="btnWritingMode" Text="Writing Mode" Clicked="btnWritingMode_Clicked" Margin="2"></Button>
-                    <Button x:Name="btnReadingMode" Text="Reading Mode" Clicked="btnReadingMode_Clicked" Margin="2"></Button>
+                    <Button x:Name="btnReadingMode" Text="Reading Mode" Clicked="btnReadingMode_Clicked" Margin="2" Background="{StaticResource Primary}" TextColor="{StaticResource White}"></Button>
+					<Button x:Name="btnWritingMode" Text="Writing Mode" Clicked="btnWritingMode_Clicked" Margin="2" Background="{StaticResource Primary}" TextColor="{StaticResource White}"></Button>
 				</HorizontalStackLayout>
 			</VerticalStackLayout>
 
