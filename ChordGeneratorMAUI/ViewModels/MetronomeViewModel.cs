@@ -139,17 +139,20 @@ namespace ChordGeneratorMAUI.ViewModels
         {
             _audioPlayer_metronome_practicePad_hi = AudioManager.Current.CreatePlayer(await FileSystem.OpenAppPackageFileAsync(_metronome_practicePad_hi));
             _audioPlayer_metronome_practicePad_lo = AudioManager.Current.CreatePlayer(await FileSystem.OpenAppPackageFileAsync(_metronome_practicePad_lo));
+
+            _audioPlayer_metronome_practicePad_hi.Volume = 1;
+            _audioPlayer_metronome_practicePad_lo.Volume = 1;
         }
 
-        private void PlayClickSound(int beat)
+        private async void PlayClickSound(int beat)
         {
             if (beat == 1)
             {
-                _audioPlayer_metronome_practicePad_hi.Play();
+                await Task.Factory.StartNew(_audioPlayer_metronome_practicePad_hi.Play);
             }
             else
             {
-                _audioPlayer_metronome_practicePad_lo.Play();
+                await Task.Factory.StartNew(_audioPlayer_metronome_practicePad_lo.Play);
             }
         }
 
@@ -201,17 +204,17 @@ namespace ChordGeneratorMAUI.ViewModels
             TotalTimeElapsed += TimeSpan.FromMilliseconds(_totalTimeInterval);
         }
 
-        private void OnBeatTimerElapsed(object sender, ElapsedEventArgs e)
+        private async void OnBeatTimerElapsed(object sender, ElapsedEventArgs e)
         {
             CurrentBeat++;
             PlayClickSound(CurrentBeat);
 
-            //await Task.Factory.StartNew(() => { EventManager.Instance.EventAggregator.GetEvent<BeatElapsedEvent>().Publish(CurrentBeat); });
+            await Task.Factory.StartNew(() => { EventManager.Instance.EventAggregator.GetEvent<BeatElapsedEvent>().Publish(CurrentBeat); });
 
-            Application.Current?.Dispatcher.Dispatch(() =>
-            {
-                EventManager.Instance.EventAggregator.GetEvent<BeatElapsedEvent>().Publish(CurrentBeat);
-            });
+            //Application.Current?.Dispatcher.Dispatch(() =>
+            //{
+            //    EventManager.Instance.EventAggregator.GetEvent<BeatElapsedEvent>().Publish(CurrentBeat);
+            //});
         }
     }
 }
