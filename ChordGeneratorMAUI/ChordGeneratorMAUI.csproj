@@ -90,7 +90,7 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#4E1950" />
+    <MauiIcon Include="Resources\AppIcon\chord_star_app_icon.svg" />
 
 		<!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#4E1950" BaseSize="128,128" />
@@ -98,7 +98,8 @@
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
 		<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
-    
+
+    <MauiImage Update="Resources\Images\chord_star_app_icon.svg" BaseSize="128, 128" />
 		<MauiImage Update="Resources\Images\home.svg" BaseSize="28,28" />
 		<MauiImage Update="Resources\Images\listmusic.svg" BaseSize="28,28" />
 		<MauiImage Update="Resources\Images\tools.svg" BaseSize="28,28" />
@@ -112,6 +113,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\AppIcon\chord_star_app_icon.svg" />
 	  <None Remove="Resources\Fonts\Font Awesome 5 Brands-Regular-400.otf" />
 	  <None Remove="Resources\Fonts\Font Awesome 5 Duotone-Solid-900.otf" />
 	  <None Remove="Resources\Fonts\Font Awesome 5 Pro-Light-300.otf" />
@@ -119,6 +121,12 @@
 	  <None Remove="Resources\Fonts\Font Awesome 5 Pro-Solid-900.otf" />
 	  <None Remove="Resources\Fonts\LASSUS.TTF" />
 	  <None Remove="Resources\Fonts\MusAnalysis.otf" />
+	  <None Remove="Resources\Images\chord_star_app_icon.svg" />
+	  <None Remove="Resources\Images\star.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiIcon Include="Resources\AppIcon\chord_star_app_icon.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -164,6 +172,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Metronome.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\PurchasePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\ReadingMode.xaml">

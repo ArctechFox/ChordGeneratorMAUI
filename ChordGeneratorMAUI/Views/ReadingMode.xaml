@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:v="clr-namespace:ChordGeneratorMAUI.Views"
 			 xmlns:vm="clr-namespace:ChordGeneratorMAUI.ViewModels"
-             x:Class="ChordGeneratorMAUI.Views.ReadingMode" Background="{StaticResource Black}" Shell.TabBarIsVisible="False">
+             x:Class="ChordGeneratorMAUI.Views.ReadingMode" Background="{StaticResource Black}" Shell.TabBarIsVisible="True">
 	<ContentPage.Padding>
 		<OnPlatform x:TypeArguments="Thickness">
             <On Platform="iOS" Value="0, 35, 0, 20" />
@@ -49,7 +49,7 @@
 			<Grid>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="*"></ColumnDefinition>
-					<ColumnDefinition Width="*"></ColumnDefinition>
+					<ColumnDefinition Width="2*"></ColumnDefinition>
 					<ColumnDefinition Width="*"></ColumnDefinition>
 				</Grid.ColumnDefinitions>
 
@@ -94,22 +94,33 @@
 				<DataTemplate>
 
 					<Border MinimumHeightRequest="70" Padding="0" StrokeThickness="2">
+                        <Border.Shadow>
+                            <Shadow Offset="0,10" Brush="Black" Radius="15" Opacity="0.4"></Shadow>
+                        </Border.Shadow>
 						<Border.Style>
 							<Style TargetType="Border">
 								<Setter Property="BackgroundColor" Value="{StaticResource Black}"></Setter>
 								<Setter Property="StrokeThickness" Value="0"></Setter>
 								<Setter Property="Stroke" Value="Transparent" />
 								<Setter Property="Margin" Value="5"></Setter>
-								<Setter Property="StrokeShape">
+                                <Setter Property="StrokeShape">
 									<Setter.Value>
-										<RoundRectangle CornerRadius="10"></RoundRectangle>
+										<RoundRectangle CornerRadius="5"></RoundRectangle>
 									</Setter.Value>
 								</Setter>
 								<Style.Triggers>
 									<DataTrigger TargetType="Border" Binding="{Binding IsHighlighted}" Value="True">
-										<Setter Property="Stroke" Value="Yellow"></Setter>
-										<Setter Property="StrokeThickness" Value="4"></Setter>
-									</DataTrigger>
+										<Setter Property="Stroke" Value="{StaticResource Tertiary}"></Setter>
+										<Setter Property="StrokeThickness" Value="2"></Setter>
+                                        <Setter Property="Shadow">
+                                            <Setter.Value>
+                                                <Shadow Brush="{StaticResource Tertiary}"
+                                             Offset="0,0"
+                                             Radius="15"
+                                             Opacity="0.6" />
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
 									<DataTrigger TargetType="Border" Binding="{Binding IsHighlighted}" Value="False">
 										<Setter Property="Stroke" Value="Transparent"></Setter>
 										<Setter Property="StrokeThickness" Value="0"></Setter>

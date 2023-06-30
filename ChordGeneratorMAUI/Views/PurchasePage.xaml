@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ChordGeneratorMAUI.Views.PurchasePage" BackgroundColor="{StaticResource Black}"
+             Title="Unlock PRO">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!--LIST OF PERKS-->
+        <VerticalStackLayout Grid.Row="0">
+            <Image></Image>
+            <Label Text="Become a PRO" HorizontalOptions="Center" />
+
+            <Button Text=""></Button>
+        </VerticalStackLayout>
+
+        
+        <!--DISCLAIMER, BUTTON, AND RESTORE PURCHASE-->
+        <VerticalStackLayout Grid.Row="1" VerticalOptions="Fill">
+            <Label></Label>
+
+            <Button></Button>
+
+            <Button></Button>
+        </VerticalStackLayout>
+    </Grid>
+    
+   
+</ContentPage>

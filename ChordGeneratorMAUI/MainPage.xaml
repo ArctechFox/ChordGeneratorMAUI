@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:v="clr-namespace:ChordGeneratorMAUI.Views"
-             x:Class="ChordGeneratorMAUI.MainPage" BackgroundColor="{StaticResource Black}" Title="Chord Star Pro">
+             x:Class="ChordGeneratorMAUI.MainPage" BackgroundColor="{StaticResource Black}" Title="Chord Star">
 
 	<Grid Padding="10">
 		<Grid.ColumnDefinitions>
@@ -10,24 +10,32 @@
 			<ColumnDefinition Width="*"></ColumnDefinition>
 		</Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height=".65*"></RowDefinition>
-            <RowDefinition Height=".35*"></RowDefinition>
+            <RowDefinition Height=".15*"></RowDefinition>
+            <RowDefinition Height=".5*"></RowDefinition>
+            <RowDefinition Height=".25*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <VerticalStackLayout Grid.Row="0" Grid.ColumnSpan="2" HorizontalOptions="Center" Padding="20">
-            <Label Text="Hi, " HorizontalTextAlignment="Center" TextColor="{StaticResource Secondary}" FontSize="{OnPlatform iOS=Header, Default=Large}"></Label>
-            <!--USERNAME-->
-            <Label Text="nerd" HorizontalTextAlignment="Center" TextColor="{StaticResource Secondary}" FontSize="{OnPlatform iOS=Title, Default=Header}"></Label>
+        <Button Grid.ColumnSpan="2" Grid.Row="0" x:Name="btnPurchase" Text="Unlock PRO Features" Clicked="btnPurchase_Clicked" Margin="5" FontSize="Small" FontAttributes="Bold" BackgroundColor="{StaticResource Tertiary}"></Button>
 
-            <ImageButton BackgroundColor="{StaticResource Primary}" WidthRequest="75" HeightRequest="75" Opacity=".5" CornerRadius="35" Margin="10"></ImageButton>
-        </VerticalStackLayout>
+        <HorizontalStackLayout Grid.Row="1" Grid.ColumnSpan="2" HorizontalOptions="Fill" VerticalOptions="Center" Padding="20">
+            <!--PROFILE IMAGE-->
+            <ImageButton BackgroundColor="{StaticResource Primary}" Source="chord_star_app_icon.png" HorizontalOptions="Start" WidthRequest="128" HeightRequest="128" Opacity=".5" CornerRadius="100" Margin="25" Padding="-5"></ImageButton>
+            
+            <VerticalStackLayout VerticalOptions="Center">
+                <Label Text="Hi," HorizontalTextAlignment="Start" TextColor="{StaticResource Secondary}" FontSize="{OnPlatform iOS=Header, Default=Large}"></Label>
+                <!--USERNAME-->
+                <Label Text="nerd" HorizontalTextAlignment="Start" TextColor="{StaticResource Secondary}" FontSize="{OnPlatform iOS=Title, Default=Header}"></Label>
+            </VerticalStackLayout>
 
-        <Button Grid.Column="0" Grid.Row="1" x:Name="btnReadingMode" Text="Reading Mode" Clicked="btnReadingMode_Clicked" Margin="5" FontSize="Medium"></Button>
-		<Button Grid.Column="1" Grid.Row="1" x:Name="btnWritingMode" Text="Writing Mode" Clicked="btnWritingMode_Clicked" Margin="5" FontSize="Medium"></Button>
+        </HorizontalStackLayout>
+        
+
+        <Button Grid.Column="0" Grid.Row="2" x:Name="btnReadingMode" Text="Reading Mode" Clicked="btnReadingMode_Clicked" Margin="5" FontSize="Medium"></Button>
+		<Button Grid.Column="1" Grid.Row="2" x:Name="btnWritingMode" Text="Writing Mode" Clicked="btnWritingMode_Clicked" Margin="5" FontSize="Medium"></Button>
         
         <!--STATS PANEL-->
-        <Grid Grid.Row="2" Grid.ColumnSpan="2" Padding="20" Opacity="1">
+        <Grid Grid.Row="3" Grid.ColumnSpan="2" Padding="20" Opacity="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>

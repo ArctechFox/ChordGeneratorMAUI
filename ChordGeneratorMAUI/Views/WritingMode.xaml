@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:v="clr-namespace:ChordGeneratorMAUI.Views"
 			 xmlns:vm="clr-namespace:ChordGeneratorMAUI.ViewModels"
-             x:Class="ChordGeneratorMAUI.Views.WritingMode" Background="{StaticResource Black}" Shell.TabBarIsVisible="False">
+             x:Class="ChordGeneratorMAUI.Views.WritingMode" Background="{StaticResource Black}" Shell.TabBarIsVisible="True">
 	<ContentPage.Padding>
 		<OnPlatform x:TypeArguments="Thickness">
 			<On Platform="iOS" Value="0, 35, 0, 20" />
@@ -18,7 +18,7 @@
 				<Setter Property="Margin" Value="5"></Setter>
 				<Setter Property="StrokeShape">
 					<Setter.Value>
-						<RoundRectangle CornerRadius="10"></RoundRectangle>
+						<RoundRectangle CornerRadius="5"></RoundRectangle>
 					</Setter.Value>
 				</Setter>
 			</Style>
@@ -59,7 +59,7 @@
 			<Grid>
 				<Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
-					<ColumnDefinition Width="*"></ColumnDefinition>
+					<ColumnDefinition Width="2*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
 				</Grid.ColumnDefinitions>
 
@@ -106,9 +106,17 @@
 					<Setter Property="Stroke" Value="Gray"></Setter>
 					<Setter Property="StrokeThickness" Value="2"></Setter>
 					<Setter Property="Margin" Value="5"></Setter>
-					<Setter Property="StrokeShape">
+                    <Setter Property="Shadow">
+                        <Setter.Value>
+                            <Shadow Brush="Black"
+                                             Offset="0,10"
+                                             Radius="15"
+                                             Opacity="0.4" />
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="StrokeShape">
 						<Setter.Value>
-							<RoundRectangle CornerRadius="10"></RoundRectangle>
+							<RoundRectangle CornerRadius="5"></RoundRectangle>
 						</Setter.Value>
 					</Setter>
 
@@ -138,6 +146,9 @@
 				<DataTemplate>
 
 					<Border MinimumHeightRequest="70" Padding="0" BackgroundColor="{StaticResource Black}">
+                        <Border.Shadow>
+                            <Shadow Offset="0,10" Brush="Black" Radius="15" Opacity="0.4"></Shadow>
+                        </Border.Shadow>
 						<Border.Triggers>
 							<DataTrigger TargetType="Border" Binding="{Binding BelongsInKey}" Value="True">
 								<Setter Property="Stroke" Value="Green"></Setter>
