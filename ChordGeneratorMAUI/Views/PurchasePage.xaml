@@ -2,29 +2,77 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ChordGeneratorMAUI.Views.PurchasePage" BackgroundColor="{StaticResource Black}"
-             Title="Unlock PRO">
-    <Grid>
+             Title="Upgrade">
+    
+    <Grid Padding="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="5*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
+        
 
-        <!--LIST OF PERKS-->
-        <VerticalStackLayout Grid.Row="0">
-            <Image></Image>
-            <Label Text="Become a PRO" HorizontalOptions="Center" />
+        <!--MAIN-->
+        <Border Grid.Column="1" Grid.Row="0" BackgroundColor="{StaticResource Gray100}" Padding="10,-30,10,10" Margin="0,45,0,20" StrokeThickness="0" Opacity=".95">
+            <Border.Shadow>
+                <Shadow Offset="0,0" Brush="{StaticResource Primary}" Radius="150" Opacity="1"/>
+            </Border.Shadow>
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10"></RoundRectangle>
+            </Border.StrokeShape>
 
-            <Button Text=""></Button>
-        </VerticalStackLayout>
+            <!--STAR IMAGE-->
+            <VerticalStackLayout HorizontalOptions="Fill">
+                <Grid>
+                    <Label Text="star" FontFamily="FA Pro Solid" TextColor="Goldenrod" Opacity="1" FontSize="84" Margin="0,0,0,20" HorizontalOptions="Center" HorizontalTextAlignment="Center">
+                        <Label.Shadow>
+                            <Shadow Offset="0,5" Brush="Black" Radius="5" Opacity=".8"/>
+                        </Label.Shadow>
+                    </Label>
+
+                    <!--<ImageButton BackgroundColor="{StaticResource Primary}" Source="chord_star_app_icon.png" HorizontalOptions="Center" WidthRequest="32" HeightRequest="32" 
+                                 Opacity=".6" CornerRadius="100" Margin="0,0,0,27" Padding="0"></ImageButton>-->
+                </Grid>
+
+                <!--SLOGAN-->
+                <Label Text="BECOME A PRO," HorizontalTextAlignment="Center" FontAttributes="None" TextColor="Black" Opacity=".75" FontSize="13"/>
+                <Label Text="OUTSHINE THE STARS." HorizontalTextAlignment="Center" FontAttributes="None" TextColor="Black" Opacity=".75" FontSize="13"/>
+
+                <Label Text="Chord Star Pro" FontSize="26" HorizontalTextAlignment="Center" FontAttributes="Bold" TextColor="{StaticResource Tertiary}" Margin="0,20,0,0">
+                    <Label.Shadow>
+                        <Shadow Offset="0,0" Brush="Black" Radius="3" Opacity=".5"/>
+                    </Label.Shadow>
+                </Label>
+
+                <Label Text="Only $3.99!" HorizontalTextAlignment="Center" FontAttributes="None" TextColor="{StaticResource Black}" Margin="0,0,0,15" Opacity=".8" FontSize="15"/>
+
+                <Border StrokeThickness="1" Stroke="Black" Opacity=".1" HeightRequest="1" HorizontalOptions="Fill" Margin="0,15,0,20"></Border>
+            </VerticalStackLayout>
+        </Border>
+
 
         
         <!--DISCLAIMER, BUTTON, AND RESTORE PURCHASE-->
-        <VerticalStackLayout Grid.Row="1" VerticalOptions="Fill">
-            <Label></Label>
+        <VerticalStackLayout Grid.ColumnSpan="3" Grid.Row="1" VerticalOptions="End">
+            
+            <!--DISCLAIMER-->
+            <Label HorizontalTextAlignment="Center" HorizontalOptions="Center" FontSize="11" TextColor="White" Opacity=".6"
+                     Text="Chord Star PRO membership is a one-time purchase. No recurring subscription required."/>
 
-            <Button></Button>
+            <!--UPGRADE NOW BUTTON-->
+            <Button Text="Upgrade Now" Margin="0,10,0,50" BackgroundColor="{StaticResource Tertiary}" TextColor="White" FontAttributes="Bold">
+                <Button.Shadow>
+                    <Shadow Offset="0,0" Brush="{StaticResource Tertiary}" Radius="15" Opacity="1"/>
+                </Button.Shadow>
+            </Button>
 
-            <Button></Button>
+            <!--RESTORE PURCHASE-->
+            <Label Text="Already a Chord Star PRO member?" TextColor="White" HorizontalTextAlignment="Center" Opacity=".8"></Label>
+            <Button Text="Restore Previous Purchase →" Background="Transparent" TextColor="CornflowerBlue" BorderWidth="0"></Button>
         </VerticalStackLayout>
     </Grid>
     

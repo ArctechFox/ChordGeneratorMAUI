@@ -19,7 +19,7 @@
 			<!--<ShellContent Title="Chart Settings" Route="ChartSettings" ContentTemplate="{DataTemplate v:ChartSettingsPage}"/>-->
 		</Tab>
 
-        <Tab Title="PRO" Route="Purchase" Icon="star.png">
+        <Tab Title="Upgrade" Route="Purchase" Icon="star.png">
             <ShellContent ContentTemplate="{DataTemplate v:PurchasePage}"/>
         </Tab>
 
