@@ -122,6 +122,13 @@
 	  <None Remove="Resources\Fonts\Font Awesome 5 Pro-Solid-900.otf" />
 	  <None Remove="Resources\Fonts\LASSUS.TTF" />
 	  <None Remove="Resources\Fonts\MusAnalysis.otf" />
+	  <None Remove="Resources\Fonts\Sansation_Bold.ttf" />
+	  <None Remove="Resources\Fonts\Sansation_Bold_Italic.ttf" />
+	  <None Remove="Resources\Fonts\Sansation_Italic.ttf" />
+	  <None Remove="Resources\Fonts\Sansation_Light.ttf" />
+	  <None Remove="Resources\Fonts\Sansation_Light_Italic.ttf" />
+	  <None Remove="Resources\Fonts\Sansation_Regular.ttf" />
+	  <None Remove="Resources\Fonts\Stark.OTF" />
 	  <None Remove="Resources\Images\chord_star_app_icon.svg" />
 	  <None Remove="Resources\Images\star.svg" />
 	</ItemGroup>
