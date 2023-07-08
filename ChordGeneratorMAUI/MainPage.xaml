@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
 
         <!-- Unlock PRO Button-->
-        <Button Grid.ColumnSpan="2" Grid.Row="0" x:Name="btnPurchase" FontFamily="OpenSansRegular" Text="Unlock PRO Features" Clicked="btnPurchase_Clicked" Margin="5" FontSize="Small" FontAttributes="Bold" BackgroundColor="{StaticResource Tertiary}"></Button>
+        <Button Grid.ColumnSpan="2" Grid.Row="0" x:Name="btnPurchase" Text="Unlock PRO Features" Clicked="btnPurchase_Clicked" Margin="5" FontSize="Small" FontAttributes="Bold" BackgroundColor="{StaticResource Tertiary}"></Button>
 
         <HorizontalStackLayout Grid.Row="1" Grid.ColumnSpan="2" HorizontalOptions="Fill" VerticalOptions="Center" Padding="20">
             <!--PROFILE IMAGE-->

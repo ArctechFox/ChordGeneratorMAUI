@@ -18,9 +18,16 @@ public static class MauiProgram
             .ConfigureFonts(fonts =>
 			{
 				// Logo/title font
-				fonts.AddFont("Stark.otf", "Stark");
+				fonts.AddFont("Gila-AL4r7.otf", "Gila");
+				fonts.AddFont("GilaBold-p7Rdr.otf", "Gila Bold");
+
+				// "Pro"
+				fonts.AddFont("Cintaly-ax7v9.otf", "Cintaly");
 
 				// Main sans-serif font
+				fonts.AddFont("SalmaproMedium-0Wooo.otf", "Salmapro");
+				fonts.AddFont("SalmaproMediumnarrow-VG5v6.otf", "Salmapro Narrow");
+
 				fonts.AddFont("Sansation_Bold.ttf", "Sansation Bold");
 				fonts.AddFont("Sansation_Bold_italic.ttf", "Sansation Bold-Italic");
 				fonts.AddFont("Sansation_Italic.ttf", "Sansation Italic");
