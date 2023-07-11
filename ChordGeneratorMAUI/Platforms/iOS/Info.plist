@@ -20,6 +20,10 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-2329707705985560~7720662329</string> <- This is a test key, replace it with your APPID
+	<key>GADIsAdManagerApp</key>
+	<true/>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>

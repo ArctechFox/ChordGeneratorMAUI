@@ -146,7 +146,9 @@
 		<PackageReference Include="CommunityToolkit.Maui" Version="5.0.0" />
 		<PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="1.0.2" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+		<PackageReference Include="Plugin.InAppBilling" Version="6.7.0" />
 		<PackageReference Include="Plugin.Maui.Audio" Version="1.0.0" />
+		<PackageReference Include="Plugin.MauiMTAdmob" Version="1.0.4" />
 		<PackageReference Include="Prism.Maui" Version="8.1.273-pre" />
 	</ItemGroup>
 

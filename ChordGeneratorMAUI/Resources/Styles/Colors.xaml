@@ -4,8 +4,9 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    <Color x:Key="Primary">#4E1950</Color>
-    <Color x:Key="Secondary">#F3BCD8</Color>
+    <Color x:Key="Primary">#6531D2</Color>
+    <Color x:Key="Primary2">#9416A1</Color> 
+    <Color x:Key="Secondary">White</Color>
 	<Color x:Key="Tertiary">#C81950</Color>
     <Color x:Key="White">White</Color>
 	<Color x:Key="Black">#1A1A1A</Color>
@@ -31,9 +32,9 @@
     <SolidColorBrush x:Key="Gray900Brush" Color="{StaticResource Gray900}"/>
     <SolidColorBrush x:Key="Gray950Brush" Color="{StaticResource Gray950}"/>
 
-    <Color x:Key="Logo1">#C042D6</Color>
+    <!--<Color x:Key="Logo1">#C042D6</Color>
     <Color x:Key="Logo2">#BD05FF</Color>
-    <Color x:Key="Logo3">#140EB8</Color>
+    <Color x:Key="Logo3">#140EB8</Color>-->
 
     <Color x:Key="Yellow100Accent">#F7B548</Color>
     <Color x:Key="Yellow200Accent">#FFD590</Color>
@@ -49,10 +50,19 @@
     
     <!--GRADIENTS-->
     <LinearGradientBrush x:Key="MainGradientBrush" EndPoint="1, 3">
-        <GradientStop Color="{StaticResource Tertiary}"
+        <GradientStop Color="{StaticResource Primary}"
+                          Offset="0.0" />
+        <GradientStop Color="{StaticResource Primary2}"
+                          Offset="0.4" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="MainGradientBrush_Reverse" EndPoint="1, -3">
+        <GradientStop Color="{StaticResource Primary2}"
                           Offset="0.0" />
         <GradientStop Color="{StaticResource Primary}"
-                          Offset="0.45" />
+                          Offset="0.6" />
     </LinearGradientBrush>
+
+
 
 </ResourceDictionary>

@@ -12,6 +12,8 @@ namespace ChordGeneratorMAUI.ViewModels
 {
     public class ChartViewModel : BindableBase
     {
+        private int _deviceWidth;
+
         private ChartModel _chordChart = new ChartModel();
         public ChartModel ChordChart
         {

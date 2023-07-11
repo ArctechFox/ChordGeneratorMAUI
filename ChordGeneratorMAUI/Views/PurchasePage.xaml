@@ -121,8 +121,6 @@
             </VerticalStackLayout>
         </Border>
 
-
-
         <!--DISCLAIMER, BUTTON, AND RESTORE PURCHASE-->
         <VerticalStackLayout Grid.ColumnSpan="3" Grid.Row="1" VerticalOptions="End">
 
@@ -131,15 +129,15 @@
                      Text="Chord Star PRO membership is a one-time purchase. No recurring subscription required."/>
 
             <!--UPGRADE NOW BUTTON-->
-            <Button Text="Upgrade Now" Margin="0,10,0,30" BackgroundColor="{StaticResource Tertiary}" TextColor="White" FontAttributes="Bold" HeightRequest="50">
+            <Button Text="Upgrade Now" Clicked="PurchaseButton_Clicked" Margin="0,10,0,30" Background="{StaticResource Primary}" TextColor="White" FontAttributes="Bold" HeightRequest="50">
                 <Button.Shadow>
-                    <Shadow Offset="0,0" Brush="{StaticResource Tertiary}" Radius="15" Opacity="1"/>
+                    <Shadow Offset="0,0" Brush="{StaticResource Primary2}" Radius="15" Opacity="1"/>
                 </Button.Shadow>
             </Button>
 
             <!--RESTORE PURCHASE-->
             <Label Text="Already a Chord Star PRO member?" TextColor="White" HorizontalTextAlignment="Center" Opacity=".8"></Label>
-            <Button Text="Restore Previous Purchase →" Background="Transparent" TextColor="CornflowerBlue" BorderWidth="0"></Button>
+            <Button Text="Restore Previous Purchase →" Clicked="RestoreButton_Clicked" Background="Transparent" TextColor="CornflowerBlue" BorderWidth="0"></Button>
         </VerticalStackLayout>
     </Grid>
 

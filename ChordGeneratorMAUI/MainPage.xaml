@@ -17,23 +17,28 @@
         </Grid.RowDefinitions>
 
         <!-- Unlock PRO Button-->
-        <Button Grid.ColumnSpan="2" Grid.Row="0" x:Name="btnPurchase" Text="Unlock PRO Features" Clicked="btnPurchase_Clicked" Margin="5" FontSize="Small" FontAttributes="Bold" BackgroundColor="{StaticResource Tertiary}"></Button>
+        <Button Grid.ColumnSpan="2" Grid.Row="0" x:Name="btnPurchase" Text="Unlock PRO Features" Clicked="btnPurchase_Clicked" Margin="5" 
+                FontSize="Small" FontAttributes="Bold" Background="{StaticResource Primary2}" BorderWidth="0">
+            <Button.Shadow>
+                <Shadow Offset="0,3" Brush="{StaticResource Primary}" Radius="15" Opacity=".9"/>
+            </Button.Shadow>
+        </Button>
 
         <HorizontalStackLayout Grid.Row="1" Grid.ColumnSpan="2" HorizontalOptions="Fill" VerticalOptions="Center" Padding="20">
             <!--PROFILE IMAGE-->
-            <ImageButton BackgroundColor="{StaticResource Primary}" Source="chord_star_app_icon.png" HorizontalOptions="Start" WidthRequest="128" HeightRequest="128" Opacity=".5" CornerRadius="100" Margin="25" Padding="-5"></ImageButton>
+            <ImageButton BackgroundColor="{StaticResource Primary}" Source="chord_star_app_icon.png" HorizontalOptions="Start" WidthRequest="82" HeightRequest="82" Opacity=".5" CornerRadius="100" Margin="25" Padding="-5"></ImageButton>
             
             <VerticalStackLayout VerticalOptions="Center">
-                <Label Text="Hi," HorizontalTextAlignment="Start" TextColor="{StaticResource Secondary}" FontSize="{OnPlatform iOS=Header, Default=Large}"></Label>
+                <Label Text="Hi," HorizontalTextAlignment="Start" TextColor="{StaticResource Secondary}" FontSize="{OnPlatform iOS=Header, Default=Large}" Opacity="1"></Label>
                 <!--USERNAME-->
-                <Label Text="nerd" HorizontalTextAlignment="Start" TextColor="{StaticResource Secondary}" FontSize="{OnPlatform iOS=Title, Default=Header}"></Label>
+                <Label Text="nerd" HorizontalTextAlignment="Start" TextColor="{StaticResource Secondary}" FontSize="{OnPlatform iOS=Title, Default=Header}" Opacity="1"></Label>
             </VerticalStackLayout>
 
         </HorizontalStackLayout>
         
-
-        <Button Grid.Column="0" Grid.Row="2" x:Name="btnReadingMode" Text="Reading Mode" Clicked="btnReadingMode_Clicked" Margin="5" FontSize="Medium"></Button>
-		<Button Grid.Column="1" Grid.Row="2" x:Name="btnWritingMode" Text="Writing Mode" Clicked="btnWritingMode_Clicked" Margin="5" FontSize="Medium"></Button>
+        <!--READ/WRITE buttons-->
+        <Button Grid.Column="0" Grid.Row="2" x:Name="btnReadingMode" Text="book-open" Clicked="btnReadingMode_Clicked" Margin="5" FontSize="Large" FontFamily="FA Pro Solid"></Button>
+        <Button Grid.Column="1" Grid.Row="2" x:Name="btnWritingMode" Text="pen" Clicked="btnWritingMode_Clicked" Margin="5" FontSize="Large" FontFamily="FA Pro Solid"></Button>
         
         <!--STATS PANEL-->
         <Grid Grid.Row="3" Grid.ColumnSpan="2" Padding="20" Opacity="1">
