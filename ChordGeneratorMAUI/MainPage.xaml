@@ -1,102 +1,196 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
 			 xmlns:v="clr-namespace:ChordGeneratorMAUI.Views"
              x:Class="ChordGeneratorMAUI.MainPage" BackgroundColor="{StaticResource Black}" Title="Chord Star">
 
-	<Grid Padding="10">
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*"></ColumnDefinition>
-			<ColumnDefinition Width="*"></ColumnDefinition>
-		</Grid.ColumnDefinitions>
+    <Grid Padding="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height=".5*"></RowDefinition>
+            <RowDefinition Height=".35*"></RowDefinition>
             <RowDefinition Height=".25*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <!-- Unlock PRO Button-->
-        <Button Grid.ColumnSpan="2" Grid.Row="0" x:Name="btnPurchase" Text="Unlock PRO Features" Clicked="btnPurchase_Clicked" Margin="5" 
-                FontSize="Small" FontAttributes="Bold" Background="{StaticResource Primary2}" BorderWidth="0">
-            <Button.Shadow>
-                <Shadow Offset="0,3" Brush="{StaticResource Primary}" Radius="15" Opacity=".9"/>
-            </Button.Shadow>
-        </Button>
+        <!--Logo Text-->
+        <VerticalStackLayout Grid.Row="0" Grid.ColumnSpan="2" VerticalOptions="Center" HorizontalOptions="Start" Padding="5" Opacity=".5">
+            <HorizontalStackLayout Padding="0,0,0,0">
+                <Label Text="CHORD STAR" x:Name="lblAnimatedLogo" HorizontalTextAlignment="Center" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource Black}" FontFamily="Sansation">
+                    <Label.Shadow>
+                        <Shadow Offset="0,0" Brush="{StaticResource White}" Radius="3" Opacity="1"/>
+                    </Label.Shadow>
+                </Label>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
 
-        <HorizontalStackLayout Grid.Row="1" Grid.ColumnSpan="2" HorizontalOptions="Fill" VerticalOptions="Center" Padding="20">
+        <HorizontalStackLayout Grid.Row="1" Grid.ColumnSpan="2" HorizontalOptions="Fill" VerticalOptions="Center" Padding="10,20,0,20">
             <!--PROFILE IMAGE-->
             <ImageButton BackgroundColor="{StaticResource Primary}" Source="chord_star_app_icon.png" HorizontalOptions="Start" WidthRequest="82" HeightRequest="82" Opacity=".5" CornerRadius="100" Margin="25" Padding="-5"></ImageButton>
-            
+
             <VerticalStackLayout VerticalOptions="Center">
-                <Label Text="Hi," HorizontalTextAlignment="Start" TextColor="{StaticResource Secondary}" FontSize="{OnPlatform iOS=Header, Default=Large}" Opacity="1"></Label>
+                <Label Text="Welcome back," HorizontalTextAlignment="Start" TextColor="{StaticResource Secondary}" FontSize="{OnPlatform iOS=Header, Default=28}" Opacity="1"></Label>
                 <!--USERNAME-->
-                <Label Text="nerd" HorizontalTextAlignment="Start" TextColor="{StaticResource Secondary}" FontSize="{OnPlatform iOS=Title, Default=Header}" Opacity="1"></Label>
+                <Label Text="Jake ☻" HorizontalTextAlignment="Start" TextColor="{StaticResource Secondary}" FontSize="{OnPlatform iOS=Title, Default=34}" Opacity="1"></Label>
             </VerticalStackLayout>
 
         </HorizontalStackLayout>
-        
+
         <!--READ/WRITE buttons-->
-        <Button Grid.Column="0" Grid.Row="2" x:Name="btnReadingMode" Text="book-open" Clicked="btnReadingMode_Clicked" Margin="5" FontSize="Large" FontFamily="FA Pro Solid"></Button>
-        <Button Grid.Column="1" Grid.Row="2" x:Name="btnWritingMode" Text="pen" Clicked="btnWritingMode_Clicked" Margin="5" FontSize="Large" FontFamily="FA Pro Solid"></Button>
-        
+        <Button Grid.Column="0" Grid.Row="2" x:Name="btnReadingMode" Text="book-open" Clicked="btnReadingMode_Clicked" Margin="0,5,5,5" FontSize="Large" FontFamily="FA Pro Solid" Background="{StaticResource PrimaryToWhiteGradientBrush}"></Button>
+        <Button Grid.Column="1" Grid.Row="2" x:Name="btnWritingMode" Text="pen" Clicked="btnWritingMode_Clicked" Margin="5,5,0,5" FontSize="Large" FontFamily="FA Pro Solid" Background="{StaticResource Primary2ToWhiteGradientBrush}"></Button>
+
         <!--STATS PANEL-->
-        <Grid Grid.Row="3" Grid.ColumnSpan="2" Padding="20" Opacity="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
+        <VerticalStackLayout Grid.Row="3" Grid.ColumnSpan="2" Padding="20" Opacity="1" VerticalOptions="Start">
 
-            <!--background-->
-            <ImageButton Grid.ColumnSpan="8" Grid.RowSpan="8" Background="{StaticResource Tertiary}" Opacity=".1" CornerRadius="15" IsEnabled="False" Margin="-15"/>
+            <!-- WEEK STREAK-->
+            <Grid Margin="0,0,0,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
 
-            <!--"Stats"-->
-            <Label Text="Stats" TextColor="{StaticResource Secondary}" FontAttributes="Bold" FontSize="26" Opacity="1"></Label>
+                <!--"Streak"-->
+                <Label Text="Streak" Grid.Column="0" Grid.Row="0" TextColor="{StaticResource Secondary}" FontAttributes="Bold" FontSize="22"></Label>
+
+                <!--Streak count and fire icon-->
+                <HorizontalStackLayout Grid.Column="1" Grid.Row="0" HorizontalOptions="End">
+                    <Label Text="fire" FontFamily="FA Pro Solid" TextColor="{StaticResource Tertiary}" FontSize="20" FontAttributes="Bold,Italic">
+                        <Label.Shadow>
+                            <Shadow Offset="0,0" Brush="{StaticResource Tertiary}" Radius="10" Opacity="1"/>
+                        </Label.Shadow>
+                    </Label>
+                    <Label Text="  69" TextColor="{StaticResource Secondary}" FontSize="22" FontAttributes="Bold"></Label>
+                    <Label Text=" days" TextColor="{StaticResource Secondary}" FontSize="11" FontAttributes="None" VerticalTextAlignment="Center"></Label>
+                </HorizontalStackLayout>
+
+                <!--TODO: Add 7-day streak tracker widget-->
+                <!--  O-O-O-O-O-O-O  -->
+                <Border Grid.ColumnSpan="2" Grid.Row="1" HeightRequest="50" Margin="0,5" 
+                        IsVisible="False">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="15"></RoundRectangle>
+                    </Border.StrokeShape>
+                </Border>
+            </Grid>
+
+            <!-- TODAY -->
+            <Grid Margin="0,0,0,20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Label Text="Today" Grid.Row="0" TextColor="{StaticResource Secondary}" FontAttributes="Bold" FontSize="22"></Label>
+
+                <!--Charts Read-->
+                <Border Grid.Row="1" HeightRequest="60" Margin="0,5" Background="{StaticResource Gray900}" StrokeThickness="0">
+                    <Border.Shadow>
+                        <Shadow Offset="0,5" Brush="{StaticResource White}" Radius="3" Opacity=".2"/>
+                    </Border.Shadow>
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="15" StrokeThickness="0"></RoundRectangle>
+                    </Border.StrokeShape>
+                    
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" FontFamily="FA Pro Light" Text="check" TextColor="{StaticResource Primary2_Light}" HorizontalOptions="Center"
+                               HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="36"></Label>
+
+                        <Label Grid.Column="1" Text="Charts Read" TextColor="{StaticResource White}" HorizontalOptions="Center"
+                               HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="16"></Label>
+
+                        <Label Grid.Column="2" Text="59" TextColor="{StaticResource White}" HorizontalOptions="Center"
+                               HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="28"></Label>
+                    </Grid>
+                </Border>
+
+                <!--Time Practiced-->
+                <Border Grid.Row="2" HeightRequest="60" Margin="0,15" Background="{StaticResource Gray900}" StrokeThickness="0">
+                    <Border.Shadow>
+                        <Shadow Offset="0,5" Brush="{StaticResource White}" Radius="3" Opacity=".2"/>
+                    </Border.Shadow>
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="15" StrokeThickness="0"></RoundRectangle>
+                    </Border.StrokeShape>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" FontFamily="FA Pro Light" Text="clock" TextColor="{StaticResource Primary2_Light}" HorizontalOptions="Center"
+                               HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="30"></Label>
+
+                        <Label Grid.Column="1" Text="Time Practiced" TextColor="{StaticResource White}" HorizontalOptions="Center"
+                               HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="16"></Label>
+
+                        <VerticalStackLayout Grid.Column="2" VerticalOptions="Center">
+                            <Label Text="1 hr" TextColor="{StaticResource White}" HorizontalOptions="Center"
+                               HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="20"></Label>
+                            <Label Text="34 min" TextColor="{StaticResource White}" HorizontalOptions="Center"
+                               HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="20"></Label>
+                        </VerticalStackLayout>
+                        
+                    </Grid>
+                </Border>
+            </Grid>
             
-            <!--TODAY-->
-            <Rectangle Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" BackgroundColor="{StaticResource Primary}" RotationX="80" Opacity=".35" Margin="10"/>
-            <Label Text="Today" Grid.Row="1" TextColor="{StaticResource Secondary}" FontAttributes="Bold" FontSize="Small" Opacity=".8" VerticalTextAlignment="Start"/>
+            <!-- BADGES --><!--
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
 
-            <HorizontalStackLayout Grid.Row="1" Grid.ColumnSpan="4" VerticalOptions="Center" Padding="15,0,0,10">
-                <Label Text="Charts Read" TextColor="{StaticResource Secondary}" FontAttributes="None" FontSize="Micro" Opacity=".75" VerticalTextAlignment="Start" Margin="0,0,10,0"/>
-                <Label Text="12" TextColor="{StaticResource White}" FontAttributes="Bold" FontSize="Micro" Opacity=".9" VerticalTextAlignment="Start"/>
+                <Label Text="Badges" Grid.Row="0" TextColor="{StaticResource Secondary}" FontAttributes="Bold" FontSize="22"></Label>
 
-                <Label Text="Shits Given" TextColor="{StaticResource Secondary}" FontAttributes="None" FontSize="Micro" Opacity=".75" VerticalTextAlignment="Start" Margin="20,0,10,0"/>
-                <Label Text="0" TextColor="{StaticResource White}" FontAttributes="Bold" FontSize="Micro" Opacity=".9" VerticalTextAlignment="Start"/>
-            </HorizontalStackLayout>
+                <CollectionView Grid.Row="1" SelectionMode="None" ItemsLayout="HorizontalList" Background="Transparent" HorizontalOptions="StartAndExpand" ItemSizingStrategy="MeasureFirstItem">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            
+                            <Grid Padding="0" Margin="0,5">
+                                --><!--Badge--><!--
+                                <Label FontFamily="FA Pro Regular" Text="poo" TextColor="{StaticResource Yellow100Accent}" Opacity="1" FontSize="36" Margin="0,4" ></Label>
+                            </Grid>
+                            
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
 
-            <!--THIS WEEK-->
-            <Rectangle Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" BackgroundColor="{StaticResource Primary}" RotationX="80" Opacity=".35" Margin="10"/>
-            <Label Text="This Week" Grid.Row="2" TextColor="{StaticResource Secondary}" FontAttributes="Bold" FontSize="Small" Opacity=".8" VerticalTextAlignment="Start"/>
+                    <CollectionView.ItemsSource>
+                        <x:Array Type="{x:Type sys:String}">
+                            <sys:String>1</sys:String>
+                            <sys:String>2</sys:String>
+                            <sys:String>3</sys:String>
+                            <sys:String>4</sys:String>
+                            <sys:String>5</sys:String>
+                            <sys:String>6</sys:String>
+                            <sys:String>7</sys:String>
+                            <sys:String>8</sys:String>
+                            <sys:String>9</sys:String>
+                            <sys:String>10</sys:String>
+                        </x:Array>
+                    </CollectionView.ItemsSource>
 
-            <HorizontalStackLayout Grid.Row="2" Grid.ColumnSpan="4" VerticalOptions="Center" Padding="15,0,0,10">
-                <Label Text="Charts Read" TextColor="{StaticResource Secondary}" FontAttributes="None" FontSize="Micro" Opacity=".75" VerticalTextAlignment="Start" Margin="0,0,10,0"/>
-                <Label Text="204" TextColor="{StaticResource White}" FontAttributes="Bold" FontSize="Micro" Opacity=".9" VerticalTextAlignment="Start"/>
+                </CollectionView>
+            </Grid>-->
 
-                <Label Text="Shits Given" TextColor="{StaticResource Secondary}" FontAttributes="None" FontSize="Micro" Opacity=".75" VerticalTextAlignment="Start" Margin="20,0,10,0"/>
-                <Label Text="0" TextColor="{StaticResource White}" FontAttributes="Bold" FontSize="Micro" Opacity=".9" VerticalTextAlignment="Start"/>
-            </HorizontalStackLayout>
-
-            <!--ALL TIME-->
-            <Rectangle Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" BackgroundColor="{StaticResource Primary}" RotationX="80" Opacity=".35" Margin="10"/>
-            <Label Text="All Time" Grid.Row="3" TextColor="{StaticResource Secondary}" FontAttributes="Bold" FontSize="Small" Opacity=".8" VerticalTextAlignment="Start"/>
-
-            <HorizontalStackLayout Grid.Row="3" Grid.ColumnSpan="4" VerticalOptions="Center" Padding="15,0,0,10">
-                <Label Text="Charts Read" TextColor="{StaticResource Secondary}" FontAttributes="None" FontSize="Micro" Opacity=".75" VerticalTextAlignment="Start" Margin="0,0,10,0"/>
-                <Label Text="1529" TextColor="{StaticResource White}" FontAttributes="Bold" FontSize="Micro" Opacity=".9" VerticalTextAlignment="Start"/>
-
-                <Label Text="Shits Given" TextColor="{StaticResource Secondary}" FontAttributes="None" FontSize="Micro" Opacity=".75" VerticalTextAlignment="Start" Margin="20,0,10,0"/>
-                <Label Text="0" TextColor="{StaticResource White}" FontAttributes="Bold" FontSize="Micro" Opacity=".9" VerticalTextAlignment="Start"/>
-            </HorizontalStackLayout>
-
-        </Grid>
-	</Grid>
+        </VerticalStackLayout>
+    </Grid>
 </ContentPage>

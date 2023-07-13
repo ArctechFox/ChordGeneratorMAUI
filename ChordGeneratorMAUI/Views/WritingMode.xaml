@@ -182,7 +182,7 @@
                 </Border.StrokeShape>
             </Border>
 
-            <Button Grid.Column="0" Text="step-backward" IsEnabled="True" Style="{StaticResource PlaybackButton}"
+            <Button Grid.Column="0" Text="step-backward" IsEnabled="True" Style="{StaticResource FontIconButton}"
 					Command="{Binding PreviousChartCommand}">
                 <Button.Triggers>
                     <DataTrigger TargetType="Button" Binding="{Binding IsPreviousEnabled}" Value="False">
@@ -191,10 +191,10 @@
                 </Button.Triggers>
             </Button>
 
-            <Button Grid.Column="1" Text="undo-alt" Style="{StaticResource PlaybackButton}"
+            <Button Grid.Column="1" Text="undo-alt" Style="{StaticResource FontIconButton}"
 					Command="{Binding ResetCommand}"></Button>
 
-            <Button Grid.Column="2" Text="pause-circle" FontFamily="FA Pro Light" IsEnabled="True" Style="{StaticResource PlaybackButton}" FontSize="{OnPlatform iOS=40, WinUI=Large}"
+            <Button Grid.Column="2" Text="pause-circle" FontFamily="FA Pro Light" IsEnabled="True" Style="{StaticResource FontIconButton}" FontSize="{OnPlatform iOS=40, WinUI=Large}"
 					Command="{Binding PauseToggleCommand}">
                 <Button.Triggers>
                     <DataTrigger TargetType="Button" Binding="{Binding ChordChart.IsPaused}" Value="True">
@@ -211,10 +211,10 @@
                 </Button.Triggers>
             </Button>
 
-            <Button Grid.Column="3" Text="save" Style="{StaticResource PlaybackButton}" IsEnabled="False"
+            <Button Grid.Column="3" Text="save" Style="{StaticResource FontIconButton}" IsEnabled="False"
 					Command="{Binding SaveChartCommand}"></Button>
 
-            <Button Grid.Column="4" Text="step-forward" Style="{StaticResource PlaybackButton}"
+            <Button Grid.Column="4" Text="step-forward" Style="{StaticResource FontIconButton}"
 					Command="{Binding GenerateChordsCommand}"></Button>
         </Grid>
 		

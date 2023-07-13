@@ -123,6 +123,9 @@
 	  <None Remove="Resources\Fonts\Font Awesome 5 Pro-Solid-900.otf" />
 	  <None Remove="Resources\Fonts\Gila-AL4r7.otf" />
 	  <None Remove="Resources\Fonts\GilaBold-p7Rdr.otf" />
+	  <None Remove="Resources\Fonts\JosefinSans-Bold.ttf" />
+	  <None Remove="Resources\Fonts\JosefinSans-Light.ttf" />
+	  <None Remove="Resources\Fonts\JosefinSans-Regular.ttf" />
 	  <None Remove="Resources\Fonts\LASSUS.TTF" />
 	  <None Remove="Resources\Fonts\MusAnalysis.otf" />
 	  <None Remove="Resources\Fonts\SalmaproMedium-0Wooo.otf" />
@@ -184,6 +187,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\ChordBuilderPopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\MainSettingsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Metronome.xaml">

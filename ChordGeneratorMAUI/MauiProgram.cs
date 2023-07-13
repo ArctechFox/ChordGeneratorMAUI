@@ -32,6 +32,10 @@ public static class MauiProgram
                 fonts.AddFont("Cintaly-ax7v9.otf", "Cintaly");
 
                 // Main sans-serif font
+                fonts.AddFont("JosefinSans-Regular.ttf", "JosefinSans");
+                fonts.AddFont("JosefinSans-Bold.ttf", "JosefinSans Bold");
+                fonts.AddFont("JosefinSans-Light.ttf", "JosefinSans Light");
+
                 fonts.AddFont("SalmaproMedium-0Wooo.otf", "Salmapro");
                 fonts.AddFont("SalmaproMediumnarrow-VG5v6.otf", "Salmapro Narrow");
 

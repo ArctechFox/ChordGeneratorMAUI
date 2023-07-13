@@ -15,16 +15,16 @@
 		<Tab Title="Charts" Route="Charts" x:Name="ChartsTab" Icon="listmusic.png">
 			<ShellContent Title="Read" Route="ReadingMode" ContentTemplate="{DataTemplate v:ReadingMode}"/>
 			<ShellContent Title="Write" Route="WritingMode" ContentTemplate="{DataTemplate v:WritingMode}"/>
-			<!--<ShellContent Title="Chart Settings" Route="ChartSettings" ContentTemplate="{DataTemplate v:ChartSettingsPage}"/>-->
+			<ShellContent Title="Chart Settings" Route="ChartSettings" ContentTemplate="{DataTemplate v:ChartSettingsPage}"/>
 		</Tab>
 
         <Tab Title="Upgrade" Route="Purchase" Icon="star.png">
             <ShellContent ContentTemplate="{DataTemplate v:PurchasePage}"/>
         </Tab>
 
-        <!--<Tab Title="Settings" Route="Settings" Icon="tools.png">
-			<ShellContent ContentTemplate="{DataTemplate v:ChartSettingsPage}"/>
-		</Tab>-->
+        <Tab Title="Settings" Route="Settings" Icon="tools.png">
+			<ShellContent ContentTemplate="{DataTemplate v:MainSettingsPage}"/>
+		</Tab>
 	</TabBar>
 
 </Shell>

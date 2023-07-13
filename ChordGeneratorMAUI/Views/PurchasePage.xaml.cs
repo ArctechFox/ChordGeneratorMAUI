@@ -14,8 +14,8 @@ public partial class PurchasePage : ContentPage
         await PurchaseManager.Instance.MakePurchase();
     }
 
-    private void RestoreButton_Clicked(object sender, EventArgs e)
+    private async void RestoreButton_Clicked(object sender, EventArgs e)
     {
-        // TODO: restore purchase
+        await PurchaseManager.Instance.MakePurchase(); // Todo: is this fine?
     }
 }

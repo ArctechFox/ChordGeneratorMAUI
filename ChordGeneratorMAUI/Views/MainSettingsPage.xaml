@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ChordGeneratorMAUI.Views.MainSettingsPage"
+             Title="Settings" Background="{StaticResource Black}">
+
+    <Grid Padding="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!--USER INFO-->
+        <HorizontalStackLayout Grid.Row="0">
+
+            <!--PROFILE IMAGE-->
+            <ImageButton BackgroundColor="{StaticResource Primary}" Source="chord_star_app_icon.png" HorizontalOptions="Start" WidthRequest="50" HeightRequest="50" Opacity=".5" CornerRadius="100" Margin="0,0,15,0" Padding="-5"></ImageButton>
+
+            <!--USERNAME-->
+            <Label Text="Jake" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" TextColor="{StaticResource Secondary}" FontSize="20" Opacity="1"></Label>
+            <!--Edit Name Btn-->
+            <Button Text="pencil" Style="{StaticResource FontIconButton}" FontFamily="FA Pro Light" FontSize="14" Opacity=".3" VerticalOptions="Center" HorizontalOptions="Start"></Button>
+
+        </HorizontalStackLayout>
+
+        <!--Upgrade Button-->
+        <Button Grid.Row="1" HeightRequest="72" x:Name="btnPurchase" Margin="0,30" Background="{StaticResource MainGradientBrush_Vertical}" BorderWidth="0"/>
+
+        <!--Upgrade Text-->
+        <VerticalStackLayout Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center" Padding="16,0">
+            <HorizontalStackLayout Padding="0,5">
+                <Label Text="CHORD STAR" HorizontalTextAlignment="Center" VerticalTextAlignment="End" FontSize="20" FontAttributes="None" TextColor="{StaticResource White}"></Label>
+                <Label Text=" PRO" HorizontalTextAlignment="Center" VerticalTextAlignment="End" FontSize="13" FontAttributes="Bold" TextColor="{StaticResource Black}" Margin="0,0,0,3"/>
+            </HorizontalStackLayout>
+
+            <Label Text="UPGRADE NOW" Margin="2" HorizontalTextAlignment="Center" TextColor="{StaticResource White}" FontAttributes="None" FontSize="13"></Label>
+        </VerticalStackLayout>
+
+        <!--PROFILE-->
+        <VerticalStackLayout Grid.Row="2" >
+            <Label Text="Profile" TextColor="{StaticResource White}" FontSize="24" Margin="0,5,0,0"></Label>
+            <Button Text="Edit name" Background="{StaticResource Gray600Brush}" Margin="0,3"></Button>
+            <Button Text="Change profile picture" Background="{StaticResource Gray600Brush}" Margin="0,3"></Button>
+            <Button Text="Change banner" Background="{StaticResource Gray600Brush}" Margin="0,3"></Button>
+            <Button Text="Change theme" Background="{StaticResource Gray600Brush}" Margin="0,3"></Button>
+        </VerticalStackLayout>
+
+        <!--ABOUT-->
+        <VerticalStackLayout Grid.Row="3" Margin="0,20,0,0">
+            <Label Text="About" TextColor="{StaticResource White}" FontSize="24" Margin="0,5,0,0"></Label>
+            <Button Text="FAQ" Background="{StaticResource Gray600Brush}" Margin="0,3"></Button>
+            <Button Text="Leave a review" Background="{StaticResource Gray600Brush}" Margin="0,3"></Button>
+            <Button Text="Contact us" Background="{StaticResource Gray600Brush}" Margin="0,3"></Button>
+        </VerticalStackLayout>
+
+    </Grid>
+</ContentPage>
