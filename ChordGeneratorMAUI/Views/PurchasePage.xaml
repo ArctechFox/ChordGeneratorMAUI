@@ -7,133 +7,111 @@
     <Grid Padding="20">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="5*"></ColumnDefinition>
+            <ColumnDefinition Width="33*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
 
-
         <!--MAIN-->
-        <Border Grid.Column="1" Grid.Row="0" BackgroundColor="{StaticResource Black}" Padding="10,10,10,10" Margin="0,25,0,10" Stroke="{StaticResource Black}" StrokeThickness="0" Opacity="1">
+        <Border Grid.Column="1" Grid.Row="0" BackgroundColor="{StaticResource Black}" Padding="10,30,10,10" Margin="0,10,0,10" Stroke="{StaticResource Black}" StrokeThickness="0" Opacity="1">
             <Border.Shadow>
-                <Shadow Offset="0,0" Brush="{StaticResource Primary}" Radius="100" Opacity="1"/>
+                <Shadow Offset="0,-175" Brush="{StaticResource Primary}" Radius="250" Opacity="1"/>
             </Border.Shadow>
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="10"></RoundRectangle>
             </Border.StrokeShape>
 
-            <!--STAR IMAGE-->
             <VerticalStackLayout HorizontalOptions="Fill">
-                <!--<Grid>
-                    <Label Text="star" FontFamily="FA Pro Solid" TextColor="Goldenrod" Opacity="1" FontSize="64" HorizontalOptions="Center" HorizontalTextAlignment="Center">
-                        <Label.Shadow>
-                            <Shadow Offset="0,5" Brush="Black" Radius="5" Opacity=".8"/>
-                        </Label.Shadow>
-                    </Label>
-
-                    --><!--<ImageButton BackgroundColor="{StaticResource Primary}" Source="chord_star_app_icon.png" HorizontalOptions="Center" WidthRequest="32" HeightRequest="32" 
-                                 Opacity=".6" CornerRadius="100" Margin="0,0,0,27" Padding="0"></ImageButton>--><!--
-                </Grid>-->
 
                 <!--TITLE-->
-                <HorizontalStackLayout Margin="0,20" HorizontalOptions="Center" Padding="15,0,0,0">
-                    
+                <HorizontalStackLayout Margin="0,0" HorizontalOptions="Center" Padding="15,0,0,0">
+
                     <!--"Chord Star"-->
-                    <Label Text="CHORD STAR" FontFamily="Gila" FontSize="28" HorizontalTextAlignment="Center" FontAttributes="None" TextColor="{StaticResource Tertiary}">
+                    <Label Text="CHORD STAR" CharacterSpacing="1.5" FontFamily="Gila" FontSize="30" HorizontalTextAlignment="Center" FontAttributes="None" TextColor="{StaticResource White}">
                         <Label.Shadow>
-                            <Shadow Offset="0,2" Brush="{StaticResource MainGradientBrush}" Radius="1" Opacity=".5"/>
+                            <Shadow Offset="0,2" Brush="Black" Radius="1" Opacity="1"/>
                         </Label.Shadow>
                     </Label>
 
                     <!--"PRO"-->
-                    <Grid Margin="5,0">
-                        <!--<Border StrokeThickness="0" Background="{StaticResource MainGradientBrush}" WidthRequest="50">
-                            <Border.StrokeShape>
-                                <RoundRectangle CornerRadius="30"></RoundRectangle>
-                            </Border.StrokeShape>
-                            <Border.Shadow>
-                                <Shadow Offset="0,2" Brush="{StaticResource Black}" Radius="3" Opacity="1"/>
-                            </Border.Shadow>
-                        </Border>-->
-
-                        <Label Text="Pro" FontFamily="Cintaly" FontSize="38" Padding="0" Opacity=".9" FontAttributes="Italic" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" TextColor="{StaticResource Secondary}">
-                            <Label.Shadow>
-                                <Shadow Offset="0,0" Brush="{StaticResource Secondary}" Radius="3" Opacity="1"/>
-                            </Label.Shadow>
-                        </Label>
-                    </Grid>
+                    <Label Text="PRO" CharacterSpacing="0" FontFamily="Sansation" FontSize="21" Margin="10,0,0,3" FontAttributes="Bold" VerticalTextAlignment="End" HorizontalTextAlignment="Start" TextColor="{StaticResource HotMagenta}">
+                        <Label.Shadow>
+                            <Shadow Offset="0,4" Brush="Black" Radius="3" Opacity="1"/>
+                        </Label.Shadow>
+                    </Label>
                 </HorizontalStackLayout>
-                
+
+                <!--UPGRADE NOW BUTTON-->
+                <Grid Margin="0,10">
+                    <Button HeightRequest="72" x:Name="btnPurchase" Margin="15,30" Background="{StaticResource MainGradientBrush_Vertical}" BorderWidth="0"/>
+
+                    <!--Upgrade Text-->
+                    <VerticalStackLayout Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center" Padding="16,0">
+                        <Label Text="UPGRADE NOW" Margin="2" HorizontalTextAlignment="Center" TextColor="{StaticResource White}" FontSize="22" FontFamily="JosefinSans Bold"></Label>
+                        <Label Text="One time payment of $3.99" Margin="0,4,0,0" HorizontalTextAlignment="Center" TextColor="{StaticResource White}" FontFamily="JosefinSans" FontSize="14"></Label>
+                    </VerticalStackLayout>
+                </Grid>
+
                 <!--SLOGAN-->
-                <VerticalStackLayout Margin="0,0">
-                    <Label Text="BECOME A PRO," FontFamily="Salmapro" HorizontalTextAlignment="Center" FontAttributes="None" TextColor="{StaticResource Secondary}" Opacity=".9" FontSize="21"/>
-                    <Label Text="OUTSHINE THE STARS." FontFamily="Salmapro Narrow" HorizontalTextAlignment="Center" FontAttributes="Bold" TextColor="{StaticResource Secondary}" Opacity=".9" FontSize="26"/>
-                    <Label Text="Only $3.99" FontFamily="Salmapro" HorizontalTextAlignment="Center" Margin="0,10,0,0" FontAttributes="Italic" TextColor="{StaticResource Secondary}" Opacity="1" FontSize="15"/>
+                <VerticalStackLayout Margin="0,0,0,10">
+                    <Label Text="Become a pro." CharacterSpacing="0.5" HorizontalTextAlignment="Center" FontAttributes="None" FontFamily="JosefinSans Light" TextColor="{StaticResource White}" FontSize="24"/>
+                    <Label Text="Outshine the stars." CharacterSpacing="0.5" HorizontalTextAlignment="Center" FontAttributes="Bold" FontFamily="JosefinSans Light" TextColor="{StaticResource White}" FontSize="26" Margin="0,4"/>
                 </VerticalStackLayout>
 
                 <Border StrokeThickness="1" Stroke="{StaticResource White}" Opacity=".1" HeightRequest="3" HorizontalOptions="Fill" VerticalOptions="Center" Margin="0,10,0,20"></Border>
 
                 <!--PERKS LIST-->
-                <Grid Padding="10,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
+                <ScrollView VerticalOptions="FillAndExpand" Orientation="Vertical">
 
-                    <VerticalStackLayout Grid.Column="0" HorizontalOptions="Start">
-                        
-                        <!--NO ADS-->
-                        <HorizontalStackLayout Margin="0,0,0,10">
-                            <Label FontFamily="FA Pro Solid" Text="check-circle" TextColor="Green" FontSize="Small" Opacity="1"/>
-                            <Label Text="No ads, ever!" Margin="10,0" TextColor="{StaticResource Secondary}"></Label>
-                        </HorizontalStackLayout>
+                    <Grid Padding="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
 
-                        <!--UNLOCKED BPM-->
-                        <HorizontalStackLayout Margin="0,10">
-                            <Label FontFamily="FA Pro Solid" Text="check-circle" TextColor="Green" FontSize="Small" Opacity=".75"></Label>
-                            <Label Text="BPM" Margin="10,0" TextColor="{StaticResource Secondary}"></Label>
-                        </HorizontalStackLayout>
+                        <VerticalStackLayout Grid.Column="0" HorizontalOptions="Start" VerticalOptions="FillAndExpand">
 
-                        <!--TIME SIGNATURES-->
-                        <HorizontalStackLayout Margin="0,10">
-                            <Label FontFamily="FA Pro Solid" Text="check-circle" TextColor="Green" FontSize="Small" Opacity=".75"></Label>
-                            <Label Text="Time Signatures" Margin="10,0" TextColor="{StaticResource Secondary}"></Label>
-                        </HorizontalStackLayout>
+                            <!--NO ADS-->
+                            <HorizontalStackLayout Margin="0,0,0,10">
+                                <Label FontFamily="FA Pro Solid" Text="star" TextColor="{StaticResource HotMagenta}" FontSize="Small"/>
+                                <Label Text="No more ads (ever)!" Margin="10,0" TextColor="{StaticResource White}" VerticalTextAlignment="Center" FontAttributes="Bold" FontSize="Small" FontFamily="JosefinSans Light"></Label>
+                            </HorizontalStackLayout>
 
-                        <!-- CHORD TYPES: 6th, 9th, 13th-->
-                        <HorizontalStackLayout Margin="0,10">
-                            <Label FontFamily="FA Pro Solid" Text="check-circle" TextColor="Green" FontSize="Small" Opacity=".75"></Label>
-                            <Label Text="More Chord Types (6th, 9th, 13th)" Margin="10,0" TextColor="{StaticResource Secondary}"></Label>
-                        </HorizontalStackLayout>
-                    </VerticalStackLayout>
+                            <HorizontalStackLayout Margin="0,10">
+                                <Label FontFamily="FA Pro Solid" Text="star" TextColor="{StaticResource HotMagenta}" FontSize="Small"></Label>
+                                <Label Text="New chord types" Margin="10,0" TextColor="{StaticResource White}" VerticalTextAlignment="Center" FontAttributes="Bold" FontSize="Small" FontFamily="JosefinSans Light"></Label>
+                            </HorizontalStackLayout>
 
-                    <VerticalStackLayout Grid.Column="1" HorizontalOptions="Start">
+                            <HorizontalStackLayout Margin="0,10">
+                                <Label FontFamily="FA Pro Solid" Text="star" TextColor="{StaticResource HotMagenta}" FontSize="Small"></Label>
+                                <Label Text="Save unlimited charts" Margin="10,0" TextColor="{StaticResource White}" VerticalTextAlignment="Center" FontAttributes="Bold" FontSize="Small" FontFamily="JosefinSans Light"></Label>
+                            </HorizontalStackLayout>
 
-                    </VerticalStackLayout>
-                </Grid>
+                            <HorizontalStackLayout Margin="0,10">
+                                <Label FontFamily="FA Pro Solid" Text="star" TextColor="{StaticResource HotMagenta}" FontSize="Small"></Label>
+                                <Label Text="More BPM and time signatures" Margin="10,0" TextColor="{StaticResource White}" VerticalTextAlignment="Center" FontAttributes="Bold" FontSize="Small" FontFamily="JosefinSans Light"></Label>
+                            </HorizontalStackLayout>
 
-                <!--$$$ PRICE $$$-->
-                <!--<Label Text="Only $3.99!" VerticalOptions="End" HorizontalTextAlignment="Center" FontAttributes="None" TextColor="{StaticResource Black}" Margin="0,20,0,15" Opacity=".8" FontSize="15"/>-->
+                            <HorizontalStackLayout Margin="0,10">
+                                <Label FontFamily="FA Pro Solid" Text="star" TextColor="{StaticResource HotMagenta}" FontSize="Small"></Label>
+                                <Label Text="Unlock themes and customization" Margin="10,0" TextColor="{StaticResource White}" VerticalTextAlignment="Center" FontAttributes="Bold" FontSize="Small" FontFamily="JosefinSans Light"></Label>
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+
+                    </Grid>
+                </ScrollView>
 
             </VerticalStackLayout>
         </Border>
 
         <!--DISCLAIMER, BUTTON, AND RESTORE PURCHASE-->
-        <VerticalStackLayout Grid.ColumnSpan="3" Grid.Row="1" VerticalOptions="End">
+        <VerticalStackLayout Grid.ColumnSpan="3" Grid.Row="1" VerticalOptions="End" Background="{StaticResource Black}">
 
             <!--DISCLAIMER-->
-            <Label HorizontalTextAlignment="Center" HorizontalOptions="Center" FontSize="11" TextColor="White" Opacity=".6"
-                     Text="Chord Star PRO membership is a one-time purchase. No recurring subscription required."/>
-
-            <!--UPGRADE NOW BUTTON-->
-            <Button Text="Upgrade Now" Clicked="PurchaseButton_Clicked" Margin="0,10,0,30" Background="{StaticResource Primary}" TextColor="White" FontAttributes="Bold" HeightRequest="50">
-                <Button.Shadow>
-                    <Shadow Offset="0,0" Brush="{StaticResource Primary2}" Radius="15" Opacity="1"/>
-                </Button.Shadow>
-            </Button>
+            <Label HorizontalTextAlignment="Center" HorizontalOptions="Center" FontSize="11" TextColor="White" Opacity=".6" Margin="0,10"
+                     Text="No subscription required."/>
 
             <!--RESTORE PURCHASE-->
             <Label Text="Already a Chord Star PRO member?" TextColor="White" HorizontalTextAlignment="Center" Opacity=".8"></Label>

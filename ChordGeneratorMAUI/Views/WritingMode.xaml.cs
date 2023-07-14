@@ -32,4 +32,9 @@ public partial class WritingMode : ContentPage
             await this.ShowPopupAsync(popup);
         }
     }
+
+    private async void btnRead_Clicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("//Charts/ReadingMode");
+    }
 }

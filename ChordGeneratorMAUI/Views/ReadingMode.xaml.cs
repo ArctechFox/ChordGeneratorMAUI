@@ -16,4 +16,9 @@ public partial class ReadingMode : ContentPage
     {
         await Navigation.PushAsync(new ChartSettingsPage() { BindingContext = this.BindingContext });
     }
+
+    private async void btnWrite_Clicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("//Charts/WritingMode");
+    }
 }

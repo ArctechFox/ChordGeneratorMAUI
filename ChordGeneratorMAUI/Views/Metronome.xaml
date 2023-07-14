@@ -39,7 +39,7 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="25"></RowDefinition>
+                <RowDefinition Height="15"></RowDefinition>
             </Grid.RowDefinitions>
 
             <RoundRectangle Grid.Column="0" Fill="{StaticResource Gray500Brush}">

@@ -36,9 +36,8 @@
     <SolidColorBrush x:Key="Gray900Brush" Color="{StaticResource Gray900}"/>
     <SolidColorBrush x:Key="Gray950Brush" Color="{StaticResource Gray950}"/>
 
-    <!--<Color x:Key="Logo1">#C042D6</Color>
-    <Color x:Key="Logo2">#BD05FF</Color>
-    <Color x:Key="Logo3">#140EB8</Color>-->
+    <Color x:Key="HotMagenta">#C042D6</Color>
+    <Color x:Key="ColdNavy">#140EB8</Color>
 
     <Color x:Key="Yellow100Accent">#F7B548</Color>
     <Color x:Key="Yellow200Accent">#FFD590</Color>
@@ -88,6 +87,15 @@
                           Offset="0.0" />
         <GradientStop Color="{StaticResource Primary2}"
                           Offset="0.2" />
+    </LinearGradientBrush>
+    
+    
+
+    <LinearGradientBrush x:Key="LightToDarkGrayVertical" EndPoint="0, 3">
+        <GradientStop Color="{StaticResource Gray600}"
+                          Offset="0.0" />
+        <GradientStop Color="{StaticResource Gray900}"
+                          Offset="0.5" />
     </LinearGradientBrush>
 
 

@@ -80,11 +80,14 @@
 				<ColumnDefinition Width="50"></ColumnDefinition>
 			</Grid.ColumnDefinitions>
 
-			<Entry Grid.Column="1" Text="{Binding ChordChart.Name}" TextColor="White" PlaceholderColor="Gray" Placeholder="Chart Name"
+            <!--TODO:-->
+            <Button x:Name="btnWrite" Grid.Column="0" Background="{StaticResource Primary2ToWhiteGradientBrush}" FontFamily="FA Pro Solid" Text="pencil" Clicked="btnWrite_Clicked" Opacity=".9"></Button>
+
+            <Entry Grid.Column="1" Text="{Binding ChordChart.Name}" TextColor="White" PlaceholderColor="Gray" Placeholder="Chart Name"
 						FontSize="Small" FontAttributes="Bold" HorizontalOptions="Center" HorizontalTextAlignment="Center" Margin="5,0"></Entry>
 
 			<!--TODO:-->
-			<!--<Button Grid.Column="2" FontFamily="FA Pro Solid" Text="trash"></Button>-->
+			<Button Grid.Column="2" FontFamily="FA Pro Solid" Text="trash" Background="Transparent" BorderWidth="2" BorderColor="{StaticResource Tertiary}" Opacity=".9"></Button>
 		</Grid>
 
 		<!--METRONOME-->
@@ -98,44 +101,40 @@
 			<CollectionView.ItemTemplate>
 				<DataTemplate>
 
-					<Border MinimumHeightRequest="70" Padding="0" StrokeThickness="2">
-                        <Border.Shadow>
-                            <Shadow Offset="0,10" Brush="Black" Radius="15" Opacity="0.4"></Shadow>
-                        </Border.Shadow>
-						<Border.Style>
-							<Style TargetType="Border">
-								<Setter Property="BackgroundColor" Value="{StaticResource Black}"></Setter>
-								<Setter Property="StrokeThickness" Value="0"></Setter>
-								<Setter Property="Stroke" Value="Transparent" />
-								<Setter Property="Margin" Value="5"></Setter>
-                                <Setter Property="StrokeShape">
-									<Setter.Value>
-										<RoundRectangle CornerRadius="5"></RoundRectangle>
-									</Setter.Value>
-								</Setter>
-								<Style.Triggers>
+                    <Border MinimumHeightRequest="55" BackgroundColor="{StaticResource Black}" Margin="5,0,5,30">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="10"></RoundRectangle>
+                        </Border.StrokeShape>
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Style.Triggers>
 									<DataTrigger TargetType="Border" Binding="{Binding IsHighlighted}" Value="True">
-										<Setter Property="Stroke" Value="{StaticResource Primary}"></Setter>
+										<Setter Property="Stroke" Value="{StaticResource Primary2}"></Setter>
 										<Setter Property="StrokeThickness" Value="2"></Setter>
                                         <Setter Property="Shadow">
                                             <Setter.Value>
-                                                <Shadow Brush="{StaticResource Tertiary}"
-                                             Offset="0,0"
-                                             Radius="15"
-                                             Opacity="0.6" />
+                                                <Shadow Brush="{StaticResource HotMagenta}"
+                                             Offset="0,5"
+                                             Radius="10"
+                                             Opacity="1" />
                                             </Setter.Value>
                                         </Setter>
                                     </DataTrigger>
 									<DataTrigger TargetType="Border" Binding="{Binding IsHighlighted}" Value="False">
 										<Setter Property="Stroke" Value="Transparent"></Setter>
 										<Setter Property="StrokeThickness" Value="0"></Setter>
+                                        <Setter Property="Shadow">
+                                            <Setter.Value>
+                                                <Shadow Opacity="0" />
+                                            </Setter.Value>
+                                        </Setter>
 									</DataTrigger>
 								</Style.Triggers>
 							</Style>
 						</Border.Style>
 
 						<!--CHORD NAME-->
-						<Label FontSize="Medium" Margin="4" FontAttributes="None" HorizontalOptions="Center" Text="{Binding Name}"></Label>
+						<Label FontSize="20" Margin="4" FontFamily="Sansation" FontAttributes="None" HorizontalOptions="Center" Text="{Binding Name}"></Label>
 					</Border>
 
 				</DataTemplate>
@@ -143,7 +142,7 @@
 		</CollectionView>
 
 		<!--BOTTOM/PLAYBACK-->
-		<Grid Grid.Row="5" VerticalOptions="Start" Padding="10,0">
+		<Grid Grid.Row="5" VerticalOptions="Start" Padding="0">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*"></ColumnDefinition>
 				<ColumnDefinition Width="*"></ColumnDefinition>
@@ -152,9 +151,9 @@
 				<ColumnDefinition Width="*"></ColumnDefinition>
 			</Grid.ColumnDefinitions>
 
-			<Border Grid.ColumnSpan="5" Background="{StaticResource Primary}" Opacity=".98" Margin="0" StrokeThickness="0">
+			<Border Grid.ColumnSpan="5" Background="{StaticResource MainGradientBrush_Vertical}" Opacity=".98" Margin="0" StrokeThickness="0">
 				<Border.StrokeShape>
-					<RoundRectangle CornerRadius="10,10,0,0"></RoundRectangle>
+					<RoundRectangle CornerRadius="0"></RoundRectangle>
 				</Border.StrokeShape>
 			</Border>
 
@@ -170,7 +169,7 @@
 			<Button Grid.Column="1" Text="undo-alt" Style="{StaticResource FontIconButton}"
 					Command="{Binding ResetCommand}"></Button>
 
-            <Button Grid.Column="2" Text="pause-circle" IsEnabled="True" Style="{StaticResource FontIconButton}" FontSize="{OnPlatform iOS=40, WinUI=Large}"
+            <Button Grid.Column="2" Text="pause-circle" IsEnabled="True" Style="{StaticResource FontIconButton}" FontSize="{OnPlatform iOS=40, WinUI=50}"
 					Command="{Binding PauseToggleCommand}">
 				<Button.Triggers>
 					<DataTrigger TargetType="Button" Binding="{Binding ChordChart.IsPaused}" Value="True">
