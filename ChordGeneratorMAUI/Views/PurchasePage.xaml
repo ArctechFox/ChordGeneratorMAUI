@@ -18,7 +18,7 @@
         <!--MAIN-->
         <Border Grid.Column="1" Grid.Row="0" BackgroundColor="{StaticResource Black}" Padding="10,30,10,10" Margin="0,10,0,10" Stroke="{StaticResource Black}" StrokeThickness="0" Opacity="1">
             <Border.Shadow>
-                <Shadow Offset="0,-175" Brush="{StaticResource Primary}" Radius="250" Opacity="1"/>
+                <Shadow Offset="0,-20" Brush="{StaticResource Primary}" Radius="100" Opacity="1"/>
             </Border.Shadow>
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="10"></RoundRectangle>
@@ -107,7 +107,7 @@
         </Border>
 
         <!--DISCLAIMER, BUTTON, AND RESTORE PURCHASE-->
-        <VerticalStackLayout Grid.ColumnSpan="3" Grid.Row="1" VerticalOptions="End" Background="{StaticResource Black}">
+        <VerticalStackLayout Grid.ColumnSpan="3" Grid.Row="1" VerticalOptions="End" Background="Transparent">
 
             <!--DISCLAIMER-->
             <Label HorizontalTextAlignment="Center" HorizontalOptions="Center" FontSize="11" TextColor="White" Opacity=".6" Margin="0,10"

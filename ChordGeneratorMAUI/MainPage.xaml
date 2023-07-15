@@ -59,7 +59,7 @@
                 </Grid.RowDefinitions>
 
                 <!--"Streak"-->
-                <Label Text="Streak" Grid.Column="0" Grid.Row="0" TextColor="{StaticResource Secondary}" FontAttributes="Bold" FontSize="22"></Label>
+                <Label Text="Streak" Grid.Column="0" Grid.Row="0" TextColor="{StaticResource Secondary}" FontAttributes="Bold" FontSize="22" HorizontalTextAlignment="Start"></Label>
 
                 <!--Streak count and fire icon-->
                 <HorizontalStackLayout Grid.Column="1" Grid.Row="0" HorizontalOptions="End">
@@ -90,7 +90,7 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <Label Text="Today" Grid.Row="0" TextColor="{StaticResource Secondary}" FontAttributes="Bold" FontSize="22"></Label>
+                <Label Text="Today" Grid.Row="0" TextColor="{StaticResource Secondary}" FontAttributes="Bold" FontSize="22" HorizontalTextAlignment="Start"></Label>
 
                 <!--Charts Read-->
                 <Border Grid.Row="1" HeightRequest="60" Margin="0,5" Background="{StaticResource Gray900}" StrokeThickness="0">

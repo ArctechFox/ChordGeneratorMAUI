@@ -41,7 +41,7 @@
 
         <!--PROFILE-->
         <VerticalStackLayout Grid.Row="2" >
-            <Label Text="Profile" TextColor="{StaticResource White}" FontSize="24" Margin="0,5,0,0"></Label>
+            <Label Text="Profile" TextColor="{StaticResource White}" FontSize="24" Margin="0,5,0,0" HorizontalTextAlignment="Start"></Label>
             <Button Text="Edit name" Background="{StaticResource Gray600Brush}" Margin="0,3"></Button>
             <Button Text="Change profile picture" Background="{StaticResource Gray600Brush}" Margin="0,3"></Button>
             <Button Text="Change banner" Background="{StaticResource Gray600Brush}" Margin="0,3"></Button>
@@ -50,7 +50,7 @@
 
         <!--ABOUT-->
         <VerticalStackLayout Grid.Row="3" Margin="0,20,0,0">
-            <Label Text="About" TextColor="{StaticResource White}" FontSize="24" Margin="0,5,0,0"></Label>
+            <Label Text="About" TextColor="{StaticResource White}" FontSize="24" Margin="0,5,0,0" HorizontalTextAlignment="Start"></Label>
             <Button Text="FAQ" Background="{StaticResource Gray600Brush}" Margin="0,3"></Button>
             <Button Text="Leave a review" Background="{StaticResource Gray600Brush}" Margin="0,3"></Button>
             <Button Text="Contact us" Background="{StaticResource Gray600Brush}" Margin="0,3"></Button>

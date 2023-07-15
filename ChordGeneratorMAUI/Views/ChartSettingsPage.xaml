@@ -258,12 +258,12 @@
 			</VerticalStackLayout>
 
             <!--WRITING/READING MODE-->
-			<VerticalStackLayout Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center">
+			<!--<VerticalStackLayout Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center">
 				<HorizontalStackLayout>
-                    <Button x:Name="btnReadingMode" Text="Reading Mode" Clicked="btnReadingMode_Clicked" Margin="2" Background="{StaticResource Primary}" TextColor="{StaticResource White}"></Button>
-					<Button x:Name="btnWritingMode" Text="Writing Mode" Clicked="btnWritingMode_Clicked" Margin="2" Background="{StaticResource Primary}" TextColor="{StaticResource White}"></Button>
+                    <Button x:Name="btnReadingMode" Text="Reading Mode" Clicked="btnReadingMode_Clicked" Margin="2"></Button>
+					<Button x:Name="btnWritingMode" Text="Writing Mode" Clicked="btnWritingMode_Clicked" Margin="2"></Button>
 				</HorizontalStackLayout>
-			</VerticalStackLayout>
+			</VerticalStackLayout>-->
 
 		</Grid>
 	</ScrollView>

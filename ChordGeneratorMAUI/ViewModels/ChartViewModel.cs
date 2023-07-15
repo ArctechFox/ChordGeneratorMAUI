@@ -12,7 +12,25 @@ namespace ChordGeneratorMAUI.ViewModels
 {
     public class ChartViewModel : BindableBase
     {
-        private int _deviceWidth;
+        //private int _deviceWidth;
+
+        private bool _isPracticeMode = true;
+        public bool IsPracticeMode
+        {
+            get { return _isPracticeMode; }
+            set
+            {
+                SetProperty(ref _isPracticeMode, value);
+                ActiveModeText = _isPracticeMode ? "Practice" : "Compose";
+            }
+        }
+
+        private string _activeModeText = "Practice";
+        public string ActiveModeText
+        {
+            get { return _activeModeText; }
+            set { SetProperty(ref _activeModeText, value); }
+        }
 
         private ChartModel _chordChart = new ChartModel();
         public ChartModel ChordChart
@@ -28,11 +46,11 @@ namespace ChordGeneratorMAUI.ViewModels
             set { SetProperty(ref _chartHistory, value); }
         }
 
-        private int _readingModeActiveChordIndex = -1;
-        public int ReadingModeActiveChordIndex
+        private int _practiceModeActiveChordIndex = -1;
+        public int PracticeModeActiveChordIndex
         {
-            get { return _readingModeActiveChordIndex; }
-            set { SetProperty(ref _readingModeActiveChordIndex, value); }
+            get { return _practiceModeActiveChordIndex; }
+            set { SetProperty(ref _practiceModeActiveChordIndex, value); }
         }
 
         private bool _isPreviousEnabled = false;
@@ -159,6 +177,7 @@ namespace ChordGeneratorMAUI.ViewModels
 
         // /////////////////////////////////////////////////////////////////////////////////////////
 
+        public DelegateCommand TogglePracticeComposeModeCommand { get; set; }
         public DelegateCommand GenerateChordsCommand { get; set; }
         public DelegateCommand<string> SearchChordsCommand { get; set; }
         public DelegateCommand WriteNewChordCommand { get; set; }
@@ -180,6 +199,11 @@ namespace ChordGeneratorMAUI.ViewModels
                 .GetEvent<ResetToDefaultSettingsEvent>()
                 .Subscribe(ResetPlaybackHandler);
 
+            TogglePracticeComposeModeCommand = new DelegateCommand(() =>
+            {
+                IsPracticeMode = !IsPracticeMode;
+            });
+
             GenerateChordsCommand = new DelegateCommand(() =>
             {
                 // Does the ChartHistory have charts after this one? If so, skip forward to it instead of generate a new one
@@ -194,7 +218,7 @@ namespace ChordGeneratorMAUI.ViewModels
                 ChartHistory.Add(ChordChart);
 
                 IsPreviousEnabled = ChartHistory.Count > 1;
-                ReadingModeActiveChordIndex = -1;
+                PracticeModeActiveChordIndex = -1;
             });
 
             SearchChordsCommand = new DelegateCommand<string>(s =>
@@ -278,15 +302,15 @@ namespace ChordGeneratorMAUI.ViewModels
         {
             if (currentBeat == 1)
             {
-                ReadingModeActiveChordIndex++;
+                PracticeModeActiveChordIndex++;
 
                 // Remove highlight from previous chord
-                if (ReadingModeActiveChordIndex > 0)
-                    ChordChart.Chords[ReadingModeActiveChordIndex - 1].IsHighlighted = false;
+                if (PracticeModeActiveChordIndex > 0)
+                    ChordChart.Chords[PracticeModeActiveChordIndex - 1].IsHighlighted = false;
 
-                if (ReadingModeActiveChordIndex >= ChordChart.Chords.Count)
+                if (PracticeModeActiveChordIndex >= ChordChart.Chords.Count)
                 {
-                    ReadingModeActiveChordIndex = 0;
+                    PracticeModeActiveChordIndex = 0;
 
                     if (!ChordChart.LoopPlayback)
                     {
@@ -297,16 +321,16 @@ namespace ChordGeneratorMAUI.ViewModels
                 }
 
                 // Highlight current chord
-                ChordChart.Chords[ReadingModeActiveChordIndex].IsHighlighted = true;
+                ChordChart.Chords[PracticeModeActiveChordIndex].IsHighlighted = true;
             }
         }
 
         private void ResetPlaybackHandler()
         {
-            if (ReadingModeActiveChordIndex > 0)
-                ChordChart.Chords[ReadingModeActiveChordIndex].IsHighlighted = false;
+            if (PracticeModeActiveChordIndex > 0)
+                ChordChart.Chords[PracticeModeActiveChordIndex].IsHighlighted = false;
 
-            ReadingModeActiveChordIndex = -1;
+            PracticeModeActiveChordIndex = -1;
             SelectedReadingModeChord = null;
 
             ChordChart.IsPaused = true;

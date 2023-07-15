@@ -21,12 +21,12 @@ public partial class MainPage : ContentPage
 
     private async void btnWritingMode_Clicked(object sender, EventArgs e)
     {
-		await Shell.Current.GoToAsync("//Charts/WritingMode");
+        await Shell.Current.GoToAsync("//Charts/ChartPage");
     }
 
     private async void btnReadingMode_Clicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("//Charts/ReadingMode");
+        await Shell.Current.GoToAsync("//Charts/ChartPage");
     }
 
     private async void btnPurchase_Clicked(object sender, EventArgs e)

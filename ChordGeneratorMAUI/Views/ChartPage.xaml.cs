@@ -5,9 +5,9 @@ using CommunityToolkit.Maui.Views;
 
 namespace ChordGeneratorMAUI.Views;
 
-public partial class WritingMode : ContentPage
+public partial class ChartPage : ContentPage
 {
-	public WritingMode()
+	public ChartPage()
 	{
 		InitializeComponent();
         MetronomeControl.BindingContext = MetronomeViewModel.Instance;
@@ -33,8 +33,8 @@ public partial class WritingMode : ContentPage
         }
     }
 
-    private async void btnRead_Clicked(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("//Charts/ReadingMode");
-    }
+    //private async void btnRead_Clicked(object sender, EventArgs e)
+    //{
+    //    await Shell.Current.GoToAsync("//Charts/ReadingMode");
+    //}
 }

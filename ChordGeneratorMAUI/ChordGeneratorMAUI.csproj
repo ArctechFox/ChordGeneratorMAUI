@@ -159,6 +159,9 @@
 	  <Compile Update="Views\ReadingMode.xaml.cs">
 	    <DependentUpon>ReadingMode.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\ChartPage.xaml.cs">
+	    <DependentUpon>ChartPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -201,7 +204,7 @@
 	  <MauiXaml Update="Views\ReadingMode.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\WritingMode.xaml">
+	  <MauiXaml Update="Views\ChartPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
