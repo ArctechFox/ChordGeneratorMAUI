@@ -7,9 +7,9 @@ namespace ChordGeneratorMAUI.Views;
 
 public partial class ChartPage : ContentPage
 {
-	public ChartPage()
-	{
-		InitializeComponent();
+    public ChartPage()
+    {
+        InitializeComponent();
         MetronomeControl.BindingContext = MetronomeViewModel.Instance;
     }
 
@@ -33,8 +33,10 @@ public partial class ChartPage : ContentPage
         }
     }
 
-    //private async void btnRead_Clicked(object sender, EventArgs e)
-    //{
-    //    await Shell.Current.GoToAsync("//Charts/ReadingMode");
-    //}
+    private void OpenPicker(object sender, EventArgs e)
+    {
+        //keyPicker.Unfocus();
+        //keyPicker.Focus();
+        // TODO Update when bug will be fixed
+    }
 }

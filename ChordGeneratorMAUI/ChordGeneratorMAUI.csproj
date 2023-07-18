@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
+		<TargetFrameworks>net7.0-ios;net7.0-maccatalyst;net7.0-android</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
 		<OutputType>Exe</OutputType>
@@ -83,14 +82,18 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(TargetFramework)'=='net7.0-ios'">
-	  <ProvisioningType>automatic</ProvisioningType>
-	  <CodesignKey>Apple Development: Created via API (FSV7CFDFJ9)</CodesignKey>
-	  <CodesignProvision>VS: app.chordjewels.chordstar Development</CodesignProvision>
+	  <ProvisioningType>manual</ProvisioningType>
+	  <CodesignKey>Apple Development: Created via API (8FDVXK4DBX)</CodesignKey>
+	  <CodesignProvision></CodesignProvision>
+	</PropertyGroup>
+
+	<PropertyGroup>
+	  <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<!-- App Icon -->
-    <MauiIcon Include="Resources\AppIcon\chord_star_app_icon.svg" />
+    <MauiIcon Include="Resources\AppIcon\appicon.svg" />
 
 		<!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#4E1950" BaseSize="128,128" />
@@ -114,6 +117,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\AppIcon\appicon.svg" />
 	  <None Remove="Resources\AppIcon\chord_star_app_icon.svg" />
 	  <None Remove="Resources\Fonts\Cintaly-ax7v9.otf" />
 	  <None Remove="Resources\Fonts\Font Awesome 5 Brands-Regular-400.otf" />
@@ -153,12 +157,10 @@
 		<PackageReference Include="Plugin.Maui.Audio" Version="1.0.0" />
 		<PackageReference Include="Plugin.MauiMTAdmob" Version="1.0.4" />
 		<PackageReference Include="Prism.Maui" Version="8.1.273-pre" />
+		<PackageReference Include="Xamarin.Firebase.iOS.Core" Version="8.10.0.3" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Views\ReadingMode.xaml.cs">
-	    <DependentUpon>ReadingMode.xaml</DependentUpon>
-	  </Compile>
 	  <Compile Update="Views\ChartPage.xaml.cs">
 	    <DependentUpon>ChartPage.xaml</DependentUpon>
 	  </Compile>
@@ -199,9 +201,6 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\PurchasePage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\ReadingMode.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\ChartPage.xaml">

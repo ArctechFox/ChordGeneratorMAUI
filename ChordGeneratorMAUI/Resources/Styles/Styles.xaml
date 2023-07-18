@@ -63,7 +63,7 @@
 					<VisualState x:Name="Normal" />
 					<VisualState x:Name="Disabled">
 						<VisualState.Setters>
-							<Setter Property="Opacity" Value=".2"></Setter>
+							<Setter Property="Opacity" Value=".15"></Setter>
 						</VisualState.Setters>
 					</VisualState>
 				</VisualStateGroup>

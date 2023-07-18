@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:Plugin.MauiMTAdmob.Controls;assembly=Plugin.MauiMTAdmob"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
 			 xmlns:v="clr-namespace:ChordGeneratorMAUI.Views"
 			 xmlns:vm="clr-namespace:ChordGeneratorMAUI.ViewModels"
              x:Class="ChordGeneratorMAUI.Views.ChartPage" Background="{StaticResource Black}" Shell.TabBarIsVisible="True">
@@ -36,20 +37,119 @@
         <Grid Grid.Row="1" Margin="10,2,10,5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="1.25*"></ColumnDefinition>
+                <ColumnDefinition Width="1.66*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
             <!--KEY-->
-            <Button Grid.Column="0" HorizontalOptions="Fill" FontSize="16" Background="{StaticResource LightToDarkGrayVertical}" BorderWidth="4" BorderColor="{StaticResource Gray600}"/>
+            <Button Grid.Column="0" x:Name="btnKeyPicker" HorizontalOptions="Fill" FontSize="16" Background="{StaticResource LightToDarkGrayVertical}" BorderWidth="4" BorderColor="{StaticResource Gray600}"/>
             <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center">
                 <Label Text="Key" Margin="0"></Label>
                 <Label Text="{Binding ChordChart.SelectedKey}" TextColor="{StaticResource HotMagenta}" FontAttributes="Bold" FontSize="16" Margin="0,5,0,0"></Label>
             </VerticalStackLayout>
 
-            <!--TOGGLE MODES-->
-            <Button Grid.Column="1" x:Name="btnTogglePracticeComposeMode" Command="{Binding TogglePracticeComposeModeCommand}" HorizontalOptions="Fill" Text="{Binding ActiveModeText}" 
-                    FontSize="16" Background="{StaticResource LightToDarkGrayVertical}" BorderWidth="4" BorderColor="{StaticResource Gray600}" Margin="10,0"/>
+            <Picker Grid.Column="0" Title="Key" SelectedItem="{Binding ChordChart.SelectedKey}" Opacity="0" HeightRequest="100" WidthRequest="125">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type sys:String}">
+                        <sys:String>All</sys:String>
+                        <sys:String>Ab Major</sys:String>
+                        <sys:String>A Major</sys:String>
+                        <sys:String>Ab Minor</sys:String>
+                        <sys:String>A Minor</sys:String>
+                        <sys:String>A# Minor</sys:String>
+
+                        <sys:String>Bb Major</sys:String>
+                        <sys:String>B Major</sys:String>
+                        <sys:String>Bb Minor</sys:String>
+                        <sys:String>B Minor</sys:String>
+
+                        <sys:String>Cb Major</sys:String>
+                        <sys:String>C Major</sys:String>
+                        <sys:String>C# Major</sys:String>
+                        <sys:String>C Minor</sys:String>
+                        <sys:String>C# Minor</sys:String>
+
+                        <sys:String>Db Major</sys:String>
+                        <sys:String>D Major</sys:String>
+                        <sys:String>D Minor</sys:String>
+                        <sys:String>D# Minor</sys:String>
+
+                        <sys:String>Eb Major</sys:String>
+                        <sys:String>E Major</sys:String>
+                        <sys:String>Eb Minor</sys:String>
+                        <sys:String>E Minor</sys:String>
+
+                        <sys:String>F Major</sys:String>
+                        <sys:String>F# Major</sys:String>
+                        <sys:String>F Minor</sys:String>
+                        <sys:String>F# Minor</sys:String>
+
+                        <sys:String>Gb Major</sys:String>
+                        <sys:String>G Major</sys:String>
+                        <sys:String>G Minor</sys:String>
+                        <sys:String>G# Minor</sys:String>
+
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <!--PRACTICE/COMPOSE-->
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="60"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding TogglePracticeComposeModeCommand}"/>
+                </Grid.GestureRecognizers>
+
+                <Button Grid.ColumnSpan="3" HorizontalOptions="Fill" Background="{StaticResource LightToDarkGrayVertical}" BorderWidth="4" Margin="10,0" BorderColor="{StaticResource Gray600}" 
+                    Command="{Binding TogglePracticeComposeModeCommand}"/>
+
+                <!--Practice Icon-->
+                <Label Grid.Column="0" FontFamily="FA Pro Light" Text="book-open" FontSize="16" HorizontalOptions="Center" Margin="10,0,0,0">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label" Binding="{Binding IsPracticeMode}" Value="True">
+                            <Setter Property="TextColor" Value="{StaticResource HotMagenta}"></Setter>
+                            <Setter Property="FontFamily" Value="FA Pro Solid"></Setter>
+                            <Setter Property="Text" Value="book-open"></Setter>
+                            <Setter Property="Opacity" Value="1"></Setter>
+                        </DataTrigger>
+                        <DataTrigger TargetType="Label" Binding="{Binding IsPracticeMode}" Value="False">
+                            <Setter Property="TextColor" Value="{StaticResource White}"></Setter>
+                            <Setter Property="FontFamily" Value="FA Pro Light"></Setter>
+                            <Setter Property="Text" Value="book-open"></Setter>
+                            <Setter Property="Opacity" Value=".33"></Setter>
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+                
+                <!--Text-->
+                <Label Grid.Column="1" Text="{Binding ActiveModeText}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding TogglePracticeComposeModeCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <!--Compose Icon-->
+                <Label Grid.Column="2" FontFamily="FA Pro Light" Text="pencil" FontSize="16"  HorizontalOptions="Center" Margin="0,0,10,0">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label" Binding="{Binding IsPracticeMode}" Value="False">
+                            <Setter Property="TextColor" Value="{StaticResource HotMagenta}"></Setter>
+                            <Setter Property="FontFamily" Value="FA Pro Solid"></Setter>
+                            <Setter Property="Text" Value="pencil"></Setter>
+                            <Setter Property="Opacity" Value="1"></Setter>
+                        </DataTrigger>
+                        <DataTrigger TargetType="Label" Binding="{Binding IsPracticeMode}" Value="True">
+                            <Setter Property="TextColor" Value="{StaticResource White}"></Setter>
+                            <Setter Property="FontFamily" Value="FA Pro Light"></Setter>
+                            <Setter Property="Text" Value="pencil"></Setter>
+                            <Setter Property="Opacity" Value=".33"></Setter>
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+            </Grid>
 
             <!--BPM-->
             <Button Grid.Column="2" HorizontalOptions="Fill" FontSize="16" Background="{StaticResource LightToDarkGrayVertical}" BorderWidth="4" BorderColor="{StaticResource Gray600}"/>
@@ -57,6 +157,42 @@
                 <Label Text="BPM" Margin="0"></Label>
                 <Label Text="{Binding ChordChart.BPM}" TextColor="{StaticResource HotMagenta}" FontAttributes="Bold" FontSize="16" Margin="0,5,0,0"></Label>
             </VerticalStackLayout>
+
+            <Picker Grid.Column="2" Title="BPM" SelectedItem="{Binding ChordChart.BPM}" Opacity="0" HeightRequest="100" WidthRequest="125">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type sys:Int32}">
+                        <sys:Int32>60</sys:Int32>
+                        <sys:Int32>65</sys:Int32>
+                        <sys:Int32>70</sys:Int32>
+                        <sys:Int32>75</sys:Int32>
+                        <sys:Int32>80</sys:Int32>
+                        <sys:Int32>85</sys:Int32>
+                        <sys:Int32>90</sys:Int32>
+                        <sys:Int32>95</sys:Int32>
+                        <sys:Int32>100</sys:Int32>
+                        <sys:Int32>105</sys:Int32>
+                        <sys:Int32>110</sys:Int32>
+                        <sys:Int32>115</sys:Int32>
+                        <sys:Int32>120</sys:Int32>
+                        <sys:Int32>125</sys:Int32>
+                        <sys:Int32>130</sys:Int32>
+                        <sys:Int32>135</sys:Int32>
+                        <sys:Int32>140</sys:Int32>
+                        <sys:Int32>145</sys:Int32>
+                        <sys:Int32>150</sys:Int32>
+                        <sys:Int32>155</sys:Int32>
+                        <sys:Int32>160</sys:Int32>
+                        <sys:Int32>165</sys:Int32>
+                        <sys:Int32>170</sys:Int32>
+                        <sys:Int32>175</sys:Int32>
+                        <sys:Int32>180</sys:Int32>
+                        <sys:Int32>185</sys:Int32>
+                        <sys:Int32>190</sys:Int32>
+                        <sys:Int32>195</sys:Int32>
+                        <sys:Int32>200</sys:Int32>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
         </Grid>
 
         <!--CHART NAME ROW-->
@@ -93,9 +229,6 @@
                 <DataTemplate>
 
                     <Border MinimumHeightRequest="55" BackgroundColor="{StaticResource Black}" Stroke="{StaticResource MainGradientBrush_Vertical}" Margin="5,0,5,30">
-                        <Border.Shadow>
-                            <Shadow Brush="Black" Offset="0,3" Radius="10" Opacity=".8"></Shadow>
-                        </Border.Shadow>
                         <Border.StrokeShape>
                             <RoundRectangle CornerRadius="10"></RoundRectangle>
                         </Border.StrokeShape>
@@ -212,17 +345,17 @@
                         </Border>
 
                         <!-- Top line -->
-                        <Border BackgroundColor="Transparent" Stroke="{StaticResource White}" Opacity=".05" Margin="0,8,0,0" HorizontalOptions="CenterAndExpand" VerticalOptions="Start" WidthRequest="50" HeightRequest="2" StrokeThickness="2"/>
+                        <Border BackgroundColor="Transparent" Stroke="{StaticResource White}" Opacity=".1" Margin="0,8,0,4" HorizontalOptions="CenterAndExpand" VerticalOptions="Start" WidthRequest="50" HeightRequest="2" StrokeThickness="2"/>
 
                         <!-- Header text-->
-                        <HorizontalStackLayout VerticalOptions="Center">
+                        <HorizontalStackLayout HorizontalOptions="Start" VerticalOptions="Center">
 
                             <!--Music icon-->
                             <Label Text="music" TextColor="{StaticResource HotMagenta}" FontFamily="FA Pro Regular" FontAttributes="None" FontSize="16" 
                           Padding="0" Margin="15,5,5,0" Opacity=".9" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"></Label>
 
                             <!--Current track-->
-                            <Label Text="Funk Groove Ass Play - Pro Beats Pack" TextColor="{StaticResource White}" FontFamily="Salmapro" FontAttributes="Italic" FontSize="15" 
+                            <Label Text="Funk Groove Ass Play - Pro Beats Pack" TextColor="{StaticResource White}" FontFamily="Salmapro" FontAttributes="Italic" FontSize="14" 
                           Padding="0" Margin="5,5,0,0" Opacity=".5" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"></Label>
 
                         </HorizontalStackLayout>
@@ -244,6 +377,7 @@
                 </Border.Shadow>
             </Border>
 
+            <!--PREVIOUS-->
             <Button Grid.Column="0" Grid.Row="1" Text="step-backward" IsEnabled="True" Style="{StaticResource FontIconButton}"
 					Command="{Binding PreviousChartCommand}">
                 <Button.Triggers>
@@ -253,49 +387,71 @@
                 </Button.Triggers>
             </Button>
 
-            <Button Grid.Column="1" Grid.Row="1" Text="undo-alt" Style="{StaticResource FontIconButton}"
-					Command="{Binding ResetCommand}"></Button>
-
-            <Button Grid.Column="2" Grid.Row="1" Text="pause" FontFamily="FA Pro Solid" IsEnabled="True" Style="{StaticResource FontIconButton}" FontSize="{OnPlatform iOS=40, WinUI=50}"
-					Command="{Binding PauseToggleCommand}">
-                <!--<Button.Shadow>
-                    <Shadow Brush="{StaticResource White}" Radius="5"></Shadow>
-                </Button.Shadow>-->
-
+            <!--LOOP-->
+            <Button Grid.Column="1" Grid.Row="1" Text="repeat" Style="{StaticResource FontIconButton}" FontSize="Large"
+					Command="{Binding LoopToggleCommand}">
                 <Button.Triggers>
-                    <DataTrigger TargetType="Button" Binding="{Binding ChordChart.IsPaused}" Value="True">
-                        <Setter Property="Text" Value="play"></Setter>
-                        <!--<Setter Property="FontFamily" Value="FA Pro Solid"></Setter>-->
+                    <DataTrigger TargetType="Button" Binding="{Binding ChordChart.LoopPlayback}" Value="True">
+                        <Setter Property="FontFamily" Value="FA Pro Solid"></Setter>
+                        <Setter Property="FontSize" Value="33"></Setter>
+                        <Setter Property="Opacity" Value="1"></Setter>
                     </DataTrigger>
-                    <DataTrigger TargetType="Button" Binding="{Binding ChordChart.IsPaused}" Value="False">
-                        <Setter Property="Text" Value="pause"></Setter>
-                        <!--<Setter Property="FontFamily" Value="FA Pro Light"></Setter>-->
-                    </DataTrigger>
-                    <DataTrigger TargetType="Button" Binding="{Binding ChordChart.IsChordChartActive}" Value="False">
-                        <Setter Property="IsEnabled" Value="False"></Setter>
+                    <DataTrigger TargetType="Button" Binding="{Binding ChordChart.LoopPlayback}" Value="False">
+                        <Setter Property="FontFamily" Value="FA Pro Light"></Setter>
+                        <Setter Property="FontSize" Value="28"></Setter>
+                        <!--<Setter Property="Opacity" Value=".85"></Setter>-->
                     </DataTrigger>
                 </Button.Triggers>
             </Button>
 
+            <!--PLAY/PAUSE-->
+            <Button Grid.Column="2" Grid.Row="1" Text="pause" FontFamily="FA Pro Solid" IsEnabled="True" Style="{StaticResource FontIconButton}" FontSize="{OnPlatform iOS=40, WinUI=46}" Opacity="1"
+					Command="{Binding PauseToggleCommand}">
+
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button" Binding="{Binding ChordChart.IsPaused}" Value="True">
+                        <Setter Property="Text" Value="play"></Setter>
+                        <Setter Property="Opacity" Value="1"></Setter>
+                    </DataTrigger>
+                    <DataTrigger TargetType="Button" Binding="{Binding ChordChart.IsPaused}" Value="False">
+                        <Setter Property="Text" Value="pause"></Setter>
+                        <Setter Property="FontFamily" Value="FA Pro Light"></Setter>
+                        <Setter Property="Opacity" Value="1"></Setter>
+                    </DataTrigger>
+                    <DataTrigger TargetType="Button" Binding="{Binding ChordChart.IsChordChartActive}" Value="False">
+                        <Setter Property="IsEnabled" Value="False"></Setter>
+                        <Setter Property="Opacity" Value=".2"></Setter>
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
+
+            <!--SAVE-->
             <Button Grid.Column="3" Grid.Row="1" Text="save" Style="{StaticResource FontIconButton}" IsEnabled="False"
 					Command="{Binding SaveChartCommand}"></Button>
 
+            <!--GENERATE/NEXT CHART-->
             <Button Grid.Column="4" Grid.Row="1" Text="plus" Style="{StaticResource FontIconButton}"
 					Command="{Binding GenerateChordsCommand}">
+                <Button.Shadow>
+                    <Shadow Opacity="0"></Shadow>
+                </Button.Shadow>
+                
                 <Button.Triggers>
+                    
+                    <!--Hint; glows when common user action is anticipated next-->
                     <MultiTrigger TargetType="Button">
                         <MultiTrigger.Conditions>
                             <BindingCondition Binding="{Binding ChordChart.IsChordChartActive}" Value="False"></BindingCondition>
                             <BindingCondition Binding="{Binding IsPreviousEnabled}" Value="False"></BindingCondition>
                         </MultiTrigger.Conditions>
 
-                        <!--Hint; glows when common user action is anticipated next-->
                         <Setter Property="Shadow">
                             <Setter.Value>
                                 <Shadow Brush="{StaticResource White}" Offset="0,0" Radius="10" Opacity="1"></Shadow>
                             </Setter.Value>
                         </Setter>
                     </MultiTrigger>
+                    
                 </Button.Triggers>
             </Button>
         </Grid>

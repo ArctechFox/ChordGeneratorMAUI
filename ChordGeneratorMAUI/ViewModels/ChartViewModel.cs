@@ -183,6 +183,7 @@ namespace ChordGeneratorMAUI.ViewModels
         public DelegateCommand WriteNewChordCommand { get; set; }
         public DelegateCommand WriteEmptyChordCommand { get; set; }
         public DelegateCommand PauseToggleCommand { get; set; }
+        public DelegateCommand LoopToggleCommand { get; set; }
         public DelegateCommand ResetCommand { get; set; }
         public DelegateCommand PreviousChartCommand { get; set; }
         public DelegateCommand SaveChartCommand { get; set; }
@@ -202,6 +203,11 @@ namespace ChordGeneratorMAUI.ViewModels
             TogglePracticeComposeModeCommand = new DelegateCommand(() =>
             {
                 IsPracticeMode = !IsPracticeMode;
+            });
+
+            LoopToggleCommand = new DelegateCommand(() =>
+            {
+                ChordChart.LoopPlayback = !ChordChart.LoopPlayback;
             });
 
             GenerateChordsCommand = new DelegateCommand(() =>

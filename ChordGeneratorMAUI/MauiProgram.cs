@@ -4,7 +4,6 @@ using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 using Plugin.Maui.Audio;
 using Plugin.MauiMTAdmob;
-using Windows.Media;
 
 namespace ChordGeneratorMAUI;
 

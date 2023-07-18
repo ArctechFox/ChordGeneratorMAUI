@@ -196,6 +196,9 @@ namespace ChordGeneratorMAUI.ViewModels
             ResetToDefaultSettings();
             StopMetronome();
 
+            //if (ChartCount > 0)
+            //    CurrentBeat = 1;
+
             ChartCount++;
         }
 

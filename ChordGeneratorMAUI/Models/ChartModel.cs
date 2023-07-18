@@ -76,7 +76,7 @@ namespace ChordGeneratorMAUI.Models
             set { SetProperty(ref _timeSignature, value); }
         }
 
-        private int _barCount = 16;
+        private int _barCount = 4;
         public int BarCount
         {
             get { return _barCount; }
@@ -98,7 +98,7 @@ namespace ChordGeneratorMAUI.Models
             set { SetProperty(ref _showDiminishedAsMinor, value); }
         }
 
-        private bool _loopPlayback = false;
+        private bool _loopPlayback = true;
         public bool LoopPlayback
         {
             get { return _loopPlayback; }
