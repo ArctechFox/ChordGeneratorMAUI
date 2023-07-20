@@ -6,19 +6,13 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
 			 xmlns:v="clr-namespace:ChordGeneratorMAUI.Views"
 			 xmlns:vm="clr-namespace:ChordGeneratorMAUI.ViewModels"
-             x:Class="ChordGeneratorMAUI.Views.ChartPage" Background="{StaticResource Black}" Shell.TabBarIsVisible="True">
-    <!--TODO: Make tab bar invisible on this page-->
+             x:Class="ChordGeneratorMAUI.Views.ChartPage" Background="{StaticResource Black}" Shell.TabBarIsVisible="{OnPlatform iOS=False, Android=False, Default=True}">
+
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness">
             <On Platform="iOS" Value="0, 35, 0, 20" />
         </OnPlatform>
     </ContentPage.Padding>
-
-    <!--<ContentPage.Resources>
-        <ResourceDictionary>
-
-        </ResourceDictionary>
-	</ContentPage.Resources>-->
 
     <Grid>
         <Grid.RowDefinitions>
@@ -31,9 +25,13 @@
         </Grid.RowDefinitions>
 
         <!--AD VIEW-->
-        <controls:MTAdView AdSize="AnchoredAdaptive" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" AdsId="ca-app-pub-2329707705985560/7005829538" />
+        <!--<controls:MTAdView AdSize="AnchoredAdaptive" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" AdsId="ca-app-pub-2329707705985560/7005829538" />-->
+        <Border Stroke="White" Opacity=".33">
+            <Label HorizontalOptions="Center" Text="**********************  ad banner  **********************" FontAttributes="None"></Label>
 
-        <!--INFO/SETTINGS-->
+        </Border>
+
+        <!--INFO/SETTINGS HEADER-->
         <Grid Grid.Row="1" Margin="10,2,10,5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -48,7 +46,7 @@
                 <Label Text="{Binding ChordChart.SelectedKey}" TextColor="{StaticResource HotMagenta}" FontAttributes="Bold" FontSize="16" Margin="0,5,0,0"></Label>
             </VerticalStackLayout>
 
-            <Picker Grid.Column="0" Title="Key" SelectedItem="{Binding ChordChart.SelectedKey}" Opacity="0" HeightRequest="100" WidthRequest="125">
+            <Picker Grid.Column="0" Title="Key" SelectedItem="{Binding ChordChart.SelectedKey}" Opacity="0" HeightRequest="100" WidthRequest="125" ZIndex="1">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type sys:String}">
                         <sys:String>All</sys:String>
@@ -124,7 +122,7 @@
                         </DataTrigger>
                     </Label.Triggers>
                 </Label>
-                
+
                 <!--Text-->
                 <Label Grid.Column="1" Text="{Binding ActiveModeText}">
                     <Label.GestureRecognizers>
@@ -153,46 +151,26 @@
 
             <!--BPM-->
             <Button Grid.Column="2" HorizontalOptions="Fill" FontSize="16" Background="{StaticResource LightToDarkGrayVertical}" BorderWidth="4" BorderColor="{StaticResource Gray600}"/>
-            <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center">
-                <Label Text="BPM" Margin="0"></Label>
-                <Label Text="{Binding ChordChart.BPM}" TextColor="{StaticResource HotMagenta}" FontAttributes="Bold" FontSize="16" Margin="0,5,0,0"></Label>
-            </VerticalStackLayout>
+            <Grid Grid.Column="2" HorizontalOptions="Fill">
 
-            <Picker Grid.Column="2" Title="BPM" SelectedItem="{Binding ChordChart.BPM}" Opacity="0" HeightRequest="100" WidthRequest="125">
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type sys:Int32}">
-                        <sys:Int32>60</sys:Int32>
-                        <sys:Int32>65</sys:Int32>
-                        <sys:Int32>70</sys:Int32>
-                        <sys:Int32>75</sys:Int32>
-                        <sys:Int32>80</sys:Int32>
-                        <sys:Int32>85</sys:Int32>
-                        <sys:Int32>90</sys:Int32>
-                        <sys:Int32>95</sys:Int32>
-                        <sys:Int32>100</sys:Int32>
-                        <sys:Int32>105</sys:Int32>
-                        <sys:Int32>110</sys:Int32>
-                        <sys:Int32>115</sys:Int32>
-                        <sys:Int32>120</sys:Int32>
-                        <sys:Int32>125</sys:Int32>
-                        <sys:Int32>130</sys:Int32>
-                        <sys:Int32>135</sys:Int32>
-                        <sys:Int32>140</sys:Int32>
-                        <sys:Int32>145</sys:Int32>
-                        <sys:Int32>150</sys:Int32>
-                        <sys:Int32>155</sys:Int32>
-                        <sys:Int32>160</sys:Int32>
-                        <sys:Int32>165</sys:Int32>
-                        <sys:Int32>170</sys:Int32>
-                        <sys:Int32>175</sys:Int32>
-                        <sys:Int32>180</sys:Int32>
-                        <sys:Int32>185</sys:Int32>
-                        <sys:Int32>190</sys:Int32>
-                        <sys:Int32>195</sys:Int32>
-                        <sys:Int32>200</sys:Int32>
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker>
+                <!--PICKER ("HIDDEN")-->
+                <Picker VerticalOptions="Fill" HorizontalOptions="Fill" HeightRequest="75" Title="BPM" x:Name="pickerBPM" SelectedItem="{Binding ChordChart.BPM}" Opacity="0" ZIndex="1" />
+
+                <!--minus BPM-->
+                <Button FontFamily="FA Pro Solid" Background="Transparent" Text="minus" TextColor="{StaticResource HotMagenta}" FontSize="16" x:Name="btnBPM_minus" Clicked="btnBPM_minus_Clicked"
+                        VerticalOptions="Fill" HorizontalOptions="Start" ZIndex="2"/>
+
+                <!--BPM text-->
+                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                    <Label Text="BPM" Margin="0"></Label>
+                    <Label Text="{Binding ChordChart.BPM, Mode=TwoWay}" x:Name="lblBPM_text" TextColor="{StaticResource HotMagenta}" FontAttributes="Bold" FontSize="16" Margin="0,5,0,0"></Label>
+                </VerticalStackLayout>
+
+                <!--plus BPM-->
+                <Button FontFamily="FA Pro Solid" Background="Transparent" Text="plus" TextColor="{StaticResource HotMagenta}" FontSize="16" x:Name="btnBPM_plus" Clicked="btnBPM_plus_Clicked" 
+                        VerticalOptions="Fill" HorizontalOptions="End" ZIndex="2"/>
+                
+            </Grid>
         </Grid>
 
         <!--CHART NAME ROW-->
@@ -203,27 +181,30 @@
                 <ColumnDefinition Width="50"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <!--Chart Settings Button-->
-            <Button x:Name="btnChartSettings" Grid.Column="0" Background="Transparent" FontSize="22" FontFamily="FA Pro Light" Text="cog" Opacity=".8">
+            <!--Home/Back Button-->
+            <Button x:Name="btnHome" Grid.Column="0" Background="Transparent" FontSize="22" FontFamily="FA Pro Light" Text="arrow-left" Opacity=".8">
                 <Button.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="SettingsButton_Tapped" />
+                    <TapGestureRecognizer Tapped="HomeButton_Tapped" />
                 </Button.GestureRecognizers>
             </Button>
 
             <Entry Grid.Column="1" Text="{Binding ChordChart.Name}" TextColor="White" PlaceholderColor="Gray" Placeholder="Chart Name"
 						FontSize="Small" FontAttributes="Bold" HorizontalOptions="Center" HorizontalTextAlignment="Center" Margin="5,0"></Entry>
 
-            <!--TODO: delete-->
-            <Button Grid.Column="2" FontFamily="FA Pro Light" Text="trash-alt" Background="Transparent" FontSize="20" BorderWidth="0" Opacity=".8"></Button>
+            <Button x:Name="btnChartSettings" Grid.Column="2" Background="Transparent" FontSize="22" FontFamily="FA Pro Light" Text="cog" Opacity=".8">
+                <Button.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="SettingsButton_Tapped" />
+                </Button.GestureRecognizers>
+            </Button>
         </Grid>
 
         <!--METRONOME-->
         <v:Metronome x:Name="MetronomeControl" Grid.Row="3" Margin="20,10"></v:Metronome>
 
         <!--COMPOSE CHART-->
-        <CollectionView x:Name="Compose_ChordChartCollectionView" Grid.Row="4" Margin="10,0" MaximumHeightRequest="{OnPlatform iOS=350, Default=2000}"
+        <CollectionView x:Name="Compose_ChordChartCollectionView" Grid.Row="4" Margin="10,0" MaximumHeightRequest="{OnPlatform iOS=2000, Default=2000}"
 						ItemsSource="{Binding ChordChart.Chords}" SelectedItem="{Binding SelectedWritingModeChord}" SelectionChanged="CollectionView_SelectionChanged"
-						SelectionMode="Single" ItemsLayout="VerticalGrid, 4" ItemSizingStrategy="MeasureFirstItem" Background="{StaticResource BlackBrush}">
+						SelectionMode="Single" ItemsLayout="VerticalGrid, 4" ItemSizingStrategy="MeasureFirstItem" Background="{StaticResource BlackBrush}" IsEnabled="{Binding ChordChart.IsChordChartActive}">
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
@@ -259,7 +240,7 @@
                         </Border.Triggers>
 
                         <!--CHORD NAME-->
-                        <Label FontSize="20" Margin="4" FontFamily="Sansation" FontAttributes="None" HorizontalOptions="Center" Text="{Binding Name}"></Label>
+                        <Label FontSize="19" Margin="4" FontFamily="Sansation" FontAttributes="None" HorizontalOptions="Center" Text="{Binding Name}"></Label>
                     </Border>
 
                 </DataTemplate>
@@ -267,14 +248,18 @@
         </CollectionView>
 
         <!--PRACTICE CHART-->
-        <CollectionView x:Name="Practice_ChordChartCollectionView" IsVisible="{Binding IsPracticeMode}" Grid.Row="4" Margin="10,0" MaximumHeightRequest="{OnPlatform iOS=350, Default=2000}"
-						ItemsSource="{Binding ChordChart.Chords}"
-						SelectionMode="None" ItemsLayout="VerticalGrid, 4" ItemSizingStrategy="MeasureFirstItem" Background="{StaticResource BlackBrush}">
+        <CollectionView x:Name="Practice_ChordChartCollectionView" IsVisible="{Binding IsPracticeMode}" Grid.Row="4" Margin="10,0" MaximumHeightRequest="{OnPlatform iOS=2000, Default=2000}"
+						ItemsSource="{Binding ChordChart.Chords}" SelectionMode="Single" SelectedItem="{Binding SelectedPracticeModeChord}"
+						ItemsLayout="VerticalGrid, 4" ItemSizingStrategy="MeasureFirstItem" Background="{StaticResource BlackBrush}" IsEnabled="{Binding ChordChart.IsChordChartActive}">
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
 
                     <Border MinimumHeightRequest="55" BackgroundColor="{StaticResource Black}" Margin="5,0,5,30">
+                        <!--<Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GoToChordCommand}" CommandParameter="{Binding}"></TapGestureRecognizer>
+                        </Border.GestureRecognizers>-->
+                        
                         <Border.StrokeShape>
                             <RoundRectangle CornerRadius="10"></RoundRectangle>
                         </Border.StrokeShape>
@@ -307,7 +292,7 @@
                         </Border.Style>
 
                         <!--CHORD NAME-->
-                        <Label FontSize="20" Margin="4" FontFamily="Sansation" FontAttributes="None" HorizontalOptions="Center" Text="{Binding Name}"></Label>
+                        <Label FontSize="19" Margin="4" FontFamily="Sansation" FontAttributes="None" HorizontalOptions="Center" Text="{Binding Name}"></Label>
                     </Border>
 
                 </DataTemplate>
@@ -332,7 +317,7 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <!--TRACK -->
+            <!--TRACK SELECTOR -->
             <toolkit:Expander IsExpanded="False" Grid.ColumnSpan="5" Grid.Row="0">
                 <toolkit:Expander.Header>
                     <Grid HeightRequest="55">
@@ -378,23 +363,16 @@
             </Border>
 
             <!--PREVIOUS-->
-            <Button Grid.Column="0" Grid.Row="1" Text="step-backward" IsEnabled="True" Style="{StaticResource FontIconButton}"
-					Command="{Binding PreviousChartCommand}">
-                <Button.Triggers>
-                    <DataTrigger TargetType="Button" Binding="{Binding IsPreviousEnabled}" Value="False">
-                        <Setter Property="IsEnabled" Value="False"></Setter>
-                    </DataTrigger>
-                </Button.Triggers>
-            </Button>
+            <Button Grid.Column="0" Grid.Row="1" Text="step-backward" Style="{StaticResource FontIconButton}"
+					Command="{Binding PreviousChartCommand}" IsEnabled="{Binding IsPreviousEnabled}"/>
 
             <!--LOOP-->
-            <Button Grid.Column="1" Grid.Row="1" Text="repeat" Style="{StaticResource FontIconButton}" FontSize="Large"
-					Command="{Binding LoopToggleCommand}">
+            <Button Grid.Column="1" Grid.Row="1" Text="repeat" Style="{StaticResource FontIconButton}"
+					Command="{Binding LoopToggleCommand}" IsEnabled="{Binding ChordChart.IsChordChartActive}">
                 <Button.Triggers>
                     <DataTrigger TargetType="Button" Binding="{Binding ChordChart.LoopPlayback}" Value="True">
                         <Setter Property="FontFamily" Value="FA Pro Solid"></Setter>
                         <Setter Property="FontSize" Value="33"></Setter>
-                        <Setter Property="Opacity" Value="1"></Setter>
                     </DataTrigger>
                     <DataTrigger TargetType="Button" Binding="{Binding ChordChart.LoopPlayback}" Value="False">
                         <Setter Property="FontFamily" Value="FA Pro Light"></Setter>
@@ -405,22 +383,19 @@
             </Button>
 
             <!--PLAY/PAUSE-->
-            <Button Grid.Column="2" Grid.Row="1" Text="pause" FontFamily="FA Pro Solid" IsEnabled="True" Style="{StaticResource FontIconButton}" FontSize="{OnPlatform iOS=40, WinUI=46}" Opacity="1"
-					Command="{Binding PauseToggleCommand}">
+            <Button Grid.Column="2" Grid.Row="1" Command="{Binding PauseToggleCommand}" Text="pause" FontFamily="FA Pro Solid" IsEnabled="{Binding ChordChart.IsChordChartActive}" 
+                    Style="{StaticResource FontIconButton}" FontSize="{OnPlatform WinUI=46}">
 
                 <Button.Triggers>
                     <DataTrigger TargetType="Button" Binding="{Binding ChordChart.IsPaused}" Value="True">
                         <Setter Property="Text" Value="play"></Setter>
-                        <Setter Property="Opacity" Value="1"></Setter>
                     </DataTrigger>
                     <DataTrigger TargetType="Button" Binding="{Binding ChordChart.IsPaused}" Value="False">
                         <Setter Property="Text" Value="pause"></Setter>
                         <Setter Property="FontFamily" Value="FA Pro Light"></Setter>
-                        <Setter Property="Opacity" Value="1"></Setter>
                     </DataTrigger>
-                    <DataTrigger TargetType="Button" Binding="{Binding ChordChart.IsChordChartActive}" Value="False">
-                        <Setter Property="IsEnabled" Value="False"></Setter>
-                        <Setter Property="Opacity" Value=".2"></Setter>
+                    <DataTrigger TargetType="Button" Binding="{Binding ChordChart.IsChordChartActive}" Value="True">
+                        <Setter Property="Opacity" Value="1"></Setter>
                     </DataTrigger>
                 </Button.Triggers>
             </Button>
@@ -435,9 +410,9 @@
                 <Button.Shadow>
                     <Shadow Opacity="0"></Shadow>
                 </Button.Shadow>
-                
+
                 <Button.Triggers>
-                    
+
                     <!--Hint; glows when common user action is anticipated next-->
                     <MultiTrigger TargetType="Button">
                         <MultiTrigger.Conditions>
@@ -451,7 +426,7 @@
                             </Setter.Value>
                         </Setter>
                     </MultiTrigger>
-                    
+
                 </Button.Triggers>
             </Button>
         </Grid>

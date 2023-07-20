@@ -14,7 +14,7 @@
 
 		<Tab Title="Charts" Route="Charts" x:Name="ChartsTab" Icon="listmusic.png">
 			<ShellContent Title="Chart" Route="ChartPage" ContentTemplate="{DataTemplate v:ChartPage}"/>
-			<ShellContent Title="Chart Settings" Route="ChartSettings" ContentTemplate="{DataTemplate v:ChartSettingsPage}"/>
+			<!--<ShellContent Title="Chart Settings" Route="ChartSettings" ContentTemplate="{DataTemplate v:ChartSettingsPage}"/>-->
 		</Tab>
 
         <Tab Title="Upgrade" Route="Purchase" Icon="star.png">

@@ -106,7 +106,7 @@
 		<MauiImage Update="Resources\Images\home.svg" BaseSize="28,28" />
 		<MauiImage Update="Resources\Images\listmusic.svg" BaseSize="28,28" />
 		<MauiImage Update="Resources\Images\tools.svg" BaseSize="28,28" />
-		<MauiImage Update="Resources\Images\star.svg" BaseSize="64,64" />
+		<MauiImage Update="Resources\Images\star.svg" BaseSize="28,28" />
 		<MauiImage Update="Resources\Images\chordgen.png" BaseSize="28,28" />
 
 		<!-- Custom Fonts -->

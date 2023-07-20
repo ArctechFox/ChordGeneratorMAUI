@@ -11,6 +11,21 @@ public partial class ChartPage : ContentPage
     {
         InitializeComponent();
         MetronomeControl.BindingContext = MetronomeViewModel.Instance;
+
+        List<int> bpmPickerSteps = new List<int>();
+
+        // Increments of 5 for the picker, max of 300 for now
+        for (int i = 5; i <= 300; i += 5)
+        {
+            bpmPickerSteps.Add(i);
+        }
+
+        pickerBPM.ItemsSource = bpmPickerSteps;
+    }
+
+    private async void HomeButton_Tapped(object sender, TappedEventArgs e)
+    {
+        await Shell.Current.GoToAsync("//Home");
     }
 
     private async void SettingsButton_Tapped(object sender, TappedEventArgs e)
@@ -33,10 +48,21 @@ public partial class ChartPage : ContentPage
         }
     }
 
-    private void OpenPicker(object sender, EventArgs e)
+    private void btnBPM_minus_Clicked(object sender, EventArgs e)
     {
-        //keyPicker.Unfocus();
-        //keyPicker.Focus();
-        // TODO Update when bug will be fixed
+        int value = Int32.Parse(lblBPM_text.Text);
+        if (value > 0)
+            value--;
+
+        lblBPM_text.Text = value.ToString();
+    }
+
+    private void btnBPM_plus_Clicked(object sender, EventArgs e)
+    {
+        int value = Int32.Parse(lblBPM_text.Text);
+        if (value < 300)
+            value++;
+
+        lblBPM_text.Text = value.ToString();
     }
 }

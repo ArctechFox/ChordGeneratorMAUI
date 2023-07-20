@@ -168,11 +168,47 @@ namespace ChordGeneratorMAUI.ViewModels
             }
         }
 
-        private ChordModel _selectedReadingModeChord;
-        public ChordModel SelectedReadingModeChord
+        private ChordModel _selectedPracticeModeChord;
+        public ChordModel SelectedPracticeModeChord
         {
-            get { return _selectedReadingModeChord; }
-            set { SetProperty(ref _selectedReadingModeChord, value); }
+            get { return _selectedPracticeModeChord; }
+            set
+            {
+                // Deal with previous selection
+                if (value != null)
+                {
+                    if (PracticeModeActiveChordIndex >= 0)
+                    {
+                        var prevChord = ChordChart.Chords[PracticeModeActiveChordIndex];
+                        prevChord.IsHighlighted = false;
+                    }
+                    else if (_selectedPracticeModeChord != null)
+                        _selectedPracticeModeChord.IsHighlighted = false;
+
+                    //
+
+                    SetProperty(ref _selectedPracticeModeChord, value);
+
+                    PracticeModeActiveChordIndex = ChordChart.Chords.IndexOf(_selectedPracticeModeChord);
+                    _selectedPracticeModeChord.IsHighlighted = true;
+
+                    // "Resets" the metronome
+                    //if (ChordChart.IsPaused)
+                    //{
+                    //    Application.Current?.Dispatcher.Dispatch(() =>
+                    //    {
+                    //        Helpers.EventManager.Instance.EventAggregator.GetEvent<TimerPauseEvent>().Publish();
+                    //    });
+                    //}
+                    //else
+                    //{
+                    //    Application.Current?.Dispatcher.Dispatch(() =>
+                    //    {
+                    //        Helpers.EventManager.Instance.EventAggregator.GetEvent<TimerStartEvent>().Publish();
+                    //    });
+                    //}
+                }
+            }
         }
 
         // /////////////////////////////////////////////////////////////////////////////////////////
@@ -321,6 +357,7 @@ namespace ChordGeneratorMAUI.ViewModels
                     if (!ChordChart.LoopPlayback)
                     {
                         GenerateChordsCommand.Execute();
+                        // TODO: sus?? vv
                         PauseToggleCommand.Execute();
                         return;
                     }
@@ -337,7 +374,6 @@ namespace ChordGeneratorMAUI.ViewModels
                 ChordChart.Chords[PracticeModeActiveChordIndex].IsHighlighted = false;
 
             PracticeModeActiveChordIndex = -1;
-            SelectedReadingModeChord = null;
 
             ChordChart.IsPaused = true;
         }

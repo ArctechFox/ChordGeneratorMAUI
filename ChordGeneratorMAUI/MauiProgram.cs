@@ -65,9 +65,9 @@ public static class MauiProgram
         builder.Logging.AddDebug();
 #endif
 
-        CrossMauiMTAdmob.Current.UserPersonalizedAds = false;
-        //CrossMauiMTAdmob.Current.AdsId = "ca-app-pub-2329707705985560/7005829538";
-        CrossMauiMTAdmob.Current.AdsId = "ca-app-pub-3940256099942544/2934735716";
+        //CrossMauiMTAdmob.Current.UserPersonalizedAds = false;
+        ////CrossMauiMTAdmob.Current.AdsId = "ca-app-pub-2329707705985560/7005829538";
+        //CrossMauiMTAdmob.Current.AdsId = "ca-app-pub-3940256099942544/2934735716";
 
         return builder.Build();
     }

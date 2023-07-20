@@ -107,11 +107,18 @@ namespace ChordGeneratorMAUI.ViewModels
             }
         }
 
-        private string _totalTimeElapsedString = "0:00";
+        private string _totalTimeElapsedString = "";
         public string TotalTimeElapsedString
         {
             get { return _totalTimeElapsedString; }
             set { SetProperty(ref _totalTimeElapsedString, value); }
+        }
+
+        private int _chartCount = 0;
+        public int ChartCount
+        {
+            get { return _chartCount; }
+            set { SetProperty(ref _chartCount, value); }
         }
 
         private int _currentBeat = 0;
@@ -121,16 +128,70 @@ namespace ChordGeneratorMAUI.ViewModels
             set
             {
                 // TODO: subscribe to TimeSignatureChangedEvent to track this value instead of hard-coding a 4
+                // Constrain value to time signature
                 value = value > 4 ? 1 : value;
+
                 SetProperty(ref _currentBeat, value);
+
+                // Don't need to play the same sound if countdown is actively doing so
+                if (!IsCountdownActive && CurrentBeat > 0)
+                    PlayClickSound(CurrentBeat);
             }
         }
 
-        private int _chartCount = 0;
-        public int ChartCount
+        // COUNTDOWN PROPS
+
+        private bool _isCountdownEnabled = true;
+        public bool IsCountdownEnabled
         {
-            get { return _chartCount; }
-            set { SetProperty(ref _chartCount, value); }
+            get { return _isCountdownEnabled; }
+            set { SetProperty(ref _isCountdownEnabled, value); }
+        }
+
+        private bool _isCountdownActive = false;
+        public bool IsCountdownActive
+        {
+            get { return _isCountdownActive; }
+            set
+            {
+                SetProperty(ref _isCountdownActive, value);
+            }
+        }
+
+        private int _countdownInBeats = 4;
+        public int CountdownInBeats
+        {
+            get { return _countdownInBeats; }
+            set { SetProperty(ref _countdownInBeats, value); }
+        }
+
+        private int _countdownCurrentBeat = 0;
+        public int CountdownCurrentBeat
+        {
+            get { return _countdownCurrentBeat; }
+            set
+            {
+                SetProperty(ref _countdownCurrentBeat, value);
+
+                if (CountdownCurrentBeat > 0)
+                {
+
+                     if (CountdownCurrentBeat > 4)
+                    {
+                        IsCountdownActive = false;
+
+                        _totalTimer.Stop();
+                        TotalTimeElapsedString = "0:00";
+                        _totalTimer.Start();
+
+                        CurrentBeat = 1;
+                        return;
+                    }
+
+                    TotalTimeElapsedString = CountdownCurrentBeat.ToString();
+                    PlayClickSound(CountdownCurrentBeat);
+                }
+            }
         }
 
         /////////////////////////////////////////////////////////////////////////
@@ -158,7 +219,12 @@ namespace ChordGeneratorMAUI.ViewModels
 
         private void StartMetronome()
         {
+            TotalTimeElapsedString = "";
+            IsCountdownActive = true;
+
             CurrentBeat = 0;
+            CountdownCurrentBeat = 0;
+
             _beatTimer.Start();
         }
 
@@ -189,6 +255,7 @@ namespace ChordGeneratorMAUI.ViewModels
         private void BPMChangedHandler(int bpm)
         {
             _beatTimer.Interval = 60000 / bpm;
+            CurrentBeat = 0;
         }
 
         private void ChartGeneratedHandler()
@@ -204,20 +271,22 @@ namespace ChordGeneratorMAUI.ViewModels
 
         private void OnTotalTimerElapsed(object sender, ElapsedEventArgs e)
         {
-            TotalTimeElapsed += TimeSpan.FromMilliseconds(_totalTimeInterval);
+            // Don't count TotalTime while we're counting down, just show the countdown beat
+            if (!IsCountdownActive)
+                TotalTimeElapsed += TimeSpan.FromMilliseconds(_totalTimeInterval);
         }
 
         private async void OnBeatTimerElapsed(object sender, ElapsedEventArgs e)
         {
+            if (IsCountdownActive)
+            {
+                CountdownCurrentBeat++;
+                return;
+            }
+
             CurrentBeat++;
-            PlayClickSound(CurrentBeat);
 
             await Task.Factory.StartNew(() => { EventManager.Instance.EventAggregator.GetEvent<BeatElapsedEvent>().Publish(CurrentBeat); });
-
-            //Application.Current?.Dispatcher.Dispatch(() =>
-            //{
-            //    EventManager.Instance.EventAggregator.GetEvent<BeatElapsedEvent>().Publish(CurrentBeat);
-            //});
         }
     }
 }

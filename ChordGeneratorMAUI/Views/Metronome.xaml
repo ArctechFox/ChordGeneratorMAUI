@@ -28,7 +28,16 @@
         </Grid.RowDefinitions>
 
         <!--TIMER-->
-        <Label Text="{Binding TotalTimeElapsedString}" Grid.Row="0" Margin="0,0,0,5" Opacity=".5" FontSize="Small"></Label>
+        <Label Text="{Binding TotalTimeElapsedString}" Grid.Row="0" Margin="0,0,0,5" Opacity=".5" FontSize="20">
+            <Label.Triggers>
+                <DataTrigger TargetType="Label" Binding="{Binding IsCountdownActive}" Value="True">
+                    <Setter Property="TextColor" Value="{StaticResource HotMagenta}"></Setter>
+                    <Setter Property="Opacity" Value="1"></Setter>
+                    <Setter Property="FontAttributes" Value="Bold"></Setter>
+                    <Setter Property="FontSize" Value="22"></Setter>
+                </DataTrigger>
+            </Label.Triggers>
+        </Label>
 
         <!--BEAT INDICATORS-->
         <Grid Grid.Row="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0" Padding="0,0">

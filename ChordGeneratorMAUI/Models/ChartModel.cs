@@ -76,7 +76,7 @@ namespace ChordGeneratorMAUI.Models
             set { SetProperty(ref _timeSignature, value); }
         }
 
-        private int _barCount = 4;
+        private int _barCount = 8;
         public int BarCount
         {
             get { return _barCount; }
@@ -254,8 +254,6 @@ namespace ChordGeneratorMAUI.Models
 
         public ObservableCollection<ChordModel> GenerateChords(int chartHistoryCount)
         {
-            // TODO: Debug
-
             ClearChordChart();
 
             #region Filter by Chord Type

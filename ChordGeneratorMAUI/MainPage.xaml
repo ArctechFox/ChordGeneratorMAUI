@@ -28,14 +28,14 @@
             </HorizontalStackLayout>
         </VerticalStackLayout>
 
-        <HorizontalStackLayout Grid.Row="1" Grid.ColumnSpan="2" HorizontalOptions="Fill" VerticalOptions="Center" Padding="10,20,0,20">
+        <HorizontalStackLayout Grid.Row="1" Grid.ColumnSpan="2" HorizontalOptions="Fill" VerticalOptions="Center" Padding="10,10,0,10">
             <!--PROFILE IMAGE-->
-            <ImageButton BackgroundColor="{StaticResource Primary}" Source="chord_star_app_icon.png" HorizontalOptions="Start" WidthRequest="82" HeightRequest="82" Opacity=".5" CornerRadius="100" Margin="25" Padding="-5"></ImageButton>
+            <ImageButton BackgroundColor="{StaticResource Primary}" Source="chord_star_app_icon.png" HorizontalOptions="Start" WidthRequest="82" HeightRequest="82" Opacity=".5" CornerRadius="100" Margin="25"></ImageButton>
 
             <VerticalStackLayout VerticalOptions="Center">
-                <Label Text="Welcome back," HorizontalTextAlignment="Start" TextColor="{StaticResource Secondary}" FontSize="{OnPlatform iOS=Header, Default=28}" Opacity="1"></Label>
+                <Label Text="Welcome back," HorizontalTextAlignment="Start" TextColor="{StaticResource Secondary}" FontSize="33" Opacity="1"></Label>
                 <!--USERNAME-->
-                <Label Text="Jake ☻" HorizontalTextAlignment="Start" TextColor="{StaticResource Secondary}" FontSize="{OnPlatform iOS=Title, Default=34}" Opacity="1"></Label>
+                <Label Text="Jake ☻" HorizontalTextAlignment="Start" TextColor="{StaticResource Secondary}" FontSize="36" Opacity="1"></Label>
             </VerticalStackLayout>
 
         </HorizontalStackLayout>
