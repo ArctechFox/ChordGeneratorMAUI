@@ -52,7 +52,7 @@ namespace ChordGeneratorMAUI.Models
             set { SetProperty(ref _chords, value); }
         }
 
-        private int _bpm = 80;
+        private int _bpm = 120;
         public int BPM
         {
             get { return _bpm; }

@@ -15,7 +15,7 @@ public partial class ChartPage : ContentPage
         List<int> bpmPickerSteps = new List<int>();
 
         // Increments of 5 for the picker, max of 300 for now
-        for (int i = 5; i <= 300; i += 5)
+        for (int i = 5; i <= 250; i += 5)
         {
             bpmPickerSteps.Add(i);
         }

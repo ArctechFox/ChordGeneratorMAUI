@@ -175,38 +175,18 @@ namespace ChordGeneratorMAUI.ViewModels
             set
             {
                 // Deal with previous selection
-                if (value != null)
+                if (_selectedPracticeModeChord != null)
+                    _selectedPracticeModeChord.IsHighlighted = false;
+
+                SetProperty(ref _selectedPracticeModeChord, value);
+
+                // Assigns index, or -1 if not found
+                PracticeModeActiveChordIndex = ChordChart.Chords.IndexOf(SelectedPracticeModeChord);
+
+                // Highlight the new selection, if possible
+                if (PracticeModeActiveChordIndex >= 0)
                 {
-                    if (PracticeModeActiveChordIndex >= 0)
-                    {
-                        var prevChord = ChordChart.Chords[PracticeModeActiveChordIndex];
-                        prevChord.IsHighlighted = false;
-                    }
-                    else if (_selectedPracticeModeChord != null)
-                        _selectedPracticeModeChord.IsHighlighted = false;
-
-                    //
-
-                    SetProperty(ref _selectedPracticeModeChord, value);
-
-                    PracticeModeActiveChordIndex = ChordChart.Chords.IndexOf(_selectedPracticeModeChord);
-                    _selectedPracticeModeChord.IsHighlighted = true;
-
-                    // "Resets" the metronome
-                    //if (ChordChart.IsPaused)
-                    //{
-                    //    Application.Current?.Dispatcher.Dispatch(() =>
-                    //    {
-                    //        Helpers.EventManager.Instance.EventAggregator.GetEvent<TimerPauseEvent>().Publish();
-                    //    });
-                    //}
-                    //else
-                    //{
-                    //    Application.Current?.Dispatcher.Dispatch(() =>
-                    //    {
-                    //        Helpers.EventManager.Instance.EventAggregator.GetEvent<TimerStartEvent>().Publish();
-                    //    });
-                    //}
+                    SelectedPracticeModeChord.IsHighlighted = true;
                 }
             }
         }
@@ -260,7 +240,7 @@ namespace ChordGeneratorMAUI.ViewModels
                 ChartHistory.Add(ChordChart);
 
                 IsPreviousEnabled = ChartHistory.Count > 1;
-                PracticeModeActiveChordIndex = -1;
+                SelectedPracticeModeChord = ChordChart.Chords[0];
             });
 
             SearchChordsCommand = new DelegateCommand<string>(s =>
@@ -318,6 +298,13 @@ namespace ChordGeneratorMAUI.ViewModels
                 {
                     Application.Current?.Dispatcher.Dispatch(() =>
                     {
+                        if (PracticeModeActiveChordIndex == ChordChart.Chords.IndexOf(SelectedPracticeModeChord))
+                        {
+                            // reset selection to prevent advancing instantly to next chord when we hit play
+                            var resetToIndex = (PracticeModeActiveChordIndex - 1);
+                            PracticeModeActiveChordIndex = resetToIndex < -1 ? -1 : resetToIndex; // clamp to prevent invalid index
+                        }
+
                         Helpers.EventManager.Instance.EventAggregator.GetEvent<TimerStartEvent>().Publish();
                     });
                 }
@@ -346,36 +333,31 @@ namespace ChordGeneratorMAUI.ViewModels
             {
                 PracticeModeActiveChordIndex++;
 
-                // Remove highlight from previous chord
-                if (PracticeModeActiveChordIndex > 0)
-                    ChordChart.Chords[PracticeModeActiveChordIndex - 1].IsHighlighted = false;
-
+                // End of chart?
                 if (PracticeModeActiveChordIndex >= ChordChart.Chords.Count)
                 {
-                    PracticeModeActiveChordIndex = 0;
-
+                    // If loop isn't selected, generate new chords
                     if (!ChordChart.LoopPlayback)
                     {
                         GenerateChordsCommand.Execute();
                         // TODO: sus?? vv
-                        PauseToggleCommand.Execute();
-                        return;
+                        //PauseToggleCommand.Execute();
                     }
+
+                    // Select first chord in chart and return
+                    SelectedPracticeModeChord = ChordChart.Chords[0];
+                    return;
                 }
 
-                // Highlight current chord
-                ChordChart.Chords[PracticeModeActiveChordIndex].IsHighlighted = true;
+                // Select next chord
+                SelectedPracticeModeChord = ChordChart.Chords[PracticeModeActiveChordIndex];
             }
         }
 
         private void ResetPlaybackHandler()
         {
-            if (PracticeModeActiveChordIndex > 0)
-                ChordChart.Chords[PracticeModeActiveChordIndex].IsHighlighted = false;
-
-            PracticeModeActiveChordIndex = -1;
-
-            ChordChart.IsPaused = true;
+            SelectedPracticeModeChord = ChordChart.Chords[0];
+            //ChordChart.IsPaused = true;
         }
     }
 }

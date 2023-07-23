@@ -36,6 +36,9 @@ namespace ChordGeneratorMAUI.ViewModels
         // In miliseconds
         private readonly double _totalTimeInterval = 1000;
 
+        // COMMANDS
+        public DelegateCommand CountInToggleCommand { get; set; }
+
         private MetronomeViewModel()
         {
             SetupAudioPlayers();
@@ -48,6 +51,12 @@ namespace ChordGeneratorMAUI.ViewModels
             _beatTimer = new System.Timers.Timer();
             _beatTimer.AutoReset = true;
             _beatTimer.Elapsed += new ElapsedEventHandler(OnBeatTimerElapsed);
+
+            // Commands
+            CountInToggleCommand = new DelegateCommand(() =>
+            {
+                IsCountdownEnabled = !IsCountdownEnabled;
+            });
 
             // Subscribe to relevant events
             Helpers.EventManager.Instance.EventAggregator
@@ -145,17 +154,19 @@ namespace ChordGeneratorMAUI.ViewModels
         public bool IsCountdownEnabled
         {
             get { return _isCountdownEnabled; }
-            set { SetProperty(ref _isCountdownEnabled, value); }
+            set
+            {
+                SetProperty(ref _isCountdownEnabled, value);
+                if (!IsCountdownEnabled)
+                    IsCountdownActive = false;
+            }
         }
 
         private bool _isCountdownActive = false;
         public bool IsCountdownActive
         {
-            get { return _isCountdownActive; }
-            set
-            {
-                SetProperty(ref _isCountdownActive, value);
-            }
+            get { return !IsCountdownEnabled ? false : _isCountdownActive; }
+            set { SetProperty(ref _isCountdownActive, value); }
         }
 
         private int _countdownInBeats = 4;
@@ -175,21 +186,20 @@ namespace ChordGeneratorMAUI.ViewModels
 
                 if (CountdownCurrentBeat > 0)
                 {
-
-                     if (CountdownCurrentBeat > 4)
+                    string countdownString = ". . . . . ";
+                    for (int i = 0; i < CountdownCurrentBeat; i++)
                     {
-                        IsCountdownActive = false;
-
-                        _totalTimer.Stop();
-                        TotalTimeElapsedString = "0:00";
-                        _totalTimer.Start();
-
-                        CurrentBeat = 1;
-                        return;
+                        countdownString = countdownString.Remove(countdownString.Length - 2);
                     }
 
-                    TotalTimeElapsedString = CountdownCurrentBeat.ToString();
+                    TotalTimeElapsedString = countdownString;
                     PlayClickSound(CountdownCurrentBeat);
+
+                    if (CountdownCurrentBeat > 3)
+                    {
+                        IsCountdownActive = false;
+                        CurrentBeat = 0;
+                    }
                 }
             }
         }
@@ -219,11 +229,13 @@ namespace ChordGeneratorMAUI.ViewModels
 
         private void StartMetronome()
         {
-            TotalTimeElapsedString = "";
-            IsCountdownActive = true;
+            if (IsCountdownEnabled)
+            {
+                IsCountdownActive = true;
+                CountdownCurrentBeat = 1; // always start count-in on the 1
+            }
 
             CurrentBeat = 0;
-            CountdownCurrentBeat = 0;
 
             _beatTimer.Start();
         }
@@ -249,7 +261,6 @@ namespace ChordGeneratorMAUI.ViewModels
         {
             CurrentBeat = 0;
             TotalTimeElapsed = TimeSpan.Zero;
-            //ChartCount = ChartCount <= 0 ? 0 : ChartCount-1;
         }
 
         private void BPMChangedHandler(int bpm)
@@ -260,11 +271,9 @@ namespace ChordGeneratorMAUI.ViewModels
 
         private void ChartGeneratedHandler()
         {
-            ResetToDefaultSettings();
-            StopMetronome();
 
-            //if (ChartCount > 0)
-            //    CurrentBeat = 1;
+            //StartMetronome();
+            //StopMetronome();
 
             ChartCount++;
         }
@@ -272,13 +281,15 @@ namespace ChordGeneratorMAUI.ViewModels
         private void OnTotalTimerElapsed(object sender, ElapsedEventArgs e)
         {
             // Don't count TotalTime while we're counting down, just show the countdown beat
-            if (!IsCountdownActive)
+            if (!IsCountdownActive || !IsCountdownEnabled)
+            {
                 TotalTimeElapsed += TimeSpan.FromMilliseconds(_totalTimeInterval);
+            }
         }
 
         private async void OnBeatTimerElapsed(object sender, ElapsedEventArgs e)
         {
-            if (IsCountdownActive)
+            if (IsCountdownEnabled && IsCountdownActive)
             {
                 CountdownCurrentBeat++;
                 return;
