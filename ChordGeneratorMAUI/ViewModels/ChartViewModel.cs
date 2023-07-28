@@ -46,7 +46,7 @@ namespace ChordGeneratorMAUI.ViewModels
             set { SetProperty(ref _chartHistory, value); }
         }
 
-        private int _practiceModeActiveChordIndex = -1;
+        private int _practiceModeActiveChordIndex = 0;
         public int PracticeModeActiveChordIndex
         {
             get { return _practiceModeActiveChordIndex; }
@@ -180,7 +180,7 @@ namespace ChordGeneratorMAUI.ViewModels
 
                 SetProperty(ref _selectedPracticeModeChord, value);
 
-                // Assigns index, or -1 if not found
+                // Sync index for accuracy
                 PracticeModeActiveChordIndex = ChordChart.Chords.IndexOf(SelectedPracticeModeChord);
 
                 // Highlight the new selection, if possible
@@ -287,26 +287,11 @@ namespace ChordGeneratorMAUI.ViewModels
                 // Toggle boolean
                 ChordChart.IsPaused = !ChordChart.IsPaused;
 
-                if (ChordChart.IsPaused)
+            if (!ChordChart.IsPaused)// && (PracticeModeActiveChordIndex == ChordChart.Chords.IndexOf(SelectedPracticeModeChord)))
                 {
-                    Application.Current?.Dispatcher.Dispatch(() =>
-                    {
-                        Helpers.EventManager.Instance.EventAggregator.GetEvent<TimerPauseEvent>().Publish();
-                    });
-                }
-                else
-                {
-                    Application.Current?.Dispatcher.Dispatch(() =>
-                    {
-                        if (PracticeModeActiveChordIndex == ChordChart.Chords.IndexOf(SelectedPracticeModeChord))
-                        {
-                            // reset selection to prevent advancing instantly to next chord when we hit play
-                            var resetToIndex = (PracticeModeActiveChordIndex - 1);
-                            PracticeModeActiveChordIndex = resetToIndex < -1 ? -1 : resetToIndex; // clamp to prevent invalid index
-                        }
-
-                        Helpers.EventManager.Instance.EventAggregator.GetEvent<TimerStartEvent>().Publish();
-                    });
+                    // reset selection to prevent advancing instantly to next chord when we hit play
+                    var resetToIndex = (PracticeModeActiveChordIndex - 1);
+                    PracticeModeActiveChordIndex = resetToIndex < 0 ? -1 : resetToIndex; // clamp to prevent invalid index
                 }
             });
 
@@ -331,25 +316,25 @@ namespace ChordGeneratorMAUI.ViewModels
         {
             if (currentBeat == 1)
             {
-                PracticeModeActiveChordIndex++;
-
                 // End of chart?
-                if (PracticeModeActiveChordIndex >= ChordChart.Chords.Count)
+                if (PracticeModeActiveChordIndex >= ChordChart.Chords.Count - 1)
                 {
                     // If loop isn't selected, generate new chords
                     if (!ChordChart.LoopPlayback)
                     {
                         GenerateChordsCommand.Execute();
-                        // TODO: sus?? vv
-                        //PauseToggleCommand.Execute();
+                        PauseToggleCommand.Execute();
+                    }
+                    else
+                    {
+                        SelectedPracticeModeChord = ChordChart.Chords[0];
                     }
 
-                    // Select first chord in chart and return
-                    SelectedPracticeModeChord = ChordChart.Chords[0];
                     return;
                 }
 
                 // Select next chord
+                PracticeModeActiveChordIndex++;
                 SelectedPracticeModeChord = ChordChart.Chords[PracticeModeActiveChordIndex];
             }
         }

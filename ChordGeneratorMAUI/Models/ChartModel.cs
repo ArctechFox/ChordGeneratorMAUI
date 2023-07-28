@@ -109,7 +109,25 @@ namespace ChordGeneratorMAUI.Models
         public bool IsPaused
         {
             get { return _isPaused; }
-            set { SetProperty(ref _isPaused, value); }
+            set 
+            { 
+                SetProperty(ref _isPaused, value); 
+
+                if (IsPaused)
+                {
+                    Application.Current?.Dispatcher.Dispatch(() =>
+                    {
+                        Helpers.EventManager.Instance.EventAggregator.GetEvent<TimerPauseEvent>().Publish();
+                    });
+                }
+                else
+                {
+                    Application.Current?.Dispatcher.Dispatch(() =>
+                    {
+                        Helpers.EventManager.Instance.EventAggregator.GetEvent<TimerStartEvent>().Publish();
+                    });
+                }
+            }
         }
 
         private bool _isChordChartActive = false;

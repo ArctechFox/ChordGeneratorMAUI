@@ -148,6 +148,13 @@ namespace ChordGeneratorMAUI.ViewModels
             }
         }
 
+        private bool _generatingChart = false;
+        public bool GeneratingChart
+        {
+            get { return _generatingChart; }
+            set { SetProperty(ref _generatingChart, value); }
+        }
+
         // COUNTDOWN PROPS
 
         private bool _isCountdownEnabled = true;
@@ -229,13 +236,14 @@ namespace ChordGeneratorMAUI.ViewModels
 
         private void StartMetronome()
         {
-            if (IsCountdownEnabled)
+            if (IsCountdownEnabled && !GeneratingChart)
             {
                 IsCountdownActive = true;
                 CountdownCurrentBeat = 1; // always start count-in on the 1
             }
 
-            CurrentBeat = 0;
+            CurrentBeat = GeneratingChart ? 1 : 0;
+            GeneratingChart = false;
 
             _beatTimer.Start();
         }
@@ -271,10 +279,7 @@ namespace ChordGeneratorMAUI.ViewModels
 
         private void ChartGeneratedHandler()
         {
-
-            //StartMetronome();
-            //StopMetronome();
-
+            GeneratingChart = true;
             ChartCount++;
         }
 
