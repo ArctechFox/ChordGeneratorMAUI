@@ -83,7 +83,7 @@
                             <Setter.Value>
                                 <Shadow Brush="{StaticResource Primary2}"
                                              Offset="0,-5"
-                                             Radius="20"
+                                             Radius="10"
                                              Opacity="1" />
                             </Setter.Value>
                         </Setter>
@@ -99,7 +99,7 @@
                             <Setter.Value>
                                 <Shadow Brush="{StaticResource Primary2}"
                                              Offset="0,-5"
-                                             Radius="15"
+                                             Radius="10"
                                              Opacity="0.6" />
                             </Setter.Value>
                         </Setter>
@@ -115,7 +115,7 @@
                             <Setter.Value>
                                 <Shadow Brush="{StaticResource Primary2}"
                                              Offset="0,-5"
-                                             Radius="15"
+                                             Radius="10"
                                              Opacity="0.6" />
                             </Setter.Value>
                         </Setter>

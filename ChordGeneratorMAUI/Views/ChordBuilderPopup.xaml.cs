@@ -3,18 +3,23 @@ namespace ChordGeneratorMAUI.Views;
 
 public partial class ChordBuilderPopup : Popup
 {
-	public ChordBuilderPopup()
-	{
-		InitializeComponent();
-	}
+    public ChordBuilderPopup()
+    {
+        InitializeComponent();
+    }
 
     private void btnInsertChord_Clicked(object sender, EventArgs e)
     {
-		this.Close();
+        this.Close();
     }
 
     private void btnEmptyChord_Clicked(object sender, EventArgs e)
     {
         this.Close();
+    }
+
+    private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+    {
+        btnInsertChord.IsEnabled = e.SelectedItem != null;
     }
 }

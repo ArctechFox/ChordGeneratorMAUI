@@ -30,7 +30,10 @@ public partial class ChartPage : ContentPage
 
     private async void SettingsButton_Tapped(object sender, TappedEventArgs e)
     {
-        await Navigation.PushAsync(new ChartSettingsPage() { BindingContext = this.BindingContext });
+        //await Navigation.PushAsync(new ChartSettingsPage() { BindingContext = this.BindingContext });
+
+        var popup = new ChartSettingsPopup();
+        await this.ShowPopupAsync(popup);
     }
 
     private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)

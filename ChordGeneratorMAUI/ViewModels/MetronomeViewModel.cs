@@ -236,7 +236,7 @@ namespace ChordGeneratorMAUI.ViewModels
 
         private void StartMetronome()
         {
-            if (IsCountdownEnabled && !GeneratingChart)
+            if (IsCountdownEnabled && (!GeneratingChart || ChartCount <= 1))
             {
                 IsCountdownActive = true;
                 CountdownCurrentBeat = 1; // always start count-in on the 1

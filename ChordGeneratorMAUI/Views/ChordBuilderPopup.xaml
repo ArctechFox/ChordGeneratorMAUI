@@ -28,7 +28,7 @@
 		<!--OPTIONS-->
 		<HorizontalStackLayout Grid.Column="1" Grid.Row="0" Margin="0,0,5,0" HorizontalOptions="End">
 			<Label Text="In Key" TextColor="{StaticResource Secondary}" FontSize="Micro" Opacity=".98" HorizontalTextAlignment="End" Padding="0"></Label>
-			<Label Text="{Binding ChordChart.SelectedKey, FallbackValue=None}" FontAttributes="Bold" TextColor="{StaticResource Secondary}" Padding="0" FontSize="Micro" Margin="0" HorizontalTextAlignment="Center"></Label>
+			<Label Text="{Binding ChordChart.SelectedKey, FallbackValue=None}" FontAttributes="Bold" TextColor="{StaticResource Secondary}" Padding="0" FontSize="Micro" Margin="2,0" HorizontalTextAlignment="Center"></Label>
 			<CheckBox IsChecked="{Binding WriteOnlyChordsInKey}" Color="{StaticResource Secondary}" Margin="0,0,10,0"></CheckBox>
 		</HorizontalStackLayout>
 
@@ -41,9 +41,9 @@
 
 		<!--RESULTS LISTVIEW-->
 		<ListView Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" SelectionMode="Single" Background="{StaticResource Black}" Margin="{OnPlatform WinUI='10,0,0,0', Default='0'}" 
-				  MinimumHeightRequest="250" MaximumHeightRequest="{OnPlatform Android='500', Default='800'}"
+				  MinimumHeightRequest="250" MaximumHeightRequest="{OnPlatform Android='500', Default='650'}"
 				  ItemsSource="{Binding ChordBuilderSearchResults}"
-				  SelectedItem="{Binding SelectedChordBuilderChord}">
+				  SelectedItem="{Binding SelectedChordBuilderChord}" ItemSelected="ListView_ItemSelected">
 
 			<ListView.ItemTemplate>
 				<DataTemplate>
@@ -63,7 +63,7 @@
 			</Grid.ColumnDefinitions>
 
 			<Button Grid.Column="0" x:Name="btnEmptyChord" Text="Empty" Command="{Binding WriteEmptyChordCommand}" Clicked="btnEmptyChord_Clicked"></Button>
-			<Button Grid.Column="1" x:Name="btnInsertChord" Text="Insert" Command="{Binding WriteNewChordCommand}" Clicked="btnInsertChord_Clicked"></Button>
+			<Button Grid.Column="1" x:Name="btnInsertChord" Text="Insert" Command="{Binding WriteNewChordCommand}" Clicked="btnInsertChord_Clicked" IsEnabled="False"></Button>
 		</Grid>
 
 	</Grid>

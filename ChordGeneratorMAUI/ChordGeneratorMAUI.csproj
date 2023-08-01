@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net7.0-ios;net7.0-maccatalyst;net7.0-android</TargetFrameworks>
+		<TargetFrameworks>net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
 		<OutputType>Exe</OutputType>
@@ -164,6 +164,9 @@
 	  <Compile Update="Views\ChartPage.xaml.cs">
 	    <DependentUpon>ChartPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\ChartSettingsPopup.xaml.cs">
+	    <DependentUpon>ChartSettingsPopup.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -189,6 +192,9 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="Views\ChartSettingsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ChartSettingsPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\ChordBuilderPopup.xaml">

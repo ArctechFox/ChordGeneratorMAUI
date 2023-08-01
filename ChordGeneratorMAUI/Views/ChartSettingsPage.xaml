@@ -60,110 +60,7 @@
 				<RowDefinition Height="*"></RowDefinition>
 			</Grid.RowDefinitions>
 
-			<VerticalStackLayout>
-
-				<Grid Margin="0,0,0,10">
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="Auto"></ColumnDefinition>
-						<ColumnDefinition Width="*"></ColumnDefinition>
-					</Grid.ColumnDefinitions>
-
-					<!--KEY-->
-					<VerticalStackLayout Grid.Column="0">
-						<Label Text="Key" FontSize="Medium" FontAttributes="Bold" HorizontalTextAlignment="Start" IsVisible="{OnPlatform iOS=True, Default=False}"></Label>
-
-						<Picker Title="Key" SelectedItem="{Binding ChordChart.SelectedKey}" HorizontalOptions="StartAndExpand"
-							Background="{StaticResource Primary}" TextColor="{StaticResource White}" TitleColor="{StaticResource Black}"
-							FontSize="Medium" MinimumWidthRequest="150" VerticalOptions="End">
-							<Picker.ItemsSource>
-								<x:Array Type="{x:Type sys:String}">
-									<sys:String>All</sys:String>
-									<sys:String>Ab Major</sys:String>
-									<sys:String>A Major</sys:String>
-									<sys:String>Ab Minor</sys:String>
-									<sys:String>A Minor</sys:String>
-									<sys:String>A# Minor</sys:String>
-
-									<sys:String>Bb Major</sys:String>
-									<sys:String>B Major</sys:String>
-									<sys:String>Bb Minor</sys:String>
-									<sys:String>B Minor</sys:String>
-
-									<sys:String>Cb Major</sys:String>
-									<sys:String>C Major</sys:String>
-									<sys:String>C# Major</sys:String>
-									<sys:String>C Minor</sys:String>
-									<sys:String>C# Minor</sys:String>
-
-									<sys:String>Db Major</sys:String>
-									<sys:String>D Major</sys:String>
-									<sys:String>D Minor</sys:String>
-									<sys:String>D# Minor</sys:String>
-
-									<sys:String>Eb Major</sys:String>
-									<sys:String>E Major</sys:String>
-									<sys:String>Eb Minor</sys:String>
-									<sys:String>E Minor</sys:String>
-
-									<sys:String>F Major</sys:String>
-									<sys:String>F# Major</sys:String>
-									<sys:String>F Minor</sys:String>
-									<sys:String>F# Minor</sys:String>
-
-									<sys:String>Gb Major</sys:String>
-									<sys:String>G Major</sys:String>
-									<sys:String>G Minor</sys:String>
-									<sys:String>G# Minor</sys:String>
-
-								</x:Array>
-							</Picker.ItemsSource>
-						</Picker>
-					</VerticalStackLayout>
-
-					<!--BPM-->
-					<VerticalStackLayout Grid.Column="1" HorizontalOptions="End">
-                        <Label Text="BPM" FontSize="Medium" FontAttributes="Bold" HorizontalTextAlignment="End" IsVisible="{OnPlatform iOS=True, Default=False}"></Label>
-
-						<Picker Title="BPM" SelectedItem="{Binding ChordChart.BPM}" HorizontalTextAlignment="End"
-							Background="{StaticResource Primary}" TextColor="{StaticResource White}" TitleColor="{StaticResource Black}"
-							FontSize="Medium" MinimumWidthRequest="150" VerticalOptions="End">
-							<Picker.ItemsSource>
-								<x:Array Type="{x:Type sys:Int32}">
-									<sys:Int32>60</sys:Int32>
-									<sys:Int32>65</sys:Int32>
-									<sys:Int32>70</sys:Int32>
-									<sys:Int32>75</sys:Int32>
-									<sys:Int32>80</sys:Int32>
-									<sys:Int32>85</sys:Int32>
-									<sys:Int32>90</sys:Int32>
-									<sys:Int32>95</sys:Int32>
-									<sys:Int32>100</sys:Int32>
-									<sys:Int32>105</sys:Int32>
-									<sys:Int32>110</sys:Int32>
-									<sys:Int32>115</sys:Int32>
-									<sys:Int32>120</sys:Int32>
-									<sys:Int32>125</sys:Int32>
-									<sys:Int32>130</sys:Int32>
-									<sys:Int32>135</sys:Int32>
-									<sys:Int32>140</sys:Int32>
-									<sys:Int32>145</sys:Int32>
-									<sys:Int32>150</sys:Int32>
-									<sys:Int32>155</sys:Int32>
-									<sys:Int32>160</sys:Int32>
-									<sys:Int32>165</sys:Int32>
-									<sys:Int32>170</sys:Int32>
-									<sys:Int32>175</sys:Int32>
-									<sys:Int32>180</sys:Int32>
-									<sys:Int32>185</sys:Int32>
-									<sys:Int32>190</sys:Int32>
-									<sys:Int32>195</sys:Int32>
-									<sys:Int32>200</sys:Int32>
-								</x:Array>
-							</Picker.ItemsSource>
-						</Picker>
-					</VerticalStackLayout>
-
-				</Grid>
+            <VerticalStackLayout>
 
                 <Grid Margin="0,0,0,20">
                     <Grid.ColumnDefinitions>
@@ -201,71 +98,49 @@
                 </Grid>
 
                 <!--INCLUDED CHORD TYPES-->
-				<toolkit:Expander IsExpanded="True" Margin="0,0,0,10">
-					<toolkit:Expander.Header>
-						<Border Padding="10">
-							<Label Text="Chord Types" TextColor="White" FontSize="Medium" FontAttributes="Bold"></Label>
-						</Border>
-					</toolkit:Expander.Header>
+                <toolkit:Expander IsExpanded="True" Margin="0,0,0,10">
+                    <toolkit:Expander.Header>
+                        <Border Padding="10">
+                            <Label Text="Chord Types" TextColor="White" FontSize="Medium" FontAttributes="Bold"></Label>
+                        </Border>
+                    </toolkit:Expander.Header>
 
-					<HorizontalStackLayout Padding="20,0,20,10">
-						<VerticalStackLayout >
-							<Label Text="All" Margin="0, 10, 0, 0"></Label>
-							<Switch IsToggled="{Binding ChordChart.IncludeChordType_All}"></Switch>
-							<Label Text="Major" Margin="0, 10, 0, 0"></Label>
-							<Switch IsToggled="{Binding ChordChart.IncludeChordType_Major}"></Switch>
-							<Label Text="Minor" Margin="0, 10, 0, 0"></Label>
-							<Switch IsToggled="{Binding ChordChart.IncludeChordType_Minor}"></Switch>
-							<Label Text="7th" Margin="0, 10, 0, 0"></Label>
-							<Switch IsToggled="{Binding ChordChart.IncludeChordType_7th}"></Switch>
-						</VerticalStackLayout>
+                    <HorizontalStackLayout Padding="20,0,20,10">
+                        <VerticalStackLayout >
+                            <Label Text="All" Margin="0, 10, 0, 0"></Label>
+                            <Switch IsToggled="{Binding ChordChart.IncludeChordType_All}"></Switch>
+                            <Label Text="Major" Margin="0, 10, 0, 0"></Label>
+                            <Switch IsToggled="{Binding ChordChart.IncludeChordType_Major}"></Switch>
+                            <Label Text="Minor" Margin="0, 10, 0, 0"></Label>
+                            <Switch IsToggled="{Binding ChordChart.IncludeChordType_Minor}"></Switch>
+                            <Label Text="7th" Margin="0, 10, 0, 0"></Label>
+                            <Switch IsToggled="{Binding ChordChart.IncludeChordType_7th}"></Switch>
+                        </VerticalStackLayout>
 
-						<VerticalStackLayout Margin="40,0">
-							<Label IsEnabled="False" Text="6th" Margin="0, 10, 0, 0" Opacity=".5"></Label>
-							<Switch IsEnabled="False"></Switch>
+                        <VerticalStackLayout Margin="40,0">
+                            <Label IsEnabled="False" Text="6th" Margin="0, 10, 0, 0" Opacity=".5"></Label>
+                            <Switch IsEnabled="False"></Switch>
                             <Label IsEnabled="False" Text="9th" Margin="0, 10, 0, 0" Opacity=".5"></Label>
-							<Switch IsEnabled="False"></Switch>
+                            <Switch IsEnabled="False"></Switch>
                             <Label IsEnabled="False" Text="13th" Margin="0, 10, 0, 0" Opacity=".5"></Label>
-							<Switch IsEnabled="False"></Switch>
-						</VerticalStackLayout>
-					</HorizontalStackLayout>
-				</toolkit:Expander>
+                            <Switch IsEnabled="False"></Switch>
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </toolkit:Expander>
 
-				<!--SHOW DIMINISHED CHORDS-->
-				<Grid>
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="*"></ColumnDefinition>
-						<ColumnDefinition Width="Auto"></ColumnDefinition>
-					</Grid.ColumnDefinitions>
+                <!--SHOW DIMINISHED CHORDS-->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
 
-					<Label Grid.Column="0" Text="Diminished Chords" HorizontalOptions="Start" VerticalOptions="Center"></Label>
-					<Switch Grid.Column="1" IsToggled="{Binding ChordChart.ShowDiminishedAsMinor}" HorizontalOptions="End" VerticalOptions="Center"></Switch>
-				</Grid>
+                    <Label Grid.Column="0" Text="Diminished Chords" HorizontalOptions="Start" VerticalOptions="Center"></Label>
+                    <Switch Grid.Column="1" IsToggled="{Binding ChordChart.ShowDiminishedAsMinor}" HorizontalOptions="End" VerticalOptions="Center"></Switch>
+                </Grid>
 
-				<!--LOOP PLAYBACK-->
-				<Grid Margin="0,10,0,0">
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="*"></ColumnDefinition>
-						<ColumnDefinition Width="Auto"></ColumnDefinition>
-					</Grid.ColumnDefinitions>
-
-					<Label Grid.Column="0" Text="Loop" HorizontalOptions="Start" VerticalOptions="Center"></Label>
-					<Switch Grid.Column="1" IsToggled="{Binding ChordChart.LoopPlayback}" HorizontalOptions="End" VerticalOptions="Center"></Switch>
-				</Grid>
-
-				
-
-			</VerticalStackLayout>
-
-            <!--WRITING/READING MODE-->
-			<!--<VerticalStackLayout Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center">
-				<HorizontalStackLayout>
-                    <Button x:Name="btnReadingMode" Text="Reading Mode" Clicked="btnReadingMode_Clicked" Margin="2"></Button>
-					<Button x:Name="btnWritingMode" Text="Writing Mode" Clicked="btnWritingMode_Clicked" Margin="2"></Button>
-				</HorizontalStackLayout>
-			</VerticalStackLayout>-->
-
-		</Grid>
+            </VerticalStackLayout>
+        </Grid>
 	</ScrollView>
 
 	
