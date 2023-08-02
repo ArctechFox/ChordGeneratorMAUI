@@ -20,6 +20,6 @@ public partial class ChordBuilderPopup : Popup
 
     private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
-        btnInsertChord.IsEnabled = e.SelectedItem != null;
+        //btnInsertChord.IsEnabled = true;
     }
 }

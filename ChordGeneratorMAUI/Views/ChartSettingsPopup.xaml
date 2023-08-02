@@ -14,10 +14,10 @@
                 <Style TargetType="Border">
                     <Setter Property="BackgroundColor" Value="{StaticResource Primary}"></Setter>
                     <Setter Property="StrokeThickness" Value="0"></Setter>
-                    <Setter Property="Padding" Value="8,16"></Setter>
+                    <Setter Property="Padding" Value="8"></Setter>
                     <Setter Property="StrokeShape">
                         <Setter.Value>
-                            <RoundRectangle CornerRadius="10"></RoundRectangle>
+                            <RoundRectangle CornerRadius="8"></RoundRectangle>
                         </Setter.Value>
                     </Setter>
                 </Style>
@@ -112,7 +112,7 @@
         <toolkit:Expander IsExpanded="True" Margin="0,0,0,10" Grid.ColumnSpan="2" Grid.Row="2">
             <toolkit:Expander.Header>
                 <Border Padding="5">
-                    <Label Text="Chord Types" TextColor="White" FontSize="16" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="5,0"></Label>
+                    <Label Text="Chord Types" TextColor="White" FontSize="14" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="4" HeightRequest="25"></Label>
                 </Border>
             </toolkit:Expander.Header>
 

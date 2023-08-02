@@ -57,7 +57,8 @@
             </Label>
             
             <!--CLICK TOGGLE/OPTIONS?-->
-            <Button x:Name="btnMetronomeClick" Grid.Column="2" Background="Transparent" FontSize="20" FontFamily="FA Pro Regular" Text="hourglass" Opacity=".5" HorizontalOptions="End"/>
+            <Button x:Name="btnMetronomeOptions" Grid.Column="2" 
+                    Background="Transparent" FontSize="20" FontFamily="FA Pro Light" Text="hourglass" Opacity=".5" HorizontalOptions="End"/>
         </Grid>
 
         
@@ -74,23 +75,23 @@
                 <RowDefinition Height="15"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <RoundRectangle Grid.Column="0" Fill="{StaticResource Gray500Brush}">
+            <RoundRectangle Grid.Column="0" Fill="{StaticResource Gray600Brush}">
                 <RoundRectangle.Triggers>
                     <DataTrigger TargetType="RoundRectangle" Binding="{Binding CurrentBeat}" Value="1">
-                        <Setter Property="Fill" Value="{StaticResource Primary2}"></Setter>
+                        <Setter Property="Fill" Value="{StaticResource HotMagenta}"></Setter>
                         <Setter Property="Opacity" Value="1"></Setter>
                         <Setter Property="Shadow">
                             <Setter.Value>
-                                <Shadow Brush="{StaticResource Primary2}"
-                                             Offset="0,-5"
-                                             Radius="10"
+                                <Shadow Brush="{StaticResource HotMagenta}"
+                                             Offset="0,-3"
+                                             Radius="5"
                                              Opacity="1" />
                             </Setter.Value>
                         </Setter>
                     </DataTrigger>
                 </RoundRectangle.Triggers>
             </RoundRectangle>
-            <RoundRectangle Grid.Column="1" Fill="{StaticResource Gray500Brush}">
+            <RoundRectangle Grid.Column="1" Fill="{StaticResource Gray600Brush}">
                 <RoundRectangle.Triggers>
                     <DataTrigger TargetType="RoundRectangle" Binding="{Binding CurrentBeat}" Value="2">
                         <Setter Property="Fill" Value="{StaticResource Primary2}"></Setter>
@@ -98,15 +99,15 @@
                         <Setter Property="Shadow">
                             <Setter.Value>
                                 <Shadow Brush="{StaticResource Primary2}"
-                                             Offset="0,-5"
-                                             Radius="10"
+                                             Offset="0,-3"
+                                             Radius="5"
                                              Opacity="0.6" />
                             </Setter.Value>
                         </Setter>
                     </DataTrigger>
                 </RoundRectangle.Triggers>
             </RoundRectangle>
-            <RoundRectangle Grid.Column="2" Fill="{StaticResource Gray500Brush}">
+            <RoundRectangle Grid.Column="2" Fill="{StaticResource Gray600Brush}">
                 <RoundRectangle.Triggers>
                     <DataTrigger TargetType="RoundRectangle" Binding="{Binding CurrentBeat}" Value="3">
                         <Setter Property="Fill" Value="{StaticResource Primary2}"></Setter>
@@ -114,15 +115,15 @@
                         <Setter Property="Shadow">
                             <Setter.Value>
                                 <Shadow Brush="{StaticResource Primary2}"
-                                             Offset="0,-5"
-                                             Radius="10"
+                                             Offset="0,-3"
+                                             Radius="5"
                                              Opacity="0.6" />
                             </Setter.Value>
                         </Setter>
                     </DataTrigger>
                 </RoundRectangle.Triggers>
             </RoundRectangle>
-            <RoundRectangle Grid.Column="3" Fill="{StaticResource Gray500Brush}">
+            <RoundRectangle Grid.Column="3" Fill="{StaticResource Gray600Brush}">
                 <RoundRectangle.Triggers>
                     <DataTrigger TargetType="RoundRectangle" Binding="{Binding CurrentBeat}" Value="4">
                         <Setter Property="Fill" Value="{StaticResource Primary2}"></Setter>
@@ -130,8 +131,8 @@
                         <Setter Property="Shadow">
                             <Setter.Value>
                                 <Shadow Brush="{StaticResource Primary2}"
-                                             Offset="0,-5"
-                                             Radius="15"
+                                             Offset="0,-3"
+                                             Radius="5"
                                              Opacity="0.6" />
                             </Setter.Value>
                         </Setter>

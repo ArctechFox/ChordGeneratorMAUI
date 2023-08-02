@@ -140,7 +140,11 @@ namespace ChordGeneratorMAUI.ViewModels
         public ObservableCollection<ChordModel> ChordBuilderSearchResults
         {
             get { return _chordBuilderSearchResults; }
-            set { SetProperty(ref _chordBuilderSearchResults, value); }
+            set
+            {
+                SetProperty(ref _chordBuilderSearchResults, value);
+                SelectedChordBuilderChord = ChordBuilderSearchResults.FirstOrDefault();
+            }
         }
 
         private ChordModel _selectedChordBuilderChord = new ChordModel();
@@ -239,7 +243,7 @@ namespace ChordGeneratorMAUI.ViewModels
                 ChordChart.GenerateChords(ChartHistory.Count);
                 ChartHistory.Add(ChordChart);
 
-                IsPreviousEnabled = ChartHistory.Count > 1;
+                IsPreviousEnabled = ChartHistory.Count > 0;
                 SelectedPracticeModeChord = ChordChart.Chords[0];
             });
 
@@ -260,9 +264,11 @@ namespace ChordGeneratorMAUI.ViewModels
                 int indexOfChord = ChordChart.Chords.IndexOf(SelectedWritingModeChord);
                 ChordChart.Chords[indexOfChord] = SelectedChordBuilderChord;
                 ChordChart.Chords[indexOfChord].BelongsInKey = ChordChart.KeyChords.Any(c => c.Name == ChordChart.Chords[indexOfChord].Name);
+                ChordChart.IsChordChartActive = true;
 
                 SelectedWritingModeChord = null;
-            });
+
+            }, CanWriteNewChord).ObservesProperty(() => SelectedChordBuilderChord);
 
             WriteEmptyChordCommand = new DelegateCommand(() =>
             {
@@ -274,20 +280,17 @@ namespace ChordGeneratorMAUI.ViewModels
 
             PreviousChartCommand = new DelegateCommand(() =>
             {
-                if (IsPreviousEnabled)
-                {
-                    int previousIndex = ChartHistory.IndexOf(ChordChart) - 1;
-                    if (previousIndex <= 0) previousIndex = 0;
-                    ChordChart = ChartHistory[previousIndex];
-                }
-            });
+                int previousIndex = ChartHistory.IndexOf(ChordChart) - 1;
+                if (previousIndex <= 0) previousIndex = 0;
+                ChordChart = ChartHistory[previousIndex];
+            }).ObservesCanExecute(() => IsPreviousEnabled);
 
             PauseToggleCommand = new DelegateCommand(() =>
             {
                 // Toggle boolean
                 ChordChart.IsPaused = !ChordChart.IsPaused;
 
-            if (!ChordChart.IsPaused)// && (PracticeModeActiveChordIndex == ChordChart.Chords.IndexOf(SelectedPracticeModeChord)))
+                if (!ChordChart.IsPaused)// && (PracticeModeActiveChordIndex == ChordChart.Chords.IndexOf(SelectedPracticeModeChord)))
                 {
                     // reset selection to prevent advancing instantly to next chord when we hit play
                     var resetToIndex = (PracticeModeActiveChordIndex - 1);
@@ -310,6 +313,14 @@ namespace ChordGeneratorMAUI.ViewModels
             {
                 ChordChart.Chords.Add(new ChordModel());
             }
+
+            // END OF CTOR
+        }
+
+        // For the "CanExecute" of WriteNewChordCommand
+        private bool CanWriteNewChord()
+        {
+            return SelectedChordBuilderChord != null;
         }
 
         private void BeatElapsedHandler(int currentBeat)
@@ -342,7 +353,6 @@ namespace ChordGeneratorMAUI.ViewModels
         private void ResetPlaybackHandler()
         {
             SelectedPracticeModeChord = ChordChart.Chords[0];
-            //ChordChart.IsPaused = true;
         }
     }
 }

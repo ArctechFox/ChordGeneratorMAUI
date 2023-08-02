@@ -225,7 +225,7 @@
                         </Border.Triggers>
 
                         <!--CHORD NAME-->
-                        <Label FontSize="18" Margin="4" FontFamily="Sansation" FontAttributes="None" HorizontalOptions="Center" Text="{Binding Name}"></Label>
+                        <Label FontSize="17" Margin="4" FontFamily="Sansation" FontAttributes="None" HorizontalOptions="Center" Text="{Binding Name}"></Label>
                     </Border>
 
                 </DataTemplate>
@@ -275,7 +275,7 @@
                         </Border.Style>
 
                         <!--CHORD NAME-->
-                        <Label FontSize="18" Margin="4" FontFamily="Sansation" FontAttributes="None" HorizontalOptions="Center" Text="{Binding Name}"></Label>
+                        <Label FontSize="17" Margin="4" FontFamily="Sansation" FontAttributes="None" HorizontalOptions="Center" Text="{Binding Name}"></Label>
                     </Border>
 
                 </DataTemplate>
@@ -336,12 +336,12 @@
 
             <!--PLAYBACK CONTROLS-->
             <!--Playback Background-->
-            <Border Grid.ColumnSpan="5" Grid.Row="1" Background="{StaticResource MainGradientBrush_Vertical}" Opacity=".98" Padding="50" Margin="0,-2" StrokeThickness="0">
+            <Border Grid.ColumnSpan="5" Grid.Row="1" Background="{StaticResource MainGradientBrush_Vertical}" Opacity=".98" Padding="40" Margin="0" StrokeThickness="0">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="0"></RoundRectangle>
                 </Border.StrokeShape>
                 <Border.Shadow>
-                    <Shadow Brush="{StaticResource Primary2}" Radius="15" Offset="0,-5" Opacity=".5"></Shadow>
+                    <Shadow Brush="{StaticResource Primary2}" Radius="10" Offset="0,-5" Opacity=".5"></Shadow>
                 </Border.Shadow>
             </Border>
 

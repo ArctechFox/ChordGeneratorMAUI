@@ -271,10 +271,12 @@ namespace ChordGeneratorMAUI.ViewModels
             TotalTimeElapsed = TimeSpan.Zero;
         }
 
-        private void BPMChangedHandler(int bpm)
+        private async void BPMChangedHandler(int bpm)
         {
-            _beatTimer.Interval = 60000 / bpm;
-            CurrentBeat = 0;
+            await Task.Factory.StartNew(() =>
+            {
+                _beatTimer.Interval = 60000 / bpm;
+            });
         }
 
         private void ChartGeneratedHandler()
@@ -283,13 +285,16 @@ namespace ChordGeneratorMAUI.ViewModels
             ChartCount++;
         }
 
-        private void OnTotalTimerElapsed(object sender, ElapsedEventArgs e)
+        private async void OnTotalTimerElapsed(object sender, ElapsedEventArgs e)
         {
-            // Don't count TotalTime while we're counting down, just show the countdown beat
-            if (!IsCountdownActive || !IsCountdownEnabled)
+            await Task.Factory.StartNew(() =>
             {
-                TotalTimeElapsed += TimeSpan.FromMilliseconds(_totalTimeInterval);
-            }
+                // Don't count TotalTime while we're counting down, just show the countdown beat
+                if (!IsCountdownActive || !IsCountdownEnabled)
+                {
+                    TotalTimeElapsed += TimeSpan.FromMilliseconds(_totalTimeInterval);
+                }
+            });
         }
 
         private async void OnBeatTimerElapsed(object sender, ElapsedEventArgs e)
