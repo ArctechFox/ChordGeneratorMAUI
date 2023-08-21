@@ -2,6 +2,7 @@
 using ChordGeneratorMAUI.ViewModels;
 using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using Microsoft.Maui.LifecycleEvents;
 using Plugin.Maui.Audio;
 using Plugin.MauiMTAdmob;
 
@@ -12,7 +13,6 @@ public static class MauiProgram
     public static MauiApp CreateMauiApp()
     {
         var pm = PurchaseManager.Instance; // initializes
-
 
 
         var builder = MauiApp.CreateBuilder();
@@ -61,6 +61,17 @@ public static class MauiProgram
             });
 
         builder.Services.AddSingleton(AudioManager.Current);
+
+#if IOS
+        builder.ConfigureLifecycleEvents(events =>
+        {
+            events.AddiOS(iOS => iOS.FinishedLaunching((app, launchOptions) => {
+                Firebase.Core.App.Configure();
+                return false;
+            }));
+        });
+#endif
+
 #if DEBUG
         builder.Logging.AddDebug();
 #endif

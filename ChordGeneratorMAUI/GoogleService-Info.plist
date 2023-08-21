@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>428431208071-joclo568pcie5ph01ddi215n97up1p6o.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.428431208071-joclo568pcie5ph01ddi215n97up1p6o</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDrfCdQVguNGDPENt6d9kTUEXaYCIRjzp0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>428431208071</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>app.chordjewels.chordstar</string>
+	<key>PROJECT_ID</key>
+	<string>chord-star</string>
+	<key>STORAGE_BUCKET</key>
+	<string>chord-star.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:428431208071:ios:b728671266944a947c1222</string>
+	<key>DATABASE_URL</key>
+	<string>https://chord-star-default-rtdb.firebaseio.com</string>
+	<key>ADMOB_APP_ID</key>
+	<string>ca-app-pub-2329707705985560~7720662329</string>
+</dict>
+</plist>
