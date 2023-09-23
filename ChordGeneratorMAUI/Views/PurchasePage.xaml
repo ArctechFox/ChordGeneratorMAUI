@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ChordGeneratorMAUI.Views.PurchasePage" BackgroundColor="{StaticResource Black}"
              Title="Upgrade">
 
-    <Grid Padding="20">
+    <Grid Padding="20" HorizontalOptions="Center">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="33*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -16,7 +16,7 @@
         </Grid.RowDefinitions>
 
         <!--MAIN-->
-        <Border Grid.Column="1" Grid.Row="0" BackgroundColor="{StaticResource Black}" Padding="10,30,10,10" Margin="0,10,0,10" Stroke="{StaticResource Black}" StrokeThickness="0" Opacity="1">
+        <Border Grid.Column="1" Grid.Row="0" BackgroundColor="{StaticResource Black}" Padding="15,30,15,10" Margin="0,10,0,10" Stroke="{StaticResource Black}" StrokeThickness="0" Opacity="1">
             <Border.Shadow>
                 <Shadow Offset="0,-20" Brush="{StaticResource Primary}" Radius="100" Opacity="1"/>
             </Border.Shadow>
@@ -37,7 +37,7 @@
                     </Label>
 
                     <!--"PRO"-->
-                    <Label Text="PRO" CharacterSpacing="0" FontFamily="Sansation" FontSize="21" Margin="10,0,0,3" FontAttributes="Bold" VerticalTextAlignment="End" HorizontalTextAlignment="Start" TextColor="{StaticResource HotMagenta}">
+                    <Label Text="PRO" CharacterSpacing="0" FontFamily="Sansation" FontSize="21" Margin="5,0,0,3" FontAttributes="Bold" VerticalTextAlignment="End" HorizontalTextAlignment="Start" TextColor="{StaticResource HotMagenta}">
                         <Label.Shadow>
                             <Shadow Offset="0,4" Brush="Black" Radius="3" Opacity="1"/>
                         </Label.Shadow>

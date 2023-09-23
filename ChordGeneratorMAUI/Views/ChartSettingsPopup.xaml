@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
@@ -7,7 +7,7 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              x:Class="ChordGeneratorMAUI.Views.ChartSettingsPopup">
 
-    <Grid Background="{StaticResource Black}" HorizontalOptions="CenterAndExpand" Padding="15" MaximumWidthRequest="{OnPlatform Android='350', Default='1200'}">
+    <Grid Background="{StaticResource Black}" HorizontalOptions="CenterAndExpand" Padding="10" MaximumWidthRequest="{OnPlatform Android='350', Default='1200'}">
         <Grid.Resources>
             <ResourceDictionary>
 
@@ -61,14 +61,14 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
 
         <!--BAR COUNT-->
-        <VerticalStackLayout Grid.Column="0" Grid.Row="0">
+        <VerticalStackLayout Grid.Column="0" Grid.Row="0" Margin="3,0">
             <Label Text="Bar Count" FontSize="14" FontAttributes="Bold" HorizontalTextAlignment="Start" IsVisible="{OnPlatform iOS=True, Default=False}"></Label>
 
             <Picker Title="Bar Count" SelectedItem="{Binding ChordChart.BarCount}"
@@ -88,7 +88,7 @@
         </VerticalStackLayout>
 
         <!--TIME SIGNATURE-->
-        <VerticalStackLayout Grid.Column="1" Grid.Row="0">
+        <VerticalStackLayout Grid.Column="1" Grid.Row="0" Margin="3,0">
             <Label Text="Time Signature" FontSize="14" FontAttributes="Bold" HorizontalTextAlignment="End" IsVisible="{OnPlatform iOS=True, Default=False}"></Label>
 
             <Picker Grid.Row="1" Grid.Column="1" TitleColor="{StaticResource Black}" Title="Time Signature" SelectedItem="{Binding ChordChart.TimeSignature}" IsEnabled="False" Opacity=".5"
