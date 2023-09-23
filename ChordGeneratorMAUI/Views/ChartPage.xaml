@@ -10,7 +10,7 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="75"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -19,11 +19,11 @@
         </Grid.RowDefinitions>
 
         <!--AD VIEW-->
-        <!--<controls:MTAdView AdSize="AnchoredAdaptive" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" AdsId="ca-app-pub-2329707705985560/7005829538" />-->
-        <Border Stroke="White" Opacity=".33">
+        <controls:MTAdView AdSize="AnchoredAdaptive" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" AdsId="ca-app-pub-2329707705985560/7005829538" />
+        <!--<Border Stroke="White" Opacity=".33">
             <Label HorizontalOptions="Center" Text="**********************  ad banner  **********************" FontAttributes="None"></Label>
 
-        </Border>
+        </Border>-->
 
         <!--INFO/SETTINGS HEADER-->
         <Grid Grid.Row="1" Margin="10,2,10,5">
