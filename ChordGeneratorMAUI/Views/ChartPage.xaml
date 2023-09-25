@@ -40,8 +40,8 @@
                 <Label Text="{Binding ChordChart.SelectedKey}" TextColor="{StaticResource HotMagenta}" FontAttributes="Bold" FontSize="16" Margin="0,5,0,0"></Label>
             </VerticalStackLayout>
 
-            <!--PICKER ("HIDDEN")-->
-            <Picker Grid.Column="0" Title="Key" SelectedItem="{Binding ChordChart.SelectedKey}" Opacity="1" HeightRequest="100" WidthRequest="125" ZIndex="1" TextColor="Transparent" TitleColor="Transparent">
+            <!-- KEY PICKER ("HIDDEN")-->
+            <Picker Grid.Column="0" Title="Key" SelectedItem="{Binding ChordChart.SelectedKey}" Opacity="1" ZIndex="1" TextColor="Transparent" TitleColor="Transparent">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type sys:String}">
                         <sys:String>All</sys:String>
@@ -149,7 +149,7 @@
             <Grid Grid.Column="2" HorizontalOptions="Fill">
 
                 <!--PICKER ("HIDDEN")-->
-                <Picker VerticalOptions="Fill" HorizontalOptions="Fill" HeightRequest="75" Title="BPM" x:Name="pickerBPM" SelectedItem="{Binding ChordChart.BPM}" Opacity="1" ZIndex="1" TextColor="Transparent" TitleColor="Transparent"/>
+                <Picker VerticalOptions="Fill" HorizontalOptions="Fill" Title="BPM" x:Name="pickerBPM" SelectedItem="{Binding ChordChart.BPM}" Opacity="1" ZIndex="1" TextColor="Transparent" TitleColor="Transparent"/>
 
                 <!--minus BPM-->
                 <Button FontFamily="FA Pro Solid" Background="Transparent" Text="minus" TextColor="{StaticResource HotMagenta}" FontSize="16" x:Name="btnBPM_minus" Clicked="btnBPM_minus_Clicked"
@@ -164,7 +164,7 @@
                 <!--plus BPM-->
                 <Button FontFamily="FA Pro Solid" Background="Transparent" Text="plus" TextColor="{StaticResource HotMagenta}" FontSize="16" x:Name="btnBPM_plus" Clicked="btnBPM_plus_Clicked" 
                         VerticalOptions="Fill" HorizontalOptions="End" ZIndex="2"/>
-                
+
             </Grid>
         </Grid>
 

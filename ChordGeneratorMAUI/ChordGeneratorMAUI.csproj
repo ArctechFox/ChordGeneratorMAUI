@@ -144,6 +144,8 @@
 	  <None Remove="Resources\Fonts\Stark.OTF" />
 	  <None Remove="Resources\Images\chord_star_app_icon.svg" />
 	  <None Remove="Resources\Images\star.svg" />
+	  <None Remove="Resources\Raw\TrackPacks\Pro Beats - Rock\Track1_idk.wav" />
+	  <None Remove="Resources\Raw\TrackPacks\Starter Beats\Kick Snare - Basic.wav" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -174,6 +176,9 @@
 	  <Compile Update="Views\ChartSettingsPopup.xaml.cs">
 	    <DependentUpon>ChartSettingsPopup.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\ThemesPage.xaml.cs">
+	    <DependentUpon>ThemesPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -195,6 +200,14 @@
 	  <MauiAsset Update="Resources\Raw\Synth_Sine_C_lo.wav">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\TrackPacks\Pro Beats - Rock\Track1_idk.wav">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	    <LogicalName>%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\TrackPacks\Starter Beats\Kick Snare - Basic.wav">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	    <LogicalName>%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+	  </MauiAsset>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -208,6 +221,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Metronome.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ThemesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\PurchasePage.xaml">
