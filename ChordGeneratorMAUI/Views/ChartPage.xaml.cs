@@ -10,7 +10,9 @@ public partial class ChartPage : ContentPage
     public ChartPage()
     {
         InitializeComponent();
+
         MetronomeControl.BindingContext = MetronomeViewModel.Instance;
+        TrackSelectorControl.BindingContext = TrackSelectorViewModel.Instance;
 
         List<int> bpmPickerSteps = new List<int>();
 

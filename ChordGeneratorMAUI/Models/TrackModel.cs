@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Plugin.Maui.Audio;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -11,7 +12,28 @@ namespace ChordGeneratorMAUI.Models
 {
     public class TrackModel : BindableBase
     {
-        public TrackModel(string name, string packName, string path) { }
+        public TrackModel()
+        {
+            // Initialize Commands
+            PlayPauseTrackToggleCommand = new DelegateCommand(() =>
+            {
+                if (IsPlaying)
+                    Stop();
+                else
+                    Play();
+            });
+        }
+        ~TrackModel()
+        {
+            AudioPlayer.Dispose();
+        }
+
+        private IAudioPlayer _audioPlayer;
+        public IAudioPlayer AudioPlayer
+        {
+            get { return _audioPlayer; }
+            set { SetProperty(ref _audioPlayer, value); }
+        }
 
         private string _name;
         public string Name
@@ -46,6 +68,30 @@ namespace ChordGeneratorMAUI.Models
         {
             get { return _isPlaying; }
             set { SetProperty(ref _isPlaying, value); }
+        }
+
+        /////////////////////////////////////////////////////////
+        
+        public DelegateCommand PlayPauseTrackToggleCommand { get; set; }
+
+        /////////////////////////////////////////////////////////
+
+        public void Play()
+        {
+            if (AudioPlayer != null)
+            {
+                AudioPlayer.Play();
+                IsPlaying = true;
+            }
+        }
+
+        public void Stop()
+        {
+            if (AudioPlayer != null)
+            {
+                AudioPlayer.Stop();
+                IsPlaying = false;
+            }
         }
     }
 }

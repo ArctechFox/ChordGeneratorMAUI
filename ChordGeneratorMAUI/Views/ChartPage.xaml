@@ -301,38 +301,7 @@
             </Grid.RowDefinitions>
 
             <!--TRACK SELECTOR -->
-            <toolkit:Expander IsExpanded="False" Grid.ColumnSpan="5" Grid.Row="0">
-                <toolkit:Expander.Header>
-                    <Grid HeightRequest="55">
-
-                        <!--Track Background-->
-                        <Border Background="{StaticResource Gray600Brush}" Opacity=".5" Margin="0" Padding="0" StrokeThickness="0">
-                            <Border.StrokeShape>
-                                <RoundRectangle CornerRadius="20,0,0,0"></RoundRectangle>
-                            </Border.StrokeShape>
-                        </Border>
-
-                        <!-- Top line -->
-                        <Border BackgroundColor="Transparent" Stroke="{StaticResource White}" Opacity=".1" Margin="0,8,0,4" HorizontalOptions="CenterAndExpand" VerticalOptions="Start" WidthRequest="50" HeightRequest="2" StrokeThickness="2"/>
-
-                        <!-- Header text-->
-                        <HorizontalStackLayout HorizontalOptions="Start" VerticalOptions="Center">
-
-                            <!--Music icon-->
-                            <Label Text="music" TextColor="{StaticResource HotMagenta}" FontFamily="FA Pro Regular" FontAttributes="None" FontSize="16" 
-                          Padding="0" Margin="15,5,5,0" Opacity=".9" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"></Label>
-
-                            <!--Current track-->
-                            <Label Text="Funk Groove Ass Play - Pro Beats Pack" TextColor="{StaticResource White}" FontFamily="Salmapro" FontAttributes="Italic" FontSize="14" 
-                          Padding="0" Margin="5,5,0,0" Opacity=".5" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"></Label>
-
-                        </HorizontalStackLayout>
-                    </Grid>
-                </toolkit:Expander.Header>
-
-                <!--Expander content-->
-                <Border HeightRequest="165" BackgroundColor="Black"></Border>
-            </toolkit:Expander>
+            <v:TrackSelector Grid.ColumnSpan="5" Grid.Row="0" x:Name="TrackSelectorControl"></v:TrackSelector>
 
             <!--PLAYBACK CONTROLS-->
             <!--Playback Background-->

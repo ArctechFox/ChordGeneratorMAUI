@@ -1,8 +1,11 @@
-﻿using ChordGeneratorMAUI.Helpers;
+﻿using ChordGeneratorMAUI.DataAccess;
+using ChordGeneratorMAUI.Helpers;
+using ChordGeneratorMAUI.Models;
 using CommunityToolkit.Maui.Views;
 using Plugin.Maui.Audio;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -22,251 +25,77 @@ namespace ChordGeneratorMAUI.ViewModels
             }
         }
 
-        // METRONOME SOUNDS
-        private readonly string _metronome_practicePad_hi = "Perc_PracticePad_hi.wav";
-        private readonly string _metronome_practicePad_lo = "Perc_PracticePad_lo.wav";
-
-        private IAudioPlayer _audioPlayer_metronome_practicePad_lo;
-        private IAudioPlayer _audioPlayer_metronome_practicePad_hi;
-
-        // TIMERS
-        private System.Timers.Timer _totalTimer;
-        private System.Timers.Timer _beatTimer;
-
-        // In miliseconds
-        private readonly double _totalTimeInterval = 1000;
-
-        // COMMANDS
-        public DelegateCommand CountInToggleCommand { get; set; }
-
         private TrackSelectorViewModel()
         {
-            
-        }
-        ~TrackSelectorViewModel() // TODO: Hmm... ¯\_(ツ)_/¯
-        {
-            _audioPlayer_metronome_practicePad_hi.Dispose();
-            _audioPlayer_metronome_practicePad_lo.Dispose();
+            TrackOptionsCommand = new DelegateCommand(() => ShowTrackOptions = !ShowTrackOptions);
+
+            // Load tracks
+            AvailableTrackPacks = TrackManager.TrackPackLibrary;
         }
 
-        private TimeSpan _totalTimeElapsed = TimeSpan.Zero;
-        public TimeSpan TotalTimeElapsed
+        private List<TrackPackModel> _availableTrackPacks;
+        public List<TrackPackModel> AvailableTrackPacks
         {
-            get { return _totalTimeElapsed; }
-            set
-            {
-                SetProperty(ref _totalTimeElapsed, value);
-
-                string formatString;
-                if (value.TotalHours >= 1)
+            get { return _availableTrackPacks; }
+            set 
+            { 
+                SetProperty(ref _availableTrackPacks, value);
+                var allPack = new TrackPackModel();
+                allPack.Name = "All";
+                
+                foreach(var pack in TrackManager.TrackPackLibrary)
                 {
-                    formatString = @"{0:h\:mm\:ss}";
-                }
-                else if (value.TotalMinutes >= 10)
-                {
-                    formatString = @"{0:mm\:ss}";
-                }
-                else
-                {
-                    formatString = @"{0:m\:ss}";
+                    allPack.Tracks.AddRange(pack.Tracks);
                 }
 
-                TotalTimeElapsedString = string.Format(formatString, _totalTimeElapsed);
+                AvailableTrackPacks.Insert(0, allPack);
+
+                SelectedTrackPack = AvailableTrackPacks.FirstOrDefault();
             }
         }
 
-        private string _totalTimeElapsedString = "";
-        public string TotalTimeElapsedString
+        private TrackPackModel _selectedTrackPack;
+        public TrackPackModel SelectedTrackPack
         {
-            get { return _totalTimeElapsedString; }
-            set { SetProperty(ref _totalTimeElapsedString, value); }
+            get { return _selectedTrackPack; }
+            set { SetProperty(ref _selectedTrackPack, value); }
         }
 
-        private int _chartCount = 0;
-        public int ChartCount
+        private TrackModel _selectedTrack;
+        public TrackModel SelectedTrack
         {
-            get { return _chartCount; }
-            set { SetProperty(ref _chartCount, value); }
-        }
-
-        private int _currentBeat = 0;
-        public int CurrentBeat
-        {
-            get { return _currentBeat; }
-            set
+            get { return _selectedTrack; }
+            set 
             {
-                // TODO: subscribe to TimeSignatureChangedEvent to track this value instead of hard-coding a 4
-                // Constrain value to time signature
-                value = value > 4 ? 1 : value;
+                SelectedTrack.IsSelected = false;
+                SetProperty(ref _selectedTrack, value);
+                SelectedTrack.IsSelected = true;
 
-                SetProperty(ref _currentBeat, value);
-
-                // Don't need to play the same sound if countdown is actively doing so
-                if (!IsCountdownActive && CurrentBeat > 0)
-                    PlayClickSound(CurrentBeat);
             }
         }
 
-        private bool _generatingChart = false;
-        public bool GeneratingChart
+        private bool _showTrackOptions = false;
+        public bool ShowTrackOptions
         {
-            get { return _generatingChart; }
-            set { SetProperty(ref _generatingChart, value); }
-        }
-
-        // COUNTDOWN PROPS
-
-        private bool _isCountdownEnabled = true;
-        public bool IsCountdownEnabled
-        {
-            get { return _isCountdownEnabled; }
-            set
-            {
-                SetProperty(ref _isCountdownEnabled, value);
-                if (!IsCountdownEnabled)
-                    IsCountdownActive = false;
-            }
-        }
-
-        private bool _isCountdownActive = false;
-        public bool IsCountdownActive
-        {
-            get { return !IsCountdownEnabled ? false : _isCountdownActive; }
-            set { SetProperty(ref _isCountdownActive, value); }
-        }
-
-        private int _countdownInBeats = 4;
-        public int CountdownInBeats
-        {
-            get { return _countdownInBeats; }
-            set { SetProperty(ref _countdownInBeats, value); }
-        }
-
-        private int _countdownCurrentBeat = 0;
-        public int CountdownCurrentBeat
-        {
-            get { return _countdownCurrentBeat; }
-            set
-            {
-                SetProperty(ref _countdownCurrentBeat, value);
-
-                if (CountdownCurrentBeat > 0)
-                {
-                    string countdownString = ". . . . . ";
-                    for (int i = 0; i < CountdownCurrentBeat; i++)
-                    {
-                        countdownString = countdownString.Remove(countdownString.Length - 2);
-                    }
-
-                    TotalTimeElapsedString = countdownString;
-                    PlayClickSound(CountdownCurrentBeat);
-
-                    if (CountdownCurrentBeat > 3)
-                    {
-                        IsCountdownActive = false;
-                        CurrentBeat = 0;
-                    }
-                }
-            }
+            get { return _showTrackOptions; }
+            set { SetProperty(ref _showTrackOptions, value); }
         }
 
         /////////////////////////////////////////////////////////////////////////
+        
+        public DelegateCommand PlayPauseTrackToggleCommand { get; set; }
+        public DelegateCommand TrackOptionsCommand { get; set; }
 
-        private async void SetupAudioPlayers()
+        /////////////////////////////////////////////////////////////////////////
+
+        private void PlaySelectedTrack()
         {
-            _audioPlayer_metronome_practicePad_hi = AudioManager.Current.CreatePlayer(await FileSystem.OpenAppPackageFileAsync(_metronome_practicePad_hi));
-            _audioPlayer_metronome_practicePad_lo = AudioManager.Current.CreatePlayer(await FileSystem.OpenAppPackageFileAsync(_metronome_practicePad_lo));
-
-            _audioPlayer_metronome_practicePad_hi.Volume = 1;
-            _audioPlayer_metronome_practicePad_lo.Volume = 1;
+            SelectedTrack.Play();
         }
 
-        private async void PlayClickSound(int beat)
+        private void StopSelectedTrack()
         {
-            if (beat == 1)
-            {
-                await Task.Factory.StartNew(_audioPlayer_metronome_practicePad_hi.Play);
-            }
-            else
-            {
-                await Task.Factory.StartNew(_audioPlayer_metronome_practicePad_lo.Play);
-            }
-        }
-
-        private void StartMetronome()
-        {
-            if (IsCountdownEnabled && (!GeneratingChart || ChartCount <= 1))
-            {
-                IsCountdownActive = true;
-                CountdownCurrentBeat = 1; // always start count-in on the 1
-            }
-
-            CurrentBeat = GeneratingChart ? 1 : 0;
-            GeneratingChart = false;
-
-            _beatTimer.Start();
-        }
-
-        private void StopMetronome()
-        {
-            _beatTimer.Stop();
-        }
-
-        private void StartTotalTimer()
-        {
-            _totalTimer.Start();
-            StartMetronome();
-        }
-
-        private void PauseTotalTimer()
-        {
-            _totalTimer.Stop();
-            StopMetronome();
-        }
-
-        private void ResetToDefaultSettings()
-        {
-            CurrentBeat = 0;
-            TotalTimeElapsed = TimeSpan.Zero;
-        }
-
-        private async void BPMChangedHandler(int bpm)
-        {
-            await Task.Factory.StartNew(() =>
-            {
-                _beatTimer.Interval = 60000 / bpm;
-            });
-        }
-
-        private void ChartGeneratedHandler()
-        {
-            GeneratingChart = true;
-            ChartCount++;
-        }
-
-        private async void OnTotalTimerElapsed(object sender, ElapsedEventArgs e)
-        {
-            await Task.Factory.StartNew(() =>
-            {
-                // Don't count TotalTime while we're counting down, just show the countdown beat
-                if (!IsCountdownActive || !IsCountdownEnabled)
-                {
-                    TotalTimeElapsed += TimeSpan.FromMilliseconds(_totalTimeInterval);
-                }
-            });
-        }
-
-        private async void OnBeatTimerElapsed(object sender, ElapsedEventArgs e)
-        {
-            if (IsCountdownEnabled && IsCountdownActive)
-            {
-                CountdownCurrentBeat++;
-                return;
-            }
-
-            CurrentBeat++;
-
-            await Task.Factory.StartNew(() => { EventManager.Instance.EventAggregator.GetEvent<BeatElapsedEvent>().Publish(CurrentBeat); });
+            SelectedTrack.Stop();
         }
     }
 }

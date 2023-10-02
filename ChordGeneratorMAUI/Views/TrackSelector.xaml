@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="ChordGeneratorMAUI.Views.TrackSelector">
+
+    <toolkit:Expander IsExpanded="False" Background="Transparent">
+        <toolkit:Expander.Header>
+            <Grid HeightRequest="55">
+
+                <!--Track Background-->
+                <Border Background="{StaticResource Gray600Brush}" Opacity=".5" Margin="0" Padding="0" StrokeThickness="0">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="20,0,0,0"></RoundRectangle>
+                    </Border.StrokeShape>
+                </Border>
+
+                <!-- Top line -->
+                <Border BackgroundColor="Transparent" Stroke="{StaticResource White}" Opacity=".1" Margin="0,8,0,4" HorizontalOptions="CenterAndExpand" VerticalOptions="Start" WidthRequest="50" HeightRequest="2" StrokeThickness="2"/>
+
+                <!-- Header text-->
+                <HorizontalStackLayout HorizontalOptions="Start" VerticalOptions="Center">
+
+                    <!--Music icon-->
+                    <Label Text="music" TextColor="{StaticResource HotMagenta}" FontFamily="FA Pro Regular" FontAttributes="None" FontSize="16" 
+                        Padding="0" Margin="15,5,5,0" Opacity=".9" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"></Label>
+
+                    <!--Current track-->
+                    <Label Text="{Binding SelectedTrack.Name, FallbackValue='- No track selected -'}" TextColor="{StaticResource White}" FontFamily="Salmapro" FontAttributes="Italic" FontSize="14" 
+                        Padding="0" Margin="5,5,0,0" Opacity=".5" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"></Label>
+
+                </HorizontalStackLayout>
+
+            </Grid>
+        </toolkit:Expander.Header>
+
+        <!--Expander content-->
+        <Border BackgroundColor="{StaticResource Gray900}" StrokeThickness="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <!-- Track Pack Collection - Horizontal Bubble List-->
+                <CollectionView x:Name="TrackPacks_CollectionView" Margin="10,5" 
+		                ItemsSource="{Binding AvailableTrackPacks}" 
+                        SelectedItem="{Binding SelectedTrackPack}" SelectionMode="Single"
+		                Background="Transparent">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5" />
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border StrokeThickness="2" Stroke="{StaticResource Gray600}" Background="{StaticResource Black}" Padding="5,0" MinimumWidthRequest="100">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="25"></RoundRectangle>
+                                </Border.StrokeShape>
+
+                                <Label Text="{Binding Name}" FontSize="12" TextColor="{StaticResource White}"></Label>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- Tracks Collection - Vertical List-->
+                <ScrollView Grid.Row="1" Orientation="Vertical">
+                    <CollectionView x:Name="Tracks_CollectionView" WidthRequest="325"
+ItemsSource="{Binding SelectedTrackPack.Tracks}"
+SelectedItem="{Binding SelectedTrack}" SelectionMode="Single"
+Background="Transparent">
+
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                        </CollectionView.ItemsLayout>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border StrokeThickness="0" Stroke="Transparent" Background="{StaticResource Gray600}" Margin="5">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="10"></RoundRectangle>
+                                    </Border.StrokeShape>
+
+                                    <Grid ColumnDefinitions="Auto,*,Auto">
+
+                                        <Button Grid.Column="0" Text="play-circle" Style="{StaticResource FontIconButton}" VerticalOptions="Center"
+                                Command="{Binding PlayPauseTrackToggleCommand}">
+                                            <Button.Triggers>
+                                                <DataTrigger TargetType="Button" Binding="{Binding IsPlaying}" Value="False">
+                                                    <Setter Property="Text" Value="play-circle"></Setter>
+                                                </DataTrigger>
+                                                <DataTrigger TargetType="Button" Binding="{Binding IsPlaying}" Value="True">
+                                                    <Setter Property="Text" Value="stop-circle"></Setter>
+                                                    <Setter Property="TextColor" Value="{StaticResource HotMagenta}"></Setter>
+                                                </DataTrigger>
+                                            </Button.Triggers>
+                                        </Button>
+
+                                        <VerticalStackLayout Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Margin="10,0">
+                                            <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="16" HorizontalTextAlignment="Start"></Label>
+                                            <Label Text="{Binding PackName}" FontAttributes="None" FontSize="14" HorizontalTextAlignment="Start" Opacity=".5"></Label>
+                                        </VerticalStackLayout>
+
+                                        <Button Grid.Column="2" Text="..." Style="{StaticResource FontIconButton}" VerticalOptions="Center"
+                                Command="{Binding PlayPauseTrackToggleCommand}"/>
+                                    </Grid>
+
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </ScrollView>
+
+            </Grid>
+        </Border>
+
+    </toolkit:Expander>
+</ContentView>

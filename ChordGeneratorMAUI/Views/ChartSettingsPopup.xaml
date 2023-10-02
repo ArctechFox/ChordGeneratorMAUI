@@ -109,14 +109,15 @@
         </Grid>
 
         <!--INCLUDED CHORD TYPES-->
-        <toolkit:Expander IsExpanded="True" Margin="0,0,0,10" Grid.ColumnSpan="2" Grid.Row="2">
-            <toolkit:Expander.Header>
-                <Border Padding="5">
-                    <Label Text="Chord Types" TextColor="White" FontSize="14" FontAttributes="Bold" HorizontalTextAlignment="Start" Margin="4" HeightRequest="25"></Label>
-                </Border>
-            </toolkit:Expander.Header>
+        <Grid Margin="0,0,0,10" Grid.ColumnSpan="2" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
 
-            <HorizontalStackLayout Padding="20,0,20,10">
+            <Label Grid.Column="0" Text="Chord Types" HorizontalOptions="Start" VerticalOptions="Center"></Label>
+            
+            <HorizontalStackLayout Grid.ColumnSpan="2" Padding="20,0,20,10">
                 <VerticalStackLayout >
                     <Label Text="All" Margin="0, 10, 0, 0"></Label>
                     <Switch IsToggled="{Binding ChordChart.IncludeChordType_All}"></Switch>
@@ -137,8 +138,8 @@
                     <Switch IsEnabled="False"></Switch>
                 </VerticalStackLayout>
             </HorizontalStackLayout>
-        </toolkit:Expander>
-        
+        </Grid>
+
         <!--OK BUTTON-->
         <Button Grid.Row="3" Grid.ColumnSpan="2" HorizontalOptions="Fill" Margin="25,0" Text="Done" x:Name="btnOk" Clicked="btnOk_Clicked"></Button>
     </Grid>

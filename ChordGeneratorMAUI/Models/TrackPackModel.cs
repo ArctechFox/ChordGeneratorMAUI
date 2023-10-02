@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -12,11 +13,6 @@ namespace ChordGeneratorMAUI.Models
     public class TrackPackModel : BindableBase
     {
         public TrackPackModel() { }
-
-        public TrackPackModel(TrackPackModel copy)
-        {
-            this.Name = copy.Name;
-        }
 
         private string _name;
         public string Name

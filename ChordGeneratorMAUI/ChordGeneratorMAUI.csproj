@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
 	<PropertyGroup>
 		<TargetFrameworks>net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
@@ -18,7 +17,7 @@
 		<ApplicationIdGuid>dca3f05e-4fd2-478d-8311-6b41e33dbdc1</ApplicationIdGuid>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>0.3.1</ApplicationDisplayVersion>
+		<ApplicationDisplayVersion>0.3.2</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
@@ -144,8 +143,20 @@
 	  <None Remove="Resources\Fonts\Stark.OTF" />
 	  <None Remove="Resources\Images\chord_star_app_icon.svg" />
 	  <None Remove="Resources\Images\star.svg" />
-	  <None Remove="Resources\Raw\TrackPacks\Pro Beats - Rock\Track1_idk.wav" />
-	  <None Remove="Resources\Raw\TrackPacks\Starter Beats\Kick Snare - Basic.wav" />
+	  <None Remove="Resources\Raw\TrackPacks\ProBeats-Rock\FunkGrooveAssPlay - Copy (2).wav" />
+	  <None Remove="Resources\Raw\TrackPacks\ProBeats-Rock\FunkGrooveAssPlay - Copy (3).wav" />
+	  <None Remove="Resources\Raw\TrackPacks\ProBeats-Rock\FunkGrooveAssPlay - Copy (4).wav" />
+	  <None Remove="Resources\Raw\TrackPacks\ProBeats-Rock\FunkGrooveAssPlay - Copy (5).wav" />
+	  <None Remove="Resources\Raw\TrackPacks\ProBeats-Rock\FunkGrooveAssPlay - Copy (6).wav" />
+	  <None Remove="Resources\Raw\TrackPacks\ProBeats-Rock\FunkGrooveAssPlay - Copy (7).wav" />
+	  <None Remove="Resources\Raw\TrackPacks\ProBeats-Rock\FunkGrooveAssPlay - Copy (8).wav" />
+	  <None Remove="Resources\Raw\TrackPacks\ProBeats-Rock\FunkGrooveAssPlay - Copy (9).wav" />
+	  <None Remove="Resources\Raw\TrackPacks\ProBeats-Rock\FunkGrooveAssPlay - Copy.wav" />
+	  <None Remove="Resources\Raw\TrackPacks\StarterBeats - Copy (2)\KickSnare-Basic.wav" />
+	  <None Remove="Resources\Raw\TrackPacks\StarterBeats - Copy (3)\KickSnare-Basic.wav" />
+	  <None Remove="Resources\Raw\TrackPacks\StarterBeats - Copy (4)\KickSnare-Basic.wav" />
+	  <None Remove="Resources\Raw\TrackPacks\StarterBeats - Copy\KickSnare-Basic.wav" />
+	  <None Remove="Resources\Raw\TrackPacks\StarterBeats\Mixea_HighNeutral_Neural Nightmare (Catt's Stream Song).wav" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -200,13 +211,65 @@
 	  <MauiAsset Update="Resources\Raw\Synth_Sine_C_lo.wav">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </MauiAsset>
-	  <MauiAsset Update="Resources\Raw\TrackPacks\Pro Beats - Rock\Track1_idk.wav">
+	  <MauiAsset Update="Resources\Raw\TrackPacks\ProBeats-Rock\FunkGrooveAssPlay - Copy %282%29.wav">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	    <LogicalName>%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
 	  </MauiAsset>
-	  <MauiAsset Update="Resources\Raw\TrackPacks\Starter Beats\Kick Snare - Basic.wav">
+	  <MauiAsset Update="Resources\Raw\TrackPacks\ProBeats-Rock\FunkGrooveAssPlay - Copy %283%29.wav">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	    <LogicalName>%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\TrackPacks\ProBeats-Rock\FunkGrooveAssPlay - Copy %284%29.wav">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	    <LogicalName>%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\TrackPacks\ProBeats-Rock\FunkGrooveAssPlay - Copy %285%29.wav">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	    <LogicalName>%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\TrackPacks\ProBeats-Rock\FunkGrooveAssPlay - Copy %286%29.wav">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	    <LogicalName>%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\TrackPacks\ProBeats-Rock\FunkGrooveAssPlay - Copy %287%29.wav">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	    <LogicalName>%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\TrackPacks\ProBeats-Rock\FunkGrooveAssPlay - Copy %288%29.wav">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	    <LogicalName>%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\TrackPacks\ProBeats-Rock\FunkGrooveAssPlay - Copy %289%29.wav">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	    <LogicalName>%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\TrackPacks\ProBeats-Rock\FunkGrooveAssPlay - Copy.wav">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	    <LogicalName>%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\TrackPacks\ProBeats-Rock\FunkGrooveAssPlay.wav">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	    <!--<LogicalName>%(RecursiveDir)%(Filename)%(Extension)</LogicalName>-->
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\TrackPacks\StarterBeats - Copy %282%29\KickSnare-Basic.wav">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	    <LogicalName>%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\TrackPacks\StarterBeats - Copy %283%29\KickSnare-Basic.wav">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	    <LogicalName>%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\TrackPacks\StarterBeats - Copy %284%29\KickSnare-Basic.wav">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	    <LogicalName>%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\TrackPacks\StarterBeats - Copy\KickSnare-Basic.wav">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	    <LogicalName>%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\TrackPacks\StarterBeats\KickSnare-Basic.wav">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	    <!--<LogicalName>%(RecursiveDir)%(Filename)%(Extension)</LogicalName>-->
 	  </MauiAsset>
 	</ItemGroup>
 
@@ -230,6 +293,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\ChartPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\TrackSelector.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

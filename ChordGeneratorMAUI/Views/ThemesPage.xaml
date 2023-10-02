@@ -4,7 +4,7 @@
              x:Class="ChordGeneratorMAUI.Views.ThemesPage" BackgroundColor="{StaticResource Black}"
              Title="Themes">
 
-    <Grid Padding="20" HorizontalOptions="Center">
+    <!--<Grid Padding="20" HorizontalOptions="Center">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -15,7 +15,8 @@
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
 
+        <Label></Label>
         
-    </Grid>
+    </Grid>-->
     
 </ContentPage>
