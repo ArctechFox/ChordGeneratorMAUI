@@ -45,8 +45,8 @@
 	  <ApplicationTitle>Chord Star</ApplicationTitle>
 	  <ApplicationDisplayVersion>0.3.2</ApplicationDisplayVersion>
 	  <CreatePackage>false</CreatePackage>
-	  <CodesignProvision>Automatic</CodesignProvision>
-	  <CodesignKey>iPhone Developer</CodesignKey>
+	  <CodesignProvision>VS: app.chordjewels.chordstar Development</CodesignProvision>
+	  <CodesignKey>Apple Development: Created via API (8FDVXK4DBX)</CodesignKey>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-ios|AnyCPU'">
@@ -296,6 +296,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\TrackSelector.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Condition=" '$(EnableDefaultXamlItems)' == 'true' " Update="Views\ChartSettingsPopup %28copy%29.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

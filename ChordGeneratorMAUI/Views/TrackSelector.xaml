@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
@@ -65,8 +65,7 @@
                 </CollectionView>
 
                 <!-- Tracks Collection - Vertical List-->
-                <ScrollView Grid.Row="1" Orientation="Vertical">
-                    <CollectionView x:Name="Tracks_CollectionView" WidthRequest="325"
+                    <CollectionView x:Name="Tracks_CollectionView" Grid.Row="1" HeightRequest="335" Margin="10,0,0,20"
 ItemsSource="{Binding SelectedTrackPack.Tracks}"
 SelectedItem="{Binding SelectedTrack}" SelectionMode="Single"
 Background="Transparent">
@@ -102,15 +101,18 @@ Background="Transparent">
                                             <Label Text="{Binding PackName}" FontAttributes="None" FontSize="14" HorizontalTextAlignment="Start" Opacity=".5"></Label>
                                         </VerticalStackLayout>
 
-                                        <Button Grid.Column="2" Text="..." Style="{StaticResource FontIconButton}" VerticalOptions="Center"
-                                Command="{Binding PlayPauseTrackToggleCommand}"/>
+                                        <Button Grid.Column="2" x:Name="btnTrackSettings" Text="ellipsis-v" Style="{StaticResource FontIconButton}" VerticalOptions="Center">
+                                            <Button.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="TrackSettingsButton_Tapped" />
+                                            </Button.GestureRecognizers>
+                                        </Button>
+                                
                                     </Grid>
 
                                 </Border>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
-                </ScrollView>
 
             </Grid>
         </Border>

@@ -67,7 +67,9 @@ namespace ChordGeneratorMAUI.ViewModels
             get { return _selectedTrack; }
             set 
             {
-                SelectedTrack.IsSelected = false;
+                if (SelectedTrack != null)
+                    SelectedTrack.IsSelected = false;
+
                 SetProperty(ref _selectedTrack, value);
                 SelectedTrack.IsSelected = true;
 

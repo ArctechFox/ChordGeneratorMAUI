@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+			 xmlns:db="clr-namespace:ChordGeneratorMAUI.DataAccess"
+			 xmlns:m="clr-namespace:ChordGeneratorMAUI.Models"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             x:Class="ChordGeneratorMAUI.Views.TrackSettingsPopup">
+
+    <Grid Background="{StaticResource Black}" HorizontalOptions="CenterAndExpand" Padding="10" MaximumWidthRequest="{OnPlatform Android='350', Default='1200'}">
+        <Grid.Resources>
+            <ResourceDictionary>
+
+                <Style TargetType="Border">
+                    <Setter Property="BackgroundColor" Value="{StaticResource Primary}"></Setter>
+                    <Setter Property="StrokeThickness" Value="0"></Setter>
+                    <Setter Property="Padding" Value="8"></Setter>
+                    <Setter Property="StrokeShape">
+                        <Setter.Value>
+                            <RoundRectangle CornerRadius="8"></RoundRectangle>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+
+                <Style TargetType="Label">
+                    <Setter Property="TextColor" Value="{StaticResource White}"></Setter>
+                    <Setter Property="Opacity" Value=".98"></Setter>
+                    <Setter Property="FontSize" Value="14"></Setter>
+                    <Setter Property="FontAttributes" Value="None"></Setter>
+                </Style>
+
+                <Style TargetType="Switch">
+                    <Setter Property="OnColor" Value="{StaticResource Primary}"></Setter>
+                    <Setter Property="VisualStateManager.VisualStateGroups">
+                        <Setter.Value>
+                            <VisualStateGroupList>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="On">
+                                        <VisualState.Setters>
+                                            <Setter Property="ThumbColor"
+													Value="{StaticResource Secondary}" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Off">
+                                        <VisualState.Setters>
+                                            <Setter Property="ThumbColor"
+													Value="{StaticResource White}" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateGroupList>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+
+            </ResourceDictionary>
+        </Grid.Resources>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!--OK BUTTON-->
+        <Button Grid.Row="3" Grid.ColumnSpan="2" HorizontalOptions="Fill" Margin="25,0" Text="Done" x:Name="btnOk" Clicked="btnOk_Clicked"></Button>
+    </Grid>
+
+</toolkit:Popup>
