@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChordGeneratorMAUI.Models;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,6 +39,7 @@ namespace ChordGeneratorMAUI.Helpers
     public class BarCountChangedEvent : PubSubEvent<int> { }
     public class BPMChangedEvent : PubSubEvent<int> { }
     public class KeyChangedEvent : PubSubEvent<string> { }
+    public class ToggleFavoriteTrackEvent : PubSubEvent<TrackModel> { }
 
     //public class DataReceivedEvent : PubSubEvent<DataReceivedEvent_Parameters> { }
     //public class FreezeEvent : PubSubEvent<bool> { }

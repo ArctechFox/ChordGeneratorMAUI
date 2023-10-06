@@ -27,7 +27,7 @@ namespace ChordGeneratorMAUI.ViewModels
 
         private TrackSelectorViewModel()
         {
-            TrackOptionsCommand = new DelegateCommand(() => ShowTrackOptions = !ShowTrackOptions);
+            
 
             // Load tracks
             AvailableTrackPacks = TrackManager.TrackPackLibrary;
@@ -86,7 +86,6 @@ namespace ChordGeneratorMAUI.ViewModels
         /////////////////////////////////////////////////////////////////////////
         
         public DelegateCommand PlayPauseTrackToggleCommand { get; set; }
-        public DelegateCommand TrackOptionsCommand { get; set; }
 
         /////////////////////////////////////////////////////////////////////////
 

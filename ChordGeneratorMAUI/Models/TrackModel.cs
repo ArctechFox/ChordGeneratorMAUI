@@ -1,15 +1,18 @@
-﻿using Plugin.Maui.Audio;
+﻿using ChordGeneratorMAUI.Helpers;
+using Plugin.Maui.Audio;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using static ChordGeneratorMAUI.DataAccess.ChordDatabase;
 using static ChordGeneratorMAUI.Helpers.Converters;
 
 namespace ChordGeneratorMAUI.Models
 {
+    [Serializable, JsonSerializable(typeof(TrackModel))]
     public class TrackModel : BindableBase
     {
         public TrackModel()
@@ -22,12 +25,22 @@ namespace ChordGeneratorMAUI.Models
                 else
                     Play();
             });
+
+            FavoriteToggleCommand = new DelegateCommand(() =>
+            {
+                Application.Current?.Dispatcher.Dispatch(() =>
+                {
+                    Helpers.EventManager.Instance.EventAggregator.GetEvent<ToggleFavoriteTrackEvent>().Publish(this);
+                });
+            });
         }
         ~TrackModel()
         {
-            AudioPlayer.Dispose();
+            if (AudioPlayer != null)
+                AudioPlayer.Dispose();
         }
 
+        [NonSerialized]
         private IAudioPlayer _audioPlayer;
         public IAudioPlayer AudioPlayer
         {
@@ -56,6 +69,7 @@ namespace ChordGeneratorMAUI.Models
             set { SetProperty(ref _path, value); }
         }
 
+        [NonSerialized]
         private bool _isSelected = false;
         public bool IsSelected
         {
@@ -63,6 +77,7 @@ namespace ChordGeneratorMAUI.Models
             set { SetProperty(ref _isSelected, value); }
         }
 
+        [NonSerialized]
         private bool _isPlaying = false;
         public bool IsPlaying
         {
@@ -70,9 +85,19 @@ namespace ChordGeneratorMAUI.Models
             set { SetProperty(ref _isPlaying, value); }
         }
 
+        [NonSerialized]
+        private bool _isFavorited = false;
+        public bool IsFavorited
+        {
+            get { return _isFavorited; }
+            set { SetProperty(ref _isFavorited, value); }
+        }
+
         /////////////////////////////////////////////////////////
-        
+
         public DelegateCommand PlayPauseTrackToggleCommand { get; set; }
+        public DelegateCommand FavoriteToggleCommand { get; set; }
+
 
         /////////////////////////////////////////////////////////
 

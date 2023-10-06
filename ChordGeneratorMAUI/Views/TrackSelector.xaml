@@ -101,11 +101,15 @@ Background="Transparent">
                                             <Label Text="{Binding PackName}" FontAttributes="None" FontSize="14" HorizontalTextAlignment="Start" Opacity=".5"></Label>
                                         </VerticalStackLayout>
 
-                                        <Button Grid.Column="2" x:Name="btnTrackSettings" Text="ellipsis-v" Style="{StaticResource FontIconButton}" VerticalOptions="Center">
-                                            <Button.GestureRecognizers>
-                                                <TapGestureRecognizer Tapped="TrackSettingsButton_Tapped" />
-                                            </Button.GestureRecognizers>
-                                        </Button>
+                                    <Button Grid.Column="2" x:Name="btnFavorite" Text="heart" FontFamily="FA Pro Light" Style="{StaticResource FontIconButton}" VerticalOptions="Center"
+                                            Command="{Binding FavoriteToggleCommand}">
+
+                                        <Button.Triggers>
+                                            <DataTrigger TargetType="Button" Binding="{Binding IsFavorited}" Value="True">
+                                                <Setter Property="FontFamily" Value="FA Pro Solid"></Setter>
+                                            </DataTrigger>
+                                        </Button.Triggers>
+                                    </Button>
                                 
                                     </Grid>
 
