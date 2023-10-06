@@ -164,7 +164,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="banditoth.MAUI.PreferencesExtension" Version="1.0.0" />
 		<PackageReference Include="CommunityToolkit.Maui" Version="5.0.0" />
 		<PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="1.0.2" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
@@ -174,6 +173,9 @@
 		<PackageReference Include="Prism.Maui" Version="8.1.273-pre" />
 		<PackageReference Include="Xamarin.Firebase.iOS.Core" Version="8.10.0.3" />
 		<PackageReference Include="Xamarin.Google.iOS.MobileAds" Version="8.13.0.3" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
+		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.6" />
 	</ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net7.0-ios'">

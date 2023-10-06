@@ -12,7 +12,6 @@ using static ChordGeneratorMAUI.Helpers.Converters;
 
 namespace ChordGeneratorMAUI.Models
 {
-    [Serializable, JsonSerializable(typeof(TrackModel))]
     public class TrackModel : BindableBase
     {
         public TrackModel()
@@ -40,7 +39,6 @@ namespace ChordGeneratorMAUI.Models
                 AudioPlayer.Dispose();
         }
 
-        [NonSerialized]
         private IAudioPlayer _audioPlayer;
         public IAudioPlayer AudioPlayer
         {
@@ -69,7 +67,6 @@ namespace ChordGeneratorMAUI.Models
             set { SetProperty(ref _path, value); }
         }
 
-        [NonSerialized]
         private bool _isSelected = false;
         public bool IsSelected
         {
@@ -77,7 +74,6 @@ namespace ChordGeneratorMAUI.Models
             set { SetProperty(ref _isSelected, value); }
         }
 
-        [NonSerialized]
         private bool _isPlaying = false;
         public bool IsPlaying
         {
@@ -85,7 +81,6 @@ namespace ChordGeneratorMAUI.Models
             set { SetProperty(ref _isPlaying, value); }
         }
 
-        [NonSerialized]
         private bool _isFavorited = false;
         public bool IsFavorited
         {
