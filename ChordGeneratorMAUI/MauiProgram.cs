@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Maui.LifecycleEvents;
 using Plugin.Maui.Audio;
 using Plugin.MauiMTAdmob;
+using System.Runtime.CompilerServices;
 
 namespace ChordGeneratorMAUI;
 
@@ -13,7 +14,6 @@ public static class MauiProgram
     public static MauiApp CreateMauiApp()
     {
         var pm = PurchaseManager.Instance; // initializes
-
 
         var builder = MauiApp.CreateBuilder();
         builder
@@ -70,6 +70,7 @@ public static class MauiProgram
                 return false;
             }));
         });
+
 #endif
 
 #if DEBUG

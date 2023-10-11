@@ -27,31 +27,14 @@ namespace ChordGeneratorMAUI.ViewModels
 
         private TrackSelectorViewModel()
         {
-            
-
-            // Load tracks
-            AvailableTrackPacks = TrackManager.TrackPackLibrary;
+            SetupTracks();
         }
 
-        private List<TrackPackModel> _availableTrackPacks;
+        private List<TrackPackModel> _availableTrackPacks = new List<TrackPackModel>();
         public List<TrackPackModel> AvailableTrackPacks
         {
             get { return _availableTrackPacks; }
-            set 
-            { 
-                SetProperty(ref _availableTrackPacks, value);
-                var allPack = new TrackPackModel();
-                allPack.Name = "All";
-                
-                foreach(var pack in TrackManager.TrackPackLibrary)
-                {
-                    allPack.Tracks.AddRange(pack.Tracks);
-                }
-
-                AvailableTrackPacks.Insert(0, allPack);
-
-                SelectedTrackPack = AvailableTrackPacks.FirstOrDefault();
-            }
+            set { SetProperty(ref _availableTrackPacks, value); }
         }
 
         private TrackPackModel _selectedTrackPack;
@@ -65,14 +48,13 @@ namespace ChordGeneratorMAUI.ViewModels
         public TrackModel SelectedTrack
         {
             get { return _selectedTrack; }
-            set 
+            set
             {
                 if (SelectedTrack != null)
                     SelectedTrack.IsSelected = false;
 
                 SetProperty(ref _selectedTrack, value);
                 SelectedTrack.IsSelected = true;
-
             }
         }
 
@@ -84,10 +66,18 @@ namespace ChordGeneratorMAUI.ViewModels
         }
 
         /////////////////////////////////////////////////////////////////////////
-        
+
         public DelegateCommand PlayPauseTrackToggleCommand { get; set; }
 
         /////////////////////////////////////////////////////////////////////////
+
+        private async void SetupTracks()
+        {
+            await TrackManager.LoadTracks();
+
+            AvailableTrackPacks = TrackManager.TrackPackLibrary;
+            SelectedTrackPack = AvailableTrackPacks.FirstOrDefault();
+        }
 
         private void PlaySelectedTrack()
         {

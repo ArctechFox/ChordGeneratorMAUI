@@ -1,5 +1,6 @@
 ﻿using ChordGeneratorMAUI.Helpers;
 using Plugin.Maui.Audio;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -40,6 +41,7 @@ namespace ChordGeneratorMAUI.Models
         }
 
         private IAudioPlayer _audioPlayer;
+        [Ignore]
         public IAudioPlayer AudioPlayer
         {
             get { return _audioPlayer; }
@@ -68,6 +70,7 @@ namespace ChordGeneratorMAUI.Models
         }
 
         private bool _isSelected = false;
+        [Ignore]
         public bool IsSelected
         {
             get { return _isSelected; }
@@ -75,6 +78,7 @@ namespace ChordGeneratorMAUI.Models
         }
 
         private bool _isPlaying = false;
+        [Ignore]
         public bool IsPlaying
         {
             get { return _isPlaying; }
@@ -89,8 +93,9 @@ namespace ChordGeneratorMAUI.Models
         }
 
         /////////////////////////////////////////////////////////
-
+        [Ignore]
         public DelegateCommand PlayPauseTrackToggleCommand { get; set; }
+        [Ignore]
         public DelegateCommand FavoriteToggleCommand { get; set; }
 
 
